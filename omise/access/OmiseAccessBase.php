@@ -18,8 +18,7 @@ class OmiseAccessBase {
 	const URLBASE_VAULT = 'https://vault.omise.co';
 	
 	// Omiseの秘密鍵と公開鍵用変数
-	protected $_secretkey;
-	protected $_publickey;
+	protected $_secretkey, $_publickey;
 	
 	/**
 	 * 引数にOmiseの秘密鍵と公開鍵を渡す

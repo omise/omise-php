@@ -17,3 +17,10 @@ $omise = new Omise('skey_test_4y9cewl0rgwji2kbbcb', 'pkey_test_4y9cewl0s1osh44ou
 // echo("total:".$omiseBalance->getTotal()."\n");
 // echo("currency:".$omiseBalance->getCurrency()."\n");
 // var_dump($omiseBalance);
+
+$omise->initCard('Ichiro Suzuki', '4242424242424242', '12', '2014', '139', '10320', 'Bangkok');
+$omise->getOmiseAccessTokens();
+$omise->
+
+exit;
+?>
