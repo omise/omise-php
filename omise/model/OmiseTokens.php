@@ -1,11 +1,13 @@
 <?php
 require_once dirname(__FILE__).'/OmiseCard.php';
 
-class OimseTokens {
+class OmiseTokens {
 	private $_array;
+	private $_card;
 	
 	function __construct($array) {
 		$this->_array = $array;
+		$this->_card = new OmiseCard($this->_array['card']);
 	}
 	
 	function getObject() {
@@ -24,7 +26,7 @@ class OimseTokens {
 		return $this->_array['used'];
 	}
 	function getCard() {
-		return new OmiseCard($this->_array['card']);
+		return $this->_card;
 	}
 	function getCreated() {
 		return $this->_array['created'];
