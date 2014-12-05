@@ -1,4 +1,7 @@
 <?php
+require_once dirname(__FILE__).'/../exeption/Exceptions.php';
+require_once dirname(__FILE__).'/../model/OmiseError.php';
+
 class OmiseAccessBase {
 	// リクエストメソッドたち
 	const REQUEST_GET = 'GET';
@@ -23,35 +26,44 @@ class OmiseAccessBase {
 	 * @param string $secretkey
 	 * @param string $publickey
 	 */
-	function __construct($secretkey, $publickey) {
+	public function __construct($secretkey, $publickey) {
 		$this->_secretkey = $secretkey;
 		$this->_publickey = $publickey;
 	}
 	
-	function execute($url, $requestMethod, $params = null) {
+	/**
+	 * 戻り値は連想配列にされたjsonオブジェクト（ヘッダは含まない）
+	 * @param string $url
+	 * @param string $requestMethod
+	 * @param array $params
+	 * @throws OmiseException
+	 * @return string
+	 */
+	protected function execute($url, $requestMethod, $params = null) {
 		$ch = curl_init($url);
 		curl_setopt_array($ch, $this->genOptions($requestMethod, $params));
 		
 		// リクエストを実行し、失敗した場合には例外を投げる
 		if(($result = curl_exec($ch)) === false) {
-			$responsCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+			$error = curl_error($ch);
 			curl_close($ch);
-			if($responsCode === null) {
-				throw new OmiseConnectionException('Connection timeout.');
-			}else if($responsCode > 500) {
-				throw new OmiseConnectionException('Server error. Status code:'.$responsCode);
-			} else if($responsCode > 400) {
-				throw new OmiseConnectionException('Client error. Status code:'.$responsCode);
-			} else if($responsCode > 300) {
-				throw new OmiseConnectionException('Too many redirection. Status code:'.$responsCode);
-			} else {
-				throw new OmiseUnknownException('unknown exception ');
-			}
+			
+			throw new OmiseException($error);
+		}
+		// 解放
+		curl_close($ch);
+		// 連想配列に格納し、エラーチェック
+		$array = json_decode($result, true);
+		if(count($array) === 0) throw new OmiseException('This Exception is unknown.(Bad Response)');
+		if($array['object'] === 'error') {
+			$omiseError = new OmiseError($array);
+			$ex = new OmiseException($omiseError->getMessage().':Please run the "$[this exception]->getOmiseError();" for more information');
+			$ex->setOmiseError($omiseError);
+				
+			throw $ex;
 		}
 		
-		curl_close($ch);
-		return $result;
+		return $array;
 	}
 	
 	/**
@@ -67,7 +79,7 @@ class OmiseAccessBase {
 				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 				// リクエストメソッドの指定
 				CURLOPT_CUSTOMREQUEST => $requestMethod,
-				// その他HTTPヘッダが必要な場合に記述
+				// その他HTTPヘッダが必要な場合に記述。現時点で指示無いため空欄 TODO
 				CURLOPT_HTTPHEADER => array(
 	
 				),
@@ -75,8 +87,6 @@ class OmiseAccessBase {
 				CURLOPT_RETURNTRANSFER => true,
 				// ヘッダは出力しない
 				CURLOPT_HEADER => false,
-				// POSTパラメータ等を付記
-				CURLOPT_POSTFIELDS => http_build_query($params),
 				// リダイレクトを有効にする
 				CURLOPT_FOLLOWLOCATION => true,
 				// リダイレクトの最大カウントは3とする
@@ -92,6 +102,9 @@ class OmiseAccessBase {
 				// 認証情報を指定
 				CURLOPT_USERPWD => $this->_secretkey.':'
 		);
+		
+		// POSTパラメータがある場合マージ
+		if(count($params) > 0) array_merge($options, array(CURLOPT_POSTFIELDS => http_build_query($params)));
 	
 		return $options;
 	}
