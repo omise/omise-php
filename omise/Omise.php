@@ -2,6 +2,7 @@
 require_once dirname(__FILE__).'/access/OmiseAccessAccount.php';
 require_once dirname(__FILE__).'/access/OmiseAccessBalance.php';
 require_once dirname(__FILE__).'/access/OmiseAccessTokens.php';
+require_once dirname(__FILE__).'/model/OmiseCardCreateInfo.php';
 
 class Omise {
 	// Omiseの秘密鍵と公開鍵用変数
@@ -30,11 +31,24 @@ class Omise {
 		$this->_publickey = $publickey;
 	}
 	
+	/**
+	 * APIを叩く際に利用するカード情報を設定する。
+	 * このカード情報を設定すると、生成済みのインスタンスを破棄する（OmiseAccessTokens）
+	 * @param string $name
+	 * @param string $number
+	 * @param string $expirationMonth
+	 * @param string $expirationYear
+	 * @param string $securityCode
+	 * @param string $postalCode
+	 * @param string $city
+	 * @throws OmiseException
+	 */
 	public function initCard($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode, $city) {
 		$errors = $this->validCard($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode, $city);
 		if(strlen($errors) > 0) throw new OmiseException($error);
 		
-		$card = new OmiseCard();
+		$card = new OmiseCardCreateInfo($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode, $city);
+		$this->_omiseAccessTokens = null;
 	}
 	
 	/**
@@ -69,7 +83,7 @@ class Omise {
 		if($this->_card === null) {
 			throw new OmiseException('First, please initialize the card information.[Omise::initCard($cardName, $cardNumber, $cardExpirationMonth, $cardExpirationYear, $cardSecurityCode, $cardPostalCode, $cardCity)]');
 		} else if($this->_omiseAccessTokens === null) {
-			$this->_omiseAccessTokens = new OmiseAccessTokens($this->_secretkey, $this->_publickey, );
+			$this->_omiseAccessTokens = new OmiseAccessTokens($this->_secretkey, $this->_publickey);
 		}
 		
 		return $this->_omiseAccessTokens;
