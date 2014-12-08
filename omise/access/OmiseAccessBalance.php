@@ -8,7 +8,7 @@ class OmiseAccessBalance extends OmiseAccessBase {
 	 * @return OmiseBalance
 	 */
 	function retrieve() {
-		$array = parent::execute(parent::URLBASE_API.'/balance', parent::REQUEST_GET);
+		$array = parent::execute(parent::URLBASE_API.'/balance', parent::REQUEST_GET, $this->_secretkey);
 		
 		return new OmiseBalance($array);
 	}

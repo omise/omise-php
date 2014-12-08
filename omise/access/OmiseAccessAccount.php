@@ -8,7 +8,7 @@ class OmiseAccessAccount extends OmiseAccessBase {
 	 * @return OmiseAccount
 	 */
 	function retrieve() {
-		$array = parent::execute(parent::URLBASE_API.'/account', parent::REQUEST_GET);
+		$array = parent::execute(parent::URLBASE_API.'/account', parent::REQUEST_GET, $this->_secretkey);
 		
 		return new OmiseAccount($array);
 	}

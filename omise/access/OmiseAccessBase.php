@@ -38,9 +38,9 @@ class OmiseAccessBase {
 	 * @throws OmiseException
 	 * @return string
 	 */
-	protected function execute($url, $requestMethod, $params = null) {
+	protected function execute($url, $requestMethod, $userpwd, $params = null) {
 		$ch = curl_init($url);
-		curl_setopt_array($ch, $this->genOptions($requestMethod, $params));
+		curl_setopt_array($ch, $this->genOptions($requestMethod, $userpwd, $params));
 		
 		// リクエストを実行し、失敗した場合には例外を投げる
 		if(($result = curl_exec($ch)) === false) {
@@ -72,7 +72,7 @@ class OmiseAccessBase {
 	 * @param array $params
 	 * @return array
 	 */
-	private function genOptions($requestMethod, $params) {
+	private function genOptions($requestMethod, $userpwd, $params) {
 		$options = array(
 				// HTTPバージョンを1.1に指定
 				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -99,7 +99,7 @@ class OmiseAccessBase {
 				// 接続要求のタイムアウトを指定
 				CURLOPT_CONNECTTIMEOUT => self::PARAM_CONNECTTIMEOUT,
 				// 認証情報を指定
-				CURLOPT_USERPWD => $this->_secretkey.':'
+				CURLOPT_USERPWD => $userpwd.':'
 		);
 		
 		// POSTパラメータがある場合マージ
