@@ -53,7 +53,11 @@ class OmiseAccessBase {
 		// 連想配列に格納し、エラーチェック
 		$array = json_decode($result, true);
 		if(count($array) === 0) throw new OmiseException('This Exception is unknown.(Bad Response)');
-		if($array['object'] === 'error') throw  new OmiseException($omiseError->getMessage().':Please run the "$[this exception]->getOmiseError();" for more information', new OmiseError($array));
+		
+		if($array['object'] === 'error') {
+			$omiseError = new OmiseError($array);
+			throw new OmiseException($omiseError->getMessage().':Please run the "$[this exception]->getOmiseError();" for more information', $omiseError);
+		}
 		
 		return $array;
 	}
