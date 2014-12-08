@@ -2,6 +2,7 @@
 require_once dirname(__FILE__).'/omise/Omise.php';
 require_once dirname(__FILE__).'/omise/model/OmiseCardCreateInfo.php';
 require_once dirname(__FILE__).'/omise/model/OmiseTokenCreateInfo.php';
+require_once dirname(__FILE__).'/omise/model/OmiseCardUpdateInfo.php';
 
 try {
 	$omise = new Omise('skey_test_4y9cewl0rgwji2kbbcb', 'pkey_test_4y9cewl0s1osh44ouud');
@@ -21,7 +22,7 @@ try {
 // 	echo("currency:".$omiseBalance->getCurrency()."\n");
 // 	var_dump($omiseBalance);
 	
-	var_dump($omise->getOmiseAccessCards()->relative('cust_test_4ybbf0bln1f0l0aqns8', 'card_test_4ybbexwv6soly7293x1'));
+	var_dump($omise->getOmiseAccessCards()->destroy('cust_test_4ybbf0bln1f0l0aqns8', 'card_test_4ybbexwv6soly7293x1'));
 } catch(OmiseException $e) {
 	var_dump($e);
 }

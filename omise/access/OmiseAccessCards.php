@@ -7,6 +7,11 @@ class OmiseAccessCards extends OmiseAccessBase {
 	const PARAM_DESCRIPTION = 'description';
 	const PARAM_EMAIL = 'email';
 	const PARAM_CARD = 'card';
+	const PARAM_EXPIRATION_MONTH = 'expiration_month';
+	const PARAM_EXPIRATION_YEAR = 'expiration_year';
+	const PARAM_NAME = 'name';
+	const PARAM_POSTAL_CODE = 'postal_code';
+	const PARAM_CITY = 'city';
 	
 	/**
 	 * トークンを作成する。引数はCardCreateInfoオブジェクト
@@ -44,6 +49,36 @@ class OmiseAccessCards extends OmiseAccessBase {
 	public function retrieve($customerID, $cardID) {
 		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerID.'/cards/'.$cardID, parent::REQUEST_GET, $this->_secretkey);
 		
+		return new OmiseCard($array);
+	}
+	
+	/**
+	 * カード情報を更新する
+	 * @param OmiseCardUpdateInfo $cardUpdateInfo
+	 * @return OmiseCard
+	 */
+	public function update($cardUpdateInfo) {
+		$param = array(
+			self::PARAM_EXPIRATION_MONTH => $cardUpdateInfo->getExpirationMonth(),
+			self::PARAM_EXPIRATION_YEAR => $cardUpdateInfo->getExpirationYear(),
+			self::PARAM_NAME => $cardUpdateInfo->getName(),
+			self::PARAM_POSTAL_CODE => $cardUpdateInfo->getPostalCode(),
+			self::PARAM_CITY => $cardUpdateInfo->getCity()
+		);
+		$array = parent::execute(parent::URLBASE_API.'/customers/'.$cardUpdateInfo->getCustomerID().'/cards/'.$cardUpdateInfo->getCardID(), parent::REQUEST_PATCH, $this->_secretkey, $param);
+		
+		return new OmiseCard($array);
+	}
+
+	/**
+	 * 顧客IDとカードIDに一致するカード情報を破棄する
+	 * @param string $customerID
+	 * @param string $cardID
+	 * @return OmiseCard
+	 */
+	public function destroy($customerID, $cardID) {
+		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerID.'/cards/'.$cardID, parent::REQUEST_DELETE, $this->_secretkey);
+	
 		return new OmiseCard($array);
 	}
 }

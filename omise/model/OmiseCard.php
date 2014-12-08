@@ -48,4 +48,7 @@ class OmiseCard {
 	function getCreated() {
 		return $this->_array['created'];
 	}
+	function getDeleted() {
+		return $this->_array['deleted'];
+	}
 }
