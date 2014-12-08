@@ -3,14 +3,12 @@ require_once dirname(__FILE__).'/OmiseList.php';
 
 class OmiseCustomer {
 	private $_array;
-	private $_cards = array();
+	private $_cards;
 	
 	function __construct($array) {
 		$this->_array = $array;
-		
-		foreach ($this->_array['cards'] as $row) {
-			array_push($this->_cards, new OmiseList($row));
-		}
+
+		$this->_cards = new OmiseList($this->_array['cards']);
 	}
 	
 	function getObject() {

@@ -8,7 +8,7 @@ class OmiseList {
 	function __construct($array) {
 		$this->_array = $array;
 		foreach ($this->_array['data'] as $row) {
-			$this->_data = new OmiseCard($row);
+			array_push($this->_data, new OmiseCard($row));
 		}
 	}
 	
