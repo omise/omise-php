@@ -58,13 +58,12 @@ class OmiseAccessCards extends OmiseAccessBase {
 	 * @return OmiseCard
 	 */
 	public function update($cardUpdateInfo) {
-		$param = array(
-			self::PARAM_EXPIRATION_MONTH => $cardUpdateInfo->getExpirationMonth(),
-			self::PARAM_EXPIRATION_YEAR => $cardUpdateInfo->getExpirationYear(),
-			self::PARAM_NAME => $cardUpdateInfo->getName(),
-			self::PARAM_POSTAL_CODE => $cardUpdateInfo->getPostalCode(),
-			self::PARAM_CITY => $cardUpdateInfo->getCity()
-		);
+		$param = array();
+		if($cardUpdateInfo->getExpirationMonth() !== null) $param += array(self::PARAM_EXPIRATION_MONTH => $cardUpdateInfo->getExpirationMonth());
+		if($cardUpdateInfo->getExpirationYear() !== null) $param += array(self::PARAM_EXPIRATION_YEAR => $cardUpdateInfo->getExpirationYear());
+		if($cardUpdateInfo->getName() !== null) $param += array(self::PARAM_NAME => $cardUpdateInfo->getName());
+		if($cardUpdateInfo->getPostalCode() !== null) $param += array(self::PARAM_POSTAL_CODE => $cardUpdateInfo->getPostalCode());
+		if($cardUpdateInfo->getCity() !== null) $param += array(self::PARAM_CITY => $cardUpdateInfo->getCity());
 		$array = parent::execute(parent::URLBASE_API.'/customers/'.$cardUpdateInfo->getCustomerID().'/cards/'.$cardUpdateInfo->getCardID(), parent::REQUEST_PATCH, $this->_secretkey, $param);
 		
 		return new OmiseCard($array);

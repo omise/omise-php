@@ -2,23 +2,20 @@
 require_once dirname(__FILE__).'/../exception/OmiseException.php';
 
 class OmiseTokenCreateInfo {
-	private $_name, $_number, $_expirationMonth, $_expirationYear, $_securityCode, $_postalCode, $_city;
+	private $_name = null, $_number = null, $_expirationMonth = null, $_expirationYear = null, $_securityCode = null, $_postalCode = null, $_city = null;
 	
 	/**
 	 * 
 	 * @param string $name
 	 * @param string $number
-	 * @param string $expirationMonth
-	 * @param string $expirationYear
-	 * @param string $securityCode
+	 * @param integer $expirationMonth
+	 * @param integer $expirationYear
+	 * @param integer|string $securityCode
 	 * @param string $postalCode
 	 * @param string $city
 	 * @throws OmiseException
 	 */
-	public function __construct($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode, $city) {
-		$error = $this->validCard($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode, $city);
-		if(strlen($error) > 0) throw new OmiseException($error);
-		
+	public function __construct($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode = null, $city = null) {
 		$this->_name = $name;
 		$this->_number = $number;
 		$this->_expirationMonth = $expirationMonth;
@@ -28,68 +25,57 @@ class OmiseTokenCreateInfo {
 		$this->_city = $city;
 	}
 	
+	public function setName($name) {
+		if(!strlen($name))
+		$this->_name = $name;
+	}
 	public function getName() {
 		return $this->_name;
 	}
 	
+	public function setNumber($number) {
+		if(!preg_match("/^[0-9]{14,16}$/", $number)) new OmiseException('Number must be a 16 -digit number from 14 digits.');
+		$this->_number = $number;
+	}
 	public function getNumber() {
 		return $this->_number;
 	}
 	
+	public function setExpirationMonth($expirationMonth) {
+		if(!preg_match("/^[0-9]+$/", $expirationMonth)) throw new OmiseException('Expiration month is an integer.');
+		if($expirationMonth < 1 || 12 < $expirationMonth) throw new OmiseException('Illegal expiration month was entered.');
+		$this->_expirationMonth = $expirationMonth;
+	}
 	public function getExpirationMonth() {
 		return $this->_expirationMonth;
 	}
 	
+	public function setExpirationYear($expirationYear) {
+		if(!preg_match("/^[0-9]{4}$/", $expirationYear)) throw new OmiseException('Expiration year is an integer.');
+		$this->_expirationYear = $expirationYear;
+	}
 	public function getExpirationYear() {
 		return $this->_expirationYear;
 	}
 	
+	public function setSecurityCode($securityCode) {
+		if(!preg_match("/^[0-9]+$/", $securityCode)) throw new OmiseException('Security code is a number.');
+	}
 	public function getSecurityCode() {
 		return $this->_securityCode;
 	}
 	
+	public function setPostalCode($postalCode) {
+		$this->_postalCode = $postalCode;
+	}
 	public function getPostalCode() {
 		return $this->_postalCode;
 	}
 	
+	public function setCity($city) {
+		$this->_city = $city;
+	}
 	public function getCity() {
 		return $this->_city;
-	}
-	
-
-	/**
-	 * クレジットカードの入力チェックを行う。
-	 *
-	 * @param string $name
-	 * @param string $number
-	 * @param string $expirationMonth
-	 * @param string $expirationYear
-	 * @param string $securityCode
-	 * @param string $postalCode
-	 * @param string $city
-	 * @return string|boolean
-	 */
-	private function validCard($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode, $city) {
-		$errors = '';
-	
-		$numlen = strlen($number);
-		$seccodelen = strlen($securityCode);
-		if(!strlen($name)) {
-			$errors.='Name must not be empty.';
-		} else if($numlen < 14 || 16 < $numlen || !preg_match("/^[0-9]+$/", $number)) {
-			$errors.='Card number must be a 16 -digit number from 14 digits.';
-		} else if(strlen($expirationMonth) != 2 || !preg_match("/^[0-9]+$/", $expirationMonth) || $expirationMonth < 1 || 12 < $expirationMonth) {
-			$errors.='Expiration Month must be a number of 01-12.';
-		} else if(strlen($expirationYear) != 4 || !preg_match("/^[0-9]+$/", $expirationYear)) {
-			$errors.='Expiration Year must be a 4 -digit number.';
-		} else if($seccodelen < 3 || 4 < $seccodelen || !preg_match("/^[0-9]+$/", $securityCode)) {
-			$errors.='Security Code must be a 4 -digit number from 3 digits.';
-		} else if(!strlen($postalCode)) {
-			$errors.='Postal Code must not be empty.';
-		} else if(!strlen($city)) {
-			$errors.='City must not be empty.';
-		}
-	
-		return $errors;
 	}
 }

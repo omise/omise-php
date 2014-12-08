@@ -23,10 +23,10 @@ class OmiseAccessTokens extends OmiseAccessBase {
 			self::PARAM_CARD_NUMBER => $tokenCreateInfo->getNumber(),
 			self::PARAM_CARD_EXPIRATION_MONTH => $tokenCreateInfo->getExpirationMonth(),
 			self::PARAM_CARD_EXPIRATION_YEAR => $tokenCreateInfo->getExpirationYear(),
-			self::PARAM_CARD_SECURITY_CODE => $tokenCreateInfo->getSecurityCode(),
-			self::PARAM_CARD_POSTAL_CODE => $tokenCreateInfo->getPostalCode(),
-			self::PARAM_CARD_CITY => $tokenCreateInfo->getCity()
+			self::PARAM_CARD_SECURITY_CODE => $tokenCreateInfo->getSecurityCode()			
 		);
+		if($tokenCreateInfo->getPostalCode() !== null)  $param += array(self::PARAM_CARD_POSTAL_CODE => $tokenCreateInfo->getPostalCode());
+		if($tokenCreateInfo->getCity() !== null) $param += array(self::PARAM_CARD_CITY => $tokenCreateInfo->getCity());
 		$array = parent::execute(parent::URLBASE_VAULT.'/tokens', parent::REQUEST_POST, $this->_publickey, $param);
 		
 		return new OmiseToken($array);
