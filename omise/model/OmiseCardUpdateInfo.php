@@ -1,6 +1,4 @@
 <?php
-require_once dirname(__FILE__).'/../exception/OmiseException.php';
-
 class OmiseCardUpdateInfo {
 	private $_cardID = null, $_customerID = null, $_name = null, $_expirationMonth = null, $_expirationYear = null, $_postalCode = null, $_city = null;
 	
@@ -46,8 +44,8 @@ class OmiseCardUpdateInfo {
 	}
 	
 	public function setExpirationMonth($expirationMonth) {
-		if(!preg_match("/^[0-9]+$/", $expirationMonth)) throw new OmiseException('Expiration month is an integer.');
-		if($expirationMonth < 1 || 12 < $expirationMonth) throw new OmiseException('Illegal expiration month was entered.');
+		//if(!preg_match("/^[0-9]+$/", $expirationMonth)) throw new OmiseException('Expiration month is an integer.');
+		//if($expirationMonth < 1 || 12 < $expirationMonth) throw new OmiseException('Illegal expiration month was entered.');
 		
 		$this->_expirationMonth = $expirationMonth;
 	}
@@ -56,7 +54,7 @@ class OmiseCardUpdateInfo {
 	}
 	
 	public function setExpirationYear($expirationYear) {
-		if(!preg_match("/^[0-9]{4}$/", $expirationYear)) throw new OmiseException('Expiration year is 4 -digit integer.');
+		//if(!preg_match("/^[0-9]{4}$/", $expirationYear)) throw new OmiseException('Expiration year is 4 -digit integer.');
 		
 		$this->_expirationYear = $expirationYear;
 	}

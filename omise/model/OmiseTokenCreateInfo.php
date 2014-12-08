@@ -1,6 +1,4 @@
 <?php
-require_once dirname(__FILE__).'/../exception/OmiseException.php';
-
 class OmiseTokenCreateInfo {
 	private $_name = null, $_number = null, $_expirationMonth = null, $_expirationYear = null, $_securityCode = null, $_postalCode = null, $_city = null;
 	
@@ -15,7 +13,7 @@ class OmiseTokenCreateInfo {
 	 * @param string $city
 	 * @throws OmiseException
 	 */
-	public function __construct($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode = null, $city = null) {
+	public function __construct($name = null, $number = null, $expirationMonth = null, $expirationYear = null, $securityCode = null, $postalCode = null, $city = null) {
 		$this->setName($name);
 		$this->setNumber($number);
 		$this->setExpirationMonth($expirationMonth);
@@ -26,7 +24,7 @@ class OmiseTokenCreateInfo {
 	}
 	
 	public function setName($name) {
-		if(!strlen($name)) new OmiseException('Name must not be empty.');
+		//if(!strlen($name)) new OmiseException('Name must not be empty.');
 		$this->_name = $name;
 	}
 	public function getName() {
@@ -34,7 +32,7 @@ class OmiseTokenCreateInfo {
 	}
 	
 	public function setNumber($number) {
-		if(!preg_match("/^[0-9]{14,16}$/", $number)) new OmiseException('Number must be a 16 -digit number from 14 digits.');
+		//if(!preg_match("/^[0-9]{14,16}$/", $number)) new OmiseException('Number must be a 16 -digit number from 14 digits.');
 		$this->_number = $number;
 	}
 	public function getNumber() {
@@ -42,8 +40,8 @@ class OmiseTokenCreateInfo {
 	}
 	
 	public function setExpirationMonth($expirationMonth) {
-		if(!preg_match("/^[0-9]{1,2}$/", $expirationMonth)) throw new OmiseException('Expiration month is 2 -digit integer from 1 -digit.');
-		if($expirationMonth < 1 || 12 < $expirationMonth) throw new OmiseException('Illegal expiration month was entered.');
+		//if(!preg_match("/^[0-9]{1,2}$/", $expirationMonth)) throw new OmiseException('Expiration month is 2 -digit integer from 1 -digit.');
+		//if($expirationMonth < 1 || 12 < $expirationMonth) throw new OmiseException('Illegal expiration month was entered.');
 		$this->_expirationMonth = $expirationMonth;
 	}
 	public function getExpirationMonth() {
@@ -51,7 +49,7 @@ class OmiseTokenCreateInfo {
 	}
 	
 	public function setExpirationYear($expirationYear) {
-		if(!preg_match("/^[0-9]{4}$/", $expirationYear)) throw new OmiseException('Expiration year is 4 -digit integer.');
+		//if(!preg_match("/^[0-9]{4}$/", $expirationYear)) throw new OmiseException('Expiration year is 4 -digit integer.');
 		$this->_expirationYear = $expirationYear;
 	}
 	public function getExpirationYear() {
@@ -59,7 +57,8 @@ class OmiseTokenCreateInfo {
 	}
 	
 	public function setSecurityCode($securityCode) {
-		if(!preg_match("/^[0-9]{3,4}$/", $securityCode)) throw new OmiseException('Security code is a number.');
+		//if(!preg_match("/^[0-9]{3,4}$/", $securityCode)) throw new OmiseException('Security code is a number.');
+		$this->_securityCode = $securityCode;
 	}
 	public function getSecurityCode() {
 		return $this->_securityCode;
