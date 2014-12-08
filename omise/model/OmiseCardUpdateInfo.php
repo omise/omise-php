@@ -56,7 +56,7 @@ class OmiseCardUpdateInfo {
 	}
 	
 	public function setExpirationYear($expirationYear) {
-		if(!preg_match("/^[0-9]{4}$/",$expirationYear)) throw new OmiseException('Expiration year is an integer.');
+		if(!preg_match("/^[0-9]{4}$/", $expirationYear)) throw new OmiseException('Expiration year is 4 -digit integer.');
 		
 		$this->_expirationYear = $expirationYear;
 	}
