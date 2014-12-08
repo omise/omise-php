@@ -22,7 +22,7 @@ try {
 // 	echo("currency:".$omiseBalance->getCurrency()."\n");
 // 	var_dump($omiseBalance);
 	
-	var_dump($omise->getOmiseAccessCards()->destroy('cust_test_4ybbf0bln1f0l0aqns8', 'card_test_4ybbexwv6soly7293x1'));
+	var_dump($omise->getOmiseAccessCharges()->listAll('cust_test_4ybbf0bln1f0l0aqns8'));
 } catch(OmiseException $e) {
 	var_dump($e);
 }
