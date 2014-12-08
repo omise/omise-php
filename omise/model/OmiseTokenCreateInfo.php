@@ -26,7 +26,7 @@ class OmiseTokenCreateInfo {
 	}
 	
 	public function setName($name) {
-		if(!strlen($name))
+		if(!strlen($name)) new OmiseException('Name must not be empty.');
 		$this->_name = $name;
 	}
 	public function getName() {
@@ -42,7 +42,7 @@ class OmiseTokenCreateInfo {
 	}
 	
 	public function setExpirationMonth($expirationMonth) {
-		if(!preg_match("/^[0-9]+$/", $expirationMonth)) throw new OmiseException('Expiration month is an integer.');
+		if(!preg_match("/^[0-9]{1,2}$/", $expirationMonth)) throw new OmiseException('Expiration month is 2 -digit integer from 1 -digit.');
 		if($expirationMonth < 1 || 12 < $expirationMonth) throw new OmiseException('Illegal expiration month was entered.');
 		$this->_expirationMonth = $expirationMonth;
 	}
@@ -59,7 +59,7 @@ class OmiseTokenCreateInfo {
 	}
 	
 	public function setSecurityCode($securityCode) {
-		if(!preg_match("/^[0-9]+$/", $securityCode)) throw new OmiseException('Security code is a number.');
+		if(!preg_match("/^[0-9]{3,4}$/", $securityCode)) throw new OmiseException('Security code is a number.');
 	}
 	public function getSecurityCode() {
 		return $this->_securityCode;
