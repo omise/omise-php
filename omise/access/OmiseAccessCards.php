@@ -41,7 +41,7 @@ class OmiseAccessCards extends OmiseAccessBase {
 	 * @param string $cardID
 	 * @return OmiseCard
 	 */
-	public function relative($customerID, $cardID) {
+	public function retrieve($customerID, $cardID) {
 		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerID.'/cards/'.$cardID, parent::REQUEST_GET, $this->_secretkey);
 		
 		return new OmiseCard($array);
