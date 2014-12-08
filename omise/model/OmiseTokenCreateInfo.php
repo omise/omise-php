@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../exception/OmiseException.php';
 
-class OmiseCardCreateInfo {
+class OmiseTokenCreateInfo {
 	private $_name, $_number, $_expirationMonth, $_expirationYear, $_securityCode, $_postalCode, $_city;
 	
 	/**

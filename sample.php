@@ -20,8 +20,8 @@ try {
 // 	echo("currency:".$omiseBalance->getCurrency()."\n");
 // 	var_dump($omiseBalance);
 	
-// 	$cardCreateInfo = new OmiseCardCreateInfo('Somchai Prasert', '4242424242424242', '10', '2018', '123', '10320', 'Bangkok');
-// 	$omiseTokens = $omise->getOmiseAccessTokens()->create($cardCreateInfo);
+// 	$tokenCreateInfo = new OmiseTokenCreateInfo('Somchai Prasert', '4242424242424242', '10', '2018', '123', '10320', 'Bangkok');
+// 	$omiseTokens = $omise->getOmiseAccessTokens()->create($tokenCreateInfo);
 // 	echo("object:".$omiseTokens->getObject()."\n");
 // 	echo("id:".$omiseTokens->getID()."\n");
 // 	echo("livemode:".$omiseTokens->getLivemode()."\n");
