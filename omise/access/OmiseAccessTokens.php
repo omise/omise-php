@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/OmiseAccessBase.php';
 require_once dirname(__FILE__).'/../model/OmiseTokens.php';
+require_once dirname(__FILE__).'/../model/OmiseCardCreateInfo.php';
 
 class OmiseAccessTokens extends OmiseAccessBase {
 	const PARAM_CARD_NAME = 'card[name]';
@@ -12,11 +13,21 @@ class OmiseAccessTokens extends OmiseAccessBase {
 	const PARAM_CARD_CITY = 'card[city]';
 	
 	/**
-	 * @throws OmiseException
+	 * 
+	 * @param OmiseCardCreateInfo $card
 	 * @return OmiseTokens
 	 */
-	function create($card) {
-		$array = parent::execute(parent::URLBASE_VAULT.'/tokens', parent::REQUEST_POST);
+	function create($cardCreateInfo) {
+		$param = array(
+			self::PARAM_CARD_NAME => $cardCreateInfo->getName(),
+			self::PARAM_CARD_NUMBER => $cardCreateInfo->getNumber(),
+			self::PARAM_CARD_EXPIRATION_MONTH => $cardCreateInfo->getExpirationMonth(),
+			self::PARAM_CARD_EXPIRATION_YEAR => $cardCreateInfo->getExpirationYear(),
+			self::PARAM_CARD_SECURITY_CODE => $cardCreateInfo->getSecurityCode(),
+			self::PARAM_CARD_POSTAL_CODE => $cardCreateInfo->getPostalCode(),
+			self::PARAM_CARD_CITY => $cardCreateInfo->getCity()
+		);
+		$array = parent::execute(parent::URLBASE_VAULT.'/tokens', parent::REQUEST_POST, $this->_publickey, $param);
 		
 		return new OmiseTokens($array);
 	}

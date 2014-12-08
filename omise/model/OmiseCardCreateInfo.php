@@ -1,63 +1,95 @@
 <?php
+require_once dirname(__FILE__).'/../exception/OmiseException.php';
+
 class OmiseCardCreateInfo {
 	private $_name, $_number, $_expirationMonth, $_expirationYear, $_securityCode, $_postalCode, $_city;
 	
+	/**
+	 * 
+	 * @param string $name
+	 * @param string $number
+	 * @param string $expirationMonth
+	 * @param string $expirationYear
+	 * @param string $securityCode
+	 * @param string $postalCode
+	 * @param string $city
+	 * @throws OmiseException
+	 */
 	public function __construct($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode, $city) {
-		$this->setName($name);
-		$this->setNumber($number);
-		$this->setExpirationMonth($expirationMonth);
-		$this->setExpirationYear($expirationYear);
-		$this->setSecurityCode($securityCode);
-		$this->setPostalCode($postalCode);
-		$this->setCity($city);
+		$error = $this->validCard($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode, $city);
+		if(strlen($error) > 0) throw new OmiseException($error);
+		
+		$this->_name = $name;
+		$this->_number = $number;
+		$this->_expirationMonth = $expirationMonth;
+		$this->_expirationYear = $expirationYear;
+		$this->_securityCode = $securityCode;
+		$this->_postalCode = $postalCode;
+		$this->_city = $city;
 	}
 	
-	public function setName($name) {
-		$this->_name = $name;
-	}
 	public function getName() {
 		return $this->_name;
 	}
 	
-	public function setNumber($number) {
-		$this->_number = $number;
-	}
 	public function getNumber() {
 		return $this->_number;
 	}
 	
-	public function setExpirationMonth($expirationMonth) {
-		$this->_expirationMonth = $expirationMonth;
-	}
 	public function getExpirationMonth() {
 		return $this->_expirationMonth;
 	}
 	
-	public function setExpirationYear($expirationYear) {
-		$this->_expirationYear = $expirationYear;
-	}
 	public function getExpirationYear() {
 		return $this->_expirationYear;
 	}
 	
-	public function setSecurityCode($secutityCode) {
-		$this->_securityCode = $secutityCode;
-	}
 	public function getSecurityCode() {
 		return $this->_securityCode;
 	}
 	
-	public function setPostalCode($postalCode) {
-		$this->_postalCode = $postalCode;
-	}
 	public function getPostalCode() {
 		return $this->_postalCode;
 	}
 	
-	public function setCity($city) {
-		$this->_city = $city;
-	}
 	public function getCity() {
 		return $this->_city;
+	}
+	
+
+	/**
+	 * クレジットカードの入力チェックを行う。
+	 *
+	 * @param string $name
+	 * @param string $number
+	 * @param string $expirationMonth
+	 * @param string $expirationYear
+	 * @param string $securityCode
+	 * @param string $postalCode
+	 * @param string $city
+	 * @return string|boolean
+	 */
+	private function validCard($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode, $city) {
+		$errors = '';
+	
+		$numlen = strlen($number);
+		$seccodelen = strlen($securityCode);
+		if(!strlen($name)) {
+			$errors.='Name must not be empty.';
+		} else if($numlen < 14 || 16 < $numlen || !preg_match("/^[0-9]+$/", $number)) {
+			$errors.='Card number must be a 16 -digit number from 14 digits.';
+		} else if(strlen($expirationMonth) != 2 || !preg_match("/^[0-9]+$/", $expirationMonth) || $expirationMonth < 1 || 12 < $expirationMonth) {
+			$errors.='Expiration Month must be a number of 01-12.';
+		} else if(strlen($expirationYear) != 4 || !preg_match("/^[0-9]+$/", $expirationYear)) {
+			$errors.='Expiration Year must be a 4 -digit number.';
+		} else if($seccodelen < 3 || 4 < $seccodelen || !preg_match("/^[0-9]+$/", $securityCode)) {
+			$errors.='Security Code must be a 4 -digit number from 3 digits.';
+		} else if(!strlen($postalCode)) {
+			$errors.='Postal Code must not be empty.';
+		} else if(!strlen($city)) {
+			$errors.='City must not be empty.';
+		}
+	
+		return $errors;
 	}
 }

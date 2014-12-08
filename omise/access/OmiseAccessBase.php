@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/../exeption/Exceptions.php';
+require_once dirname(__FILE__).'/../exception/OmiseException.php';
 require_once dirname(__FILE__).'/../model/OmiseError.php';
 
 class OmiseAccessBase {
@@ -38,10 +38,9 @@ class OmiseAccessBase {
 	 * @throws OmiseException
 	 * @return string
 	 */
-	protected function execute($url, $requestMethod, $userpwd, $params = null) {
+	protected function execute($url, $requestMethod, $key, $params = null) {
 		$ch = curl_init($url);
-		curl_setopt_array($ch, $this->genOptions($requestMethod, $userpwd, $params));
-		
+		curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
 		// リクエストを実行し、失敗した場合には例外を投げる
 		if(($result = curl_exec($ch)) === false) {
 			$error = curl_error($ch);
@@ -93,18 +92,18 @@ class OmiseAccessBase {
 				// リダイレクトが実施されたときヘッダにRefererを追加する
 				CURLOPT_AUTOREFERER => true,
 				// HTTPレスポンスコード400番台以上はエラーとして扱う
-				CURLOPT_FAILONERROR => true,
+				//CURLOPT_FAILONERROR => true,
 				// 実行時間の限界を指定
 				CURLOPT_TIMEOUT => self::PARAM_TIMEOUT,
 				// 接続要求のタイムアウトを指定
 				CURLOPT_CONNECTTIMEOUT => self::PARAM_CONNECTTIMEOUT,
 				// 認証情報を指定
-				CURLOPT_USERPWD => $userpwd.':'
+				CURLOPT_USERPWD => $userpwd
 		);
 		
 		// POSTパラメータがある場合マージ
-		if(count($params) > 0) array_merge($options, array(CURLOPT_POSTFIELDS => http_build_query($params)));
-	
+		if(count($params) > 0) $options += array(CURLOPT_POSTFIELDS => http_build_query($params));
+		
 		return $options;
 	}
 }
