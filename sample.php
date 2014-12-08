@@ -21,11 +21,7 @@ try {
 // 	echo("currency:".$omiseBalance->getCurrency()."\n");
 // 	var_dump($omiseBalance);
 	
-	$tokenCreateInfo = new OmiseTokenCreateInfo('Somchai Prasert', '4242424242424242', '10', '2018', '123', '10320', 'Bangkok');
-	$omiseTokens = $omise->getOmiseAccessTokens()->create($tokenCreateInfo);
-	
-	$cardCreateInfo = new OmiseCardCreateInfo('John Doe (id: 30)', 'john.doe@example.com', $omiseTokens->getID());
-	var_dump($omise->getOmiseAccessCards()->create($cardCreateInfo));
+	var_dump($omise->getOmiseAccessCards()->listAll('cust_test_4ybbf0bln1f0l0aqns8'));
 } catch(OmiseException $e) {
 	var_dump($e);
 }

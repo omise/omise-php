@@ -17,7 +17,7 @@ class OmiseAccessTokens extends OmiseAccessBase {
 	 * @param OmiseTokenCreateInfo $tokenCreateInfo
 	 * @return OmiseTokens
 	 */
-	function create($tokenCreateInfo) {
+	public function create($tokenCreateInfo) {
 		$param = array(
 			self::PARAM_CARD_NAME => $tokenCreateInfo->getName(),
 			self::PARAM_CARD_NUMBER => $tokenCreateInfo->getNumber(),
@@ -37,7 +37,7 @@ class OmiseAccessTokens extends OmiseAccessBase {
 	 * @param string $tokenID
 	 * @return OmiseTokens
 	 */
-	function retrieve($tokenID) {
+	public function retrieve($tokenID) {
 		$array = parent::execute(parent::URLBASE_VAULT.'/tokens/'.$tokenID, parent::REQUEST_GET, $this->_publickey);
 		
 		return new OmiseToken($array);

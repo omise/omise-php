@@ -13,7 +13,7 @@ class OmiseAccessCards extends OmiseAccessBase {
 	 * @param OmiseCardCreateInfo $cardCreateInfo
 	 * @return OmiseTokens
 	 */
-	function create($cardCreateInfo) {
+	public function create($cardCreateInfo) {
 		$param = array(
 			self::PARAM_DESCRIPTION => $cardCreateInfo->getDescription(),
 			self::PARAM_EMAIL => $cardCreateInfo->getEmail(),
@@ -22,6 +22,13 @@ class OmiseAccessCards extends OmiseAccessBase {
 		$array = parent::execute(parent::URLBASE_API.'/customers', parent::REQUEST_POST, $this->_secretkey, $param);
 		
 		return new OmiseCustomer($array);
+	}
+	
+	
+	public function listAll($customerID) {
+		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerID.'/cards', parent::REQUEST_GET, $this->_secretkey);
+		
+		return new OmiseList($array);
 	}
 }
 ?>
