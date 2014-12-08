@@ -16,13 +16,13 @@ class OmiseTokenCreateInfo {
 	 * @throws OmiseException
 	 */
 	public function __construct($name, $number, $expirationMonth, $expirationYear, $securityCode, $postalCode = null, $city = null) {
-		$this->_name = $name;
-		$this->_number = $number;
-		$this->_expirationMonth = $expirationMonth;
-		$this->_expirationYear = $expirationYear;
-		$this->_securityCode = $securityCode;
-		$this->_postalCode = $postalCode;
-		$this->_city = $city;
+		$this->setName($name);
+		$this->setNumber($number);
+		$this->setExpirationMonth($expirationMonth);
+		$this->setExpirationYear($expirationYear);
+		$this->setSecurityCode($securityCode);
+		$this->setPostalCode($postalCode);
+		$this->setCity($city);
 	}
 	
 	public function setName($name) {
