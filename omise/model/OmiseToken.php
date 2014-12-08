@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/OmiseCard.php';
 
-class OmiseTokens {
+class OmiseToken {
 	private $_array;
 	private $_card;
 	

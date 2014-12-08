@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__).'/OmiseAccessBase.php';
-require_once dirname(__FILE__).'/../model/OmiseTokens.php';
+require_once dirname(__FILE__).'/../model/OmiseToken.php';
 require_once dirname(__FILE__).'/../model/OmiseTokenCreateInfo.php';
 
 class OmiseAccessTokens extends OmiseAccessBase {
@@ -29,7 +29,7 @@ class OmiseAccessTokens extends OmiseAccessBase {
 		);
 		$array = parent::execute(parent::URLBASE_VAULT.'/tokens', parent::REQUEST_POST, $this->_publickey, $param);
 		
-		return new OmiseTokens($array);
+		return new OmiseToken($array);
 	}
 	
 	/**
@@ -40,6 +40,6 @@ class OmiseAccessTokens extends OmiseAccessBase {
 	function retrieve($tokenID) {
 		$array = parent::execute(parent::URLBASE_VAULT.'/tokens/'.$tokenID, parent::REQUEST_GET, $this->_publickey);
 		
-		return new OmiseTokens($array);
+		return new OmiseToken($array);
 	}
 }

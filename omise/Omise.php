@@ -2,6 +2,7 @@
 require_once dirname(__FILE__).'/access/OmiseAccessAccount.php';
 require_once dirname(__FILE__).'/access/OmiseAccessBalance.php';
 require_once dirname(__FILE__).'/access/OmiseAccessTokens.php';
+require_once dirname(__FILE__).'/access/OmiseAccessCards.php';
 
 class Omise {
 	// Omiseの秘密鍵と公開鍵用変数
@@ -12,6 +13,7 @@ class Omise {
 	private $_omiseAccessAccount = null;
 	private $_omiseAccessBalance = null;
 	private $_omiseAccessTokens = null;
+	private $_omiseAccessCards = null;
 	
 	/**
 	 * 引数にOmiseの秘密鍵と公開鍵を渡す
@@ -53,7 +55,7 @@ class Omise {
 	
 	/**
 	 * API:Tokensへ接続するためのオブジェクトを返す
-	 * @return 
+	 * @return OmiseAccessTokens
 	 */
 	public function getOmiseAccessTokens() {
 		if($this->_omiseAccessTokens === null) {
@@ -61,5 +63,17 @@ class Omise {
 		}
 		
 		return $this->_omiseAccessTokens;
+	}
+	
+	/**
+	 * API:Cardsへ接続するためのオブジェクトを返す
+	 * @return OmiseAccessCards
+	 */
+	public function getOmiseAccessCards() {
+		if($this->_omiseAccessCards === null) {
+			$this->_omiseAccessCards = new OmiseAccessCards($this->_secretkey, $this->_publickey);
+		}
+		
+		return $this->_omiseAccessCards;
 	}
 }

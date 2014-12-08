@@ -10,8 +10,8 @@ class OmiseAccessBase {
 	const REQUEST_PATCH = 'PATCH';
 
 	// php-curlで使うオプションの設定
-	const PARAM_TIMEOUT = 60;
-	const PARAM_CONNECTTIMEOUT = 30;
+	const HTTP_PARAM_TIMEOUT = 60;
+	const HTTP_PARAM_CONNECTTIMEOUT = 30;
 	
 	// OmiseのベースURL
 	const URLBASE_API = 'https://api.omise.co';
@@ -94,9 +94,9 @@ class OmiseAccessBase {
 				// HTTPレスポンスコード400番台以上はエラーとして扱う
 				//CURLOPT_FAILONERROR => true,
 				// 実行時間の限界を指定
-				CURLOPT_TIMEOUT => self::PARAM_TIMEOUT,
+				CURLOPT_TIMEOUT => self::HTTP_PARAM_TIMEOUT,
 				// 接続要求のタイムアウトを指定
-				CURLOPT_CONNECTTIMEOUT => self::PARAM_CONNECTTIMEOUT,
+				CURLOPT_CONNECTTIMEOUT => self::HTTP_PARAM_CONNECTTIMEOUT,
 				// 認証情報を指定
 				CURLOPT_USERPWD => $userpwd
 		);
