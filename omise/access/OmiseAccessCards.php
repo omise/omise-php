@@ -24,11 +24,27 @@ class OmiseAccessCards extends OmiseAccessBase {
 		return new OmiseCustomer($array);
 	}
 	
-	
+	/**
+	 * 顧客IDに紐づくカードのリストを取得する。
+	 * @param string $customerID
+	 * @return OmiseList
+	 */
 	public function listAll($customerID) {
 		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerID.'/cards', parent::REQUEST_GET, $this->_secretkey);
 		
 		return new OmiseList($array);
+	}
+	
+	/**
+	 * 顧客IDとカードIDに一致するカード情報を取得する
+	 * @param string $customerID
+	 * @param string $cardID
+	 * @return OmiseCard
+	 */
+	public function relative($customerID, $cardID) {
+		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerID.'/cards/'.$cardID, parent::REQUEST_GET, $this->_secretkey);
+		
+		return new OmiseCard($array);
 	}
 }
 ?>
