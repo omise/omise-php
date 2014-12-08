@@ -2,6 +2,11 @@
 class OmiseException extends Exception {
 	private $_omiseError = null;
 	
+	public function __construct($message = null, $omiseError = null) {
+		parent::__construct($message);
+		$this->setOmiseError($omiseError);
+	}
+	
 	/**
 	 * OmiseErrorをセットする
 	 * @param OmiseError $omiseError
@@ -19,3 +24,4 @@ class OmiseException extends Exception {
 		return $this->_omiseError;
 	}
 }
+
