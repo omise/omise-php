@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/../exception/OmiseException.php';
 require_once dirname(__FILE__).'/../model/OmiseError.php';
 
-class OmiseAccessBase {
+abstract class OmiseAccessBase {
 	// リクエストメソッドたち
 	const REQUEST_GET = 'GET';
 	const REQUEST_POST = 'POST';
