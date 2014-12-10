@@ -42,4 +42,7 @@ class OmiseTransfer {
 	public function getCreated() {
 		return $this->_array['created'];
 	}
+	public function getDeleted() {
+		return $this->_array['deleted'];
+	}
 }

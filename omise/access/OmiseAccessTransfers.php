@@ -13,7 +13,7 @@ class OmiseAccessTransfers extends OmiseAccessBase {
 	 * @return OmiseTransfer
 	 */
 	public function listAll() {
-		$array = parent::execute(parent::URLBASE_VAULT.'/transfers', parent::REQUEST_GET, $this->_secretkey);
+		$array = parent::execute(parent::URLBASE_API.'/transfers', parent::REQUEST_GET, $this->_secretkey);
 		
 		return new OmiseList($array);
 	}
@@ -26,7 +26,7 @@ class OmiseAccessTransfers extends OmiseAccessBase {
 	public function create($transferCreateInfo) {
 		$param = array();
 		if($transferCreateInfo->getAmouont() !== null) $array += array(self::PARAM_AMOUNT => $transferCreateInfo->getAmouont());
-		$array = parent::execute(parent::URLBASE_VAULT.'/transfers', parent::REQUEST_POST, $this->_secretkey, $param);
+		$array = parent::execute(parent::URLBASE_API.'/transfers', parent::REQUEST_POST, $this->_secretkey, $param);
 		
 		return new OmiseTransfer($array);
 	}
@@ -37,7 +37,7 @@ class OmiseAccessTransfers extends OmiseAccessBase {
 	 * @return OmiseTransfer
 	 */
 	public function retrieve($transferID) {
-		$array = parent::execute(parent::URLBASE_VAULT.'/transfers/'.$transferID, parent::REQUEST_GET, $this->_secretkey);
+		$array = parent::execute(parent::URLBASE_API.'/transfers/'.$transferID, parent::REQUEST_GET, $this->_secretkey);
 		
 		return new OmiseTransfer($array);
 	}
@@ -51,7 +51,18 @@ class OmiseAccessTransfers extends OmiseAccessBase {
 		$param = array();
 		if($transferUpdateInfo->getAmouont() !== null) $param += array(self::PARAM_AMOUNT => $transferUpdateInfo->getAmouont());
 		
-		$array = parent::execute(parent::URLBASE_VAULT.'/transfers/'.$transferID.$transferUpdateInfo->getTransferID(), parent::REQUEST_GET, $this->_secretkey, $param);
+		$array = parent::execute(parent::URLBASE_API.'/transfers/'.$transferUpdateInfo->getTransferID(), parent::REQUEST_GET, $this->_secretkey, $param);
+		
+		return new OmiseTransfer($array);
+	}
+	
+	/**
+	 * トランスファーの削除
+	 * @param string $transferID
+	 * @return OmiseTransfer
+	 */
+	public function destroy($transferID) {
+		$array = parent::execute(parent::URLBASE_API.'/transfers/'.$transferID, parent::REQUEST_DELETE, $this->_secretkey);
 		
 		return new OmiseTransfer($array);
 	}
