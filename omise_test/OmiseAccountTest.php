@@ -1,16 +1,17 @@
 <?php
 require_once dirname(__FILE__).'/OmiseTest.php';
 require_once dirname(__FILE__).'/../omise/Omise.php';
+require_once dirname(__FILE__).'/../omise/model/OmiseAccount.php';
 
 class OmiseAccountTest extends OmiseTest {
 	public function retrieve() {
 		$omise = new Omise($this->_secretkey, $this->_publickey);
 		
-		$omiseAccessAccount = $omise->getOmiseAccessAccount()->retrieve();
+		$omiseAccount = $omise->getOmiseAccessAccount()->retrieve();
 
-		echo('object:'.$omiseAccessAccount->getObject()."\n");
-		echo('id:'.$omiseAccessAccount->getID()."\n");
-		echo('email:'.$omiseAccessAccount->getEmail()."\n");
-		echo('created:'.$omiseAccessAccount->getCreated()."\n");
+		echo('object:'.$omiseAccount->getObject()."\n");
+		echo('id:'.$omiseAccount->getID()."\n");
+		echo('email:'.$omiseAccount->getEmail()."\n");
+		echo('created:'.$omiseAccount->getCreated()."\n");
 	}
 }
