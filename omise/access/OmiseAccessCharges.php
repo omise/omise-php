@@ -23,7 +23,7 @@ class OmiseAccessCharges extends OmiseAccessBase {
 	}
 	
 	/**
-	 * 
+	 * チャージする
 	 * @param OmiseChargeCreateInfo $chargeCreateInfo
 	 * @return OmiseCharge
 	 */
@@ -40,6 +40,17 @@ class OmiseAccessCharges extends OmiseAccessBase {
 		if($chargeCreateInfo->getIP() !== null) $param += array(self::PARAM_IP => $chargeCreateInfo->getIP());
 		
 		$array = parent::execute(parent::URLBASE_API.'/charges', parent::REQUEST_POST, $this->_secretkey, $param);
+		
+		return new OmiseCharge($array);
+	}
+	
+	/**
+	 * チャージIDを元にチャージを取得する
+	 * @param string $chargeID
+	 * @return OmiseCharge
+	 */
+	public function retrieve($chargeID) {
+		$array = parent::execute(parent::URLBASE_API.'/charges/'.$chargeID, parent::REQUEST_GET, $this->_secretkey);
 		
 		return new OmiseCharge($array);
 	}
