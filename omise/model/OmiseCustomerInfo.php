@@ -1,5 +1,5 @@
 <?php
-class OmiseCustomerInfo {
+abstract class OmiseCustomerInfo {
 	private $_email = null, $_description = null, $_card = null;
 	
 	public function __construct($email = null, $description = null, $card = null) {
