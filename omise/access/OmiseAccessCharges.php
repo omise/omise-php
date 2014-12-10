@@ -71,4 +71,15 @@ class OmiseAccessCharges extends OmiseAccessBase {
 		
 		return new OmiseCharge($array);
 	}
+	
+	/**
+	 * なんだろこれ・・・・
+	 * @param string $chargeID
+	 * @return OmiseCharge
+	 */
+	public function captureAnAuthorized($chargeID) {
+		$array = parent::execute(parent::URLBASE_API.'/charges/'.$chargeID.'/capture', parent::REQUEST_POST, $this->_secretkey);
+		
+		return new OmiseCharge($array);
+	}
 }
