@@ -45,5 +45,20 @@ class OmiseAccessCustomers extends OmiseAccessBase {
 		
 		return new OmiseCustomer($array);
 	}
+	
+	/**
+	 * 顧客情報を更新する
+	 * @param OmiseCustomerUpdateInfo $customerUpdateInfo
+	 */
+	public function update($customerUpdateInfo) {
+		$array = array();
+		if($customerUpdateInfo->getEmail() !== null) $array += array(self::PARAM_EMAIL => $customerUpdateInfo->getEmail());
+		if($customerUpdateInfo->getDescription() !== null) $array += array(self::PARAM_DESCRIPTION => $customerUpdateInfo->getDescription());
+		if($customerUpdateInfo->getCard() !== null) $array += array(self::PARAM_CARD => $customerUpdateInfo->getCard());
+
+		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerUpdateInfo->getCustomerID(), parent::REQUEST_PATCH, $this->_secretkey, $array);
+		
+		return new OmiseCustomer($array);
+	}
 }
 ?>
