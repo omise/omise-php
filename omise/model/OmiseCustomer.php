@@ -3,7 +3,7 @@ require_once dirname(__FILE__).'/OmiseList.php';
 
 class OmiseCustomer {
 	private $_array;
-	private $_list;
+	private $_cards;
 	
 	function __construct($array) {
 		$this->_array = $array;
@@ -33,6 +33,6 @@ class OmiseCustomer {
 		return $this->_array['description'];
 	}
 	function getCards() {
-		return $this->_list;
+		return $this->_cards;
 	}
 }

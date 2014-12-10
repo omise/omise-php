@@ -34,5 +34,16 @@ class OmiseAccessCustomers extends OmiseAccessBase {
 		
 		return new OmiseCustomer($array);
 	}
+	
+	/**
+	 * 顧客IDを元に顧客情報を取得する
+	 * @param string $customerID
+	 * @return OmiseCustomer
+	 */
+	public function retrieve($customerID) {
+		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerID, self::REQUEST_GET, $this->_secretkey);
+		
+		return new OmiseCustomer($array);
+	}
 }
 ?>
