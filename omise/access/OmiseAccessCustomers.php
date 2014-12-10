@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/OmiseAccessBase.php';
 require_once dirname(__FILE__).'/../model/OmiseList.php';
 
-class OmiseAccessCustomer extends OmiseAccessBase {
+class OmiseAccessCustomers extends OmiseAccessBase {
 	/**
 	 * 顧客一覧を取得する
 	 * @return OmiseList
