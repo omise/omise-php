@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/OmiseCard.php';
 require_once dirname(__FILE__).'/OmiseCharge.php';
+require_once dirname(__FILE__).'/OmiseCustomer.php';
 
 class OmiseList {
 	private $_array;
@@ -17,6 +18,10 @@ class OmiseList {
 					
 				case 'card':
 					array_push($this->_data, new OmiseCard($row));
+					break;
+					
+				case 'customer':
+					array_push($this->_data, new OmiseCustomer($row));
 					break;
 			}
 		}

@@ -77,7 +77,7 @@ class OmiseAccessCards extends OmiseAccessBase {
 	 */
 	public function destroy($customerID, $cardID) {
 		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerID.'/cards/'.$cardID, parent::REQUEST_DELETE, $this->_secretkey);
-	
+		
 		return new OmiseCard($array);
 	}
 }
