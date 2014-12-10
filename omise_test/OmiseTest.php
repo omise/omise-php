@@ -1,9 +1,5 @@
 <?php
 abstract class OmiseTest {
-	protected $_secretkey, $_publickey ;
-	
-	public function __construct($publickey, $secretkey) {
-		$this->_publickey = $publickey;
-		$this->_secretkey = $secretkey;
-	}
+	const PUBLICKEY = 'pkey_test_4y9cewl0s1osh44ouud';
+	const SECRETKEY = 'skey_test_4y9cewl0rgwji2kbbcb';
 }

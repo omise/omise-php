@@ -24,7 +24,7 @@ class Omise {
 	 * @param string $secretkey
 	 * @param string $publickey
 	 */
-	public function __construct($secretkey, $publickey) {
+	public function __construct($publickey, $secretkey) {
 		if(!isset($secretkey) || !isset($publickey)) {
 			throw new OmiseException('Input of secret key and public key is required');
 		}

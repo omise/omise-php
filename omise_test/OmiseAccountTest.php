@@ -5,7 +5,7 @@ require_once dirname(__FILE__).'/../omise/model/OmiseAccount.php';
 
 class OmiseAccountTest extends OmiseTest {
 	public function retrieve() {
-		$omise = new Omise($this->_secretkey, $this->_publickey);
+		$omise = new Omise(parent::PUBLICKEY, parent::SECRETKEY);
 		
 		$omiseAccount = $omise->getOmiseAccessAccount()->retrieve();
 
