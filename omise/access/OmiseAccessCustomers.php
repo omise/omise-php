@@ -25,12 +25,12 @@ class OmiseAccessCustomers extends OmiseAccessBase {
 	 * @return OmiseCustomer
 	 */
 	public function create($customerCreateInfo) {
-		$array = array();
-		if($customerCreateInfo->getEmail() !== null) $array += array(self::PARAM_EMAIL => $customerCreateInfo->getEmail());
-		if($customerCreateInfo->getDescription() !== null) $array += array(self::PARAM_DESCRIPTION => $customerCreateInfo->getDescription());
-		if($customerCreateInfo->getCard() !== null) $array += array(self::PARAM_CARD => $customerCreateInfo->getCard());
+		$param = array();
+		if($customerCreateInfo->getEmail() !== null) $param += array(self::PARAM_EMAIL => $customerCreateInfo->getEmail());
+		if($customerCreateInfo->getDescription() !== null) $param += array(self::PARAM_DESCRIPTION => $customerCreateInfo->getDescription());
+		if($customerCreateInfo->getCard() !== null) $param += array(self::PARAM_CARD => $customerCreateInfo->getCard());
 		
-		$array = parent::execute(parent::URLBASE_API.'/customers', parent::REQUEST_POST, $this->_secretkey, $array);
+		$array = parent::execute(parent::URLBASE_API.'/customers', parent::REQUEST_POST, $this->_secretkey, $param);
 		
 		return new OmiseCustomer($array);
 	}
@@ -51,12 +51,23 @@ class OmiseAccessCustomers extends OmiseAccessBase {
 	 * @param OmiseCustomerUpdateInfo $customerUpdateInfo
 	 */
 	public function update($customerUpdateInfo) {
-		$array = array();
-		if($customerUpdateInfo->getEmail() !== null) $array += array(self::PARAM_EMAIL => $customerUpdateInfo->getEmail());
-		if($customerUpdateInfo->getDescription() !== null) $array += array(self::PARAM_DESCRIPTION => $customerUpdateInfo->getDescription());
-		if($customerUpdateInfo->getCard() !== null) $array += array(self::PARAM_CARD => $customerUpdateInfo->getCard());
+		$param = array();
+		if($customerUpdateInfo->getEmail() !== null) $param += array(self::PARAM_EMAIL => $customerUpdateInfo->getEmail());
+		if($customerUpdateInfo->getDescription() !== null) $param += array(self::PARAM_DESCRIPTION => $customerUpdateInfo->getDescription());
+		if($customerUpdateInfo->getCard() !== null) $param += array(self::PARAM_CARD => $customerUpdateInfo->getCard());
 
-		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerUpdateInfo->getCustomerID(), parent::REQUEST_PATCH, $this->_secretkey, $array);
+		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerUpdateInfo->getCustomerID(), parent::REQUEST_PATCH, $this->_secretkey, $param);
+		
+		return new OmiseCustomer($array);
+	}
+	
+	/**
+	 * 顧客IDを元に顧客を削除する
+	 * @param string $customerID
+	 * @return OmiseCustomer
+	 */
+	public function destroy($customerID) {
+		$array = parent::execute(parent::URLBASE_API.'/customers/'.$customerID, parent::REQUEST_DELETE, $this->_secretkey);
 		
 		return new OmiseCustomer($array);
 	}

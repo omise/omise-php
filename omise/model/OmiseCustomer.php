@@ -35,4 +35,7 @@ class OmiseCustomer {
 	function getCards() {
 		return $this->_cards;
 	}
+	function getDeleted() {
+		return $this->_array['deleted'];
+	}
 }
