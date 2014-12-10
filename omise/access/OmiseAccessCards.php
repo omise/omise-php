@@ -13,21 +13,20 @@ class OmiseAccessCards extends OmiseAccessBase {
 	const PARAM_POSTAL_CODE = 'postal_code';
 	const PARAM_CITY = 'city';
 	
-	/**
-	 * トークンを作成する。引数はCardCreateInfoオブジェクト
+	/*
+	 * トークンを作成する。引数はCardCreateInfoオブジェクト(OmiseCustomreCreate::createを参照)
 	 * @param OmiseCardCreateInfo $cardCreateInfo
 	 * @return OmiseTokens
-	 */
 	public function create($cardCreateInfo) {
-		$param = array(
-			self::PARAM_DESCRIPTION => $cardCreateInfo->getDescription(),
-			self::PARAM_EMAIL => $cardCreateInfo->getEmail(),
-			self::PARAM_CARD => $cardCreateInfo->getCard()
-		);
+		$param = array();
+		if($cardCreateInfo->getDescription() !== null) $array += array(self::PARAM_DESCRIPTION => $cardCreateInfo->getDescription());
+		if($cardCreateInfo->getEmail() !== null) $array += array(self::PARAM_EMAIL => $cardCreateInfo->getEmail());
+		if($cardCreateInfo->getCard() !== null) $array += array(self::PARAM_CARD => $cardCreateInfo->getCard());
 		$array = parent::execute(parent::URLBASE_API.'/customers', parent::REQUEST_POST, $this->_secretkey, $param);
 		
 		return new OmiseCustomer($array);
 	}
+	*/
 	
 	/**
 	 * 顧客IDに紐づくカードのリストを取得する。
