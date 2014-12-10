@@ -1,6 +1,9 @@
 <?php
 require_once dirname(__FILE__).'/OmiseAccessBase.php';
-require_once dirname(__FILE__).'/../model/OmiseAccount.php';
+require_once dirname(__FILE__).'/../model/OmiseChargeCreateInfo.php';
+require_once dirname(__FILE__).'/../model/OmiseChargeUpdateInfo.php';
+require_once dirname(__FILE__).'/../model/OmiseList.php';
+require_once dirname(__FILE__).'/../model/OmiseCharge.php';
 
 class OmiseAccessCharges extends OmiseAccessBase {
 	const PARAM_CUSTOMER = 'customer';
@@ -51,6 +54,20 @@ class OmiseAccessCharges extends OmiseAccessBase {
 	 */
 	public function retrieve($chargeID) {
 		$array = parent::execute(parent::URLBASE_API.'/charges/'.$chargeID, parent::REQUEST_GET, $this->_secretkey);
+		
+		return new OmiseCharge($array);
+	}
+	
+	/**
+	 * チャージの更新を行う
+	 * @param OmiseChargeUpdateInfo $chargeUpdateInfo
+	 * @return OmiseCharge
+	 */
+	public function update($chargeUpdateInfo) {
+		$param = array();
+		if($chargeUpdateInfo->getDescription()) $param += array(self::PARAM_DESCRIPTION => $chargeUpdateInfo->getDescription());
+		
+		$array = parent::execute(parent::URLBASE_API.'/charges/'.$chargeUpdateInfo->getChargeID(), parent::REQUEST_PATCH, $this->_secretkey, $param);
 		
 		return new OmiseCharge($array);
 	}
