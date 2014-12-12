@@ -96,4 +96,42 @@ class OmiseCustomersTest extends OmiseTest {
 		}
 		echo("  cards[location]".$omiseCustomer->getCards()->getLocation()."\n");
 	}
+	
+	public function retrieve() {
+		$omise = new Omise(parent::PUBLICKEY, parent::SECRETKEY);
+		$omiseCustomer = $omise->getOmiseAccessCustomers()->retrieve(parent::CUSTOMERID);
+
+		echo('object:'.$omiseCustomer->getObject()."\n");
+		echo('id:'.$omiseCustomer->getID()."\n");
+		echo('livemode:'.$omiseCustomer->getLivemode()."\n");
+		echo('location:'.$omiseCustomer->getLocation()."\n");
+		echo('default_card:'.$omiseCustomer->getDefaultCard()."\n");
+		echo('email:'.$omiseCustomer->getEmail()."\n");
+		echo('description:'.$omiseCustomer->getDescription()."\n");
+		echo('created:'.$omiseCustomer->getCreated()."\n");
+		echo("  cards[object]".$omiseCustomer->getCards()->getObject()."\n");
+		echo("  cards[from]".$omiseCustomer->getCards()->getFrom()."\n");
+		echo("  cards[to]".$omiseCustomer->getCards()->getTo()."\n");
+		echo("  cards[offset]".$omiseCustomer->getCards()->getOffset()."\n");
+		echo("  cards[limit]".$omiseCustomer->getCards()->getLimit()."\n");
+		echo("  cards[total]".$omiseCustomer->getCards()->getTotal()."\n");
+		foreach ($omiseCustomer->getCards()->getData() as $row) {
+			echo("    cards[data][][object]".$row->getObject()."\n");
+			echo("    cards[data][][id]".$row->getID()."\n");
+			echo("    cards[data][][livemode]".$row->getLivemode()."\n");
+			echo("    cards[data][][location]".$row->getLocation()."\n");
+			echo("    cards[data][][country]".$row->getCountry()."\n");
+			echo("    cards[data][][city]".$row->getCity()."\n");
+			echo("    cards[data][][postal_code]".$row->getPostalCode()."\n");
+			echo("    cards[data][][financing]".$row->getFinancing()."\n");
+			echo("    cards[data][][last_digits]".$row->getLastDigits()."\n");
+			echo("    cards[data][][brand]".$row->getBrand()."\n");
+			echo("    cards[data][][expiration_month]".$row->getExpirationMonth()."\n");
+			echo("    cards[data][][expiration_year]".$row->getExpirationYear()."\n");
+			echo("    cards[data][][fingerprint]".$row->getFingerprint()."\n");
+			echo("    cards[data][][name]".$row->getName()."\n");
+			echo("    cards[data][][created]".$row->getCreated()."\n");
+		}
+		echo("  cards[location]".$omiseCustomer->getCards()->getLocation()."\n");
+	}
 }

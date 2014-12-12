@@ -18,7 +18,8 @@ try {
 	
 	$customerTest = new OmiseCustomersTest();
 	//$customerTest->listAll();
-	$customerTest->create();
+	//$customerTest->create();
+	//$customerTest->retrieve();
 } catch(OmiseException $e) {
 	var_dump($e);
 }
