@@ -80,5 +80,11 @@ class OmiseList {
 	function getData() {
 		return $this->_data;
 	}
+	/**
+	 * @return string
+	 */
+	function getLocation() {
+		return $this->_array['location'];
+	}
 }
 ?>

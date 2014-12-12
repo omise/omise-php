@@ -41,10 +41,10 @@ class OmiseTokensTest extends OmiseTest {
 		echo('created:'.$omiseTokens->getCreated()."\n");
 	}
 	
-	public function retrieve($tokenID) {
+	public function retrieve() {
 		$omise = new Omise(parent::PUBLICKEY, parent::SECRETKEY);
 		
-		$omiseTokens = $omise->getOmiseAccessTokens()->retrieve($tokenID);
+		$omiseTokens = $omise->getOmiseAccessTokens()->retrieve(parent::TOKENID);
 
 		echo('object:'.$omiseTokens->getObject()."\n");
 		echo('id:'.$omiseTokens->getID()."\n");

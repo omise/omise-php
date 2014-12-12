@@ -14,10 +14,11 @@ try {
 	
 // 	$tokenTest = new OmiseTokensTest();
 // 	$tokenTest->create();
-// 	$tokenTest->retrieve('tokn_test_4ycu4exhnpni3yqbo9q');
+// 	$tokenTest->retrieve();
 	
 	$customerTest = new OmiseCustomersTest();
-	$customerTest->listAll();
+	//$customerTest->listAll();
+	$customerTest->create();
 } catch(OmiseException $e) {
 	var_dump($e);
 }
