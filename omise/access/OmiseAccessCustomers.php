@@ -3,6 +3,7 @@ require_once dirname(__FILE__).'/OmiseAccessBase.php';
 require_once dirname(__FILE__).'/../model/OmiseCustomer.php';
 require_once dirname(__FILE__).'/../model/OmiseList.php';
 require_once dirname(__FILE__).'/../model/OmiseCustomerCreateInfo.php';
+require_once dirname(__FILE__).'/../model/OmiseCustomerUpdateInfo.php';
 
 class OmiseAccessCustomers extends OmiseAccessBase {
 	const PARAM_DESCRIPTION = 'description';
