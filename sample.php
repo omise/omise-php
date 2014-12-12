@@ -20,7 +20,8 @@ try {
 	//$customerTest->listAll();
 	//$customerTest->create();
 	//$customerTest->retrieve();
-	$customerTest->update();
+	//$customerTest->update();
+	$customerTest->destroy();
 } catch(OmiseException $e) {
 	var_dump($e);
 }

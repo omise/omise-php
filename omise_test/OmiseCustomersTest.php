@@ -181,4 +181,15 @@ class OmiseCustomersTest extends OmiseTest {
 		}
 		echo("  cards[location]".$omiseCustomer->getCards()->getLocation()."\n");
 	}
+	
+	public function destroy() {
+		$omise = new Omise(parent::PUBLICKEY, parent::SECRETKEY);
+		
+		$omiseCustomer = $omise->getOmiseAccessCustomers()->destroy(parent::CUSTOMERID);
+
+		echo('object:'.$omiseCustomer->getObject()."\n");
+		echo('id:'.$omiseCustomer->getID()."\n");
+		echo('livemode:'.$omiseCustomer->getLivemode()."\n");
+		echo('deleted:'.$omiseCustomer->getDeleted()."\n");
+	}
 }

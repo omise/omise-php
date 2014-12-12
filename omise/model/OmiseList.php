@@ -12,27 +12,29 @@ class OmiseList {
 	function __construct($array) {
 		$this->_array = $array;
 		
-		foreach ($this->_array['data'] as $row) {
-			switch($row['object']) {
-				case 'charge':
-					array_push($this->_data, new OmiseCharge($row));
-					break;
-					
-				case 'card':
-					array_push($this->_data, new OmiseCard($row));
-					break;
-					
-				case 'customer':
-					array_push($this->_data, new OmiseCustomer($row));
-					break;
-					
-				case 'transfer':
-					array_push($this->_data, new OmiseTransfer($row));
-					break;
-					
-				case 'transaction':
-					array_push($this->_data, new OmiseTransaction($row));
-					break;
+		if(isset($this->_array['data'])) {
+			foreach ($this->_array['data'] as $row) {
+				switch($row['object']) {
+					case 'charge':
+						array_push($this->_data, new OmiseCharge($row));
+						break;
+						
+					case 'card':
+						array_push($this->_data, new OmiseCard($row));
+						break;
+						
+					case 'customer':
+						array_push($this->_data, new OmiseCustomer($row));
+						break;
+						
+					case 'transfer':
+						array_push($this->_data, new OmiseTransfer($row));
+						break;
+						
+					case 'transaction':
+						array_push($this->_data, new OmiseTransaction($row));
+						break;
+				}
 			}
 		}
 	}
