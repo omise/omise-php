@@ -4,6 +4,7 @@ require_once dirname(__FILE__).'/omise_test/OmiseBalanceTest.php';
 require_once dirname(__FILE__).'/omise_test/OmiseTokensTest.php';
 require_once dirname(__FILE__).'/omise_test/OmiseCustomersTest.php';
 require_once dirname(__FILE__).'/omise_test/OmiseCardsTest.php';
+require_once dirname(__FILE__).'/omise_test/OmiseChargesTest.php';
 
 try {
 	// ---------- Accessへの接続テスト ----------
@@ -32,7 +33,11 @@ try {
 // 	$cardTest->listAll();
 //	$cardTest->retrieve();
 //	$cardTest->update();
-	$cardTest->destroy();
+//	$cardTest->destroy();
+
+ 	// ---------- Chargesへの接続テスト ----------
+ 	$chargeTest = new OmiseChargesTest();
+ 	$chargeTest->listAll();
 } catch(OmiseException $e) {
 	var_dump($e);
 }
