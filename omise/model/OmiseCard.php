@@ -25,6 +25,12 @@ class OmiseCard {
 		return $this->_array['livemode'];
 	}
 	/**
+	 * @return boolean
+	 */
+	function getLocation() {
+		return $this->_array['location'];
+	}
+	/**
 	 * @return string
 	 */
 	function getCountry() {
@@ -83,6 +89,12 @@ class OmiseCard {
 	 */
 	function getName() {
 		return $this->_array['name'];
+	}
+	/**
+	 * @return boolean
+	 */
+	function getSecurityCodeCheck() {
+		return $this->_array['security_code_check'];
 	}
 	/**
 	 * @return string

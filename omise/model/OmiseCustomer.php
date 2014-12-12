@@ -61,6 +61,12 @@ class OmiseCustomer {
 		return $this->_cards;
 	}
 	/**
+	 * @return string
+	 */
+	function getCreated() {
+		return $this->_array['created'];
+	}
+	/**
 	 * @return boolean
 	 */
 	function getDeleted() {
