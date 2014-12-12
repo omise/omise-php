@@ -7,4 +7,5 @@ abstract class OmiseTest {
 	const CARDID = 'card_test_4yc2azdzw8pkewxw6fd';
 	const CHARGEID = 'chrg_test_4ycwqkmqbc2ivnioubp';
 	const TRANSFERID = 'trsf_test_4xs5px8c36dsanuwztf';
+	const TRANSACTIONID = 'trxn_test_4ycwqknctg60337rhh3';
 }

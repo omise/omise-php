@@ -123,7 +123,7 @@ class Omise {
 
 	/**
 	 * API:Transactionsへ接続するためのオブジェクトを返す
-	 * @return _omiseAccessTransactions
+	 * @return OmiseAccessTransactions
 	 */
 	public function getOmiseAccessTransactions() {
 		if($this->_omiseAccessTransactions === null) {
