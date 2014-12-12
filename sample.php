@@ -30,7 +30,9 @@ try {
  	// ---------- Cardsへの接続テスト ----------
  	$cardTest = new OmiseCardsTest();
 // 	$cardTest->listAll();
-	$cardTest->retrieve();
+//	$cardTest->retrieve();
+//	$cardTest->update();
+	$cardTest->destroy();
 } catch(OmiseException $e) {
 	var_dump($e);
 }

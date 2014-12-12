@@ -3,6 +3,7 @@ require_once dirname(__FILE__).'/OmiseTest.php';
 require_once dirname(__FILE__).'/../omise/Omise.php';
 require_once dirname(__FILE__).'/../omise/model/OmiseList.php';
 require_once dirname(__FILE__).'/../omise/model/OmiseCard.php';
+require_once dirname(__FILE__).'/../omise/model/OmiseCardUpdateInfo.php';
 
 class OmiseCardsTest extends OmiseTest {
 	public function listAll() {
@@ -53,5 +54,46 @@ class OmiseCardsTest extends OmiseTest {
 		echo('fingerprint:'.$omiseCard->getFingerprint()."\n");
 		echo('name:'.$omiseCard->getName()."\n");
 		echo('created:'.$omiseCard->getCreated()."\n");
+	}
+	
+	public function update() {
+		$omise = new Omise(parent::PUBLICKEY, parent::SECRETKEY);
+		
+		$info = new OmiseCardUpdateInfo();
+		$info->setCardID(parent::CARDID);
+		$info->setCustomerID(parent::CUSTOMERID);
+		$info->setName('Somchai Praset');
+		$info->setCity('Bangkok');
+		$info->setExpirationMonth(11);
+		$info->setExpirationYear(2017);
+		$info->setPostalCode(10310);
+		
+		$omiseCard = $omise->getOmiseAccessCards()->update($info);
+
+		echo('object:'.$omiseCard->getObject()."\n");
+		echo('id:'.$omiseCard->getID()."\n");
+		echo('livemode:'.$omiseCard->getLivemode()."\n");
+		echo('location:'.$omiseCard->getLocation()."\n");
+		echo('country:'.$omiseCard->getCountry()."\n");
+		echo('city:'.$omiseCard->getCity()."\n");
+		echo('postal_code:'.$omiseCard->getPostalCode()."\n");
+		echo('financing:'.$omiseCard->getFinancing()."\n");
+		echo('last_digits:'.$omiseCard->getLastDigits()."\n");
+		echo('brand:'.$omiseCard->getBrand()."\n");
+		echo('expiration_month:'.$omiseCard->getExpirationMonth()."\n");
+		echo('expiration_year:'.$omiseCard->getExpirationYear()."\n");
+		echo('fingerprint:'.$omiseCard->getFingerprint()."\n");
+		echo('name:'.$omiseCard->getName()."\n");
+		echo('created:'.$omiseCard->getCreated()."\n");
+	}
+	
+	public function destroy() {
+		$omise = new Omise(parent::PUBLICKEY, parent::SECRETKEY);
+		$omiseCard = $omise->getOmiseAccessCards()->destroy(parent::CUSTOMERID, parent::CARDID);
+		
+		echo('object:'.$omiseCard->getObject()."\n");
+		echo('id:'.$omiseCard->getID()."\n");
+		echo('livemode:'.$omiseCard->getLivemode()."\n");
+		echo('deleted:'.$omiseCard->getDeleted()."\n");
 	}
 }
