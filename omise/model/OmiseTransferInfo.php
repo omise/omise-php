@@ -3,10 +3,10 @@ abstract class OmiseTransferInfo {
 	private $_amount = null;
 	
 	public function __construct($amount = null) {
-		$this->setAmoount($amount);
+		$this->setAmount($amount);
 	}
 	
-	public function setAmoount($amount) {
+	public function setAmount($amount) {
 		$this->_amount = $amount;
 	}
 	public function getAmouont() {

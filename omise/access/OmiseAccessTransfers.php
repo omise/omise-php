@@ -25,7 +25,7 @@ class OmiseAccessTransfers extends OmiseAccessBase {
 	 */
 	public function create($transferCreateInfo) {
 		$param = array();
-		if($transferCreateInfo->getAmouont() !== null) $array += array(self::PARAM_AMOUNT => $transferCreateInfo->getAmouont());
+		if($transferCreateInfo->getAmouont() !== null) $param += array(self::PARAM_AMOUNT => $transferCreateInfo->getAmouont());
 		$array = parent::execute(parent::URLBASE_API.'/transfers', parent::REQUEST_POST, $this->_secretkey, $param);
 		
 		return new OmiseTransfer($array);
@@ -47,7 +47,7 @@ class OmiseAccessTransfers extends OmiseAccessBase {
 	 * @param OmiseTransferUpdateInfo $transferUpdateInfo
 	 * @return OmiseTransfer
 	 */
-	public function upadte($transferUpdateInfo) {
+	public function update($transferUpdateInfo) {
 		$param = array();
 		if($transferUpdateInfo->getAmouont() !== null) $param += array(self::PARAM_AMOUNT => $transferUpdateInfo->getAmouont());
 		

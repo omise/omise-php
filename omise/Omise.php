@@ -5,6 +5,8 @@ require_once dirname(__FILE__).'/access/OmiseAccessTokens.php';
 require_once dirname(__FILE__).'/access/OmiseAccessCards.php';
 require_once dirname(__FILE__).'/access/OmiseAccessCharges.php';
 require_once dirname(__FILE__).'/access/OmiseAccessCustomers.php';
+require_once dirname(__FILE__).'/access/OmiseAccessTransfers.php';
+require_once dirname(__FILE__).'/access/OmiseAccessTransactions.php';
 
 class Omise {
 	// Omiseの秘密鍵と公開鍵用変数
@@ -18,6 +20,8 @@ class Omise {
 	private $_omiseAccessCards = null;
 	private $_omiseAccessCharges = null;
 	private $_omiseAccessCustomers = null;
+	private $_omiseAccessTransfers = null;
+	private $_omiseAccessTransactions = null;
 	
 	/**
 	 * 引数にOmiseの秘密鍵と公開鍵を渡す
@@ -92,7 +96,7 @@ class Omise {
 		
 		return $this->_omiseAccessCharges;
 	}
-	
+
 	/**
 	 * API:Customersへ接続するためのオブジェクトを返す
 	 * @return OmiseAccessCustomers
@@ -101,7 +105,31 @@ class Omise {
 		if($this->_omiseAccessCustomers === null) {
 			$this->_omiseAccessCustomers = new OmiseAccessCustomers($this->_secretkey, $this->_publickey);
 		}
-		
+	
 		return $this->_omiseAccessCustomers;
+	}
+
+	/**
+	 * API:Transfersへ接続するためのオブジェクトを返す
+	 * @return OmiseAccessTransfers
+	 */
+	public function getOmiseAccessTransfers() {
+		if($this->_omiseAccessTransfers === null) {
+			$this->_omiseAccessTransfers = new OmiseAccessTransfers($this->_secretkey, $this->_publickey);
+		}
+	
+		return $this->_omiseAccessTransfers;
+	}
+
+	/**
+	 * API:Transactionsへ接続するためのオブジェクトを返す
+	 * @return _omiseAccessTransactions
+	 */
+	public function getOmiseAccessTransactions() {
+		if($this->_omiseAccessTransactions === null) {
+			$this->_omiseAccessTransactions = new OmiseAccessTransactions($this->_secretkey, $this->_publickey);
+		}
+	
+		return $this->_omiseAccessTransactions;
 	}
 }
