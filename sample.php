@@ -3,25 +3,34 @@ require_once dirname(__FILE__).'/omise_test/OmiseAccountTest.php';
 require_once dirname(__FILE__).'/omise_test/OmiseBalanceTest.php';
 require_once dirname(__FILE__).'/omise_test/OmiseTokensTest.php';
 require_once dirname(__FILE__).'/omise_test/OmiseCustomersTest.php';
+require_once dirname(__FILE__).'/omise_test/OmiseCardsTest.php';
 
 try {
-// 	$accountTest = new OmiseAccountTest();
+	// ---------- Accessへの接続テスト ----------
+ 	$accountTest = new OmiseAccountTest();
 // 	$accountTest->retrieve();
-	
-// 	$balanceTest = new OmiseBalanceTest();
+
+	// ---------- Balanceへの接続テスト ----------
+ 	$balanceTest = new OmiseBalanceTest();
 // 	$balanceTest->retrieve();
-	
-	
-// 	$tokenTest = new OmiseTokensTest();
+
+	// ---------- Tokensへの接続テスト ----------
+ 	$tokenTest = new OmiseTokensTest();
 // 	$tokenTest->create();
 // 	$tokenTest->retrieve();
-	
-	$customerTest = new OmiseCustomersTest();
-	//$customerTest->listAll();
-	//$customerTest->create();
-	//$customerTest->retrieve();
-	//$customerTest->update();
-	$customerTest->destroy();
+
+	// ---------- Customersへの接続テスト ----------
+ 	$customerTest = new OmiseCustomersTest();
+// 	$customerTest->listAll();
+// 	$customerTest->create();
+// 	$customerTest->retrieve();
+// 	$customerTest->update();
+// 	$customerTest->destroy();
+
+ 	// ---------- Cardsへの接続テスト ----------
+ 	$cardTest = new OmiseCardsTest();
+// 	$cardTest->listAll();
+	$cardTest->retrieve();
 } catch(OmiseException $e) {
 	var_dump($e);
 }
