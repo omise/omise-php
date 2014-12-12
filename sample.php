@@ -37,8 +37,11 @@ try {
 
  	// ---------- Chargesへの接続テスト ----------
  	$chargeTest = new OmiseChargesTest();
- 	$chargeTest->listAll();
-// 	$chargeTest->create();
+// 	$chargeTest->listAll();
+ 	$chargeTest->create();
+// 	$chargeTest->retrieve();
+//	$chargeTest->update();
+//	$chargeTest->captureAnAuthorized();
 } catch(OmiseException $e) {
 	var_dump($e);
 }

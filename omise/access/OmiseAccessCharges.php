@@ -73,7 +73,7 @@ class OmiseAccessCharges extends OmiseAccessBase {
 	}
 	
 	/**
-	 * なんだろこれ・・・・
+	 * チャージを確定する？
 	 * @param string $chargeID
 	 * @return OmiseCharge
 	 */

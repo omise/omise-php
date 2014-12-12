@@ -2,7 +2,7 @@
 class OmiseChargeUpdateInfo {
 	private $_chargeID = null, $_description = null;
 	
-	public function __construct($chargeID, $description) {
+	public function __construct($chargeID = null, $description = null) {
 		$this->setChargeID($chargeID);
 		$this->setDescription($description);
 	}
