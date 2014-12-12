@@ -76,9 +76,33 @@ class OmiseCharge {
 	function getTransaction() {
 		return $this->_array['transaction'];
 	}
+	/**
+	 * @return string
+	 */
+	function getReturnURI() {
+		return $this->_array['return_uri'];
+	}
+	/**
+	 * @return string
+	 */
+	function getReference() {
+		return $this->_array['reference'];
+	}
+	/**
+	 * @return string
+	 */
+	function getAuthorizeURI() {
+		return $this->_array['authorize_uri'];
+	}
+	/**
+	 * @return string
+	 */
 	function getFailureCode() {
 		return $this->_array['failure_code'];
 	}
+	/**
+	 * @return string
+	 */
 	function getFailureMessage() {
 		return $this->_array['failure_message'];
 	}

@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../exception/OmiseException.php';
 require_once dirname(__FILE__).'/../model/OmiseError.php';
+require_once dirname(__FILE__).'/../util/OmiseSetting.php';
 
 abstract class OmiseAccessBase {
 	// リクエストメソッドたち
@@ -8,10 +9,6 @@ abstract class OmiseAccessBase {
 	const REQUEST_POST = 'POST';
 	const REQUEST_DELETE = 'DELETE';
 	const REQUEST_PATCH = 'PATCH';
-
-	// php-curlで使うオプションの設定
-	const HTTP_PARAM_TIMEOUT = 60;
-	const HTTP_PARAM_CONNECTTIMEOUT = 30;
 	
 	// OmiseのベースURL
 	const URLBASE_API = 'https://api.omise.co';
@@ -75,10 +72,8 @@ abstract class OmiseAccessBase {
 				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 				// リクエストメソッドの指定
 				CURLOPT_CUSTOMREQUEST => $requestMethod,
-				// その他HTTPヘッダが必要な場合に記述。現時点で指示無いため空欄 TODO
-				CURLOPT_HTTPHEADER => array(
-	
-				),
+				// ユーザエージェントの設定
+				CURLOPT_USERAGENT => "OmisePHP/".OMISE_PHP_LIB_VERSION." OmiseAPI/".OMISE_API_VERSION,
 				// データを文字列で取得する
 				CURLOPT_RETURNTRANSFER => true,
 				// ヘッダは出力しない
@@ -92,9 +87,9 @@ abstract class OmiseAccessBase {
 				// HTTPレスポンスコード400番台以上はエラーとして扱う
 				//CURLOPT_FAILONERROR => true,
 				// 実行時間の限界を指定
-				CURLOPT_TIMEOUT => self::HTTP_PARAM_TIMEOUT,
+				CURLOPT_TIMEOUT => OMISE_TIMEOUT,
 				// 接続要求のタイムアウトを指定
-				CURLOPT_CONNECTTIMEOUT => self::HTTP_PARAM_CONNECTTIMEOUT,
+				CURLOPT_CONNECTTIMEOUT => OMISE_CONNECTTIMEOUT,
 				// 認証情報を指定
 				CURLOPT_USERPWD => $userpwd
 		);

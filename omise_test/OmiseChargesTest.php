@@ -3,6 +3,7 @@ require_once dirname(__FILE__).'/OmiseTest.php';
 require_once dirname(__FILE__).'/../omise/Omise.php';
 require_once dirname(__FILE__).'/../omise/model/OmiseList.php';
 require_once dirname(__FILE__).'/../omise/model/OmiseCharge.php';
+require_once dirname(__FILE__).'/../omise/model/OmiseChargeCreateInfo.php';
 
 class OmiseChargesTest extends OmiseTest {
 	public function listAll() {
@@ -51,5 +52,55 @@ class OmiseChargesTest extends OmiseTest {
 			echo('  data[ip]:'.$row->getIP()."\n");
 			echo('  data[created]:'.$row->getCreated()."\n");
 		}
+	}
+	
+	public function create() {
+		$omise = new Omise(parent::PUBLICKEY, parent::SECRETKEY);
+		
+		$info = new OmiseChargeCreateInfo();
+		//$info->setCustomer(self::CUSTOMERID);
+		//$info->setCard(self::CARDID);
+		$info->setCard(self::TOKENID);
+		$info->setAmount(100000);
+		$info->setCurrency('thb');
+		$info->setReturnUri('https://example.co.th/orders/384/complete');
+		$info->setIP('127.0.0.1');
+		$info->setDescription('description=Order-385"');
+		
+		$omiseCharge = $omise->getOmiseAccessCharges()->create($info);
+
+		echo('object:'.$omiseCharge->getObject()."\n");
+		echo('id:'.$omiseCharge->getID()."\n");
+		echo('livemode:'.$omiseCharge->getLivemode()."\n");
+		echo('location:'.$omiseCharge->getLocation()."\n");
+		echo('amount:'.$omiseCharge->getAmount()."\n");
+		echo('currency:'.$omiseCharge->getCurrency()."\n");
+		echo('description:'.$omiseCharge->getDescription()."\n");
+		echo('capture:'.$omiseCharge->getCapture()."\n");
+		echo('authorized:'.$omiseCharge->getAuthorized()."\n");
+		echo('captured:'.$omiseCharge->getCaptured()."\n");
+		echo('transaction:'.$omiseCharge->getTransaction()."\n");
+		echo('return_uri:'.$omiseCharge->getReturnURI()."\n");
+		echo('reference:'.$omiseCharge->getReference()."\n");
+		echo('authorize_uri:'.$omiseCharge->getAuthorizeURI()."\n");
+
+		echo('  card[object]:'.$omiseCharge->getCard()->getObject()."\n");
+		echo('  card[id]:'.$omiseCharge->getCard()->getID()."\n");
+		echo('  card[livemode]:'.$omiseCharge->getCard()->getLivemode()."\n");
+		echo('  card[country]:'.$omiseCharge->getCard()->getCountry()."\n");
+		echo('  card[city]:'.$omiseCharge->getCard()->getCity()."\n");
+		echo('  card[postal_code]:'.$omiseCharge->getCard()->getPostalCode()."\n");
+		echo('  card[financing]:'.$omiseCharge->getCard()->getFinancing()."\n");
+		echo('  card[last_digits]:'.$omiseCharge->getCard()->getLastDigits()."\n");
+		echo('  card[brand]:'.$omiseCharge->getCard()->getBrand()."\n");
+		echo('  card[expiration_month]:'.$omiseCharge->getCard()->getExpirationMonth()."\n");
+		echo('  card[expiration_year]:'.$omiseCharge->getCard()->getExpirationYear()."\n");
+		echo('  card[fingerprint]:'.$omiseCharge->getCard()->getFingerprint()."\n");
+		echo('  card[name]:'.$omiseCharge->getCard()->getName()."\n");
+		echo('  card[created]:'.$omiseCharge->getCard()->getCreated()."\n");
+		
+		echo('customer:'.$omiseCharge->getCustomer()."\n");
+		echo('ip:'.$omiseCharge->getIP()."\n");
+		echo('created:'.$omiseCharge->getCreated()."\n");
 	}
 }

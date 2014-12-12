@@ -38,6 +38,7 @@ try {
  	// ---------- Chargesへの接続テスト ----------
  	$chargeTest = new OmiseChargesTest();
  	$chargeTest->listAll();
+// 	$chargeTest->create();
 } catch(OmiseException $e) {
 	var_dump($e);
 }
