@@ -36,25 +36,47 @@ class OmiseList {
 			}
 		}
 	}
-	
+
+	/**
+	 * @return string
+	 */
 	function getObject() {
 		return $this->_array['object'];
 	}
+	/**
+	 * @return string
+	 */
 	function getFrom() {
 		return $this->_array['from'];
 	}
+	/**
+	 * @return string
+	 */
 	function getTo() {
 		return $this->_array['to'];
 	}
+	/**
+	 * @return integer
+	 */
 	function getOffset() {
 		return $this->_array['offset'];
 	}
+	/**
+	 * @return integer
+	 */
 	function getLimit() {
 		return $this->_array['limit'];
 	}
+	/**
+	 * @return integer
+	 */
 	function getTotal() {
 		return $this->_array['total'];
 	}
+	/**
+	 * 
+	 * @return OmiseCustomer[]|OmiseCharge[]|OmiseCard[]|OmiseTransfer[]|OmiseTransaction[]
+	 */
 	function getData() {
 		return $this->_data;
 	}
