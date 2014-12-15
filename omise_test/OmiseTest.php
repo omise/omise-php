@@ -1,11 +1,11 @@
 <?php
 abstract class OmiseTest {
-	const PUBLICKEY = 'pkey_test_4y9cewl0s1osh44ouud';
-	const SECRETKEY = 'skey_test_4y9cewl0rgwji2kbbcb';
-	const TOKENID = 'tokn_test_4ycwcxel3ai9rq1nspo';
-	const CUSTOMERID = 'cust_test_4yc2azhbhs6n05oi7cv';
-	const CARDID = 'card_test_4yc2azdzw8pkewxw6fd';
-	const CHARGEID = 'chrg_test_4ycwqkmqbc2ivnioubp';
-	const TRANSFERID = 'trsf_test_4xs5px8c36dsanuwztf';
-	const TRANSACTIONID = 'trxn_test_4ycwqknctg60337rhh3';
+	const PUBLICKEY = '';
+	const SECRETKEY = '';
+	const TOKENID = '';
+	const CUSTOMERID = '';
+	const CARDID = '';
+	const CHARGEID = '';
+	const TRANSFERID = '';
+	const TRANSACTIONID = '';
 }
