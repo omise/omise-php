@@ -1,7 +1,7 @@
 <?php
-require_once dirname(__FILE__).'/OmiseRequestBase.php';
+require_once dirname(__FILE__).'/OmiseAPIResource.php';
 
-abstract class OmiseSingletonRequestBase extends OmiseRequestBase {
+abstract class OmiseAPIResourceSingleton extends OmiseAPIResource {
 	private static $_instance = null;
 	
 	private function __construct() {

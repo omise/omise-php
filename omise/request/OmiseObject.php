@@ -1,5 +1,6 @@
 <?php
-class OmiseObject implements ArrayAccess {
+class OmiseObject implements ArrayAccess, Iterator, Countable {
+	// 連想配列に使うオブジェクト
 	protected $_values;
 	
 	// Omiseの秘密鍵と公開鍵用変数
@@ -16,7 +17,7 @@ class OmiseObject implements ArrayAccess {
 		$this->_values = array();
 	}
 	
-	// ArrayAccess override method
+	// ArrayAccessのoverrideメソッド
 	public function offsetSet($key, $value) {
 		$this->_values[$key] = $value;
 	}
@@ -28,5 +29,27 @@ class OmiseObject implements ArrayAccess {
 	}
 	public function offsetGet($key) {
 		return isset($this->_values[$key]) ? $this->_values[$key] : null;
+	}
+
+	// Iteratorのoverrideメソッド
+	public function rewind() {
+		reset($this->_values);
+	}
+	public function current() {
+		return current($this->_values);
+	}
+	public function key() {
+		return key($this->_values);
+	}
+	public function next() {
+		return next($this->_values);
+	}
+	public function valid() {
+		return ($this->current() !== false);
+	}
+	
+	// Countableのoverrideメソッド
+	public function count() {
+		return count($this->_values);
 	}
 }
