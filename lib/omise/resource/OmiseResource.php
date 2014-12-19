@@ -40,8 +40,8 @@ class OmiseResource extends OmiseObject {
 	protected $_endpoint = '';
 	
 	protected static function retrive($clazz, $publickey, $secretkey) {
-		$resource = OmiseResource::getInstance($clazz, $publickey, $secretkey);
-		$result = $resource->reload();	
+		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
+		$result = $resource->reload();
 		$resource->refresh($result, $publickey, $secretkey);
 		
 		return $resource;
