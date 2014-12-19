@@ -14,10 +14,6 @@ class OmiseResource extends OmiseObject {
 	private $OMISE_CONNECTTIMEOUT = 30;
 	private $OMISE_TIMEOUT = 60;
 	
-	protected function __construct($publickey, $secretkey) {
-		parent::__construct($publickey, $secretkey);
-	}
-	
 	/**
 	 * 
 	 * @param string $clazz
@@ -26,7 +22,7 @@ class OmiseResource extends OmiseObject {
 	 * @throws Exception
 	 * @return OmiseResource
 	 */
-	protected static function getInstance($clazz, $publickey, $secretkey) {
+	protected static function getInstance($clazz, $publickey = null, $secretkey = null) {
 		if(class_exists($clazz)) {
 			return new $clazz($publickey, $secretkey);
 		} else {
@@ -39,10 +35,17 @@ class OmiseResource extends OmiseObject {
 	protected $_vaultUrl = 'https://vault.omise.co/';
 	protected $_endpoint = '';
 	
-	protected static function retrive($clazz, $publickey, $secretkey) {
+	/**
+	 * retriveする
+	 * @param string $clazz
+	 * @param string $publickey
+	 * @param string $secretkey
+	 * @return OmiseAccount|OmiseBalance
+	 */
+	protected static function retrive($clazz, $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
 		$result = $resource->reload();
-		$resource->refresh($result, $publickey, $secretkey);
+		$resource->refresh($result);
 		
 		return $resource;
 	}

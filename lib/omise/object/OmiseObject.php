@@ -1,4 +1,6 @@
 <?php
+require_once dirname(__FILE__).'/../../config.php';
+
 class OmiseObject implements ArrayAccess, Iterator, Countable {
 	// 連想配列に使うオブジェクト
 	protected $_values = array();
@@ -7,26 +9,44 @@ class OmiseObject implements ArrayAccess, Iterator, Countable {
 	protected $_secretkey, $_publickey;
 	
 	/**
-	 * 引数にOmiseの秘密鍵と公開鍵を渡す
+	 * 引数にOmiseの秘密鍵と公開鍵を渡す。config.phpに書いておけば渡さなくても良い
 	 * @param string $secretkey
 	 * @param string $publickey
 	 */
-	protected function __construct($publickey, $secretkey) {
-		$this->_secretkey = $secretkey;
-		$this->_publickey = $publickey;
+	protected function __construct($publickey = null, $secretkey = null) {
+		if($publickey !== null) {
+			$this->_publickey = $publickey;
+		} else {
+			$this->_secretkey = OMISE_PUBLIC_KEY;
+		}
+		if($secretkey !== null) {
+			$this->_secretkey = $secretkey;
+		} else {
+			$this->_secretkey = OMISE_SECRET_KEY;
+		}
 		$this->_values = array();
 	}
 	
 	/**
-	 * リソースを更新する（更新するのは、valuesと公開・秘密鍵）
+	 * リソースを更新する
 	 * @param array $values
-	 * @param string $publickey
-	 * @param string $secretkey
 	 */
-	protected function refresh($values, $publickey, $secretkey) {
+	protected function refresh($values) {
 		$this->_values += $values;
-		$this->_publickey = $publickey;
+	}
+	
+	// 鍵用のアクセサメソッド
+	public function setSecretKey($secretkey) {
 		$this->_secretkey = $secretkey;
+	}
+	public function getSecretKey() {
+		return $this->_secretkey;
+	}
+	public function setPublicKey($publickey) {
+		$this->_publickey = $publickey;
+	}
+	public function getPublicKey() {
+		return $this->_publickey;
 	}
 	
 	// ArrayAccessのoverrideメソッド

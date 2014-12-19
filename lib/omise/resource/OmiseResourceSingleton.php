@@ -2,15 +2,7 @@
 require_once dirname(__FILE__).'/OmiseResource.php';
 
 class OmiseResourceSingleton extends OmiseResource {
-	public $test = 0;
 	private static $_instance = null;
-	
-	public function upTest() {
-		$this->test = 100;
-	}
-	public function getTest() {
-		return $this->test;
-	}
 	
 	/**
 	 * 
@@ -20,7 +12,7 @@ class OmiseResourceSingleton extends OmiseResource {
 	 * @throws Exception
 	 * @return OmiseResourceSingleton
 	 */
-	protected static function getInstance($clazz, $publickey, $secretkey) {
+	protected static function getInstance($clazz, $publickey = null, $secretkey = null) {
 		if(self::$_instance === null) {
 			if(class_exists($clazz)) {
 				self::$_instance = new $clazz($publickey, $secretkey);
