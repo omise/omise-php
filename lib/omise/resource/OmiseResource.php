@@ -1,5 +1,7 @@
 <?php
+require_once dirname(__FILE__).'/../../config.php';
 require_once dirname(__FILE__).'/../object/OmiseObject.php';
+require_once dirname(__FILE__).'/../exception/OmiseException.php';
 
 class OmiseResource extends OmiseObject {
 	// リクエストメソッドたち
@@ -7,17 +9,29 @@ class OmiseResource extends OmiseObject {
 	const REQUEST_POST = 'POST';
 	const REQUEST_DELETE = 'DELETE';
 	const REQUEST_PATCH = 'PATCH';
-
-	// アクセス先
-	const MODE_API = 0x01;
-	const MODE_VAULT = 0x02;
 	
-	private function __construct($secretkey, $publickey) {
-		parent::__construct($secretkey, $publickey);
+	// タイムアウトオプション
+	private $OMISE_CONNECTTIMEOUT = 30;
+	private $OMISE_TIMEOUT = 60;
+	
+	protected function __construct($publickey, $secretkey) {
+		parent::__construct($publickey, $secretkey);
 	}
-
-	protected static function getInstance($clazz, $secretkey, $publickey) {
-		
+	
+	/**
+	 * 
+	 * @param string $clazz
+	 * @param string $secretkey
+	 * @param string $publickey
+	 * @throws Exception
+	 * @return OmiseResource
+	 */
+	protected static function getInstance($clazz, $publickey, $secretkey) {
+		if(class_exists($clazz)) {
+			return new $clazz($publickey, $secretkey);
+		} else {
+			throw new Exception('Undefined class.');
+		}
 	}
 	
 	// OmiseのベースURL
@@ -25,17 +39,28 @@ class OmiseResource extends OmiseObject {
 	protected $_vaultUrl = 'https://vault.omise.co/';
 	protected $_endpoint = '';
 	
-	protected function get() {
+	protected static function retrive($clazz, $publickey, $secretkey) {
+		$resource = OmiseResource::getInstance($clazz, $publickey, $secretkey);
+		$result = $resource->reload();	
+		$resource->refresh($result, $publickey, $secretkey);
+		
+		return $resource;
+	}
+	public function reload() {
+		return $this->execute($this->getUrl(), self::REQUEST_GET, $this->getResourceKey());
+	}
+	
+	private function get() {
 		return $this->execute(self::URLBASE_API, self::REQUEST_GET, $key);
 	}
-	protected function patch() {
+	private function patch() {
 		return $this->execute($url, $requestMethod, $key);
 	}
-	protected function post() {
+	private function post() {
 		return $this->execute($url, $requestMethod, $key);
 	}
-	protected function delete() {
-		
+	private function delete() {
+	
 	}
 	
 	/**
@@ -63,8 +88,7 @@ class OmiseResource extends OmiseObject {
 		if(count($array) === 0) throw new OmiseException('This Exception is unknown.(Bad Response)');
 	
 		if($array['object'] === 'error') {
-			$omiseError = new OmiseError($array);
-			throw new OmiseException($omiseError->getMessage().':Please run the "$[this exception]->getOmiseError();" for more information', $omiseError);
+			var_dump($array);
 		}
 	
 		return $array;
@@ -98,9 +122,9 @@ class OmiseResource extends OmiseObject {
 				// HTTPレスポンスコード400番台以上はエラーとして扱う
 				//CURLOPT_FAILONERROR => true,
 				// 実行時間の限界を指定
-				CURLOPT_TIMEOUT => OMISE_TIMEOUT,
+				CURLOPT_TIMEOUT => $this->OMISE_TIMEOUT,
 				// 接続要求のタイムアウトを指定
-				CURLOPT_CONNECTTIMEOUT => OMISE_CONNECTTIMEOUT,
+				CURLOPT_CONNECTTIMEOUT => $this->OMISE_CONNECTTIMEOUT,
 				// 認証情報を指定
 				CURLOPT_USERPWD => $userpwd
 		);
@@ -111,19 +135,22 @@ class OmiseResource extends OmiseObject {
 		return $options;
 	}
 	
+	/* ----------- APIのURLを取得するメソッドたち ----------- */
+	// アクセスすべきURLを取得する
+	protected function getUrl($id = '') {
+		return $this->getResourceURL().$this->getLocation($id);
+	}
+	// ベースURL以下のロケーションを返す
+	protected function getLocation($id = '') {
+		return $this->_endpoint.'/'.$id;
+	}
 	// APIリソースを返す
 	protected function getResourceURL() {
 		return $this->_apiUrl;
 	}
+
+	/* ----------- ただのアクセサ ----------- */
 	protected function getResourceKey() {
 		return $this->_secretkey;
-	}
-
-	// アクセサ
-	protected function setEndPoint($endPoint) {
-		$this->_endpoint = $endPoint;
-	}
-	protected function getEndPoint() {
-		return $this->_endPoint;
 	}
 }

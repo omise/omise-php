@@ -1,7 +1,7 @@
 <?php
 class OmiseObject implements ArrayAccess, Iterator, Countable {
 	// 連想配列に使うオブジェクト
-	protected $_values;
+	protected $_values = array();
 	
 	// Omiseの秘密鍵と公開鍵用変数
 	protected $_secretkey, $_publickey;
@@ -11,10 +11,16 @@ class OmiseObject implements ArrayAccess, Iterator, Countable {
 	 * @param string $secretkey
 	 * @param string $publickey
 	 */
-	protected function __construct($secretkey, $publickey) {
+	protected function __construct($publickey, $secretkey) {
 		$this->_secretkey = $secretkey;
 		$this->_publickey = $publickey;
 		$this->_values = array();
+	}
+	
+	protected function refresh($values, $publickey, $secretkey) {
+		$this->_values += $values;
+		$this->_publickey = $publickey;
+		$this->_secretkey = $secretkey;
 	}
 	
 	// ArrayAccessのoverrideメソッド
