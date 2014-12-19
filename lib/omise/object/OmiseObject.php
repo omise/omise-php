@@ -11,7 +11,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable {
 	 * @param string $secretkey
 	 * @param string $publickey
 	 */
-	public function __construct($secretkey, $publickey) {
+	protected function __construct($secretkey, $publickey) {
 		$this->_secretkey = $secretkey;
 		$this->_publickey = $publickey;
 		$this->_values = array();

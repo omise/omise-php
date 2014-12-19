@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/OmiseObject.php';
+require_once dirname(__FILE__).'/../object/OmiseObject.php';
 
 class OmiseResource extends OmiseObject {
 	// リクエストメソッドたち
@@ -7,24 +7,32 @@ class OmiseResource extends OmiseObject {
 	const REQUEST_POST = 'POST';
 	const REQUEST_DELETE = 'DELETE';
 	const REQUEST_PATCH = 'PATCH';
-	
+
 	// アクセス先
 	const MODE_API = 0x01;
 	const MODE_VAULT = 0x02;
 	
+	private function __construct($secretkey, $publickey) {
+		parent::__construct($secretkey, $publickey);
+	}
+
+	protected static function getInstance($clazz, $secretkey, $publickey) {
+		
+	}
+	
 	// OmiseのベースURL
-	const _resourceURL = array('https://api.omise.co/', 'https://vault.omise.co/');
-	protected $_mode;
+	protected $_apiUrl = 'https://api.omise.co/';
+	protected $_vaultUrl = 'https://vault.omise.co/';
 	protected $_endpoint = '';
 	
 	protected function get() {
-		return $this->execute(self::URLBASE_API, self::REQUEST_GET, $key)
+		return $this->execute(self::URLBASE_API, self::REQUEST_GET, $key);
 	}
 	protected function patch() {
-		
+		return $this->execute($url, $requestMethod, $key);
 	}
 	protected function post() {
-		
+		return $this->execute($url, $requestMethod, $key);
 	}
 	protected function delete() {
 		
@@ -101,6 +109,14 @@ class OmiseResource extends OmiseObject {
 		if(count($params) > 0) $options += array(CURLOPT_POSTFIELDS => http_build_query($params));
 	
 		return $options;
+	}
+	
+	// APIリソースを返す
+	protected function getResourceURL() {
+		return $this->_apiUrl;
+	}
+	protected function getResourceKey() {
+		return $this->_secretkey;
 	}
 
 	// アクセサ
