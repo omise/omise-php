@@ -50,9 +50,8 @@ class OmiseApiResource extends OmiseObject {
 	}
 	protected static function create($clazz, $params, $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
-		$resource->execute($resource->getUrl(), self::REQUEST_POST, $resource->getResourceKey(), $params);
-		echo($resource->getUrl());
-		echo($resource->getResourceKey());
+		$result = $resource->execute($resource->getUrl(), self::REQUEST_POST, $resource->getResourceKey(), $params);
+		$resource->refresh($result);
 		
 		return $resource;
 	}
