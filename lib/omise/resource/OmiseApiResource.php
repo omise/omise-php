@@ -3,7 +3,7 @@ require_once dirname(__FILE__).'/../../config.php';
 require_once dirname(__FILE__).'/../object/OmiseObject.php';
 require_once dirname(__FILE__).'/../exception/OmiseException.php';
 
-class OmiseResource extends OmiseObject {
+class OmiseApiResource extends OmiseObject {
 	// リクエストメソッドたち
 	const REQUEST_GET = 'GET';
 	const REQUEST_POST = 'POST';
@@ -14,8 +14,13 @@ class OmiseResource extends OmiseObject {
 	private $OMISE_CONNECTTIMEOUT = 30;
 	private $OMISE_TIMEOUT = 60;
 	
+	// OmiseのベースURL
+	protected $_apiUrl = 'https://api.omise.co/';
+	protected $_vaultUrl = 'https://vault.omise.co/';
+	protected $_endpoint = '';
+	
 	/**
-	 * 
+	 * コンストラクタを呼ぶだけ。
 	 * @param string $clazz
 	 * @param string $secretkey
 	 * @param string $publickey
@@ -30,13 +35,8 @@ class OmiseResource extends OmiseObject {
 		}
 	}
 	
-	// OmiseのベースURL
-	protected $_apiUrl = 'https://api.omise.co/';
-	protected $_vaultUrl = 'https://vault.omise.co/';
-	protected $_endpoint = '';
-	
 	/**
-	 * retriveする
+	 * リソースを生成してretriveする
 	 * @param string $clazz
 	 * @param string $publickey
 	 * @param string $secretkey
@@ -44,26 +44,21 @@ class OmiseResource extends OmiseObject {
 	 */
 	protected static function retrive($clazz, $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
-		$result = $resource->reload();
-		$resource->refresh($result);
+		$resource->reload();
 		
 		return $resource;
 	}
-	public function reload() {
-		return $this->execute($this->getUrl(), self::REQUEST_GET, $this->getResourceKey());
+	protected static function create($clazz, $params, $publickey = null, $secretkey = null) {
+		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
+		$resource->execute($resource->getUrl(), self::REQUEST_POST, $resource->getResourceKey(), $params);
+		echo($resource->getUrl());
+		echo($resource->getResourceKey());
+		
+		return $resource;
 	}
-	
-	private function get() {
-		return $this->execute(self::URLBASE_API, self::REQUEST_GET, $key);
-	}
-	private function patch() {
-		return $this->execute($url, $requestMethod, $key);
-	}
-	private function post() {
-		return $this->execute($url, $requestMethod, $key);
-	}
-	private function delete() {
-	
+	protected function reload() {
+		$result = $this->execute($this->getUrl(), self::REQUEST_GET, $this->getResourceKey());
+		$this->refresh($result);
 	}
 	
 	/**

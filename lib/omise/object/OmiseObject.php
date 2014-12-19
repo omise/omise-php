@@ -17,7 +17,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable {
 		if($publickey !== null) {
 			$this->_publickey = $publickey;
 		} else {
-			$this->_secretkey = OMISE_PUBLIC_KEY;
+			$this->_publickey = OMISE_PUBLIC_KEY;
 		}
 		if($secretkey !== null) {
 			$this->_secretkey = $secretkey;

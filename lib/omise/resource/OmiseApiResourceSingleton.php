@@ -1,11 +1,11 @@
 <?php
-require_once dirname(__FILE__).'/OmiseResource.php';
+require_once dirname(__FILE__).'/OmiseApiResource.php';
 
-class OmiseResourceSingleton extends OmiseResource {
+class OmiseApiResourceSingleton extends OmiseApiResource {
 	private static $_instance = null;
 	
 	/**
-	 * 
+	 * シングルトンインスタンスのためのインスタンス生成メソッド
 	 * @param string $clazz
 	 * @param string $secretkey
 	 * @param string $publickey
