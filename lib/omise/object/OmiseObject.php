@@ -17,6 +17,12 @@ class OmiseObject implements ArrayAccess, Iterator, Countable {
 		$this->_values = array();
 	}
 	
+	/**
+	 * リソースを更新する（更新するのは、valuesと公開・秘密鍵）
+	 * @param array $values
+	 * @param string $publickey
+	 * @param string $secretkey
+	 */
 	protected function refresh($values, $publickey, $secretkey) {
 		$this->_values += $values;
 		$this->_publickey = $publickey;
