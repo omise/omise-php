@@ -16,6 +16,13 @@ class OmiseCharges extends OmiseApiResource {
 		return parent::update(self::getUrl($this['id']), $params);
 	}
 	
+	public function capture() {
+		$result = parent::execute(self::getUrl($this['id']).'/capture', parent::REQUEST_POST, parent::getResourceKey());
+		$this->refresh($result);
+		
+		return $this;
+	}
+	
 	private static function getUrl($id = '') {
 		return OMISE_API_URL.self::ENDPOINT.'/'.$id;
 	}

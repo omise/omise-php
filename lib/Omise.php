@@ -25,7 +25,6 @@ require_once dirname(__FILE__).'/omise/OmiseCharges.php';
 // 		'security_code' => 123
 // )));
 // $object = OmiseTokens::retrive('tokn_test_4yfpjbu99utp0m6xpp0');
-// var_dump($object);
 
 // $object = OmiseCharges::retrive();
 // $object = OmiseCharges::create(array(
@@ -36,8 +35,8 @@ require_once dirname(__FILE__).'/omise/OmiseCharges.php';
 //   'ip' => '127.0.0.1',
 //   'card' => 'tokn_test_4yfpjbu99utp0m6xpp0'
 // ));
-$object = OmiseCharges::retrive('chrg_test_4ygsixowmlneebvpssg');
-$object->update(array(
-	'description' => 'Another description'
-));
-var_dump($object);
+// $object = OmiseCharges::retrive('chrg_test_4ygsixowmlneebvpssg');
+// $object->update(array(
+// 	'description' => 'Another description'
+// ));
+// $object->capture();

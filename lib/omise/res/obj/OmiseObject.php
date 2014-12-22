@@ -35,20 +35,6 @@ class OmiseObject implements ArrayAccess, Iterator, Countable {
 		$this->_values += $values;
 	}
 	
-	// 鍵用のアクセサメソッド
-	public function setSecretKey($secretkey) {
-		$this->_secretkey = $secretkey;
-	}
-	public function getSecretKey() {
-		return $this->_secretkey;
-	}
-	public function setPublicKey($publickey) {
-		$this->_publickey = $publickey;
-	}
-	public function getPublicKey() {
-		return $this->_publickey;
-	}
-	
 	// ArrayAccessのoverrideメソッド
 	public function offsetSet($key, $value) {
 		$this->_values[$key] = $value;

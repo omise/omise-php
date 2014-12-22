@@ -72,7 +72,7 @@ class OmiseApiResource extends OmiseObject {
 	 * @throws OmiseException
 	 * @return string
 	 */
-	private function execute($url, $requestMethod, $key, $params = null) {
+	protected function execute($url, $requestMethod, $key, $params = null) {
 		$ch = curl_init($url);
 		curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
 		// リクエストを実行し、失敗した場合には例外を投げる
