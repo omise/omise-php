@@ -37,4 +37,7 @@ require_once dirname(__FILE__).'/omise/OmiseCharges.php';
 //   'card' => 'tokn_test_4yfpjbu99utp0m6xpp0'
 // ));
 $object = OmiseCharges::retrive('chrg_test_4ygsixowmlneebvpssg');
+$object->update(array(
+	'description' => 'Another description'
+));
 var_dump($object);

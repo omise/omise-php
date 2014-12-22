@@ -53,6 +53,12 @@ class OmiseApiResource extends OmiseObject {
 		
 		return $resource;
 	}
+	protected function update($url, $params) {
+		$result = $this->execute($url, self::REQUEST_PATCH, $this->getResourceKey(), $params);
+		$this->refresh($result);
+		
+		return $this;
+	}
 	protected function reload($url) {
 		$result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
 		$this->refresh($result);
