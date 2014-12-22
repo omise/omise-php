@@ -3,6 +3,9 @@ require_once dirname(__FILE__).'/../../config.php';
 require_once dirname(__FILE__).'/../exception/OmiseException.php';
 require_once dirname(__FILE__).'/object/OmiseObject.php';
 
+define('OMISE_API_URL', 'https://api.omise.co/');
+define('OMISE_VAULT_URL', 'https://vault.omise.co/');
+
 class OmiseApiResource extends OmiseObject {
 	// リクエストメソッドたち
 	const REQUEST_GET = 'GET';
@@ -13,11 +16,6 @@ class OmiseApiResource extends OmiseObject {
 	// タイムアウトオプション
 	private $OMISE_CONNECTTIMEOUT = 30;
 	private $OMISE_TIMEOUT = 60;
-	
-	// OmiseのベースURL
-	protected $_apiUrl = 'https://api.omise.co/';
-	protected $_vaultUrl = 'https://vault.omise.co/';
-	protected $_endpoint = '';
 	
 	/**
 	 * コンストラクタを呼ぶだけ。
@@ -42,21 +40,21 @@ class OmiseApiResource extends OmiseObject {
 	 * @param string $secretkey
 	 * @return OmiseAccount|OmiseBalance
 	 */
-	protected static function retrive($clazz, $id = '', $publickey = null, $secretkey = null) {
+	protected static function retrive($clazz, $url, $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
-		$resource->reload($id);
+		$resource->reload($url);
 		
 		return $resource;
 	}
-	protected static function create($clazz, $params, $publickey = null, $secretkey = null) {
+	protected static function create($clazz, $url, $params, $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
-		$result = $resource->execute($resource->getUrl(), self::REQUEST_POST, $resource->getResourceKey(), $params);
+		$result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
 		$resource->refresh($result);
 		
 		return $resource;
 	}
-	protected function reload($id = '') {
-		$result = $this->execute($this->getUrl($id), self::REQUEST_GET, $this->getResourceKey());
+	protected function reload($url) {
+		$result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
 		$this->refresh($result);
 	}
 	
@@ -132,17 +130,6 @@ class OmiseApiResource extends OmiseObject {
 		return $options;
 	}
 	
-	/* ----------- APIのURLを取得するメソッドたち ----------- */
-	// アクセスすべきURLを取得する
-	protected function getUrl($id = '') {
-		return $this->getResourceURL().$this->_endpoint.'/'.$id;
-	}
-	// APIリソースを返す
-	protected function getResourceURL() {
-		return $this->_apiUrl;
-	}
-
-	/* ----------- ただのアクセサ ----------- */
 	protected function getResourceKey() {
 		return $this->_secretkey;
 	}

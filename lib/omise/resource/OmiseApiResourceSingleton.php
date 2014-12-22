@@ -23,15 +23,4 @@ class OmiseApiResourceSingleton extends OmiseApiResource {
 	
 		return self::$_instance;
 	}
-	
-	/**
-	 * シングルトンリソースはretriveにIDを必要としないためオーバーライド
-	 * @param string $clazz
-	 * @param string $publickey
-	 * @param string $secretkey
-	 * @return unknown
-	 */
-	protected static function retrive($clazz, $publickey = null, $secretkey = null) {
-		return parent::retrive($clazz, '', $publickey, $secretkey);
-	}
 }

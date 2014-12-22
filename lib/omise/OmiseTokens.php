@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/resource/OmiseVaultResource.php';
 
 class OmiseTokens extends OmiseVaultResource {
-	protected $_endpoint = 'tokens';
+	const ENDPOINT = 'tokens';
 	
 	/**
 	 * 
@@ -12,10 +12,14 @@ class OmiseTokens extends OmiseVaultResource {
 	 * @return Ambigous <OmiseAccount, OmiseBalance>
 	 */
 	public static function retrive($id, $publickey = null, $secretkey = null) {
-		return parent::retrive(get_class(), $publickey, $secretkey);
+		return parent::retrive(get_class(), self::getUrl($id), $publickey, $secretkey);
 	}
 	
 	public static function create($params, $publickey = null, $secretkey = null) {
-		return parent::create(get_class(), $params, $publickey, $secretkey);
+		return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+	}
+	
+	private static function getUrl($id = '') {
+		return OMISE_VAULT_URL.self::ENDPOINT.'/'.$id;
 	}
 }
