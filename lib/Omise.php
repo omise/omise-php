@@ -72,5 +72,8 @@ require_once dirname(__FILE__).'/omise/OmiseTransactions.php';
 // $object->isDestroyed();
 // var_dump($object);
 
-$object = OmiseTransactions::retrive();
-var_dump($object);
+$object = OmiseCustomers::retrive()->getCards();
+foreach ($object as $row) {
+	echo($row['id']);
+}
+var_dump($object->retrieve('cust_test_4ybbcn4ej78uojo8ctw'));
