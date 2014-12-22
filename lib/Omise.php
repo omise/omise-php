@@ -16,6 +16,7 @@ require_once dirname(__FILE__).'/omise/OmiseCustomers.php';
 // 		'card[security_code]' => 123
 
 // ));
+// var_dump($object);
 // $object = OmiseTokens::create(array('card' => array(
 // 		'name' => 'Somchai Prasert',
 // 		'number' => '4242424242424242',
@@ -42,5 +43,10 @@ require_once dirname(__FILE__).'/omise/OmiseCustomers.php';
 // ));
 // $object->capture();
 
-$object = OmiseCustomers::retrive();
+// $object = OmiseCustomers::retrive();
+$object = OmiseCustomers::create(array(
+	'email' => 'john.doe@example.com',
+	'description' => 'John Doe (id: 30)',
+	'card' => 'tokn_test_4ygsume4qijdokmuvh0'
+));
 var_dump($object);
