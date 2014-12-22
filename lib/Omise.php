@@ -3,6 +3,7 @@ require_once dirname(__FILE__).'/omise/OmiseAccount.php';
 require_once dirname(__FILE__).'/omise/OmiseBalance.php';
 require_once dirname(__FILE__).'/omise/OmiseTokens.php';
 require_once dirname(__FILE__).'/omise/OmiseCharges.php';
+require_once dirname(__FILE__).'/omise/OmiseCustomers.php';
 
 
 // $object = OmiseTokens::create(array(
@@ -40,3 +41,6 @@ require_once dirname(__FILE__).'/omise/OmiseCharges.php';
 // 	'description' => 'Another description'
 // ));
 // $object->capture();
+
+$object = OmiseCustomers::retrive();
+var_dump($object);
