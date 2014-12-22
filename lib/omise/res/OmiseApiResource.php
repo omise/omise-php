@@ -59,6 +59,12 @@ class OmiseApiResource extends OmiseObject {
 		
 		return $this;
 	}
+	protected function destroy($url) {
+		$result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
+		$this->refresh($result, true);
+		
+		return $this;
+	}
 	protected function reload($url) {
 		$result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
 		$this->refresh($result);

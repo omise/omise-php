@@ -49,9 +49,15 @@ require_once dirname(__FILE__).'/omise/OmiseCustomers.php';
 // 	'description' => 'John Doe (id: 30)',
 // 	'card' => 'tokn_test_4ygsume4qijdokmuvh0'
 // ));
-$object = OmiseCustomers::retrive('cust_test_4ygsutsiv9v20oez95s');
-$object->update(array(
-	'email' => 'john.smith@example.com',
-	'description' => 'Another description2'
-));
-var_dump($object);
+// $object = OmiseCustomers::retrive('cust_test_4ygsutsiv9v20oez95s');
+// $object->update(array(
+// 	'email' => 'john.smith@example.com',
+// 	'description' => 'Another description2'
+// ));
+// var_dump($object);
+
+// $object = OmiseCustomers::retrive('cust_test_4ygsutsiv9v20oez95s');
+// $object->destroy();
+// $object->isDestroyed();
+// var_dump($object);
+// var_dump($object->isDestroyed());
