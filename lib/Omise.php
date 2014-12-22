@@ -2,6 +2,7 @@
 require_once dirname(__FILE__).'/omise/OmiseAccount.php';
 require_once dirname(__FILE__).'/omise/OmiseBalance.php';
 require_once dirname(__FILE__).'/omise/OmiseTokens.php';
+require_once dirname(__FILE__).'/omise/OmiseCharges.php';
 
 
 // $object = OmiseTokens::create(array(
@@ -25,5 +26,8 @@ require_once dirname(__FILE__).'/omise/OmiseTokens.php';
 // )));
 // var_dump($object);
 
-$object = OmiseTokens::retrive('tokn_test_4yfpjbu99utp0m6xpp0');
+// $object = OmiseTokens::retrive('tokn_test_4yfpjbu99utp0m6xpp0');
+// var_dump($object);
+
+$object = OmiseCharges::retrive();
 var_dump($object);

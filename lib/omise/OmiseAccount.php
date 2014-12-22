@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/resource/OmiseApiResourceSingleton.php';
+require_once dirname(__FILE__).'/res/OmiseApiResourceSingleton.php';
 
 class OmiseAccount extends OmiseApiResourceSingleton {
 	const ENDPOINT = 'account';

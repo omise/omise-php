@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/resource/OmiseVaultResource.php';
+require_once dirname(__FILE__).'/res/OmiseVaultResource.php';
 
 class OmiseTokens extends OmiseVaultResource {
 	const ENDPOINT = 'tokens';

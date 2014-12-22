@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../../config.php';
 require_once dirname(__FILE__).'/../exception/OmiseException.php';
-require_once dirname(__FILE__).'/object/OmiseObject.php';
+require_once dirname(__FILE__).'/obj/OmiseObject.php';
 
 define('OMISE_API_URL', 'https://api.omise.co/');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
