@@ -19,6 +19,14 @@ class OmiseCards extends OmiseApiResource {
 	public function update($params) {
 		return parent::update($this->getUrl($this['id']), $params);
 	}
+	
+	public function destroy() {
+		return parent::destroy($this->getUrl($this['id']));
+	}
+	
+	public function isDestroyed() {
+		return $this['deleted'];
+	}
 
 	private function getUrl($cardID = '') {
 		return OMISE_API_URL.OmiseCustomers::ENDPOINT.'/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$cardID;
