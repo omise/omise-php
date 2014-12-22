@@ -40,7 +40,7 @@ class OmiseApiResource extends OmiseObject {
 	 * @param string $secretkey
 	 * @return OmiseAccount|OmiseBalance
 	 */
-	protected static function retrive($clazz, $url, $publickey = null, $secretkey = null) {
+	protected static function retrieve($clazz, $url, $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
 		$resource->reload($url);
 		

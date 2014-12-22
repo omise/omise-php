@@ -11,8 +11,8 @@ class OmiseTokens extends OmiseVaultResource {
 	 * @param string $secretkey
 	 * @return Ambigous <OmiseAccount, OmiseBalance>
 	 */
-	public static function retrive($id, $publickey = null, $secretkey = null) {
-		return parent::retrive(get_class(), self::getUrl($id), $publickey, $secretkey);
+	public static function retrieve($id, $publickey = null, $secretkey = null) {
+		return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
 	}
 	
 	public static function create($params, $publickey = null, $secretkey = null) {

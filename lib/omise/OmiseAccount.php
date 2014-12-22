@@ -4,8 +4,8 @@ require_once dirname(__FILE__).'/res/OmiseApiResourceSingleton.php';
 class OmiseAccount extends OmiseApiResourceSingleton {
 	const ENDPOINT = 'account';
 	
-	public static function retrive($publickey = null, $secretkey = null) {
-		return parent::retrive(get_class(), self::getUrl(), $publickey, $secretkey);
+	public static function retrieve($publickey = null, $secretkey = null) {
+		return parent::retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
 	}
 
 	public function reload() {
