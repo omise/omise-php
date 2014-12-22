@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../../config.php';
-require_once dirname(__FILE__).'/../object/OmiseObject.php';
 require_once dirname(__FILE__).'/../exception/OmiseException.php';
+require_once dirname(__FILE__).'/object/OmiseObject.php';
 
 class OmiseApiResource extends OmiseObject {
 	// リクエストメソッドたち
@@ -42,9 +42,9 @@ class OmiseApiResource extends OmiseObject {
 	 * @param string $secretkey
 	 * @return OmiseAccount|OmiseBalance
 	 */
-	protected static function retrive($clazz, $publickey = null, $secretkey = null) {
+	protected static function retrive($clazz, $id = '', $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
-		$resource->reload();
+		$resource->reload($id);
 		
 		return $resource;
 	}
@@ -55,8 +55,8 @@ class OmiseApiResource extends OmiseObject {
 		
 		return $resource;
 	}
-	protected function reload() {
-		$result = $this->execute($this->getUrl(), self::REQUEST_GET, $this->getResourceKey());
+	protected function reload($id = '') {
+		$result = $this->execute($this->getUrl($id), self::REQUEST_GET, $this->getResourceKey());
 		$this->refresh($result);
 	}
 	
@@ -135,11 +135,7 @@ class OmiseApiResource extends OmiseObject {
 	/* ----------- APIのURLを取得するメソッドたち ----------- */
 	// アクセスすべきURLを取得する
 	protected function getUrl($id = '') {
-		return $this->getResourceURL().$this->getLocation($id);
-	}
-	// ベースURL以下のロケーションを返す
-	protected function getLocation($id = '') {
-		return $this->_endpoint.'/'.$id;
+		return $this->getResourceURL().$this->_endpoint.'/'.$id;
 	}
 	// APIリソースを返す
 	protected function getResourceURL() {
