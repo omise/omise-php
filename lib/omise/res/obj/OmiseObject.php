@@ -32,7 +32,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable {
 	 * @param array $values
 	 */
 	protected function refresh($values) {
-		$this->_values += $values;
+		$this->_values = array_merge($this->_values, $values);
 	}
 	
 	// ArrayAccessのoverrideメソッド
