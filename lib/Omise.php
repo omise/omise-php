@@ -5,6 +5,7 @@ require_once dirname(__FILE__).'/omise/OmiseTokens.php';
 require_once dirname(__FILE__).'/omise/OmiseCharges.php';
 require_once dirname(__FILE__).'/omise/OmiseCustomers.php';
 require_once dirname(__FILE__).'/omise/OmiseTransfers.php';
+require_once dirname(__FILE__).'/omise/OmiseTransactions.php';
 
 
 // $object = OmiseTokens::create(array(
@@ -63,10 +64,13 @@ require_once dirname(__FILE__).'/omise/OmiseTransfers.php';
 // var_dump($object);
 // var_dump($object->isDestroyed());
 
-$object = OmiseTransfers::retrive('trsf_test_4ygtjzidyi8wb6w2sqa');
+// $object = OmiseTransfers::retrive('trsf_test_4ygtjzidyi8wb6w2sqa');
 // $object = OmiseTransfers::create(array(
 // 	'amount' => 100000
 // ));
-$object->destroy();
-$object->isDestroyed();
+// $object->destroy();
+// $object->isDestroyed();
+// var_dump($object);
+
+$object = OmiseTransactions::retrive();
 var_dump($object);
