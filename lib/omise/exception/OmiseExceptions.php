@@ -1,0 +1,105 @@
+<?php
+class OmiseException extends Exception {
+	private $_omiseError = null;
+	
+	public function __construct($message = null, $omiseError = null) {
+		parent::__construct($message);
+		$this->setOmiseError($omiseError);
+	}
+	
+	/**
+	 * Omiseのerrorオブジェクトを渡すと、適切なExceptionを返す
+	 * @param array $array
+	 * @return OmiseAuthenticationFailureException|OmiseNotFoundException|OmiseUsedTokenException|OmiseInvalidCardException|OmiseInvalidCardTokenException|OmiseMissingCardException|OmiseInvalidChargeException|OmiseFailedCaptureException|OmiseFailedFraudCheckException|OmiseUndefinedException
+	 */
+	public static function getInstance($array) {
+		switch ($array['code']) {
+			case 'authentication_failure':
+				return new OmiseAuthenticationFailureException($array['message'], $array);
+
+			case 'not_found':
+				return new OmiseNotFoundException($array['message'], $array);
+
+			case 'used_token':
+				return new OmiseUsedTokenException($array['message'], $array);
+
+			case 'invalid_card':
+				return new OmiseInvalidCardException($array['message'], $array);
+
+			case 'invalid_card_token':
+				return new OmiseInvalidCardTokenException($array['message'], $array);
+
+			case 'missing_card':
+				return new OmiseMissingCardException($array['message'], $array);
+
+			case 'invalid_charge':
+				return new OmiseInvalidChargeException($array['message'], $array);
+
+			case 'failed_capture':
+				return new OmiseFailedCaptureException($array['message'], $array);
+
+			case 'failed_fraud_check':
+				return new OmiseFailedFraudCheckException($array['message'], $array);
+
+			default:
+				return new OmiseUndefinedException($array['message'], $array);
+		}
+	}
+	
+	/**
+	 * OmiseErrorをセットする
+	 * @param OmiseError $omiseError
+	 */
+	public function setOmiseError($omiseError) {
+		$this->_omiseError = $omiseError;
+	}
+	
+	/**
+	 * OmiseErrorオブジェクトを取得する。この例外がOmiseAPIに定義されたエラー以外で発生した場合nullが帰る。（HTTP通信の失敗等）
+	 * 参考：https://docs.omise.co/api/errors/
+	 * @return OmiseError
+	 */
+	public function getOmiseError() {
+		return $this->_omiseError;
+	}
+}
+
+class OmiseAuthenticationFailureException extends OmiseException {
+	
+}
+
+class OmiseNotFoundException extends OmiseException {
+	
+}
+
+class OmiseUsedTokenException extends OmiseException {
+	
+}
+
+class OmiseInvalidCardException extends OmiseException {
+	
+}
+
+class OmiseInvalidCardTokenException extends OmiseException {
+	
+}
+
+class OmiseMissingCardException extends OmiseException {
+	
+}
+
+class OmiseInvalidChargeException extends OmiseException {
+	
+}
+
+class OmiseFailedCaptureException extends OmiseException {
+	
+}
+
+class OmiseFailedFraudCheckException extends OmiseException {
+	
+}
+
+class OmiseUndefinedException extends OmiseException {
+	
+}
