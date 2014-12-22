@@ -19,6 +19,10 @@ class OmiseTokens extends OmiseVaultResource {
 		return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
 	}
 	
+	public function reload() {
+		parent::reload(self::getUrl($this['id']));
+	}
+	
 	private static function getUrl($id = '') {
 		return OMISE_VAULT_URL.self::ENDPOINT.'/'.$id;
 	}

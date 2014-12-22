@@ -1,5 +1,6 @@
 <?php
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/res/OmiseCards.php';
 
 class OmiseCustomers extends OmiseApiResource {
 	const ENDPOINT = 'customers';
@@ -12,6 +13,14 @@ class OmiseCustomers extends OmiseApiResource {
 		return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
 	}
 	
+	public function reload() {
+		if($this['object'] === 'customer') {
+			parent::reload(self::getUrl($this['id']));
+		} else {
+			parent::reload(self::getUrl());
+		}
+	}
+	
 	public function update($params) {
 		return parent::update(self::getUrl($this['id']), $params);
 	}
@@ -22,6 +31,10 @@ class OmiseCustomers extends OmiseApiResource {
 	
 	public function isDestroyed() {
 		return $this['deleted'];
+	}
+	
+	public function getCards() {
+		parent::getInstance(get_class(OmiseCards));
 	}
 	
 	private static function getUrl($id = '') {

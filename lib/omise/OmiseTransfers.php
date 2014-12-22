@@ -11,6 +11,14 @@ class OmiseTransfers extends OmiseApiResource {
 	public static function create($params, $publickey = null, $secretkey = null) {
 		return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
 	}
+
+	public function reload() {
+		if($this['object'] === 'transfers') {
+			parent::reload(self::getUrl($this['id']));
+		} else {
+			parent::reload(self::getUrl());
+		}
+	}
 	
 	public function update($params) {
 		return parent::update(self::getUrl($this['id']), $params);

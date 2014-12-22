@@ -1,9 +1,10 @@
 <?php
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/OmiseObject.php';
 
-class OmiseCards extends OmiseApiResource {
+class OmiseList extends OmiseObject {
 	public function __construct($array, $publickey = null, $secretkey = null) {
 		parent::__construct($publickey, $secretkey);
-		$this->refresh($array);
+		
+		self::refresh($array);
 	}
 }

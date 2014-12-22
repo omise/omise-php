@@ -8,6 +8,14 @@ class OmiseCharges extends OmiseApiResource {
 		return parent::retrive(get_class(), self::getUrl($id), $publickey, $secretkey);
 	}
 
+	public function reload() {
+		if($this['object'] === 'charge') {
+			parent::reload(self::getUrl($this['id']));
+		} else {
+			parent::reload(self::getUrl());
+		}
+	}
+
 	public static function create($params, $publickey = null, $secretkey = null) {
 		return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
 	}

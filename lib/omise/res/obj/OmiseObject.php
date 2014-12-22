@@ -3,10 +3,10 @@ require_once dirname(__FILE__).'/../../../config.php';
 
 class OmiseObject implements ArrayAccess, Iterator, Countable {
 	// 連想配列に使うオブジェクト
-	protected $_values = array();
+	private $_values = array();
 	
 	// Omiseの秘密鍵と公開鍵用変数
-	protected $_secretkey, $_publickey;
+	private $_secretkey, $_publickey;
 	
 	/**
 	 * 引数にOmiseの秘密鍵と公開鍵を渡す。config.phpに書いておけば渡さなくても良い
@@ -24,6 +24,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable {
 		} else {
 			$this->_secretkey = OMISE_SECRET_KEY;
 		}
+		
 		$this->_values = array();
 	}
 	
