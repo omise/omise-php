@@ -44,9 +44,10 @@ require_once dirname(__FILE__).'/omise/OmiseCustomers.php';
 // $object->capture();
 
 // $object = OmiseCustomers::retrive();
-$object = OmiseCustomers::create(array(
-	'email' => 'john.doe@example.com',
-	'description' => 'John Doe (id: 30)',
-	'card' => 'tokn_test_4ygsume4qijdokmuvh0'
-));
+// $object = OmiseCustomers::create(array(
+// 	'email' => 'john.doe@example.com',
+// 	'description' => 'John Doe (id: 30)',
+// 	'card' => 'tokn_test_4ygsume4qijdokmuvh0'
+// ));
+$object = OmiseCustomers::retrive('cust_test_4ygsutsiv9v20oez95s');
 var_dump($object);
