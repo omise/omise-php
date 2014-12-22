@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/OmiseCardList.php';
+require_once dirname(__FILE__).'/res/obj/OmiseCardList.php';
 
 class OmiseCustomers extends OmiseApiResource {
 	const ENDPOINT = 'customers';
@@ -34,7 +34,9 @@ class OmiseCustomers extends OmiseApiResource {
 	}
 	
 	public function getCards() {
-		return new OmiseCardList($this['data'], $this->_publickey, $this->_secretkey);
+		if($this['object'] === 'customer') {
+			return new OmiseCardList($this, $this->_publickey, $this->_secretkey);
+		}
 	}
 	
 	private static function getUrl($id = '') {

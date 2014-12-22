@@ -42,7 +42,8 @@ class OmiseApiResource extends OmiseObject {
 	 */
 	protected static function retrieve($clazz, $url, $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
-		$resource->reload($url);
+		$result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+		$resource->refresh($result);
 		
 		return $resource;
 	}
@@ -125,6 +126,7 @@ class OmiseApiResource extends OmiseObject {
 				// リダイレクトの最大カウントは3とする
 				CURLOPT_MAXREDIRS => 3,
 				// リダイレクトが実施されたときヘッダにRefererを追加する
+				CURLINFO_HEADER_OUT=>true,
 				CURLOPT_AUTOREFERER => true,
 				// HTTPレスポンスコード400番台以上はエラーとして扱う
 				//CURLOPT_FAILONERROR => true,
