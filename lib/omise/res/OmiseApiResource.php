@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__).'/../../config.php';
-require_once dirname(__FILE__).'/../exception/OmiseException.php';
+require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
 require_once dirname(__FILE__).'/obj/OmiseObject.php';
 
 define('OMISE_API_URL', 'https://api.omise.co/');
@@ -38,7 +38,8 @@ class OmiseApiResource extends OmiseObject {
 	 * @param string $clazz
 	 * @param string $publickey
 	 * @param string $secretkey
-	 * @return OmiseAccount|OmiseBalance
+	 * @return OmiseAccount|OmiseBalance|OmiseCharges|OmiseCustomers|OmiseTokens|OmiseTransactions|OmiseTransfers
+	 * @throws Exception|OmiseException
 	 */
 	protected static function retrieve($clazz, $url, $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
@@ -47,6 +48,17 @@ class OmiseApiResource extends OmiseObject {
 		
 		return $resource;
 	}
+	
+	/**
+	 * 
+	 * @param string $clazz
+	 * @param string $url
+	 * @param array $params
+	 * @param string $publickey
+	 * @param string $secretkey
+	 * @return OmiseAccount|OmiseBalance|OmiseCharges|OmiseCustomers|OmiseTokens|OmiseTransactions|OmiseTransfers
+	 * @throws Exception|OmiseException
+	 */
 	protected static function create($clazz, $url, $params, $publickey = null, $secretkey = null) {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
 		$result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
@@ -54,18 +66,34 @@ class OmiseApiResource extends OmiseObject {
 		
 		return $resource;
 	}
+	
+	/**
+	 * 更新処理の共通メソッド
+	 * @param string $url
+	 * @param array $params
+	 * @throws Exception|OmiseException
+	 */
 	protected function update($url, $params) {
 		$result = $this->execute($url, self::REQUEST_PATCH, $this->getResourceKey(), $params);
 		$this->refresh($result);
-		
-		return $this;
 	}
+	
+	/**
+	 * 削除処理の共通メソッド
+	 * @param string $url
+	 * @return OmiseApiResource
+	 * @throws Exception|OmiseException
+	 */
 	protected function destroy($url) {
 		$result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
 		$this->refresh($result, true);
-		
-		return $this;
 	}
+	
+	/**
+	 * リロード処理の共通メソッド
+	 * @param string $url
+	 * @throws Exception|OmiseException
+	 */
 	protected function reload($url) {
 		$result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
 		$this->refresh($result);
@@ -87,17 +115,17 @@ class OmiseApiResource extends OmiseObject {
 			$error = curl_error($ch);
 			curl_close($ch);
 				
-			throw new OmiseException($error);
+			throw new Exception($error);
 		}
 		// 解放
 		curl_close($ch);
 		// 連想配列に格納し、エラーチェック
 		$array = json_decode($result, true);
-		if(count($array) === 0) throw new OmiseException('This Exception is unknown.(Bad Response)');
-	
-		if($array['object'] === 'error') {
-			var_dump($array);
-		}
+		
+		// レスポンスが不正か、jsonでなかった
+		if(count($array) === 0 || !isset($array['object'])) throw new Exception('This Exception is unknown.(Bad Response)');
+		// レスポンスがerrorオブジェクトだった
+		if($array['object'] === 'error') throw OmiseException::getInstance($array);
 	
 		return $array;
 	}
@@ -144,6 +172,10 @@ class OmiseApiResource extends OmiseObject {
 		return $options;
 	}
 	
+	/**
+	 * 秘密鍵を返す
+	 * @return string
+	 */
 	protected function getResourceKey() {
 		return $this->_secretkey;
 	}
