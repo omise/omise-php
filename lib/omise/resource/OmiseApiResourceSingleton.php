@@ -34,12 +34,4 @@ class OmiseApiResourceSingleton extends OmiseApiResource {
 	protected static function retrive($clazz, $publickey = null, $secretkey = null) {
 		return parent::retrive($clazz, '', $publickey, $secretkey);
 	}
-	
-	/**
-	 * シングルトンリソースはreloadを許可する
-	 * @see OmiseApiResource::reload()
-	 */
-	public function reload() {
-		parent::reload();
-	}
 }

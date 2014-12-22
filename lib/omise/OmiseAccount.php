@@ -7,4 +7,8 @@ class OmiseAccount extends OmiseApiResource {
 	public static function retrive($publickey = null, $secretkey = null) {
 		return parent::retrive(get_class(), $publickey, $secretkey);
 	}
+
+	public function reload() {
+		parent::reload();
+	}
 }
