@@ -36,4 +36,5 @@ require_once dirname(__FILE__).'/omise/OmiseCharges.php';
 //   'ip' => '127.0.0.1',
 //   'card' => 'tokn_test_4yfpjbu99utp0m6xpp0'
 // ));
-// var_dump($object);
+$object = OmiseCharges::retrive('chrg_test_4ygsixowmlneebvpssg');
+var_dump($object);

@@ -4,8 +4,8 @@ require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 class OmiseCharges extends OmiseApiResource {
 	const ENDPOINT = 'charges';
 	
-	public static function retrive($publickey = null, $secretkey = null) {
-		return parent::retrive(get_class(), self::getUrl(), $publickey, $secretkey);
+	public static function retrive($id = '', $publickey = null, $secretkey = null) {
+		return parent::retrive(get_class(), self::getUrl($id), $publickey, $secretkey);
 	}
 	
 	public static function create($params, $publickey = null, $secretkey = null) {
