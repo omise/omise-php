@@ -10,12 +10,4 @@ class OmiseList extends OmiseObject {
 	public function __construct($publickey = null, $secretkey = null) {
 		parent::__construct($publickey, $secretkey);
 	}
-	
-	/**
-	 * データに１件追加する
-	 * @param array $array
-	 */
-	public function push($array) {
-		array_push($this->_values, $array);
-	}
 }

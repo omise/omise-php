@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__).'/OmiseList.php';
-require_once dirname(__FILE__).'/../../OmiseCards.php';
+require_once dirname(__FILE__).'/../../OmiseCard.php';
 
 class OmiseCardList extends OmiseList {
 	/**
@@ -13,7 +13,7 @@ class OmiseCardList extends OmiseList {
 		parent::__construct($publickey, $secretkey);
 		
 		foreach ($customer['cards']['data'] as $row) {
-			$this->push(new OmiseCards($row, $customer['id']));
+			$this->refresh(array($row['id'] => new OmiseCard($row, $customer['id'])));
 		}
 	}
 	
@@ -23,8 +23,6 @@ class OmiseCardList extends OmiseList {
 	 * @return OmiseCard
 	 */
 	public function retrieve($id) {
-		foreach ($this as $row) {
-			if($row['id'] === $id) return $row;
-		}
+		if(isset($this[$id])) return $this[$id];
 	}
 }
