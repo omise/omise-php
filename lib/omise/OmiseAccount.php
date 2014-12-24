@@ -5,7 +5,7 @@ class OmiseAccount extends OmiseApiResourceSingleton {
 	const ENDPOINT = 'account';
 	
 	/**
-	 * retrieveする
+	 * retrieve
 	 * @param string $publickey
 	 * @param string $secretkey
 	 * @return OmiseAccount
@@ -23,7 +23,7 @@ class OmiseAccount extends OmiseApiResourceSingleton {
 	}
 
 	/**
-	 * URLを作る
+	 * Creat URL
 	 * @param string $cardID
 	 * @return string
 	 */

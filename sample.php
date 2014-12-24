@@ -9,20 +9,20 @@ require_once dirname(__FILE__).'/omise_test/OmiseTransfersTest.php';
 require_once dirname(__FILE__).'/omise_test/OmiseTransactionsTest.php';
 
 try {
-	// ---------- Accessへの接続テスト ----------
+	// ---------- Account access test ----------
  	$accountTest = new OmiseAccountTest();
 // 	$accountTest->retrieve();
 
-	// ---------- Balanceへの接続テスト ----------
+	// ---------- Balance access test  ----------
  	$balanceTest = new OmiseBalanceTest();
 // 	$balanceTest->retrieve();
 
-	// ---------- Tokensへの接続テスト ----------
+	// ---------- Tokens access test  ----------
  	$tokenTest = new OmiseTokensTest();
 // 	$tokenTest->create();
 // 	$tokenTest->retrieve();
 
-	// ---------- Customersへの接続テスト ----------
+	// ---------- Customers access test  ----------
  	$customerTest = new OmiseCustomersTest();
 // 	$customerTest->listAll();
 // 	$customerTest->create();
@@ -30,14 +30,14 @@ try {
 // 	$customerTest->update();
 // 	$customerTest->destroy();
 
- 	// ---------- Cardsへの接続テスト ----------
+ 	// ---------- Cards access test  ----------
  	$cardTest = new OmiseCardsTest();
 // 	$cardTest->listAll();
 //	$cardTest->retrieve();
 //	$cardTest->update();
 //	$cardTest->destroy();
 
- 	// ---------- Chargesへの接続テスト ----------
+ 	// ---------- Charges access test  ----------
  	$chargeTest = new OmiseChargesTest();
 // 	$chargeTest->listAll();
 // 	$chargeTest->create();
@@ -46,7 +46,7 @@ try {
 //	$chargeTest->captureAnAuthorized();
 
 
- 	// ---------- Transfersへの接続テスト ----------
+ 	// ---------- Transfers access test  ----------
  	$transferTest = new OmiseTransfersTest();
 // 	$transferTest->listAll();
 //	$transferTest->create();
@@ -54,7 +54,7 @@ try {
 //	$transferTest->update();
 //	$transferTest->destroy();
 
- 	// ---------- Transfersへの接続テスト ----------
+ 	// ---------- Transfers access test  ----------
  	$transactionTest = new OmiseTransactionsTest();
 // 	$transactionTest->listAll();
 // 	$transactionTest->retrieve();

@@ -7,7 +7,7 @@ class OmiseCard extends OmiseApiResource {
 	const ENDPOINT = 'cards';
 	
 	/**
-	 * Cardsは直接retriveしに行かずにコンストラクタでcards arrayを受け取る
+	 * Cards do not retrive directly, By using "Constructors" to get cards array
 	 * @param array $array
 	 * @param string $customerID
 	 * @param string $publickey
@@ -52,7 +52,7 @@ class OmiseCard extends OmiseApiResource {
 	}
 
 	/**
-	 * URLを作る
+	 * Creat URL
 	 * @param string $cardID
 	 * @return string
 	 */

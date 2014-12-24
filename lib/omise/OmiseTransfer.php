@@ -39,7 +39,7 @@ class OmiseTransfer extends OmiseApiResource {
 	}
 	
 	/**
-	 * amountの更新を行う
+	 * Update amount
 	 */
 	public function save() {
 		$this->update(array('amount' => $this['amount']));
