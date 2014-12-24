@@ -34,7 +34,7 @@ class OmiseApiResource extends OmiseObject {
 	}
 	
 	/**
-	 * リソースを生成してretriveする
+	 * インスタンスを生成して取得
 	 * @param string $clazz
 	 * @param string $publickey
 	 * @param string $secretkey
@@ -50,7 +50,7 @@ class OmiseApiResource extends OmiseObject {
 	}
 	
 	/**
-	 * 
+	 * インスタンスを生成して新規作成
 	 * @param string $clazz
 	 * @param string $url
 	 * @param array $params
@@ -68,7 +68,7 @@ class OmiseApiResource extends OmiseObject {
 	}
 	
 	/**
-	 * 更新処理の共通メソッド
+	 * 更新処理
 	 * @param string $url
 	 * @param array $params
 	 * @throws Exception|OmiseException
@@ -79,7 +79,7 @@ class OmiseApiResource extends OmiseObject {
 	}
 	
 	/**
-	 * 削除処理の共通メソッド
+	 * 削除処理
 	 * @param string $url
 	 * @return OmiseApiResource
 	 * @throws Exception|OmiseException
@@ -90,7 +90,7 @@ class OmiseApiResource extends OmiseObject {
 	}
 	
 	/**
-	 * リロード処理の共通メソッド
+	 * リロード処理
 	 * @param string $url
 	 * @throws Exception|OmiseException
 	 */
@@ -170,6 +170,14 @@ class OmiseApiResource extends OmiseObject {
 		if(count($params) > 0) $options += array(CURLOPT_POSTFIELDS => http_build_query($params));
 	
 		return $options;
+	}
+	
+	/**
+	 * 削除済みかどうかチェックする
+	 * @return OmiseApiResource
+	 */
+	protected function isDestroyed() {
+		return $this['deleted'];
 	}
 	
 	/**

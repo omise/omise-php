@@ -4,10 +4,21 @@ require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 class OmiseCharges extends OmiseApiResource {
 	const ENDPOINT = 'charges';
 	
+	/**
+	 * 
+	 * @param string $id
+	 * @param string $publickey
+	 * @param string $secretkey
+	 * @return OmiseCharges
+	 */
 	public static function retrieve($id = '', $publickey = null, $secretkey = null) {
 		return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
 	}
 
+	/**
+	 * (non-PHPdoc)
+	 * @see OmiseApiResource::reload()
+	 */
 	public function reload() {
 		if($this['object'] === 'charge') {
 			parent::reload(self::getUrl($this['id']));
@@ -16,14 +27,29 @@ class OmiseCharges extends OmiseApiResource {
 		}
 	}
 
+	/**
+	 * 
+	 * @param array $params
+	 * @param string $publickey
+	 * @param string $secretkey
+	 * @return OmiseCharges
+	 */
 	public static function create($params, $publickey = null, $secretkey = null) {
 		return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see OmiseApiResource::update()
+	 */
 	public function update($params) {
-		return parent::update(self::getUrl($this['id']), $params);
+		parent::update(self::getUrl($this['id']), $params);
 	}
 	
+	/**
+	 * 
+	 * @return OmiseCharges
+	 */
 	public function capture() {
 		$result = parent::execute(self::getUrl($this['id']).'/capture', parent::REQUEST_POST, parent::getResourceKey());
 		$this->refresh($result);
@@ -31,6 +57,11 @@ class OmiseCharges extends OmiseApiResource {
 		return $this;
 	}
 	
+	/**
+	 * 
+	 * @param string $id
+	 * @return string
+	 */
 	private static function getUrl($id = '') {
 		return OMISE_API_URL.self::ENDPOINT.'/'.$id;
 	}

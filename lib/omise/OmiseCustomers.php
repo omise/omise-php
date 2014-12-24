@@ -5,14 +5,32 @@ require_once dirname(__FILE__).'/res/obj/OmiseCardList.php';
 class OmiseCustomers extends OmiseApiResource {
 	const ENDPOINT = 'customers';
 	
+	/**
+	 * 
+	 * @param string $id
+	 * @param string $publickey
+	 * @param string $secretkey
+	 * @return OmiseCustomers
+	 */
 	public static function retrieve($id = '', $publickey = null, $secretkey = null) {
 		return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
 	}
 	
+	/**
+	 * 
+	 * @param unknown $params
+	 * @param string $publickey
+	 * @param string $secretkey
+	 * @return OmiseCustomers
+	 */
 	public static function create($params, $publickey = null, $secretkey = null) {
 		return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see OmiseApiResource::reload()
+	 */
 	public function reload() {
 		if($this['object'] === 'customer') {
 			parent::reload(self::getUrl($this['id']));
@@ -21,24 +39,45 @@ class OmiseCustomers extends OmiseApiResource {
 		}
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see OmiseApiResource::update()
+	 */
 	public function update($params) {
-		return parent::update(self::getUrl($this['id']), $params);
+		parent::update(self::getUrl($this['id']), $params);
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see OmiseApiResource::destroy()
+	 */
 	public function destroy() {
-		return parent::destroy(self::getUrl($this['id']));
+		parent::destroy(self::getUrl($this['id']));
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see OmiseApiResource::isDestroyed()
+	 */
 	public function isDestroyed() {
-		return $this['deleted'];
+		return parent::isDestroyed();
 	}
 	
+	/**
+	 * 
+	 * @return OmiseCardList
+	 */
 	public function getCards() {
 		if($this['object'] === 'customer') {
 			return new OmiseCardList($this, $this->_publickey, $this->_secretkey);
 		}
 	}
 	
+	/**
+	 * 
+	 * @param string $id
+	 * @return string
+	 */
 	private static function getUrl($id = '') {
 		return OMISE_API_URL.self::ENDPOINT.'/'.$id;
 	}
