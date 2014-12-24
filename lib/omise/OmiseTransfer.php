@@ -39,10 +39,17 @@ class OmiseTransfer extends OmiseApiResource {
 	}
 	
 	/**
+	 * amountの更新を行う
+	 */
+	public function save() {
+		$this->update(array('amount' => $this['amount']));
+	}
+	
+	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::update()
 	 */
-	public function update($params) {
+	protected function update($params) {
 		parent::update(self::getUrl($this['id']), $params);
 	}
 	
