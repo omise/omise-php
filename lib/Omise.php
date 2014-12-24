@@ -1,8 +1,8 @@
 <?php
 require_once dirname(__FILE__).'/omise/OmiseAccount.php';
 require_once dirname(__FILE__).'/omise/OmiseBalance.php';
-require_once dirname(__FILE__).'/omise/OmiseTokens.php';
-require_once dirname(__FILE__).'/omise/OmiseCharges.php';
-require_once dirname(__FILE__).'/omise/OmiseCustomers.php';
-require_once dirname(__FILE__).'/omise/OmiseTransfers.php';
-require_once dirname(__FILE__).'/omise/OmiseTransactions.php';
+require_once dirname(__FILE__).'/omise/OmiseToken.php';
+require_once dirname(__FILE__).'/omise/OmiseCharge.php';
+require_once dirname(__FILE__).'/omise/OmiseCustomer.php';
+require_once dirname(__FILE__).'/omise/OmiseTransfer.php';
+require_once dirname(__FILE__).'/omise/OmiseTransaction.php';

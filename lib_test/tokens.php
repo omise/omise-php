@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../lib/Omise.php';
 
-$tokens = OmiseTokens::create(
+$tokens = OmiseToken::create(
 	array('card' => array(
 		'name' => 'Somchai Prasert',
 		'number' => '4242424242424242',
@@ -13,5 +13,5 @@ $tokens = OmiseTokens::create(
 	))
 );
 
-$tokens = OmiseTokens::retrieve('tokn_test_4yhjzedpby2e0e75rbe');
+$tokens = OmiseToken::retrieve('tokn_test_4yhjzedpby2e0e75rbe');
 var_dump($tokens);
