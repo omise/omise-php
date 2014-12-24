@@ -20,7 +20,7 @@ class OmiseCardList extends OmiseList {
 	/**
 	 * retrieveする。が、生成済みのインスタンスを返すだけ
 	 * @param stroing $id
-	 * @return OmiseCards
+	 * @return OmiseCard
 	 */
 	public function retrieve($id) {
 		foreach ($this as $row) {
