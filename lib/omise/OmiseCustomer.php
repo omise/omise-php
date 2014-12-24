@@ -18,7 +18,7 @@ class OmiseCustomer extends OmiseApiResource {
 	
 	/**
 	 * 
-	 * @param unknown $params
+	 * @param array $params
 	 * @param string $publickey
 	 * @param string $secretkey
 	 * @return OmiseCustomer
