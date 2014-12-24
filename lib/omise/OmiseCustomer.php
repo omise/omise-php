@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 require_once dirname(__FILE__).'/res/obj/OmiseCardList.php';
 
-class OmiseCustomers extends OmiseApiResource {
+class OmiseCustomer extends OmiseApiResource {
 	const ENDPOINT = 'customers';
 	
 	/**
@@ -10,7 +10,7 @@ class OmiseCustomers extends OmiseApiResource {
 	 * @param string $id
 	 * @param string $publickey
 	 * @param string $secretkey
-	 * @return OmiseCustomers
+	 * @return OmiseCustomer
 	 */
 	public static function retrieve($id = '', $publickey = null, $secretkey = null) {
 		return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
@@ -21,7 +21,7 @@ class OmiseCustomers extends OmiseApiResource {
 	 * @param unknown $params
 	 * @param string $publickey
 	 * @param string $secretkey
-	 * @return OmiseCustomers
+	 * @return OmiseCustomer
 	 */
 	public static function create($params, $publickey = null, $secretkey = null) {
 		return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);

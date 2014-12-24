@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
-class OmiseTransactions extends OmiseApiResource {
+class OmiseTransaction extends OmiseApiResource {
 	const ENDPOINT = 'transactions';
 	
 	/**
@@ -9,7 +9,7 @@ class OmiseTransactions extends OmiseApiResource {
 	 * @param string $id
 	 * @param string $publickey
 	 * @param string $secretkey
-	 * @return OmiseTransactions
+	 * @return OmiseTransaction
 	 */
 	public static function retrieve($id = '', $publickey = null, $secretkey = null) {
 		return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);

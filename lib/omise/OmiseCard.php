@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 require_once dirname(__FILE__).'/OmiseCustomers.php';
 
-class OmiseCards extends OmiseApiResource {
+class OmiseCard extends OmiseApiResource {
 	private $_customerID;
 	const ENDPOINT = 'cards';
 	
