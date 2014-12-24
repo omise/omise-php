@@ -1,15 +1,18 @@
 <?php
 require_once dirname(__FILE__).'/../lib/Omise.php';
 
-$customer = OmiseCustomer::retrieve('cust_test_4ybb9ymhoi7ju6wuizb');
+// list all
+$customer = OmiseCustomer::retrieve('cust_test_4xsjvylia03ur542vn6');
 $cards = $customer->getCards();
 
-$customer = OmiseCustomer::retrieve('cust_test_4ybb9ymhoi7ju6wuizb');
-$card = $customer->getCards()->retrieve('card_test_4ybb9yic91yw7btqn40');
+// retrieve
+$customer = OmiseCustomer::retrieve('cust_test_4xsjvylia03ur542vn6');
+$card = $customer->getCards()->retrieve('card_test_4xsjw0t21xaxnuzi9gs');
 $card->reload();
 
-$customer = OmiseCustomer::retrieve('cust_test_4ybb9ymhoi7ju6wuizb');
-$card = $customer->getCards()->retrieve('card_test_4ybb9yic91yw7btqn40');
+// update
+$customer = OmiseCustomer::retrieve('cust_test_4xsjvylia03ur542vn6');
+$card = $customer->getCards()->retrieve('card_test_4xsjw0t21xaxnuzi9gs');
 $card->update(array(
 	'expiration_month' => 11,
 	'expiration_year' => 2017,
@@ -17,7 +20,8 @@ $card->update(array(
 	'postal_code' => '10310'
 ));
 
-$customer = OmiseCustomer::retrieve('cust_test_4ybb9ymhoi7ju6wuizb');
-$card = $customer->getCards()->retrieve('card_test_4ybb9yic91yw7btqn40');
+// destroy
+$customer = OmiseCustomer::retrieve('cust_test_4xsjvylia03ur542vn6');
+$card = $customer->getCards()->retrieve('card_test_4xsjw0t21xaxnuzi9gs');
 $card->destroy();
 $card->isDestroyed();

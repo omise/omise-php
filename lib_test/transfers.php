@@ -1,14 +1,23 @@
 <?php
 require_once dirname(__FILE__).'/../lib/Omise.php';
 
-$transfer = OmiseTransfer::retrieve();
+// list all
+$transfers = OmiseTransfer::retrieve();
 
-$transfer = OmiseTransfer::retrieve('trsf_test_4xs5px8c36dsanuwztf');
+// retrieve
+$transfer = OmiseTransfer::retrieve('trsf_test_4y3miv1nhy0dceit4w4');
 
-$transfer = OmiseTransfer::retrieve('trsf_test_4xs5px8c36dsanuwztf');
+// create 
+$transfer = OmiseTransfer::create(array(
+	'amount' => 100000
+));
+
+// update
+$transfer = OmiseTransfer::retrieve('trsf_test_4y3miv1nhy0dceit4w4');
 $transfer['amount'] = 50000;
 $transfer->save();
 
-$transfer = OmiseTransfer::retrieve('trsf_test_4xs5px8c36dsanuwztf');
+// destroy
+$transfer = OmiseTransfer::retrieve('trsf_test_4y3miv1nhy0dceit4w4');
 $transfer->destroy();
 $transfer->isDestroyed();

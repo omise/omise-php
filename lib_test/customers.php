@@ -1,21 +1,27 @@
 <?php
 require_once dirname(__FILE__).'/../lib/Omise.php';
 
+// list all
 $customer = OmiseCustomer::retrieve();
 
+// create
 $customer = OmiseCustomer::create(array(
 	'email' => 'john.doe@example.com',
 	'description' => 'John Doe (id: 30)',
-	'card' => 'tokn_test_4yhkav9xexs21xmtk72'
+	'card' => 'tokn_test_4xs9408a642a1htto8z'
 ));
 
-$customer = OmiseCustomer::retrieve('cust_test_4yhkb538v4u6zk0jtqh');
+// retrieve
+$customer = OmiseCustomer::retrieve('cust_test_4xtrb759599jsxlhkrb');
 
-$customer = OmiseCustomer::retrieve('cust_test_4yhkb538v4u6zk0jtqh');
+// update
+$customer = OmiseCustomer::retrieve('cust_test_4xtrb759599jsxlhkrb');
 $customer->update(array(
 	'email' => 'john.smith@example.com',
 	'description' => 'Another description'
 ));
 
-$customer = OmiseCustomer::retrieve('cust_test_4yhkb538v4u6zk0jtqh');
+// destroy
+$customer = OmiseCustomer::retrieve('cust_test_4xtrb759599jsxlhkrb');
 $customer->destroy();
+$customer->isDestroyed();
