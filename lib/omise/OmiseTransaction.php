@@ -3,9 +3,9 @@ require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
 class OmiseTransaction extends OmiseApiResource {
 	const ENDPOINT = 'transactions';
-	
+
 	/**
-	 * 
+	 * Retrieves a transaction.
 	 * @param string $id
 	 * @param string $publickey
 	 * @param string $secretkey
@@ -26,9 +26,9 @@ class OmiseTransaction extends OmiseApiResource {
 			parent::reload(self::getUrl());
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $id
 	 * @return string
 	 */

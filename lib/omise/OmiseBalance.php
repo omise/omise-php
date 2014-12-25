@@ -3,9 +3,9 @@ require_once dirname(__FILE__).'/res/OmiseApiResourceSingleton.php';
 
 class OmiseBalance extends OmiseApiResourceSingleton {
 	const ENDPOINT = 'balance';
-	
+
 	/**
-	 * 
+	 * Retrieves a current balance in the account.
 	 * @param string $publickey
 	 * @param string $secretkey
 	 * @return OmiseBalance

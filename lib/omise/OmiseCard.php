@@ -5,9 +5,9 @@ require_once dirname(__FILE__).'/OmiseCustomers.php';
 class OmiseCard extends OmiseApiResource {
 	private $_customerID;
 	const ENDPOINT = 'cards';
-	
+
 	/**
-	 * Cards do not retrive directly, By using "Constructors" to get cards array
+	 * Object representing a card. Cards are retrieved using a `Customer`.
 	 * @param array $array
 	 * @param string $customerID
 	 * @param string $publickey
@@ -34,7 +34,7 @@ class OmiseCard extends OmiseApiResource {
 	public function update($params) {
 		parent::update($this->getUrl($this['id']), $params);
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::destroy()
@@ -42,7 +42,7 @@ class OmiseCard extends OmiseApiResource {
 	public function destroy() {
 		parent::destroy($this->getUrl($this['id']));
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::isDestroyed()
@@ -52,7 +52,7 @@ class OmiseCard extends OmiseApiResource {
 	}
 
 	/**
-	 * Creat URL
+	 *
 	 * @param string $cardID
 	 * @return string
 	 */

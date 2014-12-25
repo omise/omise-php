@@ -7,18 +7,18 @@ define('OMISE_API_URL', 'https://api.omise.co/');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
 class OmiseApiResource extends OmiseObject {
-	// リクエストメソッドたち
+	// Request methods
 	const REQUEST_GET = 'GET';
 	const REQUEST_POST = 'POST';
 	const REQUEST_DELETE = 'DELETE';
 	const REQUEST_PATCH = 'PATCH';
-	
-	// タイムアウトオプション
+
+	// Timeout settings
 	private $OMISE_CONNECTTIMEOUT = 30;
 	private $OMISE_TIMEOUT = 60;
-	
+
 	/**
-	 * コンストラクタを呼ぶだけ。
+	 * Returns an instance of the class given in $clazz or raise an error.
 	 * @param string $clazz
 	 * @param string $secretkey
 	 * @param string $publickey
@@ -32,9 +32,9 @@ class OmiseApiResource extends OmiseObject {
 			throw new Exception('Undefined class.');
 		}
 	}
-	
+
 	/**
-	 * インスタンスを生成して取得
+	 * Retrieves the resource.
 	 * @param string $clazz
 	 * @param string $publickey
 	 * @param string $secretkey
@@ -45,12 +45,12 @@ class OmiseApiResource extends OmiseObject {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
 		$result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
 		$resource->refresh($result);
-		
+
 		return $resource;
 	}
-	
+
 	/**
-	 * インスタンスを生成して新規作成
+	 * Creates the resource with given parameters.in an associative array.
 	 * @param string $clazz
 	 * @param string $url
 	 * @param array $params
@@ -63,12 +63,12 @@ class OmiseApiResource extends OmiseObject {
 		$resource = $clazz::getInstance($clazz, $publickey, $secretkey);
 		$result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
 		$resource->refresh($result);
-		
+
 		return $resource;
 	}
-	
+
 	/**
-	 * 更新処理
+	 * Updates the resource with the given parameters in an associative array.
 	 * @param string $url
 	 * @param array $params
 	 * @throws Exception|OmiseException
@@ -77,9 +77,9 @@ class OmiseApiResource extends OmiseObject {
 		$result = $this->execute($url, self::REQUEST_PATCH, $this->getResourceKey(), $params);
 		$this->refresh($result);
 	}
-	
+
 	/**
-	 * 削除処理
+	 * Destroys the resource.
 	 * @param string $url
 	 * @return OmiseApiResource
 	 * @throws Exception|OmiseException
@@ -88,9 +88,9 @@ class OmiseApiResource extends OmiseObject {
 		$result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
 		$this->refresh($result, true);
 	}
-	
+
 	/**
-	 * リロード処理
+	 * Reloads the resource with latest data.
 	 * @param string $url
 	 * @throws Exception|OmiseException
 	 */
@@ -98,90 +98,89 @@ class OmiseApiResource extends OmiseObject {
 		$result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
 		$this->refresh($result);
 	}
-	
+
 	/**
-	 * 戻り値は連想配列にされたjsonオブジェクト（ヘッダは含まない）
+	 * Makes a request and returns a decoded JSON data as an associative array.
 	 * @param string $url
 	 * @param string $requestMethod
 	 * @param array $params
 	 * @throws OmiseException
-	 * @return string
+	 * @return array
 	 */
 	protected function execute($url, $requestMethod, $key, $params = null) {
 		$ch = curl_init($url);
 		curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
-		// リクエストを実行し、失敗した場合には例外を投げる
+		// Make a request or thrown an exception.
 		if(($result = curl_exec($ch)) === false) {
 			$error = curl_error($ch);
 			curl_close($ch);
-				
+
 			throw new Exception($error);
 		}
-		// 解放
+		// Close.
 		curl_close($ch);
-		// 連想配列に格納し、エラーチェック
+		// Decode the JSON response as an associative array.
 		$array = json_decode($result, true);
-		
-		// レスポンスが不正か、jsonでなかった
-		if(count($array) === 0 || !isset($array['object'])) throw new Exception('This Exception is unknown.(Bad Response)');
-		// レスポンスがerrorオブジェクトだった
+
+		// If response is invalid or not a JSON.
+		if(count($array) === 0 || !isset($array['object'])) throw new Exception('Unknown error. (Bad Response)');
+		// If response is an error object.
 		if($array['object'] === 'error') throw OmiseException::getInstance($array);
-	
+
 		return $array;
 	}
-	
+
 	/**
-	 * 引数にリクエストメソッドと、POSTしたい連想配列を渡す。
-	 * 戻り値としてphp-curlのオプション配列が帰ってくる。
+	 * Creates an option for php-curl from the given request method and parameters in an associative array.
 	 * @param string $requestMethod
 	 * @param array $params
 	 * @return array
 	 */
 	private function genOptions($requestMethod, $userpwd, $params) {
 		$options = array(
-				// HTTPバージョンを1.1に指定
+				// Set the HTTP version to 1.1.
 				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-				// リクエストメソッドの指定
+				// Set the request method.
 				CURLOPT_CUSTOMREQUEST => $requestMethod,
-				// ユーザエージェントの設定
+				// Set the user agent.
 				CURLOPT_USERAGENT => "OmisePHP/".OMISE_PHP_LIB_VERSION." OmiseAPI/".OMISE_API_VERSION,
-				// データを文字列で取得する
+				// Make php-curl returns the data as string.
 				CURLOPT_RETURNTRANSFER => true,
-				// ヘッダは出力しない
+				// Do not include the header in the output.
 				CURLOPT_HEADER => false,
-				// リダイレクトを有効にする
+				// Follow the redirection.
 				CURLOPT_FOLLOWLOCATION => true,
-				// リダイレクトの最大カウントは3とする
+				// Only follows up to 3 redirections.
 				CURLOPT_MAXREDIRS => 3,
-				// リダイレクトが実施されたときヘッダにRefererを追加する
+				// Track the header request string and set the referer on redirect.
 				CURLINFO_HEADER_OUT=>true,
 				CURLOPT_AUTOREFERER => true,
-				// HTTPレスポンスコード400番台以上はエラーとして扱う
+				// Make HTTP error code above 400 an error.
 				//CURLOPT_FAILONERROR => true,
-				// 実行時間の限界を指定
+				// Time before the request is aborted.
 				CURLOPT_TIMEOUT => $this->OMISE_TIMEOUT,
-				// 接続要求のタイムアウトを指定
+				// Time before the request is aborted when attempting to connect.
 				CURLOPT_CONNECTTIMEOUT => $this->OMISE_CONNECTTIMEOUT,
-				// 認証情報を指定
+				// Authentication.
 				CURLOPT_USERPWD => $userpwd
 		);
-	
-		// POSTパラメータがある場合マージ
+
+		// Also merge POST parameters with the option.
 		if(count($params) > 0) $options += array(CURLOPT_POSTFIELDS => http_build_query($params));
-	
+
 		return $options;
 	}
-	
+
 	/**
-	 * 削除済みかどうかチェックする
+	 * Checks whether the resource has been destroyed.
 	 * @return OmiseApiResource
 	 */
 	protected function isDestroyed() {
 		return $this['deleted'];
 	}
-	
+
 	/**
-	 * 秘密鍵を返す
+	 * Returns the secret key.
 	 * @return string
 	 */
 	protected function getResourceKey() {

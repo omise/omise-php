@@ -3,9 +3,9 @@ require_once dirname(__FILE__).'/OmiseApiResource.php';
 
 class OmiseApiResourceSingleton extends OmiseApiResource {
 	private static $_instance = null;
-	
+
 	/**
-	 * シングルトンインスタンスのためのインスタンス生成メソッド
+	 * Returns an instance of the class given in $clazz as a singleton resource or raise an error.
 	 * @param string $clazz
 	 * @param string $secretkey
 	 * @param string $publickey
@@ -20,7 +20,7 @@ class OmiseApiResourceSingleton extends OmiseApiResource {
 				throw new Exception('Undefined class.');
 			}
 		}
-	
+
 		return self::$_instance;
 	}
 }

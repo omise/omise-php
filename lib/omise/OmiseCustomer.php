@@ -4,9 +4,9 @@ require_once dirname(__FILE__).'/res/obj/OmiseCardList.php';
 
 class OmiseCustomer extends OmiseApiResource {
 	const ENDPOINT = 'customers';
-	
+
 	/**
-	 * 
+	 * Retrieves a customer.
 	 * @param string $id
 	 * @param string $publickey
 	 * @param string $secretkey
@@ -15,9 +15,9 @@ class OmiseCustomer extends OmiseApiResource {
 	public static function retrieve($id = '', $publickey = null, $secretkey = null) {
 		return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
 	}
-	
+
 	/**
-	 * 
+	 * Creates a new customer.
 	 * @param array $params
 	 * @param string $publickey
 	 * @param string $secretkey
@@ -26,7 +26,7 @@ class OmiseCustomer extends OmiseApiResource {
 	public static function create($params, $publickey = null, $secretkey = null) {
 		return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::reload()
@@ -38,7 +38,7 @@ class OmiseCustomer extends OmiseApiResource {
 			parent::reload(self::getUrl());
 		}
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::update()
@@ -46,7 +46,7 @@ class OmiseCustomer extends OmiseApiResource {
 	public function update($params) {
 		parent::update(self::getUrl($this['id']), $params);
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::destroy()
@@ -54,7 +54,7 @@ class OmiseCustomer extends OmiseApiResource {
 	public function destroy() {
 		parent::destroy(self::getUrl($this['id']));
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::isDestroyed()
@@ -62,9 +62,9 @@ class OmiseCustomer extends OmiseApiResource {
 	public function isDestroyed() {
 		return parent::isDestroyed();
 	}
-	
+
 	/**
-	 * 
+	 * Gets a list of all cards belongs to this customer.
 	 * @return OmiseCardList
 	 */
 	public function getCards() {
@@ -72,9 +72,9 @@ class OmiseCustomer extends OmiseApiResource {
 			return new OmiseCardList($this, $this->_publickey, $this->_secretkey);
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $id
 	 * @return string
 	 */

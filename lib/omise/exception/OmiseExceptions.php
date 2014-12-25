@@ -1,14 +1,14 @@
 <?php
 class OmiseException extends Exception {
 	private $_omiseError = null;
-	
+
 	public function __construct($message = null, $omiseError = null) {
 		parent::__construct($message);
 		$this->setOmiseError($omiseError);
 	}
-	
+
 	/**
-	 * Omiseのerrorオブジェクトを渡すと、適切なExceptionを返す
+	 * Returns an instance of an exception class from the given error response.
 	 * @param array $array
 	 * @return OmiseAuthenticationFailureException|OmiseNotFoundException|OmiseUsedTokenException|OmiseInvalidCardException|OmiseInvalidCardTokenException|OmiseMissingCardException|OmiseInvalidChargeException|OmiseFailedCaptureException|OmiseFailedFraudCheckException|OmiseUndefinedException
 	 */
@@ -45,18 +45,18 @@ class OmiseException extends Exception {
 				return new OmiseUndefinedException($array['message'], $array);
 		}
 	}
-	
+
 	/**
-	 * OmiseErrorをセットする
+	 * Sets the error.
 	 * @param OmiseError $omiseError
 	 */
 	public function setOmiseError($omiseError) {
 		$this->_omiseError = $omiseError;
 	}
-	
+
 	/**
-	 * OmiseErrorオブジェクトを取得する。この例外がOmiseAPIに定義されたエラー以外で発生した場合nullが帰る。（HTTP通信の失敗等）
-	 * 参考：https://docs.omise.co/api/errors/
+	 * Gets the OmiseError object. This method will return null if an error happens outside of the API. (For example, due to HTTP connectivity problem.)
+	 * Please see https://docs.omise.co/api/errors/ for a list of possible errors.
 	 * @return OmiseError
 	 */
 	public function getOmiseError() {
@@ -65,41 +65,41 @@ class OmiseException extends Exception {
 }
 
 class OmiseAuthenticationFailureException extends OmiseException {
-	
+
 }
 
 class OmiseNotFoundException extends OmiseException {
-	
+
 }
 
 class OmiseUsedTokenException extends OmiseException {
-	
+
 }
 
 class OmiseInvalidCardException extends OmiseException {
-	
+
 }
 
 class OmiseInvalidCardTokenException extends OmiseException {
-	
+
 }
 
 class OmiseMissingCardException extends OmiseException {
-	
+
 }
 
 class OmiseInvalidChargeException extends OmiseException {
-	
+
 }
 
 class OmiseFailedCaptureException extends OmiseException {
-	
+
 }
 
 class OmiseFailedFraudCheckException extends OmiseException {
-	
+
 }
 
 class OmiseUndefinedException extends OmiseException {
-	
+
 }

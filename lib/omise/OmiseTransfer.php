@@ -3,9 +3,9 @@ require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
 class OmiseTransfer extends OmiseApiResource {
 	const ENDPOINT = 'transfers';
-	
+
 	/**
-	 * 
+	 * Retrieves a transfer.
 	 * @param string $id
 	 * @param string $publickey
 	 * @param string $secretkey
@@ -14,9 +14,9 @@ class OmiseTransfer extends OmiseApiResource {
 	public static function retrieve($id = '', $publickey = null, $secretkey = null) {
 		return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
 	}
-	
+
 	/**
-	 * 
+	 * Creates a transfer.
 	 * @param unknown $params
 	 * @param string $publickey
 	 * @param string $secretkey
@@ -37,14 +37,14 @@ class OmiseTransfer extends OmiseApiResource {
 			parent::reload(self::getUrl());
 		}
 	}
-	
+
 	/**
-	 * Update amount
+	 * Updates the transfer amount.
 	 */
 	public function save() {
 		$this->update(array('amount' => $this['amount']));
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::update()
@@ -52,7 +52,7 @@ class OmiseTransfer extends OmiseApiResource {
 	protected function update($params) {
 		parent::update(self::getUrl($this['id']), $params);
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::destroy()
@@ -60,7 +60,7 @@ class OmiseTransfer extends OmiseApiResource {
 	public function destroy() {
 		parent::destroy(self::getUrl($this['id']));
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see OmiseApiResource::isDestroyed()
@@ -68,9 +68,9 @@ class OmiseTransfer extends OmiseApiResource {
 	public function isDestroyed() {
 		return parent::isDestroyed();
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $id
 	 * @return string
 	 */
