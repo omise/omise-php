@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/OmiseCustomers.php';
+require_once dirname(__FILE__).'/OmiseCustomer.php';
 
 class OmiseCard extends OmiseApiResource {
   private $_customerID;
