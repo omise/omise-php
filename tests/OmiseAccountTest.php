@@ -1,10 +1,10 @@
 <?php
 
-require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit.phar';
 require_once dirname(__FILE__).'/../lib/Omise.php';
 
 class OmiseAccountTest extends PHPUnit_Framework_TestCase {
-  public function setUpBeforeClass() {
+  public static function setUpBeforeClass() {
     /** Do Nothing **/
   }
   
@@ -15,9 +15,8 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
   public function testReload() {
     $account = OmiseAccount::retrieve();
     $account->reload();
-    
-    // リロード前のオブジェクトとリロード後のオブジェクトが一致する（singletonのため）
-    $this->assertInternalType('OmiseAccount', $account);
+
+    // objectを持っており、そのオブジェクトの実態がaccountである
     $this->assertArrayHasKey('object', $account);
     $this->assertEquals('account', $account['object']);
   }
@@ -25,8 +24,7 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
   public function testRetrieve() {
     $account = OmiseAccount::retrieve();
     
-    // 型が同一、objectを持っており、そのオブジェクトの実態がaccountである
-    $this->assertInternalType('OmiseAccount', $account);
+    // objectを持っており、そのオブジェクトの実態がaccountである
     $this->assertArrayHasKey('object', $account);
     $this->assertEquals('account', $account['object']);
   }
@@ -43,7 +41,7 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
     /** Do Nothing **/
   }
   
-  public function tearDownAfterClass() {
+  public static function tearDownAfterClass() {
     /** Do Nothing **/
   }
 }
