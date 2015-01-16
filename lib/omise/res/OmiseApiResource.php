@@ -1,6 +1,5 @@
 <?php
 
-require_once dirname(__FILE__).'/../../config.php';
 require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
 require_once dirname(__FILE__).'/obj/OmiseObject.php';
 

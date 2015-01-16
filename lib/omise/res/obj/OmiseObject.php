@@ -1,7 +1,5 @@
 <?php
 
-require_once dirname(__FILE__).'/../../../config.php';
-
 class OmiseObject implements ArrayAccess, Iterator, Countable {
   // Store the attributes of the object.
   protected $_values = array();
