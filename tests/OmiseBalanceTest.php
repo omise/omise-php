@@ -1,8 +1,10 @@
 <?php
 
 require_once 'PHPUnit.phar';
-require_once dirname(__FILE__).'/config.php';
 require_once dirname(__FILE__).'/../lib/Omise.php';
+
+define('OMISE_PUBLIC_KEY', 'pkey');
+define('OMISE_SECRET_KEY', 'skey');
 
 class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
   public static function setUpBeforeClass() {
