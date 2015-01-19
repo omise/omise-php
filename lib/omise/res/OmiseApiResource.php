@@ -1,6 +1,5 @@
 <?php
 
-require_once dirname(__FILE__).'/../../config.php';
 require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
 require_once dirname(__FILE__).'/obj/OmiseObject.php';
 
@@ -154,16 +153,18 @@ class OmiseApiResource extends OmiseObject {
         // Only follows up to 3 redirections.
         CURLOPT_MAXREDIRS => 3,
         // Track the header request string and set the referer on redirect.
-        CURLINFO_HEADER_OUT=>true,
+        CURLINFO_HEADER_OUT => true,
         CURLOPT_AUTOREFERER => true,
         // Make HTTP error code above 400 an error.
-        //CURLOPT_FAILONERROR => true,
+        // CURLOPT_FAILONERROR => true,
         // Time before the request is aborted.
         CURLOPT_TIMEOUT => $this->OMISE_TIMEOUT,
         // Time before the request is aborted when attempting to connect.
         CURLOPT_CONNECTTIMEOUT => $this->OMISE_CONNECTTIMEOUT,
         // Authentication.
-        CURLOPT_USERPWD => $userpwd
+        CURLOPT_USERPWD => $userpwd,
+        // CA bundle.
+        CURLOPT_CAINFO => dirname(__FILE__).'/../../../data/ca_certificates.pem'
     );
 
     // Also merge POST parameters with the option.
