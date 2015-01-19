@@ -1,6 +1,7 @@
 <?php
 
 require_once 'PHPUnit.phar';
+require_once dirname(__FILE__).'/config.php';
 require_once dirname(__FILE__).'/../lib/Omise.php';
 
 class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
@@ -16,7 +17,7 @@ class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
     $balance = OmiseBalance::retrieve();
     $balance->reload();
 
-    // objectを持っており、そのオブジェクトの実態がaccountである
+    // objectを持っており、そのオブジェクトの実態がbalanceである
     $this->assertArrayHasKey('object', $balance);
     $this->assertEquals('balance', $balance['object']);
   }
@@ -24,7 +25,7 @@ class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
   public function testRetrieve() {
     $balance = OmiseBalance::retrieve();
     
-    // objectを持っており、そのオブジェクトの実態がaccountである
+    // objectを持っており、そのオブジェクトの実態がbalanceである
     $this->assertArrayHasKey('object', $balance);
     $this->assertEquals('balance', $balance['object']);
   }
