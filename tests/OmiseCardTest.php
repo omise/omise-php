@@ -14,7 +14,7 @@ class OmiseCardTest extends PHPUnit_Framework_TestCase {
   	$customer = OmiseCustomer::retrieve();
   	
   	if(count($customer['data']) > 0) {
-  	  OmiseCardTest::$customerID = $customer['data'][6]['id'];
+  	  OmiseCardTest::$customerID = $customer['data'][0]['id'];
   	  
   	  $customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
   	  $cards = $customer->getCards();
