@@ -2,13 +2,13 @@
 
 namespace Omise\OmisePHP\Tests;
 
-require_once 'PHPUnit.phar';
-require_once dirname(__FILE__).'/../lib/Omise.php';
+use Omise\OmisePHP\OmiseCustomer;
+use Omise\OmisePHP\OmiseCard;
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 
-class OmiseCardTest extends PHPUnit_Framework_TestCase {
+class OmiseCardTest extends \PHPUnit_Framework_TestCase {
   static $customerID = 'cust_test_4xsjvylia03ur542vn6';
   static $cardID = 'card_test_4xsjw0t21xaxnuzi9gs';
   

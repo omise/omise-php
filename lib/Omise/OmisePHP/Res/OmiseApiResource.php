@@ -2,9 +2,9 @@
 
 namespace Omise\OmisePHP\Res;
 
-
 use Omise\OmisePHP\Exeption\OmiseException;
 use Omise\OmisePHP\Res\Obj\OmiseObject;
+use \Exception;
 
 require_once dirname(__FILE__).'/../Omise.php';
 
@@ -130,7 +130,6 @@ class OmiseApiResource extends OmiseObject {
     // If response is invalid or not a JSON.
     if(count($array) === 0 || !isset($array['object'])) throw new Exception('Unknown error. (Bad Response)');
     // If response is an error object.
-    if($array['object'] === 'error') throw OmiseException::getInstance($array);
 
     return $array;
   }
@@ -169,7 +168,7 @@ class OmiseApiResource extends OmiseObject {
         // Authentication.
         CURLOPT_USERPWD => $userpwd,
         // CA bundle.
-        CURLOPT_CAINFO => dirname(__FILE__).'/../../../data/ca_certificates.pem'
+        CURLOPT_CAINFO => dirname(__FILE__).'/../../../../data/ca_certificates.pem'
     );
 
     // Also merge POST parameters with the option.

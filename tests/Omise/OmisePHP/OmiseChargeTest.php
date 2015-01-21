@@ -2,13 +2,13 @@
 
 namespace Omise\OmisePHP\Tests;
 
-require_once 'PHPUnit.phar';
-require_once dirname(__FILE__).'/../lib/Omise.php';
+use Omise\OmisePHP\OmiseCharge;
+use Omise\OmisePHP\OmiseToken;
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 
-class OmiseChargeTest extends PHPUnit_Framework_TestCase {
+class OmiseChargeTest extends \PHPUnit_Framework_TestCase {
   static $chargeID = 'chrg_test_4xso2s8ivdej29pqnhz';
   
   public static function setUpBeforeClass() {

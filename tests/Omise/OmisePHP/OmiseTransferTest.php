@@ -2,13 +2,12 @@
 
 namespace Omise\OmisePHP\Tests;
 
-require_once 'PHPUnit.phar';
-require_once dirname(__FILE__).'/../lib/Omise.php';
+use Omise\OmisePHP\OmiseTransfer;
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 
-class OmiseTransferTest extends PHPUnit_Framework_TestCase {
+class OmiseTransferTest extends \PHPUnit_Framework_TestCase {
   static $transferID = 'trsf_test_4y3miv1nhy0rceit4w4';
   
   public static function setUpBeforeClass() {

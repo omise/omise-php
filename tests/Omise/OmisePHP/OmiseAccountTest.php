@@ -2,13 +2,12 @@
 
 namespace Omise\OmisePHP\Tests;
 
-require_once 'PHPUnit.phar';
-require_once dirname(__FILE__).'/../lib/Omise.php';
+use Omise\OmisePHP\OmiseAccount;
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 
-class OmiseAccountTest extends PHPUnit_Framework_TestCase {
+class OmiseAccountTest extends \PHPUnit_Framework_TestCase {
   public static function setUpBeforeClass() {
     /** Do Nothing **/
   }

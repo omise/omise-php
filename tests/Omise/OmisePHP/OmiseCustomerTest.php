@@ -2,13 +2,12 @@
 
 namespace Omise\OmisePHP\Tests;
 
-require_once 'PHPUnit.phar';
-require_once dirname(__FILE__).'/../lib/Omise.php';
+use Omise\OmisePHP\OmiseCustomer;
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 
-class OmiseCustomerTest extends PHPUnit_Framework_TestCase {
+class OmiseCustomerTest extends \PHPUnit_Framework_TestCase {
   static $customerID = 'cust_test_4xtrb759599jsxlhkrb';
   
   public static function setUpBeforeClass() {
