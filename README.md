@@ -2,7 +2,7 @@
 
 ## Requirements
 
-* PHP 5.0 and above.
+* PHP 5.3 and above.
 * Built-in libcurl support.
 
 ## Installation
@@ -18,13 +18,13 @@ git clone https://github.com/omise/omise-php
 Add the following to your PHP script and replace the keys by the one given in Omise dashboard:
 
 ```php
-require_once dirname(__FILE__).'/omise-php/lib/Omise.php';
+use Omise\OmisePHP\OmiseCustomer;
 
 define('OMISE_PUBLIC_KEY', 'pkey_XXXXXXXXXXXXXXXXX');
 define('OMISE_SECRET_KEY', 'skey_XXXXXXXXXXXXXXXXX');
 ```
 
-Please see [API documentation](https://docs.omise.co/) for full API usage. You may also refer to usage example in the `omise_test` directory.
+Please see [API documentation](https://docs.omise.co/) for full API usage. You may also refer to usage example in the `tests/Omise/OmisePHP` directory.
 
 After both keys are set, you can now use the API. For example, to create a customer without any cards associated to the customer:
 
