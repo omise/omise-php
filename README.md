@@ -15,9 +15,24 @@ git clone https://github.com/omise/omise-php
 
 ## Usage
 
+まずcomposer.pharをダウンロードして、
+curl -s http://getcomposer.org/installer | php
+
+次にcomposer.json作って
+{
+  "require": {
+    "omise/omise-php": "dev-master"
+  }
+}
+を書き込んで
+
+下を実行する。
+composer.phar install
+
 Add the following to your PHP script and replace the keys by the one given in Omise dashboard:
 
 ```php
+require_once dirname(__FILE__).'/vendor/autoload.php';
 use Omise\OmisePHP\OmiseCustomer;
 
 define('OMISE_PUBLIC_KEY', 'pkey_XXXXXXXXXXXXXXXXX');
