@@ -1,5 +1,7 @@
 <?php
 
+namespace Omise\OmisePHP\Res;
+
 require_once dirname(__FILE__).'/OmiseApiResource.php';
 
 class OmiseVaultResource extends OmiseApiResource {

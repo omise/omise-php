@@ -1,5 +1,7 @@
 <?php
 
+namespace Omise\OmisePHP\Res;
+
 require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
 require_once dirname(__FILE__).'/obj/OmiseObject.php';
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace Omise\OmisePHP\Res\Obj;
+
 require_once dirname(__FILE__).'/OmiseObject.php';
 
 class OmiseList extends OmiseObject {

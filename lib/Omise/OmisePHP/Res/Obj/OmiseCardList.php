@@ -1,5 +1,7 @@
 <?php
 
+namespace Omise\OmisePHP\Res\Obj;
+
 require_once dirname(__FILE__).'/OmiseList.php';
 require_once dirname(__FILE__).'/../../OmiseCard.php';
 

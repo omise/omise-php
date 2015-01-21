@@ -1,5 +1,7 @@
 <?php
 
+namespace Omise\OmisePHP\Exeption;
+
 class OmiseException extends Exception {
   private $_omiseError = null;
 

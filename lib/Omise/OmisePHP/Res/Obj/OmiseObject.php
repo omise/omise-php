@@ -1,5 +1,7 @@
 <?php
 
+namespace Omise\OmisePHP\Res\Obj;
+
 class OmiseObject implements ArrayAccess, Iterator, Countable {
   // Store the attributes of the object.
   protected $_values = array();
