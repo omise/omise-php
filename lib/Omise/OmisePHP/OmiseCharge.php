@@ -2,7 +2,7 @@
 
 namespace Omise\OmisePHP;
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+use Omise\OmisePHP\Res\OmiseApiResource;
 
 class OmiseCharge extends OmiseApiResource {
   const ENDPOINT = 'charges';

@@ -2,7 +2,7 @@
 
 namespace Omise\OmisePHP;
 
-require_once dirname(__FILE__).'/res/OmiseApiResourceSingleton.php';
+use Omise\OmisePHP\Res\OmiseApiResourceSingleton;
 
 class OmiseBalance extends OmiseApiResourceSingleton {
   const ENDPOINT = 'balance';

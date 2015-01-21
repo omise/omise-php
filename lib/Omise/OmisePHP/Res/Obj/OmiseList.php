@@ -2,7 +2,7 @@
 
 namespace Omise\OmisePHP\Res\Obj;
 
-require_once dirname(__FILE__).'/OmiseObject.php';
+use Omise\OmisePHP\Res\Obj\OmiseObject;
 
 class OmiseList extends OmiseObject {
   /**

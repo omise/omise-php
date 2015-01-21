@@ -2,8 +2,8 @@
 
 namespace Omise\OmisePHP;
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/res/obj/OmiseCardList.php';
+use Omise\OmisePHP\Res\OmiseApiResource;
+use Omise\OmisePHP\Res\Obj\OmiseCardList;
 
 class OmiseCustomer extends OmiseApiResource {
   const ENDPOINT = 'customers';
