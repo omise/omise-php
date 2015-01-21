@@ -1,5 +1,7 @@
 <?php
 
+namespace Omise\OmisePHP\Tests;
+
 require_once 'PHPUnit.phar';
 require_once dirname(__FILE__).'/../lib/Omise.php';
 

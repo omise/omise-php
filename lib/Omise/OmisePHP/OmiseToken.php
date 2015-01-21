@@ -1,5 +1,7 @@
 <?php
 
+namespace Omise\OmisePHP;
+
 require_once dirname(__FILE__).'/res/OmiseVaultResource.php';
 
 class OmiseToken extends OmiseVaultResource {

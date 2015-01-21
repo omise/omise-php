@@ -1,5 +1,7 @@
 <?php
 
+namespace Omise\OmisePHP;
+
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
 class OmiseCharge extends OmiseApiResource {
