@@ -15,19 +15,25 @@ git clone https://github.com/omise/omise-php
 
 ## Usage
 
-まずcomposer.pharをダウンロードして、
+まずcomposer.pharをダウンロードして、projectのルートに配置する
+```shell
 curl -s http://getcomposer.org/installer | php
+```
 
-次にcomposer.json作って
+次に同じ階層にcomposer.jsonファイルを作って
+```json
 {
   "require": {
     "omise/omise-php": "dev-master"
   }
 }
+```
 を書き込んで
 
 下を実行する。
+```shell
 composer.phar install
+```
 
 Add the following to your PHP script and replace the keys by the one given in Omise dashboard:
 
