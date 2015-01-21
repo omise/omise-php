@@ -6,6 +6,8 @@ namespace Omise\OmisePHP\Res;
 use Omise\OmisePHP\Exeption\OmiseException;
 use Omise\OmisePHP\Res\Obj\OmiseObject;
 
+require_once dirname(__FILE__).'/../Omise.php';
+
 define('OMISE_API_URL', 'https://api.omise.co/');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
