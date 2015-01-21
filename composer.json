@@ -1,5 +1,5 @@
 {
-  "name": "omise/omise-php-dev",
+  "name": "omise/omise-php",
   "description": "Omise API PHP Lib",
   "keywords": ["payment", "omise", "creditcard"],
   "type": "library",
