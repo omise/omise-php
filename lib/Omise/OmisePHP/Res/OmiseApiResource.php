@@ -6,6 +6,7 @@ use Omise\OmisePHP\Exeption\OmiseException;
 use Omise\OmisePHP\Res\Obj\OmiseObject;
 use \Exception;
 
+require_once dirname(__FILE__).'/../Exception/OmiseExceptions.php';
 require_once dirname(__FILE__).'/../Omise.php';
 
 define('OMISE_API_URL', 'https://api.omise.co/');
@@ -130,6 +131,7 @@ class OmiseApiResource extends OmiseObject {
     // If response is invalid or not a JSON.
     if(count($array) === 0 || !isset($array['object'])) throw new Exception('Unknown error. (Bad Response)');
     // If response is an error object.
+    if($array['object'] === 'error') throw OmiseException::getInstance($array);
 
     return $array;
   }
