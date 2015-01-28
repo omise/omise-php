@@ -15,29 +15,38 @@ class OmiseAccountTest extends \PHPUnit_Framework_TestCase {
   public function setUp() {
     /** Do Nothing **/
   }
-  
+
+  /**
+   * ----- reloadのテスト -----
+   * reloadに成功し、objectの値がaccountであれば正しいとみなす
+   */
   public function testReload() {
     $account = OmiseAccount::retrieve();
     $account->reload();
-
-    // objectを持っており、そのオブジェクトの実態がaccountである
+    
     $this->assertArrayHasKey('object', $account);
     $this->assertEquals('account', $account['object']);
   }
-  
+
+  /**
+   * ----- retrieveのテスト -----
+   * retrieveに成功し、objectの値がaccountであれば正しいとみなす
+   */
   public function testRetrieve() {
     $account = OmiseAccount::retrieve();
     
-    // objectを持っており、そのオブジェクトの実態がaccountである
     $this->assertArrayHasKey('object', $account);
     $this->assertEquals('account', $account['object']);
   }
-  
+
+  /**
+   * ----- シングルトンになっているかのテスト -----
+   * retrieveを2度実行した結果のインスタンスが同一であれば正しいとみなす
+   */
   public function testSameInstance() {
     $account1 = OmiseAccount::retrieve();
     $account2 = OmiseAccount::retrieve();
     
-    // シングルトンになっている
     $this->assertTrue($account1 === $account2);
   }
   
