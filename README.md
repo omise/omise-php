@@ -17,7 +17,7 @@ git clone https://github.com/omise/omise-php
 
 まずcomposer.pharをダウンロードして、projectのルートに配置する
 ```shell
-curl -s http://getcomposer.org/installer | php
+curl -sS https://getcomposer.org/installer | php
 ```
 
 次に同じ階層にcomposer.jsonファイルを作って
@@ -32,7 +32,7 @@ curl -s http://getcomposer.org/installer | php
 
 下を実行する。
 ```shell
-composer.phar install
+php composer.phar install
 ```
 
 Add the following to your PHP script and replace the keys by the one given in Omise dashboard:

@@ -1,13 +1,15 @@
 <?php
 
-namespace Omise\Tests;
-
-require_once dirname(__FILE__).'/../../vendor/autoload.php';
+if(version_compare(phpversion(), '5.3.2') >= 0) {
+  require_once dirname(__FILE__).'/../../vendor/autoload.php';
+} else {
+  require_once dirname(__FILE__).'/../../lib/Omise.php';
+}
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 
-class ChargeTest extends \PHPUnit_Framework_TestCase {
+class ChargeTest extends PHPUnit_Framework_TestCase {
   static $_charge;
   
   /**
@@ -20,7 +22,7 @@ class ChargeTest extends \PHPUnit_Framework_TestCase {
     $currency = 'thb';
     $description = 'Order-384';
     $ip = '127.0.0.1';
-    $token = \Omise\Token::create(
+    $token = OmiseToken::create(
       array('card' => array(
         'name' => 'Somchai Prasert',
         'number' => '4242424242424242',
@@ -32,7 +34,7 @@ class ChargeTest extends \PHPUnit_Framework_TestCase {
       ))
     );
     
-    self::$_charge = \Omise\Charge::create(array(
+    self::$_charge = OmiseCharge::create(array(
       'return_uri' => $returnUrl,
       'amount' => $amount,
       'currency' => $currency,
@@ -51,7 +53,7 @@ class ChargeTest extends \PHPUnit_Framework_TestCase {
    * retrieve()に成功し、objectの値がlistであれば正しいとみなす
    */
   public function testListAll() {
-    $charge = \Omise\Charge::retrieve();
+    $charge = OmiseCharge::retrieve();
 
     $this->assertArrayHasKey('object', $charge);
     $this->assertEquals('list', $charge['object']);
@@ -67,7 +69,7 @@ class ChargeTest extends \PHPUnit_Framework_TestCase {
     $currency = 'thb';
     $description = 'Order-384';
     $ip = '127.0.0.1';
-    $token = \Omise\Token::create(
+    $token = OmiseToken::create(
       array('card' => array(
         'name' => 'Somchai Prasert',
         'number' => '4242424242424242',
@@ -79,7 +81,7 @@ class ChargeTest extends \PHPUnit_Framework_TestCase {
       ))
     );
 
-    $charge = \Omise\Charge::create(array(
+    $charge = OmiseCharge::create(array(
       'return_uri' => $returnUrl,
       'amount' => $amount,
       'currency' => $currency,
@@ -100,7 +102,7 @@ class ChargeTest extends \PHPUnit_Framework_TestCase {
    * ritrieve(chargeID)に成功し、objectの値がchargeであれば正しいとみなす
    */
   public function testRetrieve() {
-    $charge = \Omise\Charge::retrieve(self::$_charge['id']);
+    $charge = OmiseCharge::retrieve(self::$_charge['id']);
 
     $this->assertArrayHasKey('object', $charge);
     $this->assertEquals('charge', $charge['object']);
@@ -113,7 +115,7 @@ class ChargeTest extends \PHPUnit_Framework_TestCase {
   public function testUpdate() {
     $description = 'Another description';
 
-    $charge = \Omise\Charge::retrieve(self::$_charge['id']);
+    $charge = OmiseCharge::retrieve(self::$_charge['id']);
     $charge->update(array(
       'description' => $description
     ));
@@ -127,7 +129,7 @@ class ChargeTest extends \PHPUnit_Framework_TestCase {
    * ただし、テスト環境ではcreate直後にcaptureされているため、OmiseFailedCaptureExceptionが発生する
    */
   public function testCapture() {
-    $charge = \Omise\Charge::retrieve(self::$_charge['id']);
+    $charge = OmiseCharge::retrieve(self::$_charge['id']);
     $charge->capture();
 
     $this->assertArrayHasKey('object', $charge);

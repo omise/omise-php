@@ -1,13 +1,15 @@
 <?php
 
-namespace Omise\Tests;
-
-require_once dirname(__FILE__).'/../../vendor/autoload.php';
+if(version_compare(phpversion(), '5.3.2') >= 0) {
+  require_once dirname(__FILE__).'/../../vendor/autoload.php';
+} else {
+  require_once dirname(__FILE__).'/../../lib/Omise.php';
+}
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 
-class CardTest extends \PHPUnit_Framework_TestCase {
+class CardTest extends PHPUnit_Framework_TestCase {
   private $_customer;
   
   public static function setUpBeforeClass() {
@@ -18,7 +20,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
    * テストケースに使うCustomerを作成する
    */
   public function setUp() {
-   $token = \Omise\Token::create(
+   $token = OmiseToken::create(
       array('card' => array(
         'name' => 'Somchai Prasert',
         'number' => '4111111111111111',
@@ -30,7 +32,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
       ))
     );
    
-    $this->_customer = \Omise\Customer::create(array(
+    $this->_customer = OmiseCustomer::create(array(
       'email' => 'john.doe@example.com',
       'description' => 'John Doe (id: 30)',
       'card' => $token['id']
@@ -42,7 +44,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
    * Customer::retrieve(customerID)に成功し、objectの値がcustomerであれり、cardsが実行されれば正しいとみなす
    */
   public function testListAll() {
-    $customer = \Omise\Customer::retrieve($this->_customer['id']);
+    $customer = OmiseCustomer::retrieve($this->_customer['id']);
     $cards = $customer->cards();
     
     $this->assertArrayHasKey('object', $customer);
@@ -54,7 +56,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
    * Card::retrieve(cardID)に成功し、objectの値がcardであれば正しいとみなす
    */
   public function testRetrieve() {
-    $customer = \Omise\Customer::retrieve($this->_customer['id']);
+    $customer = OmiseCustomer::retrieve($this->_customer['id']);
     $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
 
     $this->assertArrayHasKey('object', $card);
@@ -66,7 +68,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
    * Card::reload(cardID)に成功し、objectの値がcardであれば正しいとみなす
    */
   public function testReload() {
-    $customer = \Omise\Customer::retrieve($this->_customer['id']);
+    $customer = OmiseCustomer::retrieve($this->_customer['id']);
     $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
     $card->reload();
 
@@ -84,7 +86,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
     $name = 'Somchai Praset';
     $postalcode = '10310';
 
-    $customer = \Omise\Customer::retrieve($this->_customer['id']);
+    $customer = OmiseCustomer::retrieve($this->_customer['id']);
     $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
     $card->update(array(
       'expiration_month' => $month,
@@ -104,7 +106,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
    * Card::destroyに成功し、destroyedのフラグが立っていれば正しいとみなす
    */
   public function testDestroy() {
-    $customer = \Omise\Customer::retrieve($this->_customer['id']);
+    $customer = OmiseCustomer::retrieve($this->_customer['id']);
     $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
     $this->_customer = null;
     $card->destroy();
@@ -117,7 +119,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
    */
   public function tearDown() {
   	if($this->_customer != null) {
-      $customer = \Omise\Customer::retrieve($this->_customer['id']);
+      $customer = OmiseCustomer::retrieve($this->_customer['id']);
       $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
       $card->destroy();
     }

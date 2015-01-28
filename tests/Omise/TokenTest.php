@@ -1,13 +1,15 @@
 <?php
 
-namespace Omise\Tests;
-
-require_once dirname(__FILE__).'/../../vendor/autoload.php';
+if(version_compare(phpversion(), '5.3.2') >= 0) {
+  require_once dirname(__FILE__).'/../../vendor/autoload.php';
+} else {
+  require_once dirname(__FILE__).'/../../lib/Omise.php';
+}
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 
-class TokenTest extends \PHPUnit_Framework_TestCase {
+class TokenTest extends PHPUnit_Framework_TestCase {
   public static function setUpBeforeClass() {
     /** Do Nothing **/
   }
@@ -27,7 +29,7 @@ class TokenTest extends \PHPUnit_Framework_TestCase {
     $city = 'Bangkok';
     $postal_code = '10320';
     
-    $token = \Omise\Token::create(
+    $token = OmiseToken::create(
       array('card' => array(
         'name' => $name,
         'number' => '4242424242424242',
@@ -51,7 +53,7 @@ class TokenTest extends \PHPUnit_Framework_TestCase {
    * ritrieveに成功し、objectの値がtokenであれば正しいとみなす
    */
   public function testRetrieve() {
-    $token1 = \Omise\Token::create(
+    $token1 = OmiseToken::create(
       array('card' => array(
         'name' => 'Somchai Prasert',
         'number' => '4242424242424242',
@@ -63,7 +65,7 @@ class TokenTest extends \PHPUnit_Framework_TestCase {
      ))
     );
     
-    $token2 = \Omise\Token::retrieve($token1['id']);
+    $token2 = OmiseToken::retrieve($token1['id']);
 
   	$this->assertArrayHasKey('object', $token2);
   	$this->assertEquals('token', $token2['object']);

@@ -1,13 +1,15 @@
 <?php
 
-namespace Omise\Tests;
+if(version_compare(phpversion(), '5.3.2') >= 0) {
+  require_once dirname(__FILE__).'/../../vendor/autoload.php';
+} else {
+  require_once dirname(__FILE__).'/../../lib/Omise.php';
+}
 
-require_once dirname(__FILE__).'/../../vendor/autoload.php';
+define('OMISE_PUBLIC_KEY', 'pkey_test_4y9cewl0s1osh44ouud');
+define('OMISE_SECRET_KEY', 'skey_test_4y9cewl0rgwji2kbbcb');
 
-define('OMISE_PUBLIC_KEY', 'pkey');
-define('OMISE_SECRET_KEY', 'skey');
-
-class TransferTest extends \PHPUnit_Framework_TestCase {
+class TransferTest extends PHPUnit_Framework_TestCase {
   static $_transter;
   
   /**
@@ -26,7 +28,7 @@ class TransferTest extends \PHPUnit_Framework_TestCase {
    * retrieve()に成功し、objectの値がlistであれば正しいとみなす
    */
   public function testListAll() {
-    $transfers = \Omise\Transfer::retrieve();
+    $transfers = OmiseTransfer::retrieve();
 
     $this->assertArrayHasKey('object', $transfers);
     $this->assertEquals('list', $transfers['object']);
@@ -39,7 +41,7 @@ class TransferTest extends \PHPUnit_Framework_TestCase {
   public function testCreate() {
   	$amount = 100000;
   	
-    self::$_transter = \Omise\Transfer::create(array(
+    self::$_transter = OmiseTransfer::create(array(
       'amount' => $amount
     ));
 
@@ -51,7 +53,7 @@ class TransferTest extends \PHPUnit_Framework_TestCase {
    * ritrieveに成功し、objectの値がtransferであれば正しいとみなす
    */
   public function testRetrieve() {
-  	$transfer = \Omise\Transfer::retrieve(self::$_transter['id']);
+  	$transfer = OmiseTransfer::retrieve(self::$_transter['id']);
 
   	$this->assertArrayHasKey('object', $transfer);
   	$this->assertEquals('transfer', $transfer['object']);

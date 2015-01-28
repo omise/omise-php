@@ -1,13 +1,15 @@
 <?php
 
-namespace Omise\Tests;
-
-require_once dirname(__FILE__).'/../../vendor/autoload.php';
+if(version_compare(phpversion(), '5.3.2') >= 0) {
+  require_once dirname(__FILE__).'/../../vendor/autoload.php';
+} else {
+  require_once dirname(__FILE__).'/../../lib/Omise.php';
+}
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 
-class CustomerTest extends \PHPUnit_Framework_TestCase {
+class CustomerTest extends PHPUnit_Framework_TestCase {
   static $_customer;
   
   /**
@@ -15,7 +17,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase {
    * ただし、createのテストは別途行う
    */
   public static function setUpBeforeClass() {
-   $token = \Omise\Token::create(
+   $token = OmiseToken::create(
       array('card' => array(
         'name' => 'Somchai Prasert',
         'number' => '4111111111111111',
@@ -27,7 +29,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase {
       ))
     );
    
-    self::$_customer = \Omise\Customer::create(array(
+    self::$_customer = OmiseCustomer::create(array(
       'email' => 'john.doe@example.com',
       'description' => 'John Doe (id: 30)',
       'card' => $token['id']
@@ -43,7 +45,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase {
    * retrieve()に成功し、objectの値がlistであれば正しいとみなす
    */
   public function testListAll() {
-    $customer = \Omise\Customer::retrieve();
+    $customer = OmiseCustomer::retrieve();
 
     $this->assertArrayHasKey('object', $customer);
     $this->assertEquals('list', $customer['object']);
@@ -56,7 +58,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase {
   public function testCreate() {
     $email = 'john.doe@example.com';
     $description = 'John Doe (id: 30)';
-    $token = \Omise\Token::create(
+    $token = OmiseToken::create(
       array('card' => array(
         'name' => 'Somchai Prasert',
         'number' => '4242424242424242',
@@ -68,7 +70,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase {
       ))
     );
 
-    $customer = \Omise\Customer::create(array(
+    $customer = OmiseCustomer::create(array(
       'email' => $email,
       'description' => $description,
       'card' => $token['id']
@@ -85,7 +87,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase {
    * ritrieve(customerID)に成功し、objectの値がcustomerであれば正しいとみなす
    */
   public function testRetrieve() {
-  	$customer = \Omise\Customer::retrieve(self::$_customer['id']);
+  	$customer = OmiseCustomer::retrieve(self::$_customer['id']);
 
   	$this->assertArrayHasKey('object', $customer);
   	$this->assertEquals('customer', $customer['object']);
@@ -99,7 +101,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase {
     $email = 'john.smith@example.com';
     $description = 'Another description';
     
-    $customer = \Omise\Customer::retrieve(self::$_customer['id']);
+    $customer = OmiseCustomer::retrieve(self::$_customer['id']);
     $customer->update(array(
       'email' => 'john.smith@example.com',
       'description' => 'Another description'
