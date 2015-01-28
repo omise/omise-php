@@ -39,10 +39,11 @@ class CardTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * ----- list allのテスト -----
-   * Customer::retrieve(customerID)に成功し、objectの値がcustomerであれば正しいとみなす
+   * Customer::retrieve(customerID)に成功し、objectの値がcustomerであれり、getCardsが実行されれば正しいとみなす
    */
   public function testListAll() {
     $customer = \Omise\Customer::retrieve($this->_customer['id']);
+    $cards = $customer->getCards();
     
     $this->assertArrayHasKey('object', $customer);
     $this->assertEquals('customer', $customer['object']);
