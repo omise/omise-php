@@ -170,7 +170,7 @@ class OmiseApiResource extends OmiseObject {
         // Authentication.
         CURLOPT_USERPWD => $userpwd,
         // CA bundle.
-        CURLOPT_CAINFO => dirname(__FILE__).'/../../../../data/ca_certificates.pem'
+        CURLOPT_CAINFO => dirname(__FILE__).'/../../../data/ca_certificates.pem'
     );
 
     // Also merge POST parameters with the option.
