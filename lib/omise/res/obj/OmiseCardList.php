@@ -1,9 +1,7 @@
 <?php
 
-namespace Omise\Res\Obj;
-
-use Omise\Res\Obj\OmiseList;
-use Omise\Card;
+require_once dirname(__FILE__).'/OmiseList.php';
+require_once dirname(__FILE__).'/../../OmiseCard.php';
 
 class OmiseCardList extends OmiseList {
   /**
@@ -16,14 +14,14 @@ class OmiseCardList extends OmiseList {
     parent::__construct($publickey, $secretkey);
     
     foreach ($customer['cards']['data'] as $row) {
-      $this->refresh(array($row['id'] => new Card($row, $customer['id'])));
+      $this->refresh(array($row['id'] => new OmiseCard($row, $customer['id'])));
     }
   }
   
   /**
    * retrieveする。が、生成済みのインスタンスを返すだけ
    * @param stroing $id
-   * @return Card
+   * @return OmiseCard
    */
   public function retrieve($id) {
     if(isset($this[$id])) return $this[$id];

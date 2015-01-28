@@ -1,8 +1,6 @@
 <?php
 
-namespace Omise\Res;
-
-use Omise\Res\OmiseApiResource;
+require_once dirname(__FILE__).'/OmiseApiResource.php';
 
 class OmiseApiResourceSingleton extends OmiseApiResource {
   private static $_instance = null;

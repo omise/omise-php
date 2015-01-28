@@ -1,8 +1,6 @@
 <?php
 
-namespace Omise\Exeption;
-
-class OmiseException extends \Exception {
+class OmiseException extends Exception {
   private $_omiseError = null;
 
   public function __construct($message = null, $omiseError = null) {

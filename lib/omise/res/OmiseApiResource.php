@@ -1,13 +1,8 @@
 <?php
 
-namespace Omise\Res;
-
-use Omise\Exeption\OmiseException;
-use Omise\Res\Obj\OmiseObject;
-use \Exception;
-
+require_once dirname(__FILE__).'/obj/OmiseObject.php';
 require_once dirname(__FILE__).'/../Exception/OmiseExceptions.php';
-require_once dirname(__FILE__).'/../Omise.php';
+require_once dirname(__FILE__).'/../../Omise.php';
 
 define('OMISE_API_URL', 'https://api.omise.co/');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
@@ -44,7 +39,7 @@ class OmiseApiResource extends OmiseObject {
    * @param string $clazz
    * @param string $publickey
    * @param string $secretkey
-   * @return Account|Balance|Charge|Customer|Token|Transaction|Transfer|Refund
+   * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
    * @throws Exception|OmiseException
    */
   protected static function retrieve($clazz, $url, $publickey = null, $secretkey = null) {
@@ -62,7 +57,7 @@ class OmiseApiResource extends OmiseObject {
    * @param array $params
    * @param string $publickey
    * @param string $secretkey
-   * @return Account|Balance|Charge|Customer|Token|Transaction|Transfer|Refund
+   * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
    * @throws Exception|OmiseException
    */
   protected static function create($clazz, $url, $params, $publickey = null, $secretkey = null) {
