@@ -3,7 +3,7 @@
 namespace Omise;
 
 use Omise\Res\OmiseApiResource;
-use Omise\OmiseCustomer;
+use Omise\Customer;
 
 class Card extends OmiseApiResource {
   private $_customerID;
@@ -60,6 +60,6 @@ class Card extends OmiseApiResource {
    * @return string
    */
   private function getUrl($cardID = '') {
-    return OMISE_API_URL.OmiseCustomer::ENDPOINT.'/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$cardID;
+    return OMISE_API_URL.Customer::ENDPOINT.'/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$cardID;
   }
 }

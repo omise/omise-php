@@ -12,7 +12,7 @@ class Transaction extends OmiseApiResource {
    * @param string $id
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseTransaction
+   * @return Transaction
    */
   public static function retrieve($id = '', $publickey = null, $secretkey = null) {
     return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);

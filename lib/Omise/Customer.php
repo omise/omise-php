@@ -2,8 +2,8 @@
 
 namespace Omise;
 
-use Omise\OmisePHP\Res\OmiseApiResource;
-use Omise\OmisePHP\Res\Obj\OmiseCardList;
+use Omise\Res\OmiseApiResource;
+use Omise\Res\Obj\OmiseCardList;
 
 class Customer extends OmiseApiResource {
   const ENDPOINT = 'customers';
@@ -13,7 +13,7 @@ class Customer extends OmiseApiResource {
    * @param string $id
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseCustomer
+   * @return Customer
    */
   public static function retrieve($id = '', $publickey = null, $secretkey = null) {
     return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
@@ -24,7 +24,7 @@ class Customer extends OmiseApiResource {
    * @param array $params
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseCustomer
+   * @return Customer
    */
   public static function create($params, $publickey = null, $secretkey = null) {
     return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
@@ -68,7 +68,7 @@ class Customer extends OmiseApiResource {
 
   /**
    * Gets a list of all cards belongs to this customer.
-   * @return OmiseCardList
+   * @return CardList
    */
   public function getCards() {
     if($this['object'] === 'customer') {

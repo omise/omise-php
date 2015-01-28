@@ -44,7 +44,7 @@ class OmiseApiResource extends OmiseObject {
    * @param string $clazz
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+   * @return Account|Balance|Charge|Customer|Token|Transaction|Transfer
    * @throws Exception|OmiseException
    */
   protected static function retrieve($clazz, $url, $publickey = null, $secretkey = null) {
@@ -62,7 +62,7 @@ class OmiseApiResource extends OmiseObject {
    * @param array $params
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+   * @return Account|Balance|Charge|Customer|Token|Transaction|Transfer
    * @throws Exception|OmiseException
    */
   protected static function create($clazz, $url, $params, $publickey = null, $secretkey = null) {

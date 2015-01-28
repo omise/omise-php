@@ -12,7 +12,7 @@ class Charge extends OmiseApiResource {
    * @param string $id
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseCharge
+   * @return Charge
    */
   public static function retrieve($id = '', $publickey = null, $secretkey = null) {
     return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
@@ -35,7 +35,7 @@ class Charge extends OmiseApiResource {
    * @param array $params
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseCharge
+   * @return Charge
    */
   public static function create($params, $publickey = null, $secretkey = null) {
     return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
@@ -51,7 +51,7 @@ class Charge extends OmiseApiResource {
 
   /**
    * Captures a charge.
-   * @return OmiseCharges
+   * @return Charge
    */
   public function capture() {
     $result = parent::execute(self::getUrl($this['id']).'/capture', parent::REQUEST_POST, parent::getResourceKey());

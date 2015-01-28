@@ -3,7 +3,7 @@
 namespace Omise\Res\Obj;
 
 use Omise\Res\Obj\OmiseList;
-use Omise\OmiseCard;
+use Omise\Card;
 
 class OmiseCardList extends OmiseList {
   /**
@@ -16,7 +16,7 @@ class OmiseCardList extends OmiseList {
     parent::__construct($publickey, $secretkey);
     
     foreach ($customer['cards']['data'] as $row) {
-      $this->refresh(array($row['id'] => new OmiseCard($row, $customer['id'])));
+      $this->refresh(array($row['id'] => new Card($row, $customer['id'])));
     }
   }
   
