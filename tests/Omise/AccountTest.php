@@ -1,8 +1,8 @@
 <?php
 
-namespace Omise\OmisePHP\Tests;
+namespace Omise\Tests;
 
-use Omise\OmisePHP;
+require_once dirname(__FILE__).'/../../vendor/autoload.php';
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
@@ -21,7 +21,7 @@ class OmiseAccountTest extends \PHPUnit_Framework_TestCase {
    * reloadに成功し、objectの値がaccountであれば正しいとみなす
    */
   public function testReload() {
-    $account = OmisePHP\Account::retrieve();
+    $account = \Omise\Account::retrieve();
     $account->reload();
     
     $this->assertArrayHasKey('object', $account);
@@ -33,7 +33,7 @@ class OmiseAccountTest extends \PHPUnit_Framework_TestCase {
    * retrieveに成功し、objectの値がaccountであれば正しいとみなす
    */
   public function testRetrieve() {
-    $account = OmisePHP\Account::retrieve();
+    $account = \Omise\Account::retrieve();
     
     $this->assertArrayHasKey('object', $account);
     $this->assertEquals('account', $account['object']);
@@ -44,8 +44,8 @@ class OmiseAccountTest extends \PHPUnit_Framework_TestCase {
    * retrieveを2度実行した結果のインスタンスが同一であれば正しいとみなす
    */
   public function testSameInstance() {
-    $account1 = OmisePHP\Account::retrieve();
-    $account2 = OmisePHP\Account::retrieve();
+    $account1 = \Omise\Account::retrieve();
+    $account2 = \Omise\Account::retrieve();
     
     $this->assertTrue($account1 === $account2);
   }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Omise\OmisePHP;
+namespace Omise;
 
 use Omise\OmisePHP\Res\OmiseApiResource;
 use Omise\OmisePHP\Res\Obj\OmiseCardList;

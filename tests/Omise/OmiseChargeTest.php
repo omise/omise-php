@@ -1,9 +1,9 @@
 <?php
 
-namespace Omise\OmisePHP\Tests;
+namespace Omise\Tests;
 
-use Omise\OmisePHP\OmiseCharge;
-use Omise\OmisePHP\OmiseToken;
+use Omise\OmiseCharge;
+use Omise\OmiseToken;
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');

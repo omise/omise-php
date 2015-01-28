@@ -1,9 +1,9 @@
 <?php
 
-namespace Omise\OmisePHP;
+namespace Omise;
 
-use Omise\OmisePHP\Res\OmiseApiResource;
-use Omise\OmisePHP\OmiseCustomer;
+use Omise\Res\OmiseApiResource;
+use Omise\OmiseCustomer;
 
 class Card extends OmiseApiResource {
   private $_customerID;

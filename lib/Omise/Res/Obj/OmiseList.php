@@ -1,8 +1,8 @@
 <?php
 
-namespace Omise\OmisePHP\Res\Obj;
+namespace Omise\Res\Obj;
 
-use Omise\OmisePHP\Res\Obj\OmiseObject;
+use Omise\Res\Obj\OmiseObject;
 
 class OmiseList extends OmiseObject {
   /**

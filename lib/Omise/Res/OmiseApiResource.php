@@ -1,9 +1,9 @@
 <?php
 
-namespace Omise\OmisePHP\Res;
+namespace Omise\Res;
 
-use Omise\OmisePHP\Exeption\OmiseException;
-use Omise\OmisePHP\Res\Obj\OmiseObject;
+use Omise\Exeption\OmiseException;
+use Omise\Res\Obj\OmiseObject;
 use \Exception;
 
 require_once dirname(__FILE__).'/../Exception/OmiseExceptions.php';

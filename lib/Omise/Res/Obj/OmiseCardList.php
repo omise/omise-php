@@ -1,9 +1,9 @@
 <?php
 
-namespace Omise\OmisePHP\Res\Obj;
+namespace Omise\Res\Obj;
 
-use Omise\OmisePHP\Res\Obj\OmiseList;
-use Omise\OmisePHP\OmiseCard;
+use Omise\Res\Obj\OmiseList;
+use Omise\OmiseCard;
 
 class OmiseCardList extends OmiseList {
   /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace Omise\OmisePHP\Res;
+namespace Omise\Res;
 
-use Omise\OmisePHP\Res\OmiseApiResource;
+use Omise\Res\OmiseApiResource;
 
 class OmiseVaultResource extends OmiseApiResource {
   /**

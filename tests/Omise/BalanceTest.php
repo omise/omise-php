@@ -1,8 +1,8 @@
 <?php
 
-namespace Omise\OmisePHP\Tests;
+namespace Omise\Tests;
 
-use Omise\OmisePHP;
+use Omise;
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');

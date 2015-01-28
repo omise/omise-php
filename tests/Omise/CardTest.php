@@ -1,35 +1,39 @@
 <?php
 
-namespace Omise\OmisePHP\Tests;
+namespace Omise\Tests;
 
-use Omise\OmisePHP\OmiseCustomer;
-use Omise\OmisePHP\OmiseCard;
+use Omise;
+
 
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
+define('OMISE_PUBLIC_KEY', 'pkey_test_4y9cewl0s1osh44ouud');
+define('OMISE_SECRET_KEY', 'skey_test_4y9cewl0rgwji2kbbcb');
 
-class OmiseCardTest extends \PHPUnit_Framework_TestCase {
-  static $customerID = 'cust_test_4xsjvylia03ur542vn6';
-  static $cardID = 'card_test_4xsjw0t21xaxnuzi9gs';
+class CardTest extends \PHPUnit_Framework_TestCase {
+  static $customer;
   
   /**
    * テストケースに使うCustomerとCardを作成する
    */
   public static function setUpBeforeClass() {
-  	$customer = OmiseCustomer::retrieve();
-  	
-  	if(count($customer['data']) > 0) {
-  	  OmiseCardTest::$customerID = $customer['data'][0]['id'];
-  	  
-  	  $customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
-  	  $cards = $customer->getCards();
-  	  if(count($cards) > 0) {
-  	  	foreach ($cards as $key => $value) {
-  	  	  OmiseCardTest::$cardID = $value['id'];
-  	  	  break;
-  	  	}
-  	  }
-  	}
+    $token = OmisePHP\Token::create(
+        array('card' => array(
+            'name' => 'Somchai Prasert',
+            'number' => '4242424242424242',
+            'expiration_month' => 10,
+            'expiration_year' => 2018,
+            'city' => 'Bangkok',
+            'postal_code' => '10320',
+            'security_code' => 123
+        ))
+    );
+    
+    self::$customer = OmisePHP\Customer::create(array(
+        'email' => 'john.doe@example.com',
+        'description' => 'John Doe (id: 30)',
+        'card' => $token['id']
+    ));
   }
 
   public function setUp() {
@@ -53,33 +57,33 @@ class OmiseCardTest extends \PHPUnit_Framework_TestCase {
    * retrieve(customerId)に成功し、objectの値がcustomerであれば正しいとみなす
    */
   public function testRetrieve() {
-  	$customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
-  	$card = $customer->getCards()->retrieve(OmiseCardTest::$cardID);
+    $customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
+    $card = $customer->getCards()->retrieve(OmiseCardTest::$cardID);
 
-  	// objectを持っており、そのオブジェクトの実態がcardである
+    // objectを持っており、そのオブジェクトの実態がcardである
     $this->assertArrayHasKey('object', $card);
     $this->assertEquals('card', $card['object']);
   }
 
   public function testReload() {
-  	$customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
-  	$card = $customer->getCards()->retrieve(OmiseCardTest::$cardID);
-  	$card->reload();
+    $customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
+    $card = $customer->getCards()->retrieve(OmiseCardTest::$cardID);
+    $card->reload();
   
-  	// objectを持っており、そのオブジェクトの実態がcardである
-  	$this->assertArrayHasKey('object', $card);
-  	$this->assertEquals('card', $card['object']);
+    // objectを持っており、そのオブジェクトの実態がcardである
+    $this->assertArrayHasKey('object', $card);
+    $this->assertEquals('card', $card['object']);
   }
 
   public function testUpdate() {
-  	$month = 11;
-  	$year = 2017;
-  	$name = 'Somchai Praset';
-  	$postalcode = '10310';
-  	
-  	$customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
-  	$card = $customer->getCards()->retrieve(OmiseCardTest::$cardID);
-  	$card->update(array(
+    $month = 11;
+    $year = 2017;
+    $name = 'Somchai Praset';
+    $postalcode = '10310';
+    
+    $customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
+    $card = $customer->getCards()->retrieve(OmiseCardTest::$cardID);
+    $card->update(array(
       'expiration_month' => $month,
       'expiration_year' => $year,
       'name' => $name,

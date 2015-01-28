@@ -1,8 +1,8 @@
 <?php
 
-namespace Omise\OmisePHP;
+namespace Omise;
 
-use Omise\OmisePHP\Res\OmiseApiResource;
+use Omise\Res\OmiseApiResource;
 
 class Transfer extends OmiseApiResource {
   const ENDPOINT = 'transfers';
