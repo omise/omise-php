@@ -12,6 +12,9 @@ class OmiseCardTest extends \PHPUnit_Framework_TestCase {
   static $customerID = 'cust_test_4xsjvylia03ur542vn6';
   static $cardID = 'card_test_4xsjw0t21xaxnuzi9gs';
   
+  /**
+   * テストケースに使うCustomerとCardを作成する
+   */
   public static function setUpBeforeClass() {
   	$customer = OmiseCustomer::retrieve();
   	
@@ -32,24 +35,23 @@ class OmiseCardTest extends \PHPUnit_Framework_TestCase {
   public function setUp() {
     /** Do Nothing **/
   }
-  
+
+  /**
+   * ----- list allのテスト -----
+   * retrieve(customerId)に成功し、objectの値がcustomerであれば正しいとみなす
+   */
   public function testListAll() {
     $customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
     
     // objectを持っており、そのオブジェクトの実態がlistである
     $this->assertArrayHasKey('object', $customer);
     $this->assertEquals('customer', $customer['object']);
-
-    $cards = $customer->getCards();
-    // $cardsが全てCardオブジェクトである
-    if(count($cards) > 0) {
-      foreach ($cards as $key => $value) {
-        $this->assertArrayHasKey('object', $value);
-        $this->assertEquals('card', $value['object']);
-      }
-    }
   }
-  
+
+  /**
+   * ----- ritrieveのテスト -----
+   * retrieve(customerId)に成功し、objectの値がcustomerであれば正しいとみなす
+   */
   public function testRetrieve() {
   	$customer = OmiseCustomer::retrieve(OmiseCardTest::$customerID);
   	$card = $customer->getCards()->retrieve(OmiseCardTest::$cardID);

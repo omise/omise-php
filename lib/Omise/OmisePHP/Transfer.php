@@ -3,28 +3,27 @@
 namespace Omise\OmisePHP;
 
 use Omise\OmisePHP\Res\OmiseApiResource;
-use Omise\OmisePHP\Res\Obj\OmiseCardList;
 
-class OmiseCustomer extends OmiseApiResource {
-  const ENDPOINT = 'customers';
+class Transfer extends OmiseApiResource {
+  const ENDPOINT = 'transfers';
 
   /**
-   * Retrieves a customer.
+   * Retrieves a transfer.
    * @param string $id
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseCustomer
+   * @return OmiseTransfer
    */
   public static function retrieve($id = '', $publickey = null, $secretkey = null) {
     return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
   }
 
   /**
-   * Creates a new customer.
-   * @param array $params
+   * Creates a transfer.
+   * @param unknown $params
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseCustomer
+   * @return OmiseTransfer
    */
   public static function create($params, $publickey = null, $secretkey = null) {
     return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
@@ -35,7 +34,7 @@ class OmiseCustomer extends OmiseApiResource {
    * @see OmiseApiResource::reload()
    */
   public function reload() {
-    if($this['object'] === 'customer') {
+    if($this['object'] === 'transfers') {
       parent::reload(self::getUrl($this['id']));
     } else {
       parent::reload(self::getUrl());
@@ -43,10 +42,17 @@ class OmiseCustomer extends OmiseApiResource {
   }
 
   /**
+   * Updates the transfer amount.
+   */
+  public function save() {
+    $this->update(array('amount' => $this['amount']));
+  }
+
+  /**
    * (non-PHPdoc)
    * @see OmiseApiResource::update()
    */
-  public function update($params) {
+  protected function update($params) {
     parent::update(self::getUrl($this['id']), $params);
   }
 
@@ -64,16 +70,6 @@ class OmiseCustomer extends OmiseApiResource {
    */
   public function isDestroyed() {
     return parent::isDestroyed();
-  }
-
-  /**
-   * Gets a list of all cards belongs to this customer.
-   * @return OmiseCardList
-   */
-  public function getCards() {
-    if($this['object'] === 'customer') {
-      return new OmiseCardList($this, $this->_publickey, $this->_secretkey);
-    }
   }
 
   /**

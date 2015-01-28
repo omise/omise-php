@@ -4,7 +4,7 @@ namespace Omise\OmisePHP;
 
 use Omise\OmisePHP\Res\OmiseApiResource;
 
-class OmiseCharge extends OmiseApiResource {
+class Charge extends OmiseApiResource {
   const ENDPOINT = 'charges';
 
   /**

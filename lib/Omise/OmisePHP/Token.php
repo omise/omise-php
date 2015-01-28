@@ -4,7 +4,7 @@ namespace Omise\OmisePHP;
 
 use Omise\OmisePHP\Res\OmiseVaultResource;
 
-class OmiseToken extends OmiseVaultResource {
+class Token extends OmiseVaultResource {
   const ENDPOINT = 'tokens';
 
   /**

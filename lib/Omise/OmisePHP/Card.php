@@ -5,7 +5,7 @@ namespace Omise\OmisePHP;
 use Omise\OmisePHP\Res\OmiseApiResource;
 use Omise\OmisePHP\OmiseCustomer;
 
-class OmiseCard extends OmiseApiResource {
+class Card extends OmiseApiResource {
   private $_customerID;
   const ENDPOINT = 'cards';
 
