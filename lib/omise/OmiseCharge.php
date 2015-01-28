@@ -1,10 +1,9 @@
 <?php
 
-namespace Omise;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/res/obj/OmiseRefundList.php';
 
-use Omise\Res\OmiseApiResource;
-
-class Charge extends OmiseApiResource {
+class OmiseCharge extends OmiseApiResource {
   const ENDPOINT = 'charges';
 
   /**
@@ -58,6 +57,15 @@ class Charge extends OmiseApiResource {
     $this->refresh($result);
 
     return $this;
+  }
+  
+  /**
+   * refund
+   * @return Refund
+   */
+  public function refunds() {
+    return new OmiseRefundList(parent::execute(self::getUrl($this['id']).'/refunds', parent::REQUEST_GET, parent::getResourceKey()), 
+    		$this->_publickey, $this->_secretkey);
   }
 
   /**

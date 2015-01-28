@@ -1,11 +1,9 @@
 <?php
 
-namespace Omise;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/OmiseCustomer.php';
 
-use Omise\Res\OmiseApiResource;
-use Omise\Customer;
-
-class Card extends OmiseApiResource {
+class OmiseCard extends OmiseApiResource {
   private $_customerID;
   const ENDPOINT = 'cards';
 

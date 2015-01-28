@@ -39,11 +39,11 @@ class CardTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * ----- list allのテスト -----
-   * Customer::retrieve(customerID)に成功し、objectの値がcustomerであれり、getCardsが実行されれば正しいとみなす
+   * Customer::retrieve(customerID)に成功し、objectの値がcustomerであれり、cardsが実行されれば正しいとみなす
    */
   public function testListAll() {
     $customer = \Omise\Customer::retrieve($this->_customer['id']);
-    $cards = $customer->getCards();
+    $cards = $customer->cards();
     
     $this->assertArrayHasKey('object', $customer);
     $this->assertEquals('customer', $customer['object']);
@@ -55,7 +55,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
    */
   public function testRetrieve() {
     $customer = \Omise\Customer::retrieve($this->_customer['id']);
-    $card = $customer->getCards()->retrieve($this->_customer['cards']['data'][0]['id']);
+    $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
 
     $this->assertArrayHasKey('object', $card);
     $this->assertEquals('card', $card['object']);
@@ -67,7 +67,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
    */
   public function testReload() {
     $customer = \Omise\Customer::retrieve($this->_customer['id']);
-    $card = $customer->getCards()->retrieve($this->_customer['cards']['data'][0]['id']);
+    $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
     $card->reload();
 
     $this->assertArrayHasKey('object', $card);
@@ -85,7 +85,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
     $postalcode = '10310';
 
     $customer = \Omise\Customer::retrieve($this->_customer['id']);
-    $card = $customer->getCards()->retrieve($this->_customer['cards']['data'][0]['id']);
+    $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
     $card->update(array(
       'expiration_month' => $month,
       'expiration_year' => $year,
@@ -105,7 +105,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
    */
   public function testDestroy() {
     $customer = \Omise\Customer::retrieve($this->_customer['id']);
-    $card = $customer->getCards()->retrieve($this->_customer['cards']['data'][0]['id']);
+    $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
     $this->_customer = null;
     $card->destroy();
 
@@ -118,7 +118,7 @@ class CardTest extends \PHPUnit_Framework_TestCase {
   public function tearDown() {
   	if($this->_customer != null) {
       $customer = \Omise\Customer::retrieve($this->_customer['id']);
-      $card = $customer->getCards()->retrieve($this->_customer['cards']['data'][0]['id']);
+      $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
       $card->destroy();
     }
   }

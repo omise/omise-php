@@ -1,10 +1,8 @@
 <?php
 
-namespace Omise;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
-use Omise\Res\OmiseApiResource;
-
-class Transaction extends OmiseApiResource {
+class OmiseTransaction extends OmiseApiResource {
   const ENDPOINT = 'transactions';
 
   /**

@@ -23,7 +23,7 @@ class OmiseCardList extends OmiseList {
   /**
    * retrieveする。が、生成済みのインスタンスを返すだけ
    * @param stroing $id
-   * @return OmiseCard
+   * @return Card
    */
   public function retrieve($id) {
     if(isset($this[$id])) return $this[$id];

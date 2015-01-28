@@ -19,8 +19,6 @@
     "phpunit/phpunit": "4.4.*"
   },
   "autoload": {
-    "psr-0": {
-      "Omise": "lib/"
-    }
+  	  "classmap": ["lib/omise/"]
   }
 }

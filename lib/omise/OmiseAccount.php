@@ -1,17 +1,15 @@
 <?php
 
-namespace Omise;
+require_once dirname(__FILE__).'/res/OmiseApiResourceSingleton.php';
 
-use Omise\Res\OmiseApiResourceSingleton;
-
-class Balance extends OmiseApiResourceSingleton {
-  const ENDPOINT = 'balance';
+class OmiseAccount extends OmiseApiResourceSingleton {
+  const ENDPOINT = 'account';
 
   /**
-   * Retrieves a current balance in the account.
+   * Retrieves an account.
    * @param string $publickey
    * @param string $secretkey
-   * @return Balance
+   * @return Account
    */
   public static function retrieve($publickey = null, $secretkey = null) {
     return parent::retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
@@ -26,6 +24,7 @@ class Balance extends OmiseApiResourceSingleton {
   }
 
   /**
+   *
    * @param string $cardID
    * @return string
    */
