@@ -15,29 +15,38 @@ class OmiseBalanceTest extends \PHPUnit_Framework_TestCase {
   public function setUp() {
     /** Do Nothing **/
   }
-  
+
+  /**
+   * ----- reloadのテスト -----
+   * reloadに成功し、objectの値がbalanceであれば正しいとみなす
+   */
   public function testReload() {
     $balance = OmiseBalance::retrieve();
     $balance->reload();
 
-    // objectを持っており、そのオブジェクトの実態がbalanceである
     $this->assertArrayHasKey('object', $balance);
     $this->assertEquals('balance', $balance['object']);
   }
-  
+
+  /**
+   * ----- retrieveのテスト -----
+   * retrieveに成功し、objectの値がbalanceであれば正しいとみなす
+   */
   public function testRetrieve() {
     $balance = OmiseBalance::retrieve();
     
-    // objectを持っており、そのオブジェクトの実態がbalanceである
     $this->assertArrayHasKey('object', $balance);
     $this->assertEquals('balance', $balance['object']);
   }
-  
+
+  /**
+   * ----- シングルトンになっているかのテスト -----
+   * retrieveを2度実行した結果のインスタンスが同一であれば正しいとみなす
+   */
   public function testSameInstance() {
     $balance1 = OmiseBalance::retrieve();
     $balance2 = OmiseBalance::retrieve();
     
-    // シングルトンになっている
     $this->assertTrue($balance1 === $balance2);
   }
   
