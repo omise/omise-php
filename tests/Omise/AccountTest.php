@@ -4,8 +4,9 @@ namespace Omise\Tests;
 
 require_once dirname(__FILE__).'/../../vendor/autoload.php';
 
-define('OMISE_PUBLIC_KEY', 'pkey_test_4y9cewl0s1osh44ouud');
-define('OMISE_SECRET_KEY', 'skey_test_4y9cewl0rgwji2kbbcb');
+define('OMISE_PUBLIC_KEY', 'pkey');
+define('OMISE_SECRET_KEY', 'skey');
+
 class OmiseAccountTest extends \PHPUnit_Framework_TestCase {
   public static function setUpBeforeClass() {
     /** Do Nothing **/
