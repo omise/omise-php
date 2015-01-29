@@ -13,14 +13,14 @@ class TokenTest extends PHPUnit_Framework_TestCase {
   public static function setUpBeforeClass() {
     /** Do Nothing **/
   }
-  
+
   public function setUp() {
     /** Do Nothing **/
   }
 
   /**
-   * ----- createのテスト -----
-   * createに成功し、createで渡したパラメータの値になっていれば正しいとみなす
+   * ----- Test create -----
+   * Assert that a token is successfully created with the given parameters set.
    */
   public function testCreate() {
     $name = 'Somchai Prasert';
@@ -28,7 +28,7 @@ class TokenTest extends PHPUnit_Framework_TestCase {
     $expiration_year = 2018;
     $city = 'Bangkok';
     $postal_code = '10320';
-    
+
     $token = OmiseToken::create(
       array('card' => array(
         'name' => $name,
@@ -47,10 +47,10 @@ class TokenTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals($city, $token['card']['city']);
     $this->assertEquals($postal_code, $token['card']['postal_code']);
   }
-  
+
   /**
-   * ----- ritrieveのテスト -----
-   * ritrieveに成功し、objectの値がtokenであれば正しいとみなす
+   * ----- Test retrieve -----
+   * Assert that a customer object is returned after a successful retrieve.
    */
   public function testRetrieve() {
     $token1 = OmiseToken::create(
@@ -64,17 +64,17 @@ class TokenTest extends PHPUnit_Framework_TestCase {
         'security_code' => 123
      ))
     );
-    
+
     $token2 = OmiseToken::retrieve($token1['id']);
 
   	$this->assertArrayHasKey('object', $token2);
   	$this->assertEquals('token', $token2['object']);
   }
-  
+
   public function tearDown() {
     /** Do Nothing **/
   }
-  
+
   public static function tearDownAfterClass() {
     /** Do Nothing **/
   }

@@ -11,10 +11,9 @@ define('OMISE_SECRET_KEY', 'skey');
 
 class ChargeTest extends PHPUnit_Framework_TestCase {
   static $_charge;
-  
+
   /**
-   * テストケースに使うchargeを生成する。
-   * ただし、createのテストは別途行う
+   * Setup the charge to be used in test cases (except in create).
    */
   public static function setUpBeforeClass() {
     $returnUrl = 'https://example.co.th/orders/384/complete';
@@ -33,7 +32,7 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
         'security_code' => 123
       ))
     );
-    
+
     self::$_charge = OmiseCharge::create(array(
       'return_uri' => $returnUrl,
       'amount' => $amount,
@@ -49,8 +48,8 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- list allのテスト -----
-   * retrieve()に成功し、objectの値がlistであれば正しいとみなす
+   * ----- Test list all -----
+   * Assert that a list of charge object could be successfully retrieved.
    */
   public function testListAll() {
     $charge = OmiseCharge::retrieve();
@@ -60,8 +59,8 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- createのテスト -----
-   * createに成功し、createで渡したパラメータの値になっていれば正しいとみなす
+   * ----- Test create -----
+   * Assert that a charge is successfully created with the given parameters set.
    */
   public function testCreate() {
     $returnUrl = 'https://example.co.th/orders/384/complete';
@@ -98,8 +97,8 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- ritrieveのテスト -----
-   * ritrieve(chargeID)に成功し、objectの値がchargeであれば正しいとみなす
+   * ----- Test retrieve -----
+   * Assert that a charge object is returned after a successful retrieve.
    */
   public function testRetrieve() {
     $charge = OmiseCharge::retrieve(self::$_charge['id']);
@@ -109,8 +108,8 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- updateのテスト -----
-   * updateに成功し、update後の値が反映されていれば正しいとみなす
+   * ----- Test update -----
+   * Assert that a charge is successfully updated with the given parameters set.
    */
   public function testUpdate() {
     $description = 'Another description';
@@ -124,9 +123,11 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- captureのテスト -----
-   * captureに成功し、update後の値が反映されていれば正しいとみなす
-   * ただし、テスト環境ではcreate直後にcaptureされているため、OmiseFailedCaptureExceptionが発生する
+   * ----- Test capture -----
+   * Assert that a captured flag is set after charge is successfully captured.
+   *
+   * In our test environment, the charge will be auto-captured after create
+   * and this test will raise OmiseFailedCaptureException.
    */
   public function testCapture() {
     $charge = OmiseCharge::retrieve(self::$_charge['id']);

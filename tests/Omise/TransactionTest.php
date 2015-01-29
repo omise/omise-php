@@ -19,8 +19,8 @@ class TransactionTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- ritrieveのテスト -----
-   * ritrieve()に成功し、objectの値がlistであれば正しいとみなす
+   * ----- Test list all -----
+   * Assert that a list of transactions object could be successfully retrieved.
    */
   public function testListAll() {
     $transactions = OmiseTransaction::retrieve();
@@ -30,9 +30,9 @@ class TransactionTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- ritrieveのテスト -----
-   * ritrieve(transactionID)に成功し、objectの値がtransactionであれば正しいとみなす。
-   * 有効なtransactionが存在しなく、テストが行えなかった場合標準出力でメッセージを出力する。
+   * ----- Test retrieve -----
+   * Assert that a transaction object is returned after a successful retrieve.
+   * This test will echo to STDOUT if there is no transaction available for testing.
    */
   public function testRetrieve() {
   	$transactions = OmiseTransaction::retrieve();

@@ -11,13 +11,13 @@ define('OMISE_SECRET_KEY', 'skey');
 
 class CardTest extends PHPUnit_Framework_TestCase {
   private $_customer;
-  
+
   public static function setUpBeforeClass() {
   	/** Do Nothing **/
   }
 
   /**
-   * テストケースに使うCustomerを作成する
+   * Setup the customer to be used in test cases.
    */
   public function setUp() {
    $token = OmiseToken::create(
@@ -31,7 +31,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
         'security_code' => 123
       ))
     );
-   
+
     $this->_customer = OmiseCustomer::create(array(
       'email' => 'john.doe@example.com',
       'description' => 'John Doe (id: 30)',
@@ -40,20 +40,20 @@ class CardTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- list allのテスト -----
-   * Customer::retrieve(customerID)に成功し、objectの値がcustomerであれり、cardsが実行されれば正しいとみなす
+   * ----- Test list all -----
+   * Assert that a list of card object could be successfully retrieved from customer.
    */
   public function testListAll() {
     $customer = OmiseCustomer::retrieve($this->_customer['id']);
     $cards = $customer->cards();
-    
+
     $this->assertArrayHasKey('object', $customer);
     $this->assertEquals('customer', $customer['object']);
   }
 
   /**
-   * ----- ritrieveのテスト -----
-   * Card::retrieve(cardID)に成功し、objectの値がcardであれば正しいとみなす
+   * ----- Test retrieve -----
+   * Assert that a card is could be successfully retrieved from customer.
    */
   public function testRetrieve() {
     $customer = OmiseCustomer::retrieve($this->_customer['id']);
@@ -64,8 +64,8 @@ class CardTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- reloadのテスト -----
-   * Card::reload(cardID)に成功し、objectの値がcardであれば正しいとみなす
+   * ----- Test reload -----
+   * Assert that a card object is returned after a successful reload.
    */
   public function testReload() {
     $customer = OmiseCustomer::retrieve($this->_customer['id']);
@@ -77,8 +77,8 @@ class CardTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- updateのテスト -----
-   * Card::updateに成功し、update後の値が反映されていれば正しいとみなす
+   * ----- Test update -----
+   * Assert that a card is successfully updated with the given parameters set.
    */
   public function testUpdate() {
     $month = 11;
@@ -102,8 +102,8 @@ class CardTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- destroyのテスト -----
-   * Card::destroyに成功し、destroyedのフラグが立っていれば正しいとみなす
+   * ----- Test destroy -----
+   * Assert that a destroyed flag is set after a card is successfully destroyed.
    */
   public function testDestroy() {
     $customer = OmiseCustomer::retrieve($this->_customer['id']);
@@ -115,7 +115,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * テストケースに使ったCustomerを削除する
+   * Remove the customer used in test cases.
    */
   public function tearDown() {
   	if($this->_customer != null) {

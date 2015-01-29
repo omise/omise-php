@@ -11,10 +11,9 @@ define('OMISE_SECRET_KEY', 'skey');
 
 class CustomerTest extends PHPUnit_Framework_TestCase {
   static $_customer;
-  
+
   /**
-   * テストケースに使うCustomerを生成
-   * ただし、createのテストは別途行う
+   * Setup the customer to be used in test cases (except in create).
    */
   public static function setUpBeforeClass() {
    $token = OmiseToken::create(
@@ -28,7 +27,7 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
         'security_code' => 123
       ))
     );
-   
+
     self::$_customer = OmiseCustomer::create(array(
       'email' => 'john.doe@example.com',
       'description' => 'John Doe (id: 30)',
@@ -41,8 +40,8 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- list allのテスト -----
-   * retrieve()に成功し、objectの値がlistであれば正しいとみなす
+   * ----- Test list all -----
+   * Assert that a list of customer object could be successfully retrieved.
    */
   public function testListAll() {
     $customer = OmiseCustomer::retrieve();
@@ -52,8 +51,8 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- createのテスト -----
-   * createに成功し、createで渡したパラメータの値になっていれば正しいとみなす
+   * ----- Test create -----
+   * Assert that a customer is successfully created with the given parameters set.
    */
   public function testCreate() {
     $email = 'john.doe@example.com';
@@ -78,13 +77,13 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
 
     $this->assertEquals($email, $customer['email']);
     $this->assertEquals($description, $customer['description']);
-    
+
     $customer->destroy();
   }
 
   /**
-   * ----- ritrieveのテスト -----
-   * ritrieve(customerID)に成功し、objectの値がcustomerであれば正しいとみなす
+   * ----- Test retrieve -----
+   * Assert that a customer object is returned after a successful retrieve.
    */
   public function testRetrieve() {
   	$customer = OmiseCustomer::retrieve(self::$_customer['id']);
@@ -94,26 +93,26 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- updateのテスト -----
-   * updateに成功し、update後の値が反映されていれば正しいとみなす
+   * ----- Test update -----
+   * Assert that a customer is successfully updated with the given parameters set.
    */
   public function testUpdate() {
     $email = 'john.smith@example.com';
     $description = 'Another description';
-    
+
     $customer = OmiseCustomer::retrieve(self::$_customer['id']);
     $customer->update(array(
       'email' => 'john.smith@example.com',
       'description' => 'Another description'
     ));
-    
+
     $this->assertEquals($email, $customer['email']);
     $this->assertEquals($description, $customer['description']);
   }
 
   /**
-   * ----- destroyのテスト -----
-   * destroyに成功し、destroyedのフラグが立っていれば正しいとみなす
+   * ----- Test destroy -----
+   * Assert that a destroyed flag is set after a customer is successfully destroyed.
    */
   public function testDestroy() {
   	self::$_customer->destroy();

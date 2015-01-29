@@ -11,9 +11,9 @@ define('OMISE_SECRET_KEY', 'skey_test_4y9cewl0rgwji2kbbcb');
 
 class TransferTest extends PHPUnit_Framework_TestCase {
   static $_transter;
-  
+
   /**
-   * テストケースに使うTransferを作っておく
+   * Setup the transfer to be used in test cases (except in create).
    */
   public static function setUpBeforeClass() {
   	/** Do Nothing **/
@@ -24,8 +24,8 @@ class TransferTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- list allのテスト -----
-   * retrieve()に成功し、objectの値がlistであれば正しいとみなす
+   * ----- Test list all -----
+   * Assert that a list of transfer object could be successfully retrieved.
    */
   public function testListAll() {
     $transfers = OmiseTransfer::retrieve();
@@ -35,12 +35,12 @@ class TransferTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- createのテスト -----
-   * createに成功し、createで渡したパラメータの値になっていれば正しいとみなす
+   * ----- Test create -----
+   * Assert that a transfer is successfully created with the given parameters set.
    */
   public function testCreate() {
   	$amount = 100000;
-  	
+
     self::$_transter = OmiseTransfer::create(array(
       'amount' => $amount
     ));
@@ -49,8 +49,8 @@ class TransferTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- ritrieveのテスト -----
-   * ritrieveに成功し、objectの値がtransferであれば正しいとみなす
+   * ----- Test retrieve -----
+   * Assert that a transfer object is returned after a successful retrieve.
    */
   public function testRetrieve() {
   	$transfer = OmiseTransfer::retrieve(self::$_transter['id']);
@@ -60,21 +60,21 @@ class TransferTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- updateのテスト -----
-   * updateに成功し、update後の値が反映されていれば正しいとみなす
+   * ----- Test update -----
+   * Assert that a transfer is successfully updated with the given parameters set.
    */
   public function testUpdate() {
     $amount = 5000;
-    
+
   	self::$_transter['amount'] = $amount;
   	self::$_transter->save();
-    
+
     $this->assertEquals($amount, self::$_transter['amount']);
   }
 
   /**
-   * ----- destroyのテスト -----
-   * destroyに成功し、destroyedのフラグが立っていれば正しいとみなす
+   * ----- Test destroy -----
+   * Assert that a destroyed flag is set after a transfer is successfully destroyed.
    */
   public function testDestroy() {
   	self::$_transter->destroy();
