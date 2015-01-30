@@ -10,21 +10,21 @@ class OmiseTransaction extends OmiseApiResource {
    * @param string $id
    * @param string $publickey
    * @param string $secretkey
-   * @return Transaction
+   * @return OmiseTransaction
    */
   public static function retrieve($id = '', $publickey = null, $secretkey = null) {
-    return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+    return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::reload()
+   * @see OmiseApiResource::g_reload()
    */
   public function reload() {
     if($this['object'] === 'transaction') {
       parent::reload(self::getUrl($this['id']));
     } else {
-      parent::reload(self::getUrl());
+      parent::g_reload(self::getUrl());
     }
   }
 

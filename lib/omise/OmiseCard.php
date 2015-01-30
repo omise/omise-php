@@ -22,26 +22,26 @@ class OmiseCard extends OmiseApiResource {
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::reload()
+   * @see OmiseApiResource::g_reload()
    */
   public function reload() {
-    parent::reload($this->getUrl($this['id']));
+    parent::g_reload($this->getUrl($this['id']));
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::update()
+   * @see OmiseApiResource::g_update()
    */
   public function update($params) {
-    parent::update($this->getUrl($this['id']), $params);
+    parent::g_update($this->getUrl($this['id']), $params);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::destroy()
+   * @see OmiseApiResource::g_destroy()
    */
   public function destroy() {
-    parent::destroy($this->getUrl($this['id']));
+    parent::g_destroy($this->getUrl($this['id']));
   }
 
   /**

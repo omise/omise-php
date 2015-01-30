@@ -9,18 +9,18 @@ class OmiseBalance extends OmiseApiResourceSingleton {
    * Retrieves a current balance in the account.
    * @param string $publickey
    * @param string $secretkey
-   * @return Balance
+   * @return OmiseBalance
    */
   public static function retrieve($publickey = null, $secretkey = null) {
-    return parent::retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
+    return parent::g_retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::reload()
+   * @see OmiseApiResource::g_reload()
    */
   public function reload() {
-    parent::reload(self::getUrl());
+    parent::g_reload(self::getUrl());
   }
 
   /**

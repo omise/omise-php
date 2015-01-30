@@ -11,21 +11,21 @@ class OmiseCharge extends OmiseApiResource {
    * @param string $id
    * @param string $publickey
    * @param string $secretkey
-   * @return Charge
+   * @return OmiseCharge
    */
   public static function retrieve($id = '', $publickey = null, $secretkey = null) {
-    return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+    return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::reload()
+   * @see OmiseApiResource::g_reload()
    */
   public function reload() {
     if($this['object'] === 'charge') {
-      parent::reload(self::getUrl($this['id']));
+      parent::g_reload(self::getUrl($this['id']));
     } else {
-      parent::reload(self::getUrl());
+      parent::g_reload(self::getUrl());
     }
   }
 
@@ -34,23 +34,23 @@ class OmiseCharge extends OmiseApiResource {
    * @param array $params
    * @param string $publickey
    * @param string $secretkey
-   * @return Charge
+   * @return OmiseCharge
    */
   public static function create($params, $publickey = null, $secretkey = null) {
-    return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+    return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::update()
+   * @see OmiseApiResource::g_update()
    */
   public function update($params) {
-    parent::update(self::getUrl($this['id']), $params);
+    parent::g_update(self::getUrl($this['id']), $params);
   }
 
   /**
    * Captures a charge.
-   * @return Charge
+   * @return OmiseCharge
    */
   public function capture() {
     $result = parent::execute(self::getUrl($this['id']).'/capture', parent::REQUEST_POST, parent::getResourceKey());
@@ -61,7 +61,7 @@ class OmiseCharge extends OmiseApiResource {
   
   /**
    * refund
-   * @return Refund
+   * @return OmiseRefund
    */
   public function refunds() {
     return new OmiseRefundList(parent::execute(self::getUrl($this['id']).'/refunds', parent::REQUEST_GET, parent::getResourceKey()), 

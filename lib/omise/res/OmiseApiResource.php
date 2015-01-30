@@ -43,7 +43,7 @@ class OmiseApiResource extends OmiseObject {
    * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
    * @throws Exception|OmiseException
    */
-  protected static function retrieve($clazz, $url, $publickey = null, $secretkey = null) {
+  protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null) {
     $resource = $clazz::getInstance($clazz, $publickey, $secretkey);
     $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
     $resource->refresh($result);
@@ -61,7 +61,7 @@ class OmiseApiResource extends OmiseObject {
    * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
    * @throws Exception|OmiseException
    */
-  protected static function create($clazz, $url, $params, $publickey = null, $secretkey = null) {
+  protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null) {
     $resource = $clazz::getInstance($clazz, $publickey, $secretkey);
     $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
     $resource->refresh($result);
@@ -75,7 +75,7 @@ class OmiseApiResource extends OmiseObject {
    * @param array $params
    * @throws Exception|OmiseException
    */
-  protected function update($url, $params) {
+  protected function g_update($url, $params) {
     $result = $this->execute($url, self::REQUEST_PATCH, $this->getResourceKey(), $params);
     $this->refresh($result);
   }
@@ -86,7 +86,7 @@ class OmiseApiResource extends OmiseObject {
    * @return OmiseApiResource
    * @throws Exception|OmiseException
    */
-  protected function destroy($url) {
+  protected function g_destroy($url) {
     $result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
     $this->refresh($result, true);
   }
@@ -96,7 +96,7 @@ class OmiseApiResource extends OmiseObject {
    * @param string $url
    * @throws Exception|OmiseException
    */
-  protected function reload($url) {
+  protected function g_reload($url) {
     $result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
     $this->refresh($result);
   }
