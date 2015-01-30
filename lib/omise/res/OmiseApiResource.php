@@ -44,7 +44,7 @@ class OmiseApiResource extends OmiseObject {
    * @throws Exception|OmiseException
    */
   protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null) {
-    $resource = $clazz::getInstance($clazz, $publickey, $secretkey);
+  	$resource = call_user_func(array($clazz,'getInstance'),$clazz, $publickey, $secretkey);
     $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
     $resource->refresh($result);
 
@@ -62,7 +62,7 @@ class OmiseApiResource extends OmiseObject {
    * @throws Exception|OmiseException
    */
   protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null) {
-    $resource = $clazz::getInstance($clazz, $publickey, $secretkey);
+  	$resource = call_user_func(array($clazz,'getInstance'),$clazz, $publickey, $secretkey);
     $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
     $resource->refresh($result);
 
