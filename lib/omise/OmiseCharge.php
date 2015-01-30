@@ -1,7 +1,6 @@
 <?php
 
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/res/obj/OmiseRefundList.php';
 
 class OmiseCharge extends OmiseApiResource {
   const ENDPOINT = 'charges';
@@ -57,15 +56,6 @@ class OmiseCharge extends OmiseApiResource {
     $this->refresh($result);
 
     return $this;
-  }
-  
-  /**
-   * refund
-   * @return OmiseRefund
-   */
-  public function refunds() {
-    return new OmiseRefundList(parent::execute(self::getUrl($this['id']).'/refunds', parent::REQUEST_GET, parent::getResourceKey()), 
-    		$this->_publickey, $this->_secretkey);
   }
 
   /**
