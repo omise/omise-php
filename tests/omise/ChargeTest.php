@@ -6,8 +6,8 @@ if(version_compare(phpversion(), '5.3.2') >= 0) {
   require_once dirname(__FILE__).'/../../lib/Omise.php';
 }
 
-define('OMISE_PUBLIC_KEY', 'pkey');
-define('OMISE_SECRET_KEY', 'skey');
+define('OMISE_PUBLIC_KEY', 'pkey_test_4y9cewl0s1osh44ouud');
+define('OMISE_SECRET_KEY', 'skey_test_4y9cewl0rgwji2kbbcb');
 
 class ChargeTest extends PHPUnit_Framework_TestCase {
   static $_charge;
@@ -76,7 +76,8 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
         'expiration_year' => 2018,
         'city' => 'Bangkok',
         'postal_code' => '10320',
-        'security_code' => 123
+        'security_code' => 123,
+      	'capture' => false
       ))
     );
 
