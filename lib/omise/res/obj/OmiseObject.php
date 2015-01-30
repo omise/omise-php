@@ -8,7 +8,7 @@ class OmiseObject implements \ArrayAccess, \Iterator, \Countable {
   protected $_secretkey, $_publickey;
 
   /**
-   * Setup an omise object. If no secret and public are passed the one defined
+   * Setup the Omise object. If no secret and public are passed the one defined
    * in config.php will be used.
    * @param string $publickey
    * @param string $secretkey
