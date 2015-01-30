@@ -6,8 +6,8 @@ if(version_compare(phpversion(), '5.3.2') >= 0) {
   require_once dirname(__FILE__).'/../../lib/Omise.php';
 }
 
-define('OMISE_PUBLIC_KEY', 'pkey_test_4y9cewl0s1osh44ouud');
-define('OMISE_SECRET_KEY', 'skey_test_4y9cewl0rgwji2kbbcb');
+define('OMISE_PUBLIC_KEY', 'pkey');
+define('OMISE_SECRET_KEY', 'skey');
 
 class ChargeTest extends PHPUnit_Framework_TestCase {
   static $_charge;
@@ -39,6 +39,7 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
       'currency' => $currency,
       'description' => $description,
       'ip' => $ip,
+      'capture' => false,
       'card' => $token['id']
     ));
   }
@@ -76,8 +77,7 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
         'expiration_year' => 2018,
         'city' => 'Bangkok',
         'postal_code' => '10320',
-        'security_code' => 123,
-      	'capture' => false
+        'security_code' => 123
       ))
     );
 
@@ -136,7 +136,7 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
 
     $this->assertArrayHasKey('object', $charge);
     $this->assertEquals('charge', $charge['object']);
-    $this->assertTrue($charge['capture']);
+    $this->assertTrue($charge['captured']);
   }
 
   public function tearDown() {
