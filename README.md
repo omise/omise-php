@@ -84,15 +84,17 @@ $customer->isDestroyed();  // => true
 
 For full usage, please refer to [API documentation](https://docs.omise.co/). You may also refer to example in the `tests/Omise` directory.
 
-### Test
+## Testing
 
-最初にtests/omise/TestConfig.phpに鍵を設定します。
+To run an automated test suite, first replace your keys in `tests/omise/TestConfig.php`:
+
 ```php
 define('OMISE_PUBLIC_KEY', 'pkey_XXXXXXXXXXXXXXXXX');
 define('OMISE_SECRET_KEY', 'skey_XXXXXXXXXXXXXXXXX');
 ```
 
-その後、phpUnitを実行します
+Then run the PHPUnit:
+
 ```
 phpunit omise-php/tests/omise/AccountTest
 ```

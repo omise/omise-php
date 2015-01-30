@@ -9,7 +9,7 @@ if(version_compare(phpversion(), '5.3.2') >= 0 && file_exists(dirname(__FILE__).
 
 class RefundTest extends PHPUnit_Framework_TestCase {
   static $_charge;
-  
+
   public static function setUpBeforeClass() {
   	$returnUrl = 'https://example.co.th/orders/384/complete';
     $amount = 100000;
@@ -44,7 +44,7 @@ class RefundTest extends PHPUnit_Framework_TestCase {
 
   /**
    * ----- Test list all -----
-   * Assert that a list of omiserefundlist object could be successfully retrieved.
+   * Assert that a list of refunds object could be successfully retrieved.
    */
   public function testListAll() {
     $charge = OmiseCharge::retrieve(self::$_charge['id']);
@@ -61,10 +61,10 @@ class RefundTest extends PHPUnit_Framework_TestCase {
   public function testCreate() {
     $charge = OmiseCharge::retrieve(self::$_charge['id']);
     $refunds = $charge->refunds();
-    
+
   	$amount = 10000;
   	$refund = $refunds->create(array('amount' => $amount));
-  
+
   	$this->assertEquals($amount, $refund['amount']);
   }
 
@@ -74,13 +74,13 @@ class RefundTest extends PHPUnit_Framework_TestCase {
   public function testRetrieve() {
     $charge = OmiseCharge::retrieve(self::$_charge['id']);
     $refunds = $charge->refunds();
-    
+
   	$refund = $refunds->retrieve($refunds->create(array('amount' => 10000))['id']);
-  
+
   	$this->assertArrayHasKey('object', $refund);
   	$this->assertEquals('refund', $refund['object']);
   }
-  
+
   public function tearDown() {
   	/** Do Nothing **/
   }
