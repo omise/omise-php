@@ -66,7 +66,7 @@ define('OMISE_SECRET_KEY', 'skey_XXXXXXXXXXXXXXXXX');
 Once both keys are set, you can now use the API. For example, to create a customer with a card returned from the token API (e.g. via the [card.js](https://docs.omise.co/card-js/)):
 
 ```php
-$customer = Omise\Customer::create(array(
+$customer = OmiseCustomer::create(array(
   'email' => 'john.doe@example.com',
   'description' => 'John Doe (id: 30)',
   'card' => 'tokn_test_4xs9408a642a1htto8z'
@@ -76,13 +76,26 @@ $customer = Omise\Customer::create(array(
 To retrieve, update and destroy that customer:
 
 ```php
-$customer = Omise\Customer::retrieve('cust_test_4xtrb759599jsxlhkrb');
+$customer = OmiseCustomer::retrieve('cust_test_4xtrb759599jsxlhkrb');
 $customer->update(array('description' => 'John W. Doe'));
 $customer->destroy();
 $customer->isDestroyed();  // => true
 ```
 
 For full usage, please refer to [API documentation](https://docs.omise.co/). You may also refer to example in the `tests/Omise` directory.
+
+### Test
+
+最初にtests/omise/TestConfig.phpに鍵を設定します。
+```php
+define('OMISE_PUBLIC_KEY', 'pkey_XXXXXXXXXXXXXXXXX');
+define('OMISE_SECRET_KEY', 'skey_XXXXXXXXXXXXXXXXX');
+```
+
+その後、phpUnitを実行します
+```
+phpunit omise-php/tests/omise/AccountTest
+```
 
 ## License
 
