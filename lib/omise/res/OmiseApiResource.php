@@ -22,8 +22,8 @@ class OmiseApiResource extends OmiseObject {
   /**
    * Returns an instance of the class given in $clazz or raise an error.
    * @param string $clazz
-   * @param string $secretkey
    * @param string $publickey
+   * @param string $secretkey
    * @throws Exception
    * @return OmiseResource
    */

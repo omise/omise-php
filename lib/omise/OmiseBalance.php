@@ -24,7 +24,7 @@ class OmiseBalance extends OmiseApiResourceSingleton {
   }
 
   /**
-   * @param string $cardID
+   * @param string $id
    * @return string
    */
   private static function getUrl($id = '') {

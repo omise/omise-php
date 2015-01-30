@@ -25,7 +25,7 @@ class OmiseAccount extends OmiseApiResourceSingleton {
 
   /**
    *
-   * @param string $cardID
+   * @param string $id
    * @return string
    */
   private static function getUrl($id = '') {
