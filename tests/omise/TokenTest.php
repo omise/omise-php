@@ -6,8 +6,8 @@ if(version_compare(phpversion(), '5.3.2') >= 0) {
   require_once dirname(__FILE__).'/../../lib/Omise.php';
 }
 
-define('OMISE_PUBLIC_KEY', 'pkey_test_4y9cewl0s1osh44ouud');
-define('OMISE_SECRET_KEY', 'skey_test_4y9cewl0rgwji2kbbcb');
+define('OMISE_PUBLIC_KEY', 'pkey');
+define('OMISE_SECRET_KEY', 'skey');
 
 class TokenTest extends PHPUnit_Framework_TestCase {
   public static function setUpBeforeClass() {
