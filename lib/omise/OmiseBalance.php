@@ -12,19 +12,19 @@ class OmiseBalance extends OmiseApiResourceSingleton {
    * @return OmiseBalance
    */
   public static function retrieve($publickey = null, $secretkey = null) {
-    return parent::retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
+    return parent::g_retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::reload()
+   * @see OmiseApiResource::g_reload()
    */
   public function reload() {
-    parent::reload(self::getUrl());
+    parent::g_reload(self::getUrl());
   }
 
   /**
-   * @param string $cardID
+   * @param string $id
    * @return string
    */
   private static function getUrl($id = '') {

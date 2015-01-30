@@ -13,7 +13,7 @@ class OmiseToken extends OmiseVaultResource {
    * @return OmiseToken
    */
   public static function retrieve($id, $publickey = null, $secretkey = null) {
-    return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+    return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
   }
 
   /**
@@ -25,15 +25,15 @@ class OmiseToken extends OmiseVaultResource {
    * @return OmiseToken
    */
   public static function create($params, $publickey = null, $secretkey = null) {
-    return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+    return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::reload()
+   * @see OmiseApiResource::g_reload()
    */
   public function reload() {
-    parent::reload(self::getUrl($this['id']));
+    parent::g_reload(self::getUrl($this['id']));
   }
 
   /**

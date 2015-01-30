@@ -1,8 +1,10 @@
 <?php
 
-require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
 require_once dirname(__FILE__).'/obj/OmiseObject.php';
+require_once dirname(__FILE__).'/../Exception/OmiseExceptions.php';
 
+define('OMISE_PHP_LIB_VERSION', '2.0.0');
+define('OMISE_API_VERSION', '2014-07-27');
 define('OMISE_API_URL', 'https://api.omise.co/');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
@@ -20,8 +22,8 @@ class OmiseApiResource extends OmiseObject {
   /**
    * Returns an instance of the class given in $clazz or raise an error.
    * @param string $clazz
-   * @param string $secretkey
    * @param string $publickey
+   * @param string $secretkey
    * @throws Exception
    * @return OmiseResource
    */
@@ -41,8 +43,8 @@ class OmiseApiResource extends OmiseObject {
    * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
    * @throws Exception|OmiseException
    */
-  protected static function retrieve($clazz, $url, $publickey = null, $secretkey = null) {
-    $resource = $clazz::getInstance($clazz, $publickey, $secretkey);
+  protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null) {
+  	$resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
     $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
     $resource->refresh($result);
 
@@ -59,8 +61,8 @@ class OmiseApiResource extends OmiseObject {
    * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
    * @throws Exception|OmiseException
    */
-  protected static function create($clazz, $url, $params, $publickey = null, $secretkey = null) {
-    $resource = $clazz::getInstance($clazz, $publickey, $secretkey);
+  protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null) {
+  	$resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
     $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
     $resource->refresh($result);
 
@@ -73,7 +75,7 @@ class OmiseApiResource extends OmiseObject {
    * @param array $params
    * @throws Exception|OmiseException
    */
-  protected function update($url, $params) {
+  protected function g_update($url, $params) {
     $result = $this->execute($url, self::REQUEST_PATCH, $this->getResourceKey(), $params);
     $this->refresh($result);
   }
@@ -84,7 +86,7 @@ class OmiseApiResource extends OmiseObject {
    * @return OmiseApiResource
    * @throws Exception|OmiseException
    */
-  protected function destroy($url) {
+  protected function g_destroy($url) {
     $result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
     $this->refresh($result, true);
   }
@@ -94,7 +96,7 @@ class OmiseApiResource extends OmiseObject {
    * @param string $url
    * @throws Exception|OmiseException
    */
-  protected function reload($url) {
+  protected function g_reload($url) {
     $result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
     $this->refresh($result);
   }
@@ -148,10 +150,6 @@ class OmiseApiResource extends OmiseObject {
         CURLOPT_RETURNTRANSFER => true,
         // Do not include the header in the output.
         CURLOPT_HEADER => false,
-        // Follow the redirection.
-        CURLOPT_FOLLOWLOCATION => true,
-        // Only follows up to 3 redirections.
-        CURLOPT_MAXREDIRS => 3,
         // Track the header request string and set the referer on redirect.
         CURLINFO_HEADER_OUT => true,
         CURLOPT_AUTOREFERER => true,

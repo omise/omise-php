@@ -8,8 +8,8 @@ class OmiseApiResourceSingleton extends OmiseApiResource {
   /**
    * Returns an instance of the class given in $clazz as a singleton resource or raise an error.
    * @param string $clazz
-   * @param string $secretkey
    * @param string $publickey
+   * @param string $secretkey
    * @throws Exception
    * @return OmiseResourceSingleton
    */

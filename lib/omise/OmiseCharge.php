@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/OmiseRefundList.php';
 
 class OmiseCharge extends OmiseApiResource {
   const ENDPOINT = 'charges';
@@ -13,18 +14,18 @@ class OmiseCharge extends OmiseApiResource {
    * @return OmiseCharge
    */
   public static function retrieve($id = '', $publickey = null, $secretkey = null) {
-    return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+    return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::reload()
+   * @see OmiseApiResource::g_reload()
    */
   public function reload() {
     if($this['object'] === 'charge') {
-      parent::reload(self::getUrl($this['id']));
+      parent::g_reload(self::getUrl($this['id']));
     } else {
-      parent::reload(self::getUrl());
+      parent::g_reload(self::getUrl());
     }
   }
 
@@ -36,26 +37,35 @@ class OmiseCharge extends OmiseApiResource {
    * @return OmiseCharge
    */
   public static function create($params, $publickey = null, $secretkey = null) {
-    return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+    return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::update()
+   * @see OmiseApiResource::g_update()
    */
   public function update($params) {
-    parent::update(self::getUrl($this['id']), $params);
+    parent::g_update(self::getUrl($this['id']), $params);
   }
 
   /**
    * Captures a charge.
-   * @return OmiseCharges
+   * @return OmiseCharge
    */
   public function capture() {
     $result = parent::execute(self::getUrl($this['id']).'/capture', parent::REQUEST_POST, parent::getResourceKey());
     $this->refresh($result);
 
     return $this;
+  }
+  
+  /**
+   * list refunds
+   * @return OmiseRefundList
+   */
+  public function refunds() {
+  	$result = parent::execute(self::getUrl($this['id']).'/refunds', parent::REQUEST_GET, parent::getResourceKey());
+  	return new OmiseRefundList($result, $this['id']);
   }
 
   /**

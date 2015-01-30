@@ -13,7 +13,7 @@ class OmiseTransfer extends OmiseApiResource {
    * @return OmiseTransfer
    */
   public static function retrieve($id = '', $publickey = null, $secretkey = null) {
-    return parent::retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+    return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
   }
 
   /**
@@ -24,18 +24,18 @@ class OmiseTransfer extends OmiseApiResource {
    * @return OmiseTransfer
    */
   public static function create($params, $publickey = null, $secretkey = null) {
-    return parent::create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+    return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::reload()
+   * @see OmiseApiResource::g_reload()
    */
   public function reload() {
     if($this['object'] === 'transfers') {
-      parent::reload(self::getUrl($this['id']));
+      parent::g_reload(self::getUrl($this['id']));
     } else {
-      parent::reload(self::getUrl());
+      parent::g_reload(self::getUrl());
     }
   }
 
@@ -48,18 +48,18 @@ class OmiseTransfer extends OmiseApiResource {
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::update()
+   * @see OmiseApiResource::g_update()
    */
   protected function update($params) {
-    parent::update(self::getUrl($this['id']), $params);
+    parent::g_update(self::getUrl($this['id']), $params);
   }
 
   /**
    * (non-PHPdoc)
-   * @see OmiseApiResource::destroy()
+   * @see OmiseApiResource::g_destroy()
    */
   public function destroy() {
-    parent::destroy(self::getUrl($this['id']));
+    parent::g_destroy(self::getUrl($this['id']));
   }
 
   /**
