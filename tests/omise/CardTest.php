@@ -45,8 +45,8 @@ class CardTest extends PHPUnit_Framework_TestCase {
     $customer = OmiseCustomer::retrieve($this->_customer['id']);
     $cards = $customer->cards();
 
-    $this->assertArrayHasKey('object', $customer);
-    $this->assertEquals('customer', $customer['object']);
+    $this->assertArrayHasKey('object', $cards);
+    $this->assertEquals('list', $cards['object']);
   }
 
   /**
