@@ -150,10 +150,6 @@ class OmiseApiResource extends OmiseObject {
         CURLOPT_RETURNTRANSFER => true,
         // Do not include the header in the output.
         CURLOPT_HEADER => false,
-        // Follow the redirection.
-        CURLOPT_FOLLOWLOCATION => true,
-        // Only follows up to 3 redirections.
-        CURLOPT_MAXREDIRS => 3,
         // Track the header request string and set the referer on redirect.
         CURLINFO_HEADER_OUT => true,
         CURLOPT_AUTOREFERER => true,
