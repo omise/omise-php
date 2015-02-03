@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/obj/OmiseObject.php';
-require_once dirname(__FILE__).'/../Exception/OmiseExceptions.php';
+require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
 
 define('OMISE_PHP_LIB_VERSION', '2.0.0');
 define('OMISE_API_VERSION', '2014-07-27');
