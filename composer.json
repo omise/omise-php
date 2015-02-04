@@ -4,7 +4,6 @@
   "keywords": ["payment", "omise", "creditcard"],
   "type": "library",
   "license": "MIT",
-  "version": "2.1.0",
   "homepage": "https://github.com/omise/omise-php.git",
   "authors": [
     {
