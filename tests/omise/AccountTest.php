@@ -39,17 +39,6 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('account', $account['object']);
   }
 
-  /**
-   * ----- Test singleton -----
-   * Assert that retrieving the account twice returns the same instance.
-   */
-  public function testSameInstance() {
-    $account1 = OmiseAccount::retrieve();
-    $account2 = OmiseAccount::retrieve();
-
-    $this->assertTrue($account1 === $account2);
-  }
-
   public function tearDown() {
     /** Do Nothing **/
   }
