@@ -1,0 +1,25 @@
+{
+  "object": "token",
+  "id": "tokn_test_4zkqd1f291pn0bs3w7f",
+  "livemode": false,
+  "location": "https://vault.omise.co/tokens/tokn_test_4zkqd1f291pn0bs3w7f",
+  "used": false,
+  "card": {
+    "object": "card",
+    "id": "card_test_4zkqd1f0vxalmggm9mx",
+    "livemode": false,
+    "country": "us",
+    "city": "Bangkok",
+    "postal_code": "10320",
+    "financing": "",
+    "last_digits": "4242",
+    "brand": "Visa",
+    "expiration_month": 10,
+    "expiration_year": 2018,
+    "fingerprint": "pvtmjojEaHi3y880wV/485z1dVNhASL4xCrxSlsCLBw=",
+    "name": "Omise Tester",
+    "security_code_check": true,
+    "created": "2015-04-03T06:09:50Z"
+  },
+  "created": "2015-04-03T06:09:50Z"
+}
