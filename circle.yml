@@ -1,0 +1,5 @@
+machine:
+    timezone:
+        Asia/Bangkok
+    php:
+        version: 5.3.20
