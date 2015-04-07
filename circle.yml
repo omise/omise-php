@@ -6,4 +6,4 @@ machine:
 
 test:
     override:
-    	- php ./vendor/bin/phpunit tests
+        - php ./vendor/bin/phpunit tests
