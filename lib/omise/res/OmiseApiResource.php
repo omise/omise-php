@@ -20,6 +20,15 @@ class OmiseApiResource extends OmiseObject {
   private $OMISE_TIMEOUT = 60;
 
   /**
+   * Trigger for execute function with test mode or not
+   * If it true. It'll not request to API Server,
+   * It use mock data from json file only (that's contain in tests/fixture folder)
+   *
+   * @param bool
+   */
+  private $_test = false;
+
+  /**
    * Returns an instance of the class given in $clazz or raise an error.
    * @param string $clazz
    * @param string $publickey
@@ -110,22 +119,42 @@ class OmiseApiResource extends OmiseObject {
    * @return array
    */
   protected function execute($url, $requestMethod, $key, $params = null) {
-    $ch = curl_init($url);
-    curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
-    // Make a request or thrown an exception.
-    if(($result = curl_exec($ch)) === false) {
-      $error = curl_error($ch);
-      curl_close($ch);
+    if ($this->_test) {
 
-      throw new Exception($error);
+      // Remove Http, Https protocal from $url (string).
+      $url = preg_replace('#^(http|https)://#', '', $url);
+
+      // Remove slash if it had in last letter.
+      $url = rtrim($url, '/');
+
+      $result = file_get_contents(LIB_PATH.'/../tests/fixtures/'.$url.'-'.strtolower($requestMethod).'.json');
+
+      if ($result == "")
+        throw new Exception($error);
+
+    } else {
+      $ch = curl_init($url);
+
+      curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
+
+      // Make a request or thrown an exception.
+      if(($result = curl_exec($ch)) === false) {
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        throw new Exception($error);
+      }
+
+      // Close.
+      curl_close($ch);
     }
-    // Close.
-    curl_close($ch);
+
     // Decode the JSON response as an associative array.
     $array = json_decode($result, true);
 
     // If response is invalid or not a JSON.
     if(count($array) === 0 || !isset($array['object'])) throw new Exception('Unknown error. (Bad Response)');
+
     // If response is an error object.
     if($array['object'] === 'error') throw OmiseException::getInstance($array);
 
@@ -185,5 +214,14 @@ class OmiseApiResource extends OmiseObject {
    */
   protected function getResourceKey() {
     return $this->_secretkey;
+  }
+
+  /**
+   * Trigger test mode.
+   * This's use for PHPUnit test only.
+   * @return void
+   */
+  public function test() {
+    $this->_test = true;
   }
 }
