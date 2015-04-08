@@ -28,6 +28,13 @@ class OmiseApiResource extends OmiseObject {
    */
   private $_test = false;
 
+  public function __construct() {
+    // If this class is execute by phpunit > get test mode.
+    if ($_SERVER['SCRIPT_NAME'] == "./vendor/bin/phpunit") {
+      $this->test();
+    }
+  }
+
   /**
    * Returns an instance of the class given in $clazz or raise an error.
    * @param string $clazz
@@ -120,36 +127,9 @@ class OmiseApiResource extends OmiseObject {
    */
   protected function execute($url, $requestMethod, $key, $params = null) {
     if ($this->_test) {
-
-      // Remove Http, Https protocal from $url (string).
-      $url = preg_replace('#^(http|https)://#', '', $url);
-
-      // Remove slash if it had in last letter.
-      $url = rtrim($url, '/');
-
-      if (!file_exists(LIB_PATH.'/../tests/fixtures/'.$url.'-'.strtolower($requestMethod).'.json'))
-        throw new Exception('File \''.LIB_PATH.'/../tests/fixtures/'.$url.'-'.strtolower($requestMethod).'.json\' not found.');
-
-      $result = file_get_contents(LIB_PATH.'/../tests/fixtures/'.$url.'-'.strtolower($requestMethod).'.json');
-
-      if ($result == "")
-        throw new Exception('File \''.LIB_PATH.'/../tests/fixtures/'.$url.'-'.strtolower($requestMethod).'.json\' was empty.');
-
+      $result = $this->_executeTest($url, $requestMethod, $key, $params);
     } else {
-      $ch = curl_init($url);
-
-      curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
-
-      // Make a request or thrown an exception.
-      if(($result = curl_exec($ch)) === false) {
-        $error = curl_error($ch);
-        curl_close($ch);
-
-        throw new Exception($error);
-      }
-
-      // Close.
-      curl_close($ch);
+      $result = $this->_executeCurl($url, $requestMethod, $key, $params);
     }
 
     // Decode the JSON response as an associative array.
@@ -162,6 +142,70 @@ class OmiseApiResource extends OmiseObject {
     if($array['object'] === 'error') throw OmiseException::getInstance($array);
 
     return $array;
+  }
+
+  /**
+   * @param string $url
+   * @param string $requestMethod
+   * @param array $params
+   * @throws OmiseException
+   * @return array
+   */
+  private function _executeCurl($url, $requestMethod, $key, $params = null) {
+    $ch = curl_init($url);
+
+    curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
+
+    // Make a request or thrown an exception.
+    if(($result = curl_exec($ch)) === false) {
+      $error = curl_error($ch);
+      curl_close($ch);
+
+      throw new Exception($error);
+    }
+
+    // Close.
+    curl_close($ch);
+
+    return $result;
+  }
+
+  private function _executeTest($url, $requestMethod, $key, $params = null) {
+    // Remove Http, Https protocal from $url (string).
+    $request_url = preg_replace('#^(http|https)://#', '', $url);
+
+    // Remove slash if it had in last letter.
+    $request_url = rtrim($request_url, '/');
+
+    // Finally.
+    $request_url = LIB_PATH.'/../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
+
+    // Make a request from Curl if json file not exists.
+    if (!file_exists($request_url)) {
+
+      // Get a directory that's file should contain.
+      $request_dir = explode('/', $request_url);
+      unset($request_dir[count($request_dir) - 1]);
+      $request_dir = implode('/', $request_dir);
+
+      // Create directory if it not exists.
+      if (!file_exists($request_dir)) {
+        mkdir($request_dir, 0777, true);
+      }
+
+      $result = $this->_executeCurl($url, $requestMethod, $key, $params);
+
+      $f = fopen($request_url, 'w');
+      if ($f) {
+        fwrite($f, $result);
+
+        fclose($f);
+      }
+    } else { // Or get response from json file.
+      $result = file_get_contents($request_url);
+    }
+
+    return $result;
   }
 
   /**
@@ -224,7 +268,7 @@ class OmiseApiResource extends OmiseObject {
    * This's use for PHPUnit test only.
    * @return void
    */
-  public function test() {
-    $this->_test = true;
+  public function test($trigger = true) {
+    $this->_test = $trigger;
   }
 }
