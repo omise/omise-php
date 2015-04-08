@@ -39,17 +39,6 @@ class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('balance', $balance['object']);
   }
 
-  /**
-   * ----- Test singleton -----
-   * Assert that retrieving the balance twice returns the same instance.
-   */
-  public function testSameInstance() {
-    $balance1 = OmiseBalance::retrieve();
-    $balance2 = OmiseBalance::retrieve();
-
-    $this->assertTrue($balance1 === $balance2);
-  }
-
   public function tearDown() {
     /** Do Nothing **/
   }
