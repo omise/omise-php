@@ -127,10 +127,13 @@ class OmiseApiResource extends OmiseObject {
       // Remove slash if it had in last letter.
       $url = rtrim($url, '/');
 
+      if (!file_exists(LIB_PATH.'/../tests/fixtures/'.$url.'-'.strtolower($requestMethod).'.json'))
+        throw new Exception('File \''.LIB_PATH.'/../tests/fixtures/'.$url.'-'.strtolower($requestMethod).'.json\' not found.');
+
       $result = file_get_contents(LIB_PATH.'/../tests/fixtures/'.$url.'-'.strtolower($requestMethod).'.json');
 
       if ($result == "")
-        throw new Exception($error);
+        throw new Exception('File \''.LIB_PATH.'/../tests/fixtures/'.$url.'-'.strtolower($requestMethod).'.json\' was empty.');
 
     } else {
       $ch = curl_init($url);
