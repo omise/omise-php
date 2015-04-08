@@ -75,7 +75,8 @@ class RefundTest extends PHPUnit_Framework_TestCase {
     $charge = OmiseCharge::retrieve(self::$_charge['id']);
     $refunds = $charge->refunds();
 
-  	$refund = $refunds->retrieve($refunds->create(array('amount' => 10000))['id']);
+    $create = $refunds->create(array('amount' => 10000));
+  	$refund = $refunds->retrieve($create['id']);
 
   	$this->assertArrayHasKey('object', $refund);
   	$this->assertEquals('refund', $refund['object']);
