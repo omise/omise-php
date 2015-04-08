@@ -25,7 +25,7 @@ class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
     $balance->reload();
 
     $this->assertArrayHasKey('object', $balance);
-    // $this->assertEquals('balance', $balance['object']);
+    $this->assertEquals('balance', $balance['object']);
   }
 
   /**
