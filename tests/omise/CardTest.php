@@ -11,7 +11,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
   private $_customer;
 
   public static function setUpBeforeClass() {
-  	/** Do Nothing **/
+    /** Do Nothing **/
   }
 
   /**
@@ -116,7 +116,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
    * Remove the customer used in test cases.
    */
   public function tearDown() {
-  	if($this->_customer != null) {
+    if($this->_customer != null) {
       $customer = OmiseCustomer::retrieve($this->_customer['id']);
       $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
       $card->destroy();

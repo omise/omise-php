@@ -84,10 +84,10 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
    * Assert that a customer object is returned after a successful retrieve.
    */
   public function testRetrieve() {
-  	$customer = OmiseCustomer::retrieve(self::$_customer['id']);
+    $customer = OmiseCustomer::retrieve(self::$_customer['id']);
 
-  	$this->assertArrayHasKey('object', $customer);
-  	$this->assertEquals('customer', $customer['object']);
+    $this->assertArrayHasKey('object', $customer);
+    $this->assertEquals('customer', $customer['object']);
   }
 
   /**
@@ -113,10 +113,10 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
    * Assert that a destroyed flag is set after a customer is successfully destroyed.
    */
   public function testDestroy() {
-  	self::$_customer->destroy();
+    self::$_customer->destroy();
 
-  	$this->assertTrue(self::$_customer->isDestroyed());
-  	self::$_customer = null;
+    $this->assertTrue(self::$_customer->isDestroyed());
+    self::$_customer = null;
   }
 
   public function tearDown() {
@@ -125,7 +125,7 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
 
   public static function tearDownAfterClass() {
     if(self::$_customer != null) {
-    	self::$_customer->destroy();
+      self::$_customer->destroy();
     }
   }
 }

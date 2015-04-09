@@ -33,15 +33,15 @@ class TransactionTest extends PHPUnit_Framework_TestCase {
    * This test will echo to STDOUT if there is no transaction available for testing.
    */
   public function testRetrieve() {
-  	$transactions = OmiseTransaction::retrieve();
-  	if(count($transactions['data']) > 0) {
-  	  $transaction = OmiseTransaction::retrieve($transactions['data'][0]['id']);
+    $transactions = OmiseTransaction::retrieve();
+    if(count($transactions['data']) > 0) {
+      $transaction = OmiseTransaction::retrieve($transactions['data'][0]['id']);
 
-  	  $this->assertArrayHasKey('object', $transaction);
-  	  $this->assertEquals('transaction', $transaction['object']);
-  	} else {
-  		echo 'Can not run  testRetrieve()';
-  	}
+      $this->assertArrayHasKey('object', $transaction);
+      $this->assertEquals('transaction', $transaction['object']);
+    } else {
+      echo 'Can not run  testRetrieve()';
+    }
   }
 
   public function tearDown() {
