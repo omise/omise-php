@@ -93,7 +93,7 @@ Then run the PHPUnit:
 phpunit omise-php/tests
 ```
 
-If you want to test with some library specific, you can run
+If you want to run with a specific test, let's try
 
 ```
 phpunit omise-php/tests/omise/AccountTest
