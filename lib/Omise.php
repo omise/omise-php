@@ -1,8 +1,5 @@
 <?php
 
-// Define library path
-define("LIB_PATH", dirname(__FILE__));
-
 require_once dirname(__FILE__).'/omise/OmiseAccount.php';
 require_once dirname(__FILE__).'/omise/OmiseBalance.php';
 require_once dirname(__FILE__).'/omise/OmiseCard.php';

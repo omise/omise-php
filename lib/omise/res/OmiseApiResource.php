@@ -178,7 +178,7 @@ class OmiseApiResource extends OmiseObject {
     $request_url = rtrim($request_url, '/');
 
     // Finally.
-    $request_url = LIB_PATH.'/../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
+    $request_url = dirname(__FILE__).'/../../../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
 
     // Make a request from Curl if json file not exists.
     if (!file_exists($request_url)) {
