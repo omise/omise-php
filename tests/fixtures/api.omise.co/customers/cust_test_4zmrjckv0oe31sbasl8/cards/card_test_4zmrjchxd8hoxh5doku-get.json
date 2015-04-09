@@ -1,0 +1,18 @@
+{
+  "object": "card",
+  "id": "card_test_4zmrjchxd8hoxh5doku",
+  "livemode": false,
+  "location": "/customers/cust_test_4zmrjckv0oe31sbasl8/cards/card_test_4zmrjchxd8hoxh5doku",
+  "country": "us",
+  "city": "Bangkok",
+  "postal_code": "10320",
+  "financing": "",
+  "last_digits": "1111",
+  "brand": "Visa",
+  "expiration_month": 10,
+  "expiration_year": 2018,
+  "fingerprint": "zoT22qQjIGifavlKMASVVJ7+XsEBwVd4PzEL3zqs6eA=",
+  "name": "Somchai Prasert",
+  "security_code_check": true,
+  "created": "2015-04-08T10:53:16Z"
+}

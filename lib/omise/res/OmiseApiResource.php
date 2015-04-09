@@ -20,6 +20,22 @@ class OmiseApiResource extends OmiseObject {
   private $OMISE_TIMEOUT = 60;
 
   /**
+   * Trigger for execute function with test mode or not
+   * If it true. It'll not request to API Server,
+   * It use mock data from json file only (that's contain in tests/fixture folder)
+   *
+   * @param bool
+   */
+  private $_test = false;
+
+  public function __construct() {
+    // If this class is execute by phpunit > get test mode.
+    if ($_SERVER['SCRIPT_NAME'] == "./vendor/bin/phpunit") {
+      $this->test();
+    }
+  }
+
+  /**
    * Returns an instance of the class given in $clazz or raise an error.
    * @param string $clazz
    * @param string $publickey
@@ -44,7 +60,7 @@ class OmiseApiResource extends OmiseObject {
    * @throws Exception|OmiseException
    */
   protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null) {
-  	$resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+    $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
     $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
     $resource->refresh($result);
 
@@ -62,7 +78,7 @@ class OmiseApiResource extends OmiseObject {
    * @throws Exception|OmiseException
    */
   protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null) {
-  	$resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+    $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
     $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
     $resource->refresh($result);
 
@@ -110,8 +126,36 @@ class OmiseApiResource extends OmiseObject {
    * @return array
    */
   protected function execute($url, $requestMethod, $key, $params = null) {
+    if ($this->_test) {
+      $result = $this->_executeTest($url, $requestMethod, $key, $params);
+    } else {
+      $result = $this->_executeCurl($url, $requestMethod, $key, $params);
+    }
+
+    // Decode the JSON response as an associative array.
+    $array = json_decode($result, true);
+
+    // If response is invalid or not a JSON.
+    if(count($array) === 0 || !isset($array['object'])) throw new Exception('Unknown error. (Bad Response)');
+
+    // If response is an error object.
+    if($array['object'] === 'error') throw OmiseException::getInstance($array);
+
+    return $array;
+  }
+
+  /**
+   * @param string $url
+   * @param string $requestMethod
+   * @param array $params
+   * @throws OmiseException
+   * @return string
+   */
+  private function _executeCurl($url, $requestMethod, $key, $params = null) {
     $ch = curl_init($url);
+
     curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
+
     // Make a request or thrown an exception.
     if(($result = curl_exec($ch)) === false) {
       $error = curl_error($ch);
@@ -119,17 +163,56 @@ class OmiseApiResource extends OmiseObject {
 
       throw new Exception($error);
     }
+
     // Close.
     curl_close($ch);
-    // Decode the JSON response as an associative array.
-    $array = json_decode($result, true);
 
-    // If response is invalid or not a JSON.
-    if(count($array) === 0 || !isset($array['object'])) throw new Exception('Unknown error. (Bad Response)');
-    // If response is an error object.
-    if($array['object'] === 'error') throw OmiseException::getInstance($array);
+    return $result;
+  }
 
-    return $array;
+  /**
+   * @param string $url
+   * @param string $requestMethod
+   * @param array $params
+   * @throws OmiseException
+   * @return string
+   */
+  private function _executeTest($url, $requestMethod, $key, $params = null) {
+    // Remove Http, Https protocal from $url (string).
+    $request_url = preg_replace('#^(http|https)://#', '', $url);
+
+    // Remove slash if it had in last letter.
+    $request_url = rtrim($request_url, '/');
+
+    // Finally.
+    $request_url = dirname(__FILE__).'/../../../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
+
+    // Make a request from Curl if json file was not exists.
+    if (!file_exists($request_url)) {
+
+      // Get a directory that's file should contain.
+      $request_dir = explode('/', $request_url);
+      unset($request_dir[count($request_dir) - 1]);
+      $request_dir = implode('/', $request_dir);
+
+      // Create directory if it not exists.
+      if (!file_exists($request_dir)) {
+        mkdir($request_dir, 0777, true);
+      }
+
+      $result = $this->_executeCurl($url, $requestMethod, $key, $params);
+
+      $f = fopen($request_url, 'w');
+      if ($f) {
+        fwrite($f, $result);
+
+        fclose($f);
+      }
+    } else { // Or get response from json file.
+      $result = file_get_contents($request_url);
+    }
+
+    return $result;
   }
 
   /**
@@ -185,5 +268,14 @@ class OmiseApiResource extends OmiseObject {
    */
   protected function getResourceKey() {
     return $this->_secretkey;
+  }
+
+  /**
+   * Trigger test mode.
+   * This's use for PHPUnit test only.
+   * @return void
+   */
+  public function test($trigger = true) {
+    $this->_test = $trigger;
   }
 }

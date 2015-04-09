@@ -1,0 +1,467 @@
+{
+  "object": "list",
+  "from": "1970-01-01T00:00:00+00:00",
+  "to": "2015-04-08T10:53:32+00:00",
+  "offset": 0,
+  "limit": 20,
+  "total": 179,
+  "data": [
+    {
+      "object": "customer",
+      "id": "cust_test_4zkdaqsurbtjbgtgv7w",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkdaqsurbtjbgtgv7w",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-02T07:53:51Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkdaqsurbtjbgtgv7w/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkor57qm2b8wl0lkzv",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkor57qm2b8wl0lkzv",
+      "default_card": "card_test_4zkor54z95a9s3mtwln",
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:25:23Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 1,
+        "data": [
+          {
+            "object": "card",
+            "id": "card_test_4zkor54z95a9s3mtwln",
+            "livemode": false,
+            "location": "/customers/cust_test_4zkor57qm2b8wl0lkzv/cards/card_test_4zkor54z95a9s3mtwln",
+            "country": "us",
+            "city": "Bangkok",
+            "postal_code": "10320",
+            "financing": "",
+            "last_digits": "1111",
+            "brand": "Visa",
+            "expiration_month": 10,
+            "expiration_year": 2018,
+            "fingerprint": "zoT22qQjIGifavlKMASVVJ7+XsEBwVd4PzEL3zqs6eA=",
+            "name": "Somchai Prasert",
+            "security_code_check": true,
+            "created": "2015-04-03T03:25:22Z"
+          }
+        ],
+        "location": "/customers/cust_test_4zkor57qm2b8wl0lkzv/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkoryfgxq4yegrinq7",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkoryfgxq4yegrinq7",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:27:41Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkoryfgxq4yegrinq7/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkoryv4lkh96642mae",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkoryv4lkh96642mae",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:27:43Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkoryv4lkh96642mae/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkorzczuo6ge0w0svt",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkorzczuo6ge0w0svt",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:27:45Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkorzczuo6ge0w0svt/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkorzxd4flz37o32pz",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkorzxd4flz37o32pz",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:27:48Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkorzxd4flz37o32pz/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkos0hx1lr9p2hev6v",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkos0hx1lr9p2hev6v",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:27:51Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkos0hx1lr9p2hev6v/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkoswp2d7v2k3hcsu3",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkoswp2d7v2k3hcsu3",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:30:23Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkoswp2d7v2k3hcsu3/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkosx5fpceitn99wgo",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkosx5fpceitn99wgo",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:30:25Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkosx5fpceitn99wgo/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkosxnn0ku1oeyg1x3",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkosxnn0ku1oeyg1x3",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:30:28Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkosxnn0ku1oeyg1x3/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkosy8hvdi7f7ku68w",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkosy8hvdi7f7ku68w",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:30:30Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkosy8hvdi7f7ku68w/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkosz1vu6lofd8wnb0",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkosz1vu6lofd8wnb0",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:30:34Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkosz1vu6lofd8wnb0/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkox9519rkvsh0r53j",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkox9519rkvsh0r53j",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:42:44Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkox9519rkvsh0r53j/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkox9l8k8q4wn1oq2f",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkox9l8k8q4wn1oq2f",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:42:46Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkox9l8k8q4wn1oq2f/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkoxa3wvb43ra5t65r",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkoxa3wvb43ra5t65r",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:42:48Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkoxa3wvb43ra5t65r/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkoxaoto01bhbazudc",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkoxaoto01bhbazudc",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:42:51Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkoxaoto01bhbazudc/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkoxbryikd2cirk1qp",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkoxbryikd2cirk1qp",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:42:56Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkoxbryikd2cirk1qp/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkoxtbj247vrt1g72a",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkoxtbj247vrt1g72a",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:44:19Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkoxtbj247vrt1g72a/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkoxtrhnvn9vq52eva",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkoxtrhnvn9vq52eva",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:44:22Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkoxtrhnvn9vq52eva/cards"
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_4zkoxua54knkla9o8c8",
+      "livemode": false,
+      "location": "/customers/cust_test_4zkoxua54knkla9o8c8",
+      "default_card": null,
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2015-04-03T03:44:24Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2015-04-08T10:53:32+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 0,
+        "data": [
+
+        ],
+        "location": "/customers/cust_test_4zkoxua54knkla9o8c8/cards"
+      }
+    }
+  ]
+}

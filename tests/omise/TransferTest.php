@@ -14,7 +14,7 @@ class TransferTest extends PHPUnit_Framework_TestCase {
    * Setup the transfer to be used in test cases (except in create).
    */
   public static function setUpBeforeClass() {
-  	/** Do Nothing **/
+    /** Do Nothing **/
   }
 
   public function setUp() {
@@ -37,7 +37,7 @@ class TransferTest extends PHPUnit_Framework_TestCase {
    * Assert that a transfer is successfully created with the given parameters set.
    */
   public function testCreate() {
-  	$amount = 100000;
+    $amount = 100000;
 
     self::$_transter = OmiseTransfer::create(array(
       'amount' => $amount
@@ -51,10 +51,10 @@ class TransferTest extends PHPUnit_Framework_TestCase {
    * Assert that a transfer object is returned after a successful retrieve.
    */
   public function testRetrieve() {
-  	$transfer = OmiseTransfer::retrieve(self::$_transter['id']);
+    $transfer = OmiseTransfer::retrieve(self::$_transter['id']);
 
-  	$this->assertArrayHasKey('object', $transfer);
-  	$this->assertEquals('transfer', $transfer['object']);
+    $this->assertArrayHasKey('object', $transfer);
+    $this->assertEquals('transfer', $transfer['object']);
   }
 
   /**
@@ -64,8 +64,8 @@ class TransferTest extends PHPUnit_Framework_TestCase {
   public function testUpdate() {
     $amount = 5000;
 
-  	self::$_transter['amount'] = $amount;
-  	self::$_transter->save();
+    self::$_transter['amount'] = $amount;
+    self::$_transter->save();
 
     $this->assertEquals($amount, self::$_transter['amount']);
   }
@@ -75,9 +75,9 @@ class TransferTest extends PHPUnit_Framework_TestCase {
    * Assert that a destroyed flag is set after a transfer is successfully destroyed.
    */
   public function testDestroy() {
-  	self::$_transter->destroy();
+    self::$_transter->destroy();
 
-  	$this->assertTrue(self::$_transter->isDestroyed());
+    $this->assertTrue(self::$_transter->isDestroyed());
   }
 
   public function tearDown() {

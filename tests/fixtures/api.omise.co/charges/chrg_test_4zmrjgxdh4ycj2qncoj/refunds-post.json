@@ -1,0 +1,10 @@
+{
+  "object": "refund",
+  "id": "rfnd_test_4zmrjhlbqy587sw6fwt",
+  "location": "/charges/chrg_test_4zmrjgxdh4ycj2qncoj/refunds/rfnd_test_4zmrjhlbqy587sw6fwt",
+  "amount": 10000,
+  "currency": "thb",
+  "charge": "chrg_test_4zmrjgxdh4ycj2qncoj",
+  "transaction": "trxn_test_4zmrjhlflnz6id6q0bo",
+  "created": "2015-04-08T10:53:40Z"
+}

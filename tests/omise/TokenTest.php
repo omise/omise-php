@@ -65,8 +65,8 @@ class TokenTest extends PHPUnit_Framework_TestCase {
 
     $token2 = OmiseToken::retrieve($token1['id']);
 
-  	$this->assertArrayHasKey('object', $token2);
-  	$this->assertEquals('token', $token2['object']);
+    $this->assertArrayHasKey('object', $token2);
+    $this->assertEquals('token', $token2['object']);
   }
 
   public function tearDown() {

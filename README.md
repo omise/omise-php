@@ -86,14 +86,14 @@ For full usage, please refer to [API documentation](https://docs.omise.co/). You
 
 ## Testing
 
-To run an automated test suite, first replace your keys in `tests/omise/TestConfig.php`:
+To run an automated test suite, make sure you already have a [PHPUnit](https://phpunit.de/) in your local machine.
+Then run the PHPUnit:
 
-```php
-define('OMISE_PUBLIC_KEY', 'pkey_XXXXXXXXXXXXXXXXX');
-define('OMISE_SECRET_KEY', 'skey_XXXXXXXXXXXXXXXXX');
+```
+phpunit omise-php/tests
 ```
 
-Then run the PHPUnit:
+If you want to run with a specific test, let's try
 
 ```
 phpunit omise-php/tests/omise/AccountTest

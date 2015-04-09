@@ -1,0 +1,52 @@
+{
+  "object": "charge",
+  "id": "chrg_test_4zmrjgxdh4ycj2qncoj",
+  "livemode": false,
+  "location": "/charges/chrg_test_4zmrjgxdh4ycj2qncoj",
+  "amount": 100000,
+  "currency": "thb",
+  "description": "Another description",
+  "capture": false,
+  "authorized": true,
+  "captured": false,
+  "transaction": null,
+  "refunded": 0,
+  "refunds": {
+    "object": "list",
+    "from": "1970-01-01T00:00:00+00:00",
+    "to": "2015-04-08T10:53:30+00:00",
+    "offset": 0,
+    "limit": 20,
+    "total": 0,
+    "data": [
+
+    ],
+    "location": "/charges/chrg_test_4zmrjgxdh4ycj2qncoj/refunds"
+  },
+  "return_uri": "https://example.co.th/orders/384/complete",
+  "reference": "paym_test_4zmrjeujqntoxrxd8g2",
+  "authorize_uri": "https://api.omise.co/payments/paym_test_4zmrjeujqntoxrxd8g2/authorize",
+  "failure_code": null,
+  "failure_message": null,
+  "card": {
+    "object": "card",
+    "id": "card_test_4zmrjera07arnc1sctr",
+    "livemode": false,
+    "country": "us",
+    "city": "Bangkok",
+    "postal_code": "10320",
+    "financing": "",
+    "last_digits": "4242",
+    "brand": "Visa",
+    "expiration_month": 10,
+    "expiration_year": 2018,
+    "fingerprint": "pvtmjojEaHi3y880wV/485z1dVNhASL4xCrxSlsCLBw=",
+    "name": "Somchai Prasert",
+    "security_code_check": true,
+    "created": "2015-04-08T10:53:27Z"
+  },
+  "customer": null,
+  "ip": "127.0.0.1",
+  "dispute": null,
+  "created": "2015-04-08T10:53:27Z"
+}

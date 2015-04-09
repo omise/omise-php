@@ -11,7 +11,7 @@ class RefundTest extends PHPUnit_Framework_TestCase {
   static $_charge;
 
   public static function setUpBeforeClass() {
-  	$returnUrl = 'https://example.co.th/orders/384/complete';
+    $returnUrl = 'https://example.co.th/orders/384/complete';
     $amount = 100000;
     $currency = 'thb';
     $description = 'Order-384';
@@ -62,10 +62,10 @@ class RefundTest extends PHPUnit_Framework_TestCase {
     $charge = OmiseCharge::retrieve(self::$_charge['id']);
     $refunds = $charge->refunds();
 
-  	$amount = 10000;
-  	$refund = $refunds->create(array('amount' => $amount));
+    $amount = 10000;
+    $refund = $refunds->create(array('amount' => $amount));
 
-  	$this->assertEquals($amount, $refund['amount']);
+    $this->assertEquals($amount, $refund['amount']);
   }
 
   /**
@@ -75,14 +75,15 @@ class RefundTest extends PHPUnit_Framework_TestCase {
     $charge = OmiseCharge::retrieve(self::$_charge['id']);
     $refunds = $charge->refunds();
 
-  	$refund = $refunds->retrieve($refunds->create(array('amount' => 10000))['id']);
+    $create = $refunds->create(array('amount' => 10000));
+    $refund = $refunds->retrieve($create['id']);
 
-  	$this->assertArrayHasKey('object', $refund);
-  	$this->assertEquals('refund', $refund['object']);
+    $this->assertArrayHasKey('object', $refund);
+    $this->assertEquals('refund', $refund['object']);
   }
 
   public function tearDown() {
-  	/** Do Nothing **/
+    /** Do Nothing **/
   }
 
   public static function tearDownAfterClass() {
