@@ -149,7 +149,7 @@ class OmiseApiResource extends OmiseObject {
    * @param string $requestMethod
    * @param array $params
    * @throws OmiseException
-   * @return array
+   * @return string
    */
   private function _executeCurl($url, $requestMethod, $key, $params = null) {
     $ch = curl_init($url);
@@ -170,6 +170,13 @@ class OmiseApiResource extends OmiseObject {
     return $result;
   }
 
+  /**
+   * @param string $url
+   * @param string $requestMethod
+   * @param array $params
+   * @throws OmiseException
+   * @return string
+   */
   private function _executeTest($url, $requestMethod, $key, $params = null) {
     // Remove Http, Https protocal from $url (string).
     $request_url = preg_replace('#^(http|https)://#', '', $url);
@@ -180,7 +187,7 @@ class OmiseApiResource extends OmiseObject {
     // Finally.
     $request_url = dirname(__FILE__).'/../../../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
 
-    // Make a request from Curl if json file not exists.
+    // Make a request from Curl if json file was not exists.
     if (!file_exists($request_url)) {
 
       // Get a directory that's file should contain.
