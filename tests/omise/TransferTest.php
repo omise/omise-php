@@ -25,7 +25,7 @@ class TransferTest extends PHPUnit_Framework_TestCase {
    * ----- Test list all -----
    * Assert that a list of transfer object could be successfully retrieved.
    */
-  public function testListAll() {
+  public function testRetrieveTransferListObject() {
     $transfers = OmiseTransfer::retrieve();
 
     $this->assertArrayHasKey('object', $transfers);

@@ -17,20 +17,18 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test OmiseAccount's method exists -----
-   * OmiseAccount should contain some method like below.
+   * OmiseAccount class must be contain some method below.
    */
   public function testOmiseAccountMethodExists() {
-
     $this->assertTrue(method_exists('OmiseAccount', 'retrieve'));
     $this->assertTrue(method_exists('OmiseAccount', 'reload'));
+    $this->assertTrue(method_exists('OmiseAccount', 'getUrl'));
   }
 
   /**
-   * ----- Test retrieve -----
    * Assert that an account object is returned after a successful retrieve.
    */
-  public function testRetrieve() {
+  public function testRetrieveOmiseAccountObject() {
     $account = OmiseAccount::retrieve();
 
     $this->assertArrayHasKey('object', $account);
@@ -38,22 +36,27 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test response structure -----
    * Assert that an account object is returned after a successful retrieve.
-   * And It should receive a right key that it should be
-   * (It's need for first time when run test with the real server).
+   * It should be contain all of value like below
+   * (use it when run test with the real server).
    */
-  public function testJsonResponseStructure() {
+  public function testValidateResponseObjectStructure() {
     $account = OmiseAccount::retrieve();
 
     $this->assertArrayHasKey('object', $account);
+    $this->assertInternalType('string', $account['object']);
+
     $this->assertArrayHasKey('id', $account);
+    $this->assertInternalType('string', $account['id']);
+
     $this->assertArrayHasKey('email', $account);
+    $this->assertInternalType('string', $account['email']);
+    
     $this->assertArrayHasKey('created', $account);
+    $this->assertInternalType('string', $account['created']);
   }
 
   /**
-   * ----- Test reload -----
    * Assert that an account object is returned after a successful reload.
    */
   public function testReload() {

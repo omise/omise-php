@@ -14,23 +14,40 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
    * Setup the customer to be used in test cases (except in create).
    */
   public static function setUpBeforeClass() {
-   $token = OmiseToken::create(
-      array('card' => array(
-        'name' => 'Somchai Prasert',
-        'number' => '4111111111111111',
-        'expiration_month' => 10,
-        'expiration_year' => 2018,
-        'city' => 'Bangkok',
-        'postal_code' => '10320',
-        'security_code' => 123
-      ))
-    );
-
-    self::$_customer = OmiseCustomer::create(array(
-      'email' => 'john.doe@example.com',
-      'description' => 'John Doe (id: 30)',
-      'card' => $token['id']
-    ));
+    // Skip a tokenize card and create customer service process
+    // and mock it up with static data.
+    self::$_customer = array(
+      'object'        => 'customer',
+      'id'            => 'cust_test_4zmrjg2hct06ybwobqc',
+      'livemode'      => false,
+      'location'      => '/customers/cust_test_4zmrjg2hct06ybwobqc',
+      'default_card'  => 'card_test_4zmrjfzf0spz3mh63cs',
+      'email'         => 'john.doe@example.com',
+      'description'   => 'John Doe (id: 30)',
+      'created'       => '2015-04-08T10:53:33Z',
+      'cards'         => array( 'object'  => 'list',
+                                'from'    => '1970-01-01T00:00:00+00:00',
+                                'to'      => '2015-04-08T10:53:33+00:00',
+                                'offset'  => '0',
+                                'limit'   => '20',
+                                'total'   => '1',
+                                'data'    => array(array( 'object'              => 'card',
+                                                          'id'                  => 'card_test_4zmrjfzf0spz3mh63cs',
+                                                          'livemode'            => '',
+                                                          'location'            => '/customers/cust_test_4zmrjg2hct06ybwobqc/cards/card_test_4zmrjfzf0spz3mh63cs',
+                                                          'country'             => 'us',
+                                                          'city'                => 'Bangkok',
+                                                          'postal_code'         => '10320',
+                                                          'financing'           => '',
+                                                          'last_digits'         => '4242',
+                                                          'brand'               => 'Visa',
+                                                          'expiration_month'    => '10',
+                                                          'expiration_year'     => '2018',
+                                                          'fingerprint'         => 'pvtmjojEaHi3y880wV/485z1dVNhASL4xCrxSlsCLBw=',
+                                                          'name'                => 'Somchai Prasert',
+                                                          'security_code_check' => '1',
+                                                          'created'             => '2015-04-08T10:53:33Z')),
+                                'location' => '/customers/cust_test_4zmrjg2hct06ybwobqc/cards'));
   }
 
   public function setUp() {
@@ -38,10 +55,9 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test list all -----
    * Assert that a list of customer object could be successfully retrieved.
    */
-  public function testListAll() {
+  public function testRetrieveCustomerListObject() {
     $customer = OmiseCustomer::retrieve();
 
     $this->assertArrayHasKey('object', $customer);
@@ -49,41 +65,21 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test create -----
    * Assert that a customer is successfully created with the given parameters set.
    */
   public function testCreate() {
-    $email = 'john.doe@example.com';
-    $description = 'John Doe (id: 30)';
-    $token = OmiseToken::create(
-      array('card' => array(
-        'name' => 'Somchai Prasert',
-        'number' => '4242424242424242',
-        'expiration_month' => 10,
-        'expiration_year' => 2018,
-        'city' => 'Bangkok',
-        'postal_code' => '10320',
-        'security_code' => 123
-      ))
-    );
+    $customer = OmiseCustomer::create(array('email'       => 'john.doe@example.com',
+                                            'description' => 'John Doe (id: 30)',
+                                            'card'        => 'tokn_test_4zmrjhuk2rndz24a6x0'));
 
-    $customer = OmiseCustomer::create(array(
-      'email' => $email,
-      'description' => $description,
-      'card' => $token['id']
-    ));
-
-    $this->assertEquals($email, $customer['email']);
-    $this->assertEquals($description, $customer['description']);
-
-    $customer->destroy();
+    $this->assertArrayHasKey('object', $customer);
+    $this->assertEquals('customer', $customer['object']);
   }
 
   /**
-   * ----- Test retrieve -----
    * Assert that a customer object is returned after a successful retrieve.
    */
-  public function testRetrieve() {
+  public function testRetrieveSpecificCustomerObjectFromCustomerId() {
     $customer = OmiseCustomer::retrieve(self::$_customer['id']);
 
     $this->assertArrayHasKey('object', $customer);
@@ -91,32 +87,25 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test update -----
    * Assert that a customer is successfully updated with the given parameters set.
    */
   public function testUpdate() {
-    $email = 'john.smith@example.com';
-    $description = 'Another description';
-
     $customer = OmiseCustomer::retrieve(self::$_customer['id']);
-    $customer->update(array(
-      'email' => 'john.smith@example.com',
-      'description' => 'Another description'
-    ));
-
-    $this->assertEquals($email, $customer['email']);
-    $this->assertEquals($description, $customer['description']);
+    $customer->update(array('email'       => 'john.smith@example.com',
+                            'description' => 'Another description'));
+    
+    $this->assertArrayHasKey('object', $customer);
+    $this->assertEquals('customer', $customer['object']);
   }
 
   /**
-   * ----- Test destroy -----
    * Assert that a destroyed flag is set after a customer is successfully destroyed.
    */
   public function testDestroy() {
-    self::$_customer->destroy();
+    $customer = OmiseCustomer::retrieve(self::$_customer['id']);
+    $customer->destroy();
 
-    $this->assertTrue(self::$_customer->isDestroyed());
-    self::$_customer = null;
+    $this->assertTrue($customer->isDestroyed());
   }
 
   public function tearDown() {
@@ -124,8 +113,6 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
   }
 
   public static function tearDownAfterClass() {
-    if(self::$_customer != null) {
-      self::$_customer->destroy();
-    }
+    /** Do Nothing **/
   }
 }

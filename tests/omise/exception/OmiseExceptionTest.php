@@ -1,10 +1,10 @@
 <?php
 
-require_once dirname(__FILE__).'/TestConfig.php';
-if(version_compare(phpversion(), '5.3.2') >= 0 && file_exists(dirname(__FILE__).'/../../vendor/autoload.php')) {
-  require_once dirname(__FILE__).'/../../vendor/autoload.php';
+require_once dirname(__FILE__).'/../TestConfig.php';
+if(version_compare(phpversion(), '5.3.2') >= 0 && file_exists(dirname(__FILE__).'/../../../vendor/autoload.php')) {
+  require_once dirname(__FILE__).'/../../../vendor/autoload.php';
 } else {
-  require_once dirname(__FILE__).'/../../lib/Omise.php';
+  require_once dirname(__FILE__).'/../../../lib/Omise.php';
 }
 
 class OmiseExceptionTest extends PHPUnit_Framework_TestCase {
@@ -135,5 +135,13 @@ class OmiseExceptionTest extends PHPUnit_Framework_TestCase {
                   'message'   => 'Strange case, don\'t know why?');
 
     throw OmiseException::getInstance($mock);
+  }
+
+  public function tearDown() {
+    /** Do Nothing **/
+  }
+
+  public static function tearDownAfterClass() {
+    /** Do Nothing **/
   }
 }

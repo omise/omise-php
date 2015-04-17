@@ -17,33 +17,32 @@ class TokenTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
+   * ----- Test OmiseToken's method exists -----
+   * OmiseToken should contain some method like below.
+   */
+  public function testOmiseTokenMethodExists() {
+    $this->assertTrue(method_exists('OmiseToken', 'retrieve'));
+    $this->assertTrue(method_exists('OmiseToken', 'create'));
+    $this->assertTrue(method_exists('OmiseToken', 'reload'));
+    $this->assertTrue(method_exists('OmiseToken', 'getUrl'));
+  }
+
+  /**
    * ----- Test create -----
    * Assert that a token is successfully created with the given parameters set.
    */
   public function testCreate() {
-    $name = 'Somchai Prasert';
-    $expiration_month = 10;
-    $expiration_year = 2018;
-    $city = 'Bangkok';
-    $postal_code = '10320';
+    $token = OmiseToken::create(array(
+      'card' => array('name'              => 'Somchai Prasert',
+                      'number'            => '4242424242424242',
+                      'expiration_month'  => 10,
+                      'expiration_year'   => 2018,
+                      'city'              => 'Bangkok',
+                      'postal_code'       => '10320',
+                      'security_code'     => 123)));
 
-    $token = OmiseToken::create(
-      array('card' => array(
-        'name' => $name,
-        'number' => '4242424242424242',
-        'expiration_month' => $expiration_month,
-        'expiration_year' => $expiration_year,
-        'city' => $city,
-        'postal_code' => $postal_code,
-        'security_code' => 123
-     ))
-    );
-
-    $this->assertEquals($name, $token['card']['name']);
-    $this->assertEquals($expiration_month, $token['card']['expiration_month']);
-    $this->assertEquals($expiration_year, $token['card']['expiration_year']);
-    $this->assertEquals($city, $token['card']['city']);
-    $this->assertEquals($postal_code, $token['card']['postal_code']);
+    $this->assertArrayHasKey('object', $token);
+    $this->assertEquals('token', $token['object']);
   }
 
   /**
@@ -51,22 +50,12 @@ class TokenTest extends PHPUnit_Framework_TestCase {
    * Assert that a customer object is returned after a successful retrieve.
    */
   public function testRetrieve() {
-    $token1 = OmiseToken::create(
-      array('card' => array(
-        'name' => 'Somchai Prasert',
-        'number' => '4242424242424242',
-        'expiration_month' => 10,
-        'expiration_year' => 2018,
-        'city' => 'Bangkok',
-        'postal_code' => '10320',
-        'security_code' => 123
-     ))
-    );
+    // I assume the OmiseToken::create was fine already from above test
+    // and It don't need to create new token anymore because it has id 'tokn_test_4zmrjhuk2rndz24a6x0' fixture already.
+    $token = OmiseToken::retrieve('tokn_test_4zmrjhuk2rndz24a6x0');
 
-    $token2 = OmiseToken::retrieve($token1['id']);
-
-    $this->assertArrayHasKey('object', $token2);
-    $this->assertEquals('token', $token2['object']);
+    $this->assertArrayHasKey('object', $token);
+    $this->assertEquals('token', $token['object']);
   }
 
   public function tearDown() {

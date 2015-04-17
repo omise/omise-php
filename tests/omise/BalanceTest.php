@@ -17,23 +17,18 @@ class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test OmiseAccount's method exists -----
-   * OmiseAccount should contain some method like below.
+   * OmiseBalance class must be contain some method below.
    */
   public function testOmiseBalanceMethodExists() {
-
-    // This's need for retrieve users balance.
     $this->assertTrue(method_exists('OmiseBalance', 'retrieve'));
-
-    // This's need for reload user balance.
     $this->assertTrue(method_exists('OmiseBalance', 'reload'));
+    $this->assertTrue(method_exists('OmiseBalance', 'getUrl'));
   }
 
   /**
-   * ----- Test retrieve -----
    * Assert that a balance object is returned after a successful retrieve.
    */
-  public function testRetrieve() {
+  public function testRetrieveOmiseBalanceObject() {
     $balance = OmiseBalance::retrieve();
 
     $this->assertArrayHasKey('object', $balance);
@@ -41,23 +36,30 @@ class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test response structure -----
    * Assert that a balance object is returned after a successful retrieve.
-   * And It should receive a right key that it should be
-   * (It's need for first time when run test with the real server).
+   * It should be contain all of value like below
+   * (use it when run test with the real server).
    */
-  public function testJsonResponseStructure() {
+  public function testValidateResponseObjectStructure() {
     $balance = OmiseBalance::retrieve();
 
     $this->assertArrayHasKey('object', $balance);
+    $this->assertInternalType('string', $balance['object']);
+
     $this->assertArrayHasKey('livemode', $balance);
+    $this->assertInternalType('boolean', $balance['livemode']);
+
     $this->assertArrayHasKey('available', $balance);
+    $this->assertInternalType('int', $balance['available']);
+
     $this->assertArrayHasKey('total', $balance);
+    $this->assertInternalType('int', $balance['total']);
+
     $this->assertArrayHasKey('currency', $balance);
+    $this->assertInternalType('string', $balance['currency']);
   }
 
   /**
-   * ----- Test reload -----
    * Assert that a balance object is returned after a successful reload.
    */
   public function testReload() {

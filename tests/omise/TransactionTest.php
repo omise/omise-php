@@ -17,10 +17,18 @@ class TransactionTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test list all -----
+   * OmiseTransaction should contain some method like below.
+   */
+  public function testOmiseTransactionMethodExists() {
+    $this->assertTrue(method_exists('OmiseTransaction', 'retrieve'));
+    $this->assertTrue(method_exists('OmiseTransaction', 'reload'));
+    $this->assertTrue(method_exists('OmiseTransaction', 'getUrl'));
+  }
+
+  /**
    * Assert that a list of transactions object could be successfully retrieved.
    */
-  public function testListAll() {
+  public function testRetrieveAllTransactions() {
     $transactions = OmiseTransaction::retrieve();
 
     $this->assertArrayHasKey('object', $transactions);
@@ -28,20 +36,28 @@ class TransactionTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test retrieve -----
-   * Assert that a transaction object is returned after a successful retrieve.
-   * This test will echo to STDOUT if there is no transaction available for testing.
+   * Assert that a transaction object is returned after a successful retrieve with transaction id.
    */
-  public function testRetrieve() {
-    $transactions = OmiseTransaction::retrieve();
-    if(count($transactions['data']) > 0) {
-      $transaction = OmiseTransaction::retrieve($transactions['data'][0]['id']);
+  public function testRetrieveWithSpecificTransaction() {
+    $transaction = OmiseTransaction::retrieve('trxn_test_4zmrjhlflnz6id6q0bo');
 
-      $this->assertArrayHasKey('object', $transaction);
-      $this->assertEquals('transaction', $transaction['object']);
-    } else {
-      echo 'Can not run  testRetrieve()';
-    }
+    $this->assertArrayHasKey('object', $transaction);
+    $this->assertEquals('transaction', $transaction['object']);
+  }
+
+  /**
+   * Assert that a transaction object is returned after a successful retrieve with transaction id.
+   * And validate json structure that's return back.
+   */
+  public function testCheckJsonStructureReturn() {
+    $transaction = OmiseTransaction::retrieve('trxn_test_4zmrjhlflnz6id6q0bo');
+
+    $this->assertArrayHasKey('object', $transaction);
+    $this->assertArrayHasKey('id', $transaction);
+    $this->assertArrayHasKey('type', $transaction);
+    $this->assertArrayHasKey('amount', $transaction);
+    $this->assertArrayHasKey('currency', $transaction);
+    $this->assertArrayHasKey('created', $transaction);
   }
 
   public function tearDown() {
