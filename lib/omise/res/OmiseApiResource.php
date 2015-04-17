@@ -20,22 +20,6 @@ class OmiseApiResource extends OmiseObject {
   private $OMISE_TIMEOUT = 60;
 
   /**
-   * Trigger for execute function with test mode or not
-   * If it true. It'll not request to API Server,
-   * It use mock data from json file only (that's contain in tests/fixture folder)
-   *
-   * @param bool
-   */
-  private $_test = false;
-
-  public function __construct() {
-    // If this class is execute by phpunit > get test mode.
-    if ($_SERVER['SCRIPT_NAME'] == "./vendor/bin/phpunit") {
-      $this->test();
-    }
-  }
-
-  /**
    * Returns an instance of the class given in $clazz or raise an error.
    * @param string $clazz
    * @param string $publickey
@@ -126,7 +110,9 @@ class OmiseApiResource extends OmiseObject {
    * @return array
    */
   protected function execute($url, $requestMethod, $key, $params = null) {
-    if ($this->_test) {
+
+    // If this class is execute by phpunit > get test mode.
+    if ($_SERVER['SCRIPT_NAME'] == "./vendor/bin/phpunit") {
       $result = $this->_executeTest($url, $requestMethod, $key, $params);
     } else {
       $result = $this->_executeCurl($url, $requestMethod, $key, $params);
@@ -268,14 +254,5 @@ class OmiseApiResource extends OmiseObject {
    */
   protected function getResourceKey() {
     return $this->_secretkey;
-  }
-
-  /**
-   * Trigger test mode.
-   * This's use for PHPUnit test only.
-   * @return void
-   */
-  public function test($trigger = true) {
-    $this->_test = $trigger;
   }
 }
