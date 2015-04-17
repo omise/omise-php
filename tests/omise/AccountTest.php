@@ -17,15 +17,13 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test reload -----
-   * Assert that an account object is returned after a successful reload.
+   * ----- Test OmiseAccount's method exists -----
+   * OmiseAccount should contain some method like below.
    */
-  public function testReload() {
-    $account = OmiseAccount::retrieve();
-    $account->reload();
+  public function testOmiseAccountMethodExists() {
 
-    $this->assertArrayHasKey('object', $account);
-    $this->assertEquals('account', $account['object']);
+    $this->assertTrue(method_exists('OmiseAccount', 'retrieve'));
+    $this->assertTrue(method_exists('OmiseAccount', 'reload'));
   }
 
   /**
@@ -34,6 +32,33 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
    */
   public function testRetrieve() {
     $account = OmiseAccount::retrieve();
+
+    $this->assertArrayHasKey('object', $account);
+    $this->assertEquals('account', $account['object']);
+  }
+
+  /**
+   * ----- Test response structure -----
+   * Assert that an account object is returned after a successful retrieve.
+   * And It should receive a right key that it should be
+   * (It's need for first time when run test with the real server).
+   */
+  public function testJsonResponseStructure() {
+    $account = OmiseAccount::retrieve();
+
+    $this->assertArrayHasKey('object', $account);
+    $this->assertArrayHasKey('id', $account);
+    $this->assertArrayHasKey('email', $account);
+    $this->assertArrayHasKey('created', $account);
+  }
+
+  /**
+   * ----- Test reload -----
+   * Assert that an account object is returned after a successful reload.
+   */
+  public function testReload() {
+    $account = OmiseAccount::retrieve();
+    $account->reload();
 
     $this->assertArrayHasKey('object', $account);
     $this->assertEquals('account', $account['object']);
