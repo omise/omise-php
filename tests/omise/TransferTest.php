@@ -22,7 +22,20 @@ class TransferTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test list all -----
+   * OmiseTransfer should contain some method like below.
+   */
+  public function testMethodExists() {
+    $this->assertTrue(method_exists('OmiseTransfer', 'retrieve'));
+    $this->assertTrue(method_exists('OmiseTransfer', 'create'));
+    $this->assertTrue(method_exists('OmiseTransfer', 'reload'));
+    $this->assertTrue(method_exists('OmiseTransfer', 'save'));
+    $this->assertTrue(method_exists('OmiseTransfer', 'update'));
+    $this->assertTrue(method_exists('OmiseTransfer', 'destroy'));
+    $this->assertTrue(method_exists('OmiseTransfer', 'isDestroyed'));
+    $this->assertTrue(method_exists('OmiseTransfer', 'getUrl'));
+  }
+
+  /**
    * Assert that a list of transfer object could be successfully retrieved.
    */
   public function testRetrieveTransferListObject() {
@@ -33,32 +46,26 @@ class TransferTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test create -----
    * Assert that a transfer is successfully created with the given parameters set.
    */
   public function testCreate() {
-    $amount = 100000;
+    self::$_transter = OmiseTransfer::create(array('amount' => 100000));
 
-    self::$_transter = OmiseTransfer::create(array(
-      'amount' => $amount
-    ));
-
-    $this->assertEquals($amount, self::$_transter['amount']);
+    $this->assertArrayHasKey('object', self::$_transter);
+    $this->assertEquals('transfer', self::$_transter['object']);
   }
 
   /**
-   * ----- Test retrieve -----
    * Assert that a transfer object is returned after a successful retrieve.
    */
   public function testRetrieve() {
-    $transfer = OmiseTransfer::retrieve(self::$_transter['id']);
+    $transfer = OmiseTransfer::retrieve('trsf_test_4zmrjicrvw7j6uhv1l4');
 
     $this->assertArrayHasKey('object', $transfer);
     $this->assertEquals('transfer', $transfer['object']);
   }
 
   /**
-   * ----- Test update -----
    * Assert that a transfer is successfully updated with the given parameters set.
    */
   public function testUpdate() {
@@ -71,7 +78,6 @@ class TransferTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test destroy -----
    * Assert that a destroyed flag is set after a transfer is successfully destroyed.
    */
   public function testDestroy() {

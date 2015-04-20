@@ -8,46 +8,19 @@ if(version_compare(phpversion(), '5.3.2') >= 0 && file_exists(dirname(__FILE__).
 }
 
 class RefundTest extends PHPUnit_Framework_TestCase {
-  static $_charge;
-
   public static function setUpBeforeClass() {
-    $returnUrl = 'https://example.co.th/orders/384/complete';
-    $amount = 100000;
-    $currency = 'thb';
-    $description = 'Order-384';
-    $ip = '127.0.0.1';
-    $token = OmiseToken::create(
-      array('card' => array(
-        'name' => 'Somchai Prasert',
-        'number' => '4242424242424242',
-        'expiration_month' => 10,
-        'expiration_year' => 2018,
-        'city' => 'Bangkok',
-        'postal_code' => '10320',
-        'security_code' => 123
-      ))
-    );
-
-    self::$_charge = OmiseCharge::create(array(
-      'return_uri' => $returnUrl,
-      'amount' => $amount,
-      'currency' => $currency,
-      'description' => $description,
-      'ip' => $ip,
-      'card' => $token['id']
-    ));
+    /** Do Nothing **/
   }
 
   public function setUp() {
-   /** Do Nothing **/
+    /** Do Nothing **/
   }
 
   /**
-   * ----- Test list all -----
    * Assert that a list of refunds object could be successfully retrieved.
    */
-  public function testListAll() {
-    $charge = OmiseCharge::retrieve(self::$_charge['id']);
+  public function testRetrieveChargeRefundListObject() {
+    $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
     $refunds = $charge->refunds();
 
     $this->assertArrayHasKey('object', $refunds);
@@ -55,11 +28,10 @@ class RefundTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test create -----
    * Assert that a refund is successfully created with the given parameters set.
    */
   public function testCreate() {
-    $charge = OmiseCharge::retrieve(self::$_charge['id']);
+    $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
     $refunds = $charge->refunds();
 
     $amount = 10000;
@@ -69,10 +41,9 @@ class RefundTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test retrieve -----
    */
-  public function testRetrieve() {
-    $charge = OmiseCharge::retrieve(self::$_charge['id']);
+  public function testRetrieveSpecificChargeRefundObject() {
+    $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
     $refunds = $charge->refunds();
 
     $create = $refunds->create(array('amount' => 10000));

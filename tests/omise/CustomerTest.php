@@ -8,50 +8,27 @@ if(version_compare(phpversion(), '5.3.2') >= 0 && file_exists(dirname(__FILE__).
 }
 
 class CustomerTest extends PHPUnit_Framework_TestCase {
-  static $_customer;
-
-  /**
-   * Setup the customer to be used in test cases (except in create).
-   */
   public static function setUpBeforeClass() {
-    // Skip a tokenize card and create customer service process
-    // and mock it up with static data.
-    self::$_customer = array(
-      'object'        => 'customer',
-      'id'            => 'cust_test_4zmrjg2hct06ybwobqc',
-      'livemode'      => false,
-      'location'      => '/customers/cust_test_4zmrjg2hct06ybwobqc',
-      'default_card'  => 'card_test_4zmrjfzf0spz3mh63cs',
-      'email'         => 'john.doe@example.com',
-      'description'   => 'John Doe (id: 30)',
-      'created'       => '2015-04-08T10:53:33Z',
-      'cards'         => array( 'object'  => 'list',
-                                'from'    => '1970-01-01T00:00:00+00:00',
-                                'to'      => '2015-04-08T10:53:33+00:00',
-                                'offset'  => '0',
-                                'limit'   => '20',
-                                'total'   => '1',
-                                'data'    => array(array( 'object'              => 'card',
-                                                          'id'                  => 'card_test_4zmrjfzf0spz3mh63cs',
-                                                          'livemode'            => '',
-                                                          'location'            => '/customers/cust_test_4zmrjg2hct06ybwobqc/cards/card_test_4zmrjfzf0spz3mh63cs',
-                                                          'country'             => 'us',
-                                                          'city'                => 'Bangkok',
-                                                          'postal_code'         => '10320',
-                                                          'financing'           => '',
-                                                          'last_digits'         => '4242',
-                                                          'brand'               => 'Visa',
-                                                          'expiration_month'    => '10',
-                                                          'expiration_year'     => '2018',
-                                                          'fingerprint'         => 'pvtmjojEaHi3y880wV/485z1dVNhASL4xCrxSlsCLBw=',
-                                                          'name'                => 'Somchai Prasert',
-                                                          'security_code_check' => '1',
-                                                          'created'             => '2015-04-08T10:53:33Z')),
-                                'location' => '/customers/cust_test_4zmrjg2hct06ybwobqc/cards'));
+    /** Do Nothing **/
   }
 
   public function setUp() {
     /** Do Nothing **/
+  }
+
+  /**
+   * OmiseCustomer class must be contain some method below.
+   */
+  public function testMethodExists() {
+    $this->assertTrue(method_exists('OmiseCustomer', 'retrieve'));
+    $this->assertTrue(method_exists('OmiseCustomer', 'create'));
+    $this->assertTrue(method_exists('OmiseCustomer', 'reload'));
+    $this->assertTrue(method_exists('OmiseCustomer', 'update'));
+    $this->assertTrue(method_exists('OmiseCustomer', 'destroy'));
+    $this->assertTrue(method_exists('OmiseCustomer', 'isDestroyed'));
+    $this->assertTrue(method_exists('OmiseCustomer', 'cards'));
+    $this->assertTrue(method_exists('OmiseCustomer', 'getCards'));
+    $this->assertTrue(method_exists('OmiseCustomer', 'getUrl'));
   }
 
   /**
@@ -79,8 +56,8 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
   /**
    * Assert that a customer object is returned after a successful retrieve.
    */
-  public function testRetrieveSpecificCustomerObjectFromCustomerId() {
-    $customer = OmiseCustomer::retrieve(self::$_customer['id']);
+  public function testRetrieveSpecificCustomerObject() {
+    $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
 
     $this->assertArrayHasKey('object', $customer);
     $this->assertEquals('customer', $customer['object']);
@@ -90,7 +67,7 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
    * Assert that a customer is successfully updated with the given parameters set.
    */
   public function testUpdate() {
-    $customer = OmiseCustomer::retrieve(self::$_customer['id']);
+    $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
     $customer->update(array('email'       => 'john.smith@example.com',
                             'description' => 'Another description'));
     
@@ -102,7 +79,7 @@ class CustomerTest extends PHPUnit_Framework_TestCase {
    * Assert that a destroyed flag is set after a customer is successfully destroyed.
    */
   public function testDestroy() {
-    $customer = OmiseCustomer::retrieve(self::$_customer['id']);
+    $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
     $customer->destroy();
 
     $this->assertTrue($customer->isDestroyed());

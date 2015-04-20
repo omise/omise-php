@@ -31,27 +31,39 @@ class CardTest extends PHPUnit_Framework_TestCase {
                                 'offset'  => '0',
                                 'limit'   => '20',
                                 'total'   => '1',
-                                'data'    => array(array( 'object'              => 'card',
-                                                          'id'                  => 'card_test_4zmrjfzf0spz3mh63cs',
-                                                          'livemode'            => '',
-                                                          'location'            => '/customers/cust_test_4zmrjg2hct06ybwobqc/cards/card_test_4zmrjfzf0spz3mh63cs',
-                                                          'country'             => 'us',
-                                                          'city'                => 'Bangkok',
-                                                          'postal_code'         => '10320',
-                                                          'financing'           => '',
-                                                          'last_digits'         => '4242',
-                                                          'brand'               => 'Visa',
-                                                          'expiration_month'    => '10',
-                                                          'expiration_year'     => '2018',
-                                                          'fingerprint'         => 'pvtmjojEaHi3y880wV/485z1dVNhASL4xCrxSlsCLBw=',
-                                                          'name'                => 'Somchai Prasert',
-                                                          'security_code_check' => '1',
-                                                          'created'             => '2015-04-08T10:53:33Z')),
+                                'data'    => array(
+                                  array('object'              => 'card',
+                                        'id'                  => 'card_test_4zmrjfzf0spz3mh63cs',
+                                        'livemode'            => '',
+                                        'location'            => '/customers/cust_test_4zmrjg2hct06ybwobqc/cards/card_test_4zmrjfzf0spz3mh63cs',
+                                        'country'             => 'us',
+                                        'city'                => 'Bangkok',
+                                        'postal_code'         => '10320',
+                                        'financing'           => '',
+                                        'last_digits'         => '4242',
+                                        'brand'               => 'Visa',
+                                        'expiration_month'    => '10',
+                                        'expiration_year'     => '2018',
+                                        'fingerprint'         => 'pvtmjojEaHi3y880wV/485z1dVNhASL4xCrxSlsCLBw=',
+                                        'name'                => 'Somchai Prasert',
+                                        'security_code_check' => '1',
+                                        'created'             => '2015-04-08T10:53:33Z')),
                                 'location' => '/customers/cust_test_4zmrjg2hct06ybwobqc/cards'));
   }
 
   public function setUp() {
     /** Do Nothing **/
+  }
+
+  /**
+   * OmiseCard class must be contain some method below.
+   */
+  public function testMethodExists() {
+    $this->assertTrue(method_exists('OmiseCard', 'reload'));
+    $this->assertTrue(method_exists('OmiseCard', 'update'));
+    $this->assertTrue(method_exists('OmiseCard', 'destroy'));
+    $this->assertTrue(method_exists('OmiseCard', 'isDestroyed'));
+    $this->assertTrue(method_exists('OmiseCard', 'getUrl'));
   }
 
   /**
@@ -68,7 +80,7 @@ class CardTest extends PHPUnit_Framework_TestCase {
   /**
    * Assert that a card is could be successfully retrieved from customer.
    */
-  public function testRetrieveSpecificCustomerCardObjectFromCardId() {
+  public function testRetrieveSpecificCustomerCardObject() {
     $customer = OmiseCustomer::retrieve(self::$_customer['id']);
     $card     = $customer->cards()->retrieve(self::$_customer['cards']['data'][0]['id']);
 

@@ -17,10 +17,9 @@ class TokenTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test OmiseToken's method exists -----
    * OmiseToken should contain some method like below.
    */
-  public function testOmiseTokenMethodExists() {
+  public function testMethodExists() {
     $this->assertTrue(method_exists('OmiseToken', 'retrieve'));
     $this->assertTrue(method_exists('OmiseToken', 'create'));
     $this->assertTrue(method_exists('OmiseToken', 'reload'));
@@ -28,7 +27,6 @@ class TokenTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test create -----
    * Assert that a token is successfully created with the given parameters set.
    */
   public function testCreate() {
@@ -46,7 +44,6 @@ class TokenTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test retrieve -----
    * Assert that a customer object is returned after a successful retrieve.
    */
   public function testRetrieve() {

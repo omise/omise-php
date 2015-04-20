@@ -19,7 +19,7 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
   /**
    * OmiseAccount class must be contain some method below.
    */
-  public function testOmiseAccountMethodExists() {
+  public function testMethodExists() {
     $this->assertTrue(method_exists('OmiseAccount', 'retrieve'));
     $this->assertTrue(method_exists('OmiseAccount', 'reload'));
     $this->assertTrue(method_exists('OmiseAccount', 'getUrl'));
@@ -40,7 +40,7 @@ class OmiseAccountTest extends PHPUnit_Framework_TestCase {
    * It should be contain all of value like below
    * (use it when run test with the real server).
    */
-  public function testValidateResponseObjectStructure() {
+  public function testValidateOmiseAccountObjectRetrievedStructure() {
     $account = OmiseAccount::retrieve();
 
     $this->assertArrayHasKey('object', $account);

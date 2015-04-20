@@ -49,7 +49,7 @@ class TransactionTest extends PHPUnit_Framework_TestCase {
    * Assert that a transaction object is returned after a successful retrieve with transaction id.
    * And validate json structure that's return back.
    */
-  public function testCheckJsonStructureReturn() {
+  public function testValidateOmiseTransactionObjectRetrievedStructure() {
     $transaction = OmiseTransaction::retrieve('trxn_test_4zmrjhlflnz6id6q0bo');
 
     $this->assertArrayHasKey('object', $transaction);

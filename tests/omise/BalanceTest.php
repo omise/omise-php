@@ -19,7 +19,7 @@ class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
   /**
    * OmiseBalance class must be contain some method below.
    */
-  public function testOmiseBalanceMethodExists() {
+  public function testMethodExists() {
     $this->assertTrue(method_exists('OmiseBalance', 'retrieve'));
     $this->assertTrue(method_exists('OmiseBalance', 'reload'));
     $this->assertTrue(method_exists('OmiseBalance', 'getUrl'));
@@ -40,7 +40,7 @@ class OmiseBalanceTest extends PHPUnit_Framework_TestCase {
    * It should be contain all of value like below
    * (use it when run test with the real server).
    */
-  public function testValidateResponseObjectStructure() {
+  public function testValidateOmiseBalanceObjectRetrievedStructure() {
     $balance = OmiseBalance::retrieve();
 
     $this->assertArrayHasKey('object', $balance);
