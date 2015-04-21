@@ -1,23 +1,9 @@
-<?php
+<?php require_once dirname(__FILE__).'/TestConfig.php';
 
-require_once dirname(__FILE__).'/TestConfig.php';
-if(version_compare(phpversion(), '5.3.2') >= 0 && file_exists(dirname(__FILE__).'/../../vendor/autoload.php')) {
-  require_once dirname(__FILE__).'/../../vendor/autoload.php';
-} else {
-  require_once dirname(__FILE__).'/../../lib/Omise.php';
-}
-
-class ChargeTest extends PHPUnit_Framework_TestCase {
-  public static function setUpBeforeClass() {
-    /** Do Nothing **/
-  }
-
-  public function setUp() {
-    /** Do Nothing **/
-  }
-
+class ChargeTest extends TestConfig {
   /**
    * OmiseCharge class must be contain some method below.
+   *
    */
   public function testMethodExists() {
     $this->assertTrue(method_exists('OmiseCharge', 'reload'));
@@ -30,6 +16,7 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
 
   /**
    * Assert that a list of charge object could be successfully retrieved.
+   *
    */
   public function testRetrieveChargeListObject() {
     $charge = OmiseCharge::retrieve();
@@ -40,6 +27,7 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
 
   /**
    * Assert that a charge is successfully created with the given parameters set.
+   *
    */
   public function testCreate() {
     $charge = OmiseCharge::create(array('amount'      => 100000,
@@ -54,6 +42,7 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
 
   /**
    * Assert that a charge object is returned after a successful retrieve.
+   *
    */
   public function testRetrieveSpecificChargeObject() {
     $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
@@ -64,6 +53,7 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
 
   /**
    * Assert that a charge is successfully updated with the given parameters set.
+   *
    */
   public function testUpdate() {
     $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
@@ -78,6 +68,7 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
    *
    * In our test environment, the charge will be auto-captured after create
    * and this test will raise OmiseFailedCaptureException.
+   *
    */
   public function testCapture() {
     $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
@@ -86,13 +77,5 @@ class ChargeTest extends PHPUnit_Framework_TestCase {
     $this->assertArrayHasKey('object', $charge);
     $this->assertEquals('charge', $charge['object']);
     $this->assertTrue($charge['captured']);
-  }
-
-  public function tearDown() {
-    /** Do Nothing **/
-  }
-
-  public static function tearDownAfterClass() {
-    /** Do Nothing **/
   }
 }

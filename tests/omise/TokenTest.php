@@ -1,23 +1,9 @@
-<?php
+<?php require_once dirname(__FILE__).'/TestConfig.php';
 
-require_once dirname(__FILE__).'/TestConfig.php';
-if(version_compare(phpversion(), '5.3.2') >= 0 && file_exists(dirname(__FILE__).'/../../vendor/autoload.php')) {
-  require_once dirname(__FILE__).'/../../vendor/autoload.php';
-} else {
-  require_once dirname(__FILE__).'/../../lib/Omise.php';
-}
-
-class TokenTest extends PHPUnit_Framework_TestCase {
-  public static function setUpBeforeClass() {
-    /** Do Nothing **/
-  }
-
-  public function setUp() {
-    /** Do Nothing **/
-  }
-
+class TokenTest extends TestConfig {
   /**
    * OmiseToken should contain some method like below.
+   *
    */
   public function testMethodExists() {
     $this->assertTrue(method_exists('OmiseToken', 'retrieve'));
@@ -28,6 +14,7 @@ class TokenTest extends PHPUnit_Framework_TestCase {
 
   /**
    * Assert that a token is successfully created with the given parameters set.
+   *
    */
   public function testCreate() {
     $token = OmiseToken::create(array(
@@ -45,6 +32,7 @@ class TokenTest extends PHPUnit_Framework_TestCase {
 
   /**
    * Assert that a customer object is returned after a successful retrieve.
+   *
    */
   public function testRetrieve() {
     // I assume the OmiseToken::create was fine already from above test
@@ -53,13 +41,5 @@ class TokenTest extends PHPUnit_Framework_TestCase {
 
     $this->assertArrayHasKey('object', $token);
     $this->assertEquals('token', $token['object']);
-  }
-
-  public function tearDown() {
-    /** Do Nothing **/
-  }
-
-  public static function tearDownAfterClass() {
-    /** Do Nothing **/
   }
 }
