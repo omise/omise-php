@@ -119,7 +119,7 @@ class OmiseObjectTest extends TestConfig {
     // Get current key.
     $this->assertEquals('user', self::$obj->key());
 
-    // Move pointer to next one.
+    // Move pointer to next place one.
     self::$obj->next();
     $this->assertEquals('CDC', self::$obj->current());
 

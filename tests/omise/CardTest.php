@@ -19,7 +19,7 @@ class CardTest extends TestConfig {
    */
   public function testRetrieveCustomerCardListObject() {
     $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
-    $cards    = $customer->cards();
+    $cards = $customer->cards();
 
     $this->assertArrayHasKey('object', $cards);
     $this->assertEquals('list', $cards['object']);
@@ -31,7 +31,7 @@ class CardTest extends TestConfig {
    */
   public function testRetrieveSpecificCustomerCardObject() {
     $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
-    $card     = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
+    $card = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
 
     $this->assertArrayHasKey('object', $card);
     $this->assertEquals('card', $card['object']);

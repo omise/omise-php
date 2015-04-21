@@ -35,8 +35,6 @@ class TokenTest extends TestConfig {
    *
    */
   public function testRetrieve() {
-    // I assume the OmiseToken::create was fine already from above test
-    // and It don't need to create new token anymore because it has id 'tokn_test_4zmrjhuk2rndz24a6x0' fixture already.
     $token = OmiseToken::retrieve('tokn_test_4zmrjhuk2rndz24a6x0');
 
     $this->assertArrayHasKey('object', $token);
