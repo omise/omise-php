@@ -3,14 +3,22 @@
 An [unreleased] version is not available on `master` branch. Elements of unreleased list may be edited or removed at any time.
 
 ## [unreleased]
-- [Added] Added mock files for various test case.
-- [Added] Added CHANGELOG.md file.
+- [Added] Added fixture files for mock some data to use it in various test case.
+- [Added] Added **CHANGELOG.md** file.
+- [Added] Added more test case.
+- [Added] Created `TestConfig` class that extends `PHPUnit_Framework_TestCase` class
 - [Improved] Enhance a unit test methodology. everytime when phpunit is execute (for run a test), it will look up a `json response` by request data from **local file system** rather than **connect to the real Omise server**.
+- [Improved] Rewrote some function's comments for make it clear what it do.
+- [Changed] In */lib/omise/res/obj/OmiseObject.php*, Changed `refresh` method access modifier from `protected` to `public`.
+- [Changed] Changed all test class to extends `TestConfig` class rather than extend directly to `PHPUnit` class
+- [Changed] Renamed some test methods to clarified what it will do.
+- [Removed] Removed some code that's needless for local file system test environment.
+- [Removed] Removed setUp, tearDown method from all test.
 
 ## [2.1.2] 2015-02-04
+- [Changed] Changed `OMISE_PHP_LIB_VERSION` constant variable's value from **2.0.0** to **2.1.2** in *lib/omise/res/OmiseApiResource.php*.
 - [Removed] Removed version field in *composer.json*.
 - [Removed] Removed `Global Namespace` in `OmiseObject`'s implement class *(lib/omise/res/obj/OmiseObject.php)*.
-- [Changed] Changed `OMISE_PHP_LIB_VERSION` constant variable's value from **2.0.0** to **2.1.2** in *lib/omise/res/OmiseApiResource.php*.
 
 ## [2.1.1] 2015-02-03
 - [Fixed] Fixed the error for a case insensitive system, (renamed a capital letter to small letter in *lib/omise/res/OmiseApiResource.php*).
