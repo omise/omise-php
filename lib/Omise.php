@@ -11,3 +11,4 @@ require_once dirname(__FILE__).'/omise/OmiseRefund.php';
 require_once dirname(__FILE__).'/omise/OmiseRefundList.php';
 require_once dirname(__FILE__).'/omise/OmiseTransfer.php';
 require_once dirname(__FILE__).'/omise/OmiseTransaction.php';
+require_once dirname(__FILE__).'/omise/OmiseRecipient.php';
