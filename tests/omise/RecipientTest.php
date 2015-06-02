@@ -2,7 +2,7 @@
 
 class OmiseRecipientTest extends TestConfig {
   /**
-   * OmiseAccount class must be contain some method below.
+   * OmiseRecipient class must be contain some method below.
    *
    */
   public function testMethodExists() {
@@ -52,7 +52,7 @@ class OmiseRecipientTest extends TestConfig {
   }
 
   /**
-   * Assert that a recipient is successfully created with the given parameters set.
+   * Assert that a recipient is successfully updated with the given parameters set.
    *
    */
   public function testUpdate() {
