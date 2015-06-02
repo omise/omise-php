@@ -34,7 +34,23 @@ class OmiseRecipient extends OmiseApiResource {
   public function update($params) {
     parent::g_update(self::getUrl($this['id']), $params);
   }
-  
+
+  /**
+   * (non-PHPdoc)
+   * @see OmiseApiResource::g_destroy()
+   */
+  public function destroy() {
+    parent::g_destroy(self::getUrl($this['id']));
+  }
+
+  /**
+   * (non-PHPdoc)
+   * @see OmiseApiResource::isDestroyed()
+   */
+  public function isDestroyed() {
+    return parent::isDestroyed();
+  }
+
   /**
    *
    * @param string $id

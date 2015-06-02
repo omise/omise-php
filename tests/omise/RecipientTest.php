@@ -27,7 +27,7 @@ class OmiseRecipientTest extends TestConfig {
    *
    */
   public function testRetrieveOmiseRecipientObjectWithKey() {
-    $recipient = OmiseRecipient::retrieve('recp_test_506zyw920w15czmfsuk');
+    $recipient = OmiseRecipient::retrieve('recp_test_508a9dytz793gxv9m77');
 
     $this->assertArrayHasKey('object', $recipient);
     $this->assertEquals('recipient', $recipient['object']);
@@ -56,12 +56,23 @@ class OmiseRecipientTest extends TestConfig {
    *
    */
   public function testUpdate() {
-    $recipient = OmiseRecipient::retrieve('recp_test_506zyw920w15czmfsuk');
+    $recipient = OmiseRecipient::retrieve('recp_test_508a9dytz793gxv9m77');
     $recipient->update(array( 'name'        => 'Nuttanon Tra',
                               'email'       => 'nam@omise.co',
                               'description' => 'Another description'));
 
     $this->assertArrayHasKey('object', $recipient);
     $this->assertEquals('recipient', $recipient['object']);
+  }
+
+  /**
+   * Assert that a destroyed flag is set after a recipient is successfully destroyed.
+   *
+   */
+  public function testDelete() {
+    $recipient = OmiseRecipient::retrieve('recp_test_508a9dytz793gxv9m77');
+    $recipient->destroy();
+
+    $this->assertTrue($recipient->isDestroyed());
   }
 }
