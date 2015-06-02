@@ -21,4 +21,33 @@ class OmiseRecipientTest extends TestConfig {
     $this->assertEquals('list', $recipient['object']);
     $this->assertEquals('recipient', $recipient['data'][0]['object']);
   }
+
+  /**
+   * Assert that an recipient object is returned after a successful retrieve.
+   *
+   */
+  public function testRetrieveOmiseRecipientObjectWithKey() {
+    $recipient = OmiseRecipient::retrieve('recp_test_506zyw920w15czmfsuk');
+
+    $this->assertArrayHasKey('object', $recipient);
+    $this->assertEquals('recipient', $recipient['object']);
+  }
+
+  /**
+   * Assert that a recipient is successfully created with the given parameters set.
+   *
+   */
+  public function testCreate() {
+    $recipient = OmiseRecipient::create(array('name'          => 'Nuttanon T',
+                                              'description'   => 'Nuttanon T\'s account',
+                                              'email'         => 'nam@omise.co',
+                                              'type'          => 'individual',
+                                              'tax_id'        => '',
+                                              'bank_account'  => array( 'brand'   => 'scb',
+                                                                        'number'  => '1234567890',
+                                                                        'name'    => 'Nuttanon T')));
+
+    $this->assertArrayHasKey('object', $recipient);
+    $this->assertEquals('recipient', $recipient['object']);
+  }
 }
