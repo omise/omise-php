@@ -80,7 +80,7 @@ class OmiseCustomer extends OmiseApiResource {
    * @return OmiseCardList
    */
   public function getCards() {
-  	return $this->cards();
+    return $this->cards();
   }
 
   /**

@@ -24,8 +24,8 @@ class OmiseRefundList extends OmiseApiResource {
    * @return OmiseRefund
    */
   public function create($params) {
-  	$result = parent::execute($this->getUrl(), parent::REQUEST_POST, self::getResourceKey(), $params);
-  	return new OmiseRefund($result, $this->_publickey, $this->_secretkey);
+    $result = parent::execute($this->getUrl(), parent::REQUEST_POST, self::getResourceKey(), $params);
+    return new OmiseRefund($result, $this->_publickey, $this->_secretkey);
   }
   
   /**
@@ -34,8 +34,8 @@ class OmiseRefundList extends OmiseApiResource {
    * @return OmiseRefund
    */
   public function retrieve($id) {
-  	$result = parent::execute($this->getUrl($id), parent::REQUEST_GET, self::getResourceKey());
-  	return new OmiseRefund($result, $this->_publickey, $this->_secretkey);
+    $result = parent::execute($this->getUrl($id), parent::REQUEST_GET, self::getResourceKey());
+    return new OmiseRefund($result, $this->_publickey, $this->_secretkey);
   }
 
   /**
@@ -43,6 +43,6 @@ class OmiseRefundList extends OmiseApiResource {
    * @return string
    */
   private function getUrl($id = '') {
-  	return OMISE_API_URL.'charges/'.$this->_chargeID.'/'.self::ENDPOINT.'/'.$id;
+    return OMISE_API_URL.'charges/'.$this->_chargeID.'/'.self::ENDPOINT.'/'.$id;
   }
 }

@@ -1,48 +1,24 @@
-<?php
+<?php require_once dirname(__FILE__).'/TestConfig.php';
 
-require_once dirname(__FILE__).'/TestConfig.php';
-if(version_compare(phpversion(), '5.3.2') >= 0 && file_exists(dirname(__FILE__).'/../../vendor/autoload.php')) {
-  require_once dirname(__FILE__).'/../../vendor/autoload.php';
-} else {
-  require_once dirname(__FILE__).'/../../lib/Omise.php';
-}
-
-class CardTest extends PHPUnit_Framework_TestCase {
-  private $_customer;
-
-  public static function setUpBeforeClass() {
-  	/** Do Nothing **/
-  }
-
+class CardTest extends TestConfig {
   /**
-   * Setup the customer to be used in test cases.
+   * OmiseCard class must be contain some method below.
+   *
    */
-  public function setUp() {
-   $token = OmiseToken::create(
-      array('card' => array(
-        'name' => 'Somchai Prasert',
-        'number' => '4111111111111111',
-        'expiration_month' => 10,
-        'expiration_year' => 2018,
-        'city' => 'Bangkok',
-        'postal_code' => '10320',
-        'security_code' => 123
-      ))
-    );
-
-    $this->_customer = OmiseCustomer::create(array(
-      'email' => 'john.doe@example.com',
-      'description' => 'John Doe (id: 30)',
-      'card' => $token['id']
-    ));
+  public function testMethodExists() {
+    $this->assertTrue(method_exists('OmiseCard', 'reload'));
+    $this->assertTrue(method_exists('OmiseCard', 'update'));
+    $this->assertTrue(method_exists('OmiseCard', 'destroy'));
+    $this->assertTrue(method_exists('OmiseCard', 'isDestroyed'));
+    $this->assertTrue(method_exists('OmiseCard', 'getUrl'));
   }
 
   /**
-   * ----- Test list all -----
    * Assert that a list of card object could be successfully retrieved from customer.
+   *
    */
-  public function testListAll() {
-    $customer = OmiseCustomer::retrieve($this->_customer['id']);
+  public function testRetrieveCustomerCardListObject() {
+    $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
     $cards = $customer->cards();
 
     $this->assertArrayHasKey('object', $cards);
@@ -50,24 +26,24 @@ class CardTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test retrieve -----
    * Assert that a card is could be successfully retrieved from customer.
+   *
    */
-  public function testRetrieve() {
-    $customer = OmiseCustomer::retrieve($this->_customer['id']);
-    $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
+  public function testRetrieveSpecificCustomerCardObject() {
+    $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
+    $card = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
 
     $this->assertArrayHasKey('object', $card);
     $this->assertEquals('card', $card['object']);
   }
 
   /**
-   * ----- Test reload -----
    * Assert that a card object is returned after a successful reload.
+   *
    */
   public function testReload() {
-    $customer = OmiseCustomer::retrieve($this->_customer['id']);
-    $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
+    $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
+    $card = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
     $card->reload();
 
     $this->assertArrayHasKey('object', $card);
@@ -75,55 +51,32 @@ class CardTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * ----- Test update -----
    * Assert that a card is successfully updated with the given parameters set.
+   *
    */
   public function testUpdate() {
-    $month = 11;
-    $year = 2017;
-    $name = 'Somchai Praset';
-    $postalcode = '10310';
+    $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
+    $card = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
+    $card->update(array('expiration_month'  => 11,
+                        'expiration_year'   => 2017,
+                        'name'              => 'Somchai Praset',
+                        'postal_code'       => '10310'));
 
-    $customer = OmiseCustomer::retrieve($this->_customer['id']);
-    $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
-    $card->update(array(
-      'expiration_month' => $month,
-      'expiration_year' => $year,
-      'name' => $name,
-      'postal_code' => $postalcode
-    ));
-
-    $this->assertEquals($month, $card['expiration_month']);
-    $this->assertEquals($year, $card['expiration_year']);
-    $this->assertEquals($name, $card['name']);
-    $this->assertEquals($postalcode, $card['postal_code']);
+    $this->assertArrayHasKey('object', $card);
+    $this->assertEquals('card', $card['object']);
   }
 
   /**
-   * ----- Test destroy -----
    * Assert that a destroyed flag is set after a card is successfully destroyed.
+   *
    */
   public function testDestroy() {
-    $customer = OmiseCustomer::retrieve($this->_customer['id']);
-    $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
-    $this->_customer = null;
+    $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
+    $card = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
     $card->destroy();
 
+    $this->assertArrayHasKey('object', $card);
+    $this->assertEquals('card', $card['object']);
     $this->assertTrue($card->isDestroyed());
-  }
-
-  /**
-   * Remove the customer used in test cases.
-   */
-  public function tearDown() {
-  	if($this->_customer != null) {
-      $customer = OmiseCustomer::retrieve($this->_customer['id']);
-      $card = $customer->cards()->retrieve($this->_customer['cards']['data'][0]['id']);
-      $card->destroy();
-    }
-  }
-
-  public static function tearDownAfterClass() {
-    /** Do Nothing **/
   }
 }

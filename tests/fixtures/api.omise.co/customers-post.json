@@ -1,0 +1,39 @@
+{
+  "object": "customer",
+  "id": "cust_test_4zmrjg2hct06ybwobqc",
+  "livemode": false,
+  "location": "/customers/cust_test_4zmrjg2hct06ybwobqc",
+  "default_card": "card_test_4zmrjfzf0spz3mh63cs",
+  "email": "john.doe@example.com",
+  "description": "John Doe (id: 30)",
+  "created": "2015-04-08T10:53:33Z",
+  "cards": {
+    "object": "list",
+    "from": "1970-01-01T00:00:00+00:00",
+    "to": "2015-04-08T10:53:33+00:00",
+    "offset": 0,
+    "limit": 20,
+    "total": 1,
+    "data": [
+      {
+        "object": "card",
+        "id": "card_test_4zmrjfzf0spz3mh63cs",
+        "livemode": false,
+        "location": "/customers/cust_test_4zmrjg2hct06ybwobqc/cards/card_test_4zmrjfzf0spz3mh63cs",
+        "country": "us",
+        "city": "Bangkok",
+        "postal_code": "10320",
+        "financing": "",
+        "last_digits": "4242",
+        "brand": "Visa",
+        "expiration_month": 10,
+        "expiration_year": 2018,
+        "fingerprint": "pvtmjojEaHi3y880wV/485z1dVNhASL4xCrxSlsCLBw=",
+        "name": "Somchai Prasert",
+        "security_code_check": true,
+        "created": "2015-04-08T10:53:33Z"
+      }
+    ],
+    "location": "/customers/cust_test_4zmrjg2hct06ybwobqc/cards"
+  }
+}

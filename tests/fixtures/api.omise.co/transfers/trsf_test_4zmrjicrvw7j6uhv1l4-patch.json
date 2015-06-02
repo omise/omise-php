@@ -1,0 +1,14 @@
+{
+  "object": "transfer",
+  "id": "trsf_test_4zmrjicrvw7j6uhv1l4",
+  "livemode": false,
+  "location": "/transfers/trsf_test_4zmrjicrvw7j6uhv1l4",
+  "sent": false,
+  "paid": false,
+  "amount": 5000,
+  "currency": "thb",
+  "failure_code": null,
+  "failure_message": null,
+  "transaction": null,
+  "created": "2015-04-08T10:53:44Z"
+}
