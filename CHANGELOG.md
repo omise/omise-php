@@ -1,8 +1,6 @@
 # Change Log
 
-An [unreleased] version is not available on `master` branch. Elements of unreleased list may be edited or removed at any time.
-
-## [unreleased]
+## [2.1.3] 2015-06-02
 - [Added] Added fixture files for mock some data to use it in various test case.
 - [Added] Added **CHANGELOG.md** file.
 - [Added] Added more test case.
@@ -12,6 +10,7 @@ An [unreleased] version is not available on `master` branch. Elements of unrelea
 - [Changed] In */lib/omise/res/obj/OmiseObject.php*, Changed `refresh` method access modifier from `protected` to `public`.
 - [Changed] Changed all test class to extends `TestConfig` class rather than extend directly to `PHPUnit` class
 - [Changed] Renamed some test methods to clarified what it will do.
+- [Changed] Changed `OMISE_PHP_LIB_VERSION` constant variable's value from **2.1.2** to **2.1.3** in *lib/omise/res/OmiseApiResource.php*.
 - [Removed] Removed some code that's needless for local file system test environment.
 - [Removed] Removed setUp, tearDown method from all test.
 
