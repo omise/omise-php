@@ -1,0 +1,22 @@
+{
+  "object": "recipient",
+  "id": "recp_test_506zyw920w15czmfsuk",
+  "livemode": false,
+  "location": "/recipients/recp_test_506zyw920w15czmfsuk",
+  "verified": true,
+  "active": true,
+  "name": "Nuttanon Tra",
+  "email": "nam@omise.co",
+  "description": "Another description",
+  "type": "individual",
+  "tax_id": "",
+  "bank_account": {
+    "object": "bank_account",
+    "brand": "test",
+    "last_digits": "6789",
+    "name": "DEFAULT BANK ACCOUNT",
+    "created": "2015-05-30T04:27:59Z"
+  },
+  "failure_code": null,
+  "created": "2015-05-30T04:27:59Z"
+}

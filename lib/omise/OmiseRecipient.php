@@ -28,6 +28,14 @@ class OmiseRecipient extends OmiseApiResource {
   }
 
   /**
+   * (non-PHPdoc)
+   * @see OmiseApiResource::g_update()
+   */
+  public function update($params) {
+    parent::g_update(self::getUrl($this['id']), $params);
+  }
+  
+  /**
    *
    * @param string $id
    * @return string
