@@ -1,5 +1,10 @@
 # Change Log
 
+An [unreleased] version is not available on `master` branch. Elements of unreleased list may be edited or removed at any time.
+
+## [unreleased]
+- [Added] Implemented **Recipient** APIs (retrieve, create, update, destroy, Recipient's error code handler class)
+
 ## [2.1.3] 2015-06-02
 - [Added] Added fixture files for mock some data to use it in various test case.
 - [Added] Added **CHANGELOG.md** file.
