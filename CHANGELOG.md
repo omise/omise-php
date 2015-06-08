@@ -1,9 +1,8 @@
 # Change Log
 
-An [unreleased] version is not available on `master` branch. Elements of unreleased list may be edited or removed at any time.
-
-## [unreleased]
+## [2.2.0] 2015-06-08
 - [Added] Implemented **Recipient** APIs (retrieve, create, update, destroy, Recipient's error code handler class)
+- [Changed] Changed `OMISE_PHP_LIB_VERSION` constant variable's value from **2.1.3** to **2.2.0** in *lib/omise/res/OmiseApiResource.php*.
 
 ## [2.1.3] 2015-06-02
 - [Added] Added fixture files for mock some data to use it in various test case.
