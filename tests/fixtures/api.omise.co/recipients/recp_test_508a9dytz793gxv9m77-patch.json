@@ -1,0 +1,22 @@
+{
+  "object": "recipient",
+  "id": "recp_test_508a9dytz793gxv9m77",
+  "livemode": false,
+  "location": "/recipients/recp_test_508a9dytz793gxv9m77",
+  "verified": false,
+  "active": false,
+  "name": "Nuttanon Tra",
+  "email": "nam@omise.co",
+  "description": "Another description",
+  "type": "individual",
+  "tax_id": "",
+  "bank_account": {
+    "object": "bank_account",
+    "brand": "scb",
+    "last_digits": "7890",
+    "name": "Nuttanon T",
+    "created": "2015-06-02T11:22:05Z"
+  },
+  "failure_code": null,
+  "created": "2015-06-02T11:22:05Z"
+}
