@@ -42,6 +42,12 @@ class OmiseException extends Exception {
       case 'failed_fraud_check':
         return new OmiseFailedFraudCheckException($array['message'], $array);
 
+      case 'invalid_recipient':
+        return new OmiseInvalidRecipientException($array['message'], $array);
+
+      case 'invalid_bank_account':
+        return new OmiseInvalidBankAccountException($array['message'], $array);
+
       default:
         return new OmiseUndefinedException($array['message'], $array);
     }
@@ -98,6 +104,14 @@ class OmiseFailedCaptureException extends OmiseException {
 }
 
 class OmiseFailedFraudCheckException extends OmiseException {
+
+}
+
+class OmiseInvalidRecipientException extends OmiseException {
+
+}
+
+class OmiseInvalidBankAccountException extends OmiseException {
 
 }
 
