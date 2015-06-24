@@ -7,16 +7,18 @@ class OmiseDisputeTest extends TestConfig {
    */
   public function testMethodExists() {
     $this->assertTrue(method_exists('OmiseDispute', 'retrieve'));
+    $this->assertTrue(method_exists('OmiseDispute', 'reload'));
     $this->assertTrue(method_exists('OmiseDispute', 'update'));
     $this->assertTrue(method_exists('OmiseDispute', 'getUrl'));
   }
 
   /**
-   * Assert that a dispute object is returned after a successful retrieve.
+   * Assert that a list of dispute object is returned after a successful retrieve.
    *
    */
   public function testRetrieveOmiseDisputeObject() {
     $dispute = OmiseDispute::retrieve();
+    $dispute->reload();
 
     $this->assertArrayHasKey('object', $dispute);
     $this->assertEquals('list', $dispute['object']);
@@ -35,33 +37,39 @@ class OmiseDisputeTest extends TestConfig {
   }
 
   /**
-   * Assert that a dispute object is returned after a successful retrieve.
+   * Assert that a dispute object is returned after a successful retrieve with 'open' status.
    *
    */
   public function testRetrieveOmiseDisputeObjectThatOpen() {
     $dispute = OmiseDispute::retrieve('open');
 
     $this->assertArrayHasKey('object', $dispute);
+    $this->assertEquals('dispute', $dispute['data'][0]['object']);
+    $this->assertEquals('open', $dispute['data'][0]['status']);
   }
 
   /**
-   * Assert that a dispute object is returned after a successful retrieve.
+   * Assert that a dispute object is returned after a successful retrieve with 'pending' status.
    *
    */
   public function testRetrieveOmiseDisputeObjectThatPending() {
     $dispute = OmiseDispute::retrieve('pending');
 
     $this->assertArrayHasKey('object', $dispute);
+    $this->assertEquals('dispute', $dispute['data'][0]['object']);
+    $this->assertEquals('pending', $dispute['data'][0]['status']);
   }
 
   /**
-   * Assert that a dispute object is returned after a successful retrieve.
+   * Assert that a dispute object is returned after a successful retrieve with 'closed' status.
    *
    */
   public function testRetrieveOmiseDisputeObjectThatClosed() {
     $dispute = OmiseDispute::retrieve('closed');
 
     $this->assertArrayHasKey('object', $dispute);
+    $this->assertEquals('dispute', $dispute['data'][0]['object']);
+    $this->assertEquals('closed', $dispute['data'][0]['status']);
   }
 
   /**
