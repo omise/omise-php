@@ -10,7 +10,7 @@ class OmiseDispute extends OmiseApiResource {
    * @param string $id
    * @param string $publickey
    * @param string $secretkey
-   * @return OmiseCustomer
+   * @return OmiseDispute
    */
   public static function retrieve($id = '', $publickey = null, $secretkey = null) {
     return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
@@ -37,7 +37,7 @@ class OmiseDispute extends OmiseApiResource {
   }
 
   /**
-   *
+   * Generate request url.
    * @param string $id
    * @return string
    */
