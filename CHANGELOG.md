@@ -3,8 +3,8 @@
 An [unreleased] version is not available on `master` branch. Elements of unreleased list may be edited or removed at any time.
 
 ## [unreleased]
-- [Added] Implemented **Dispute** APIs (retrieve, update)
-- [Added] Added more Unit Test for **Dispute** APIs (7 tests, 13 assertions)
+- [Added] Implemented **Dispute** APIs (retrieve, reload, update)
+- [Added] Added more Unit Test for **Dispute** APIs (7 tests, 20 assertions)
 
 ## [2.2.0] 2015-06-08
 - [Added] Implemented **Recipient** APIs (retrieve, create, update, destroy, Recipient's error code handler class)
