@@ -58,23 +58,23 @@ Please see usage section below for usage examples.
 
 ## Usage
 
-###1. Flow
+### 1. Flow
 
 The following flow is recommended in order to comply with the PCI Security Standards.
 You should never transmit card data through your servers unless you have a valid PCI certificate.
 
-###Flow using Omise.js
+### Flow using Omise.js
 1. User enters the credit card information on a form on your site, completely white-label (user never sees Omise).
 2. The card is sent directly from the browser to Omise server via HTTPS using our Javascript (Omise.js).
 3. Omise returns a Token that identifies the card and if the card passed the authorization `card.security_code_check`
 4. Your page will send this token to your server to finally make the charge capture.
 
-###Notes:
+### Notes:
 In step 3, if `card.security_code_check` is `false`, the card failed the authorization process, probably because of a wrong CVV, wrong expire date or wrong card number. In this case you should display an error message and ask user to enter card again.
 
 In step 4, Omise will make the final capture of the amount. If this fails, but token was authorized, it can be due to card having no funds required for the charge.
 
-###The Code
+### The Code
 
 Add the following to your PHP script and **replace the keys by the one given in Omise dashboard**:
 
