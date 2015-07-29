@@ -2,6 +2,9 @@
 
 An [unreleased] version is not available on `master` branch. Elements of unreleased list may be edited or removed at any time.
 
+## [2.3.1] 2015-07-29
+- [Added] New DigiCert CA certificates.
+
 ## [2.3.0] 2015-06-24
 - [Added] Implemented **Dispute** APIs (retrieve, reload, update)
 - [Added] Added more Unit Test for **Dispute** APIs (7 tests, 20 assertions)
