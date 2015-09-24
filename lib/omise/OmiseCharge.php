@@ -58,14 +58,27 @@ class OmiseCharge extends OmiseApiResource {
 
     return $this;
   }
-  
+
   /**
    * list refunds
+   * @param null|string $publickey
+   * @param null|string $secretkey
    * @return OmiseRefundList
+   * @throws Exception
+   * @throws OmiseAuthenticationFailureException
+   * @throws OmiseFailedCaptureException
+   * @throws OmiseFailedFraudCheckException
+   * @throws OmiseInvalidCardException
+   * @throws OmiseInvalidCardTokenException
+   * @throws OmiseInvalidChargeException
+   * @throws OmiseMissingCardException
+   * @throws OmiseNotFoundException
+   * @throws OmiseUndefinedException
+   * @throws OmiseUsedTokenException
    */
-  public function refunds() {
+  public function refunds($publickey = null, $secretkey = null) {
     $result = parent::execute(self::getUrl($this['id']).'/refunds', parent::REQUEST_GET, parent::getResourceKey());
-    return new OmiseRefundList($result, $this['id']);
+    return new OmiseRefundList($result, $this['id'], $publickey, $secretkey);
   }
 
   /**
