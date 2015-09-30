@@ -2,6 +2,9 @@
 
 An [unreleased] version is not available on `master` branch. Elements of unreleased list may be edited or removed at any time.
 
+## [2.3.2] 2015-09-30
+- [Fixed] Pass key values into the OmiseRefundList object when call a refunds() method inside the OmiseCharge instance.
+
 ## [2.3.1] 2015-07-29
 - [Added] New DigiCert CA certificates.
 
