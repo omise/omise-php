@@ -4,7 +4,6 @@ require_once dirname(__FILE__).'/obj/OmiseObject.php';
 require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
 
 define('OMISE_PHP_LIB_VERSION', '2.3.2');
-define('OMISE_API_VERSION', '2014-07-27');
 define('OMISE_API_URL', 'https://api.omise.co/');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
@@ -208,15 +207,14 @@ class OmiseApiResource extends OmiseObject {
    * @return array
    */
   private function genOptions($requestMethod, $userpwd, $params) {
+    $user_agent = "OmisePHP/".OMISE_PHP_LIB_VERSION;
+    $omise_api_version = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
+
     $options = array(
         // Set the HTTP version to 1.1.
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         // Set the request method.
         CURLOPT_CUSTOMREQUEST => $requestMethod,
-        // Set the request header
-        CURLOPT_HTTPHEADER => "Omise-Version: ".OMISE_API_VERSION,
-        // Set the user agent.
-        CURLOPT_USERAGENT => "OmisePHP/".OMISE_PHP_LIB_VERSION." OmiseAPI/".OMISE_API_VERSION,
         // Make php-curl returns the data as string.
         CURLOPT_RETURNTRANSFER => true,
         // Do not include the header in the output.
@@ -235,6 +233,19 @@ class OmiseApiResource extends OmiseObject {
         // CA bundle.
         CURLOPT_CAINFO => dirname(__FILE__).'/../../../data/ca_certificates.pem'
     );
+
+    // Config Omise API Version
+    if ($omise_api_version) {
+      $options += array(CURLOPT_HTTPHEADER => array("Omise-Version: ".$omise_api_version));
+
+      $user_agent .= ' OmiseAPI/'.$omise_api_version;
+    }
+
+    // Config UserAgent
+    if (defined('OMISE_USER_AGENT_SUFFIX'))
+      $options += array(CURLOPT_USERAGENT => $user_agent." ".OMISE_USER_AGENT_SUFFIX);
+    else
+      $options += array(CURLOPT_USERAGENT => $user_agent);
 
     // Also merge POST parameters with the option.
     if(count($params) > 0) $options += array(CURLOPT_POSTFIELDS => http_build_query($params));
