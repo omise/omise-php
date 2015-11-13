@@ -1,6 +1,8 @@
 # Change Log
 
-An [unreleased] version is not available on `master` branch. Elements of unreleased list may be edited or removed at any time.
+## [2.4.0] 2015-11-13
+- [Added] Add Omise-Version header to request.
+- [Added] Add `OMISE_USER_AGENT_SUFFIX` constant that let's people add the suffix into the `user-agent` string.
 
 ## [2.3.2] 2015-09-30
 - [Fixed] Pass key values into the OmiseRefundList object when call a refunds() method inside the OmiseCharge instance.

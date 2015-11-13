@@ -56,6 +56,23 @@ require_once dirname(__FILE__).'/omise-php/lib/Omise.php';
 
 Please see usage section below for usage examples.
 
+### API version
+
+In case you want to enforce API version the application use, you can specify it
+by setting the api_version. The version specified by this settings will override
+the version setting in your account. This is useful if you have multiple
+environments with different API versions (e.g. development on the latest but
+production on the older version).
+
+```php
+require_once dirname(__FILE__).'/omise-php/lib/Omise.php';
+
+define('OMISE_API_VERSION', '2014-07-27');
+```
+
+It is highly recommended to set this version to the current version
+you're using.
+
 ## Usage
 
 ### 1. Flow
