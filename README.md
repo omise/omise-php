@@ -58,11 +58,12 @@ Please see usage section below for usage examples.
 
 ### API version
 
-In case you want to enforce API version the application use, you can specify it
-by setting the api_version. The version specified by this settings will override
-the version setting in your account. This is useful if you have multiple
-environments with different API versions (e.g. development on the latest but
-production on the older version).
+You can choose which API version to use with Omise. Each API version has new features and might not be compatible with previous versions. You can change the default version by visiting your Omise Dashboard.
+
+To overwrite the API version to use, you can specify it by defining OMISE_API_VERSION.
+The version configured here will have higher priority than the version set in your Omise account.
+This is useful if you have multiple environments with different API versions for testing.
+(e.g. Development on the latest version but production is on an older version).
 
 ```php
 require_once dirname(__FILE__).'/omise-php/lib/Omise.php';
