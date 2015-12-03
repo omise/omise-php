@@ -13,10 +13,19 @@ class OmiseCardList extends OmiseApiResource {
    * @param string $publickey
    * @param string $secretkey
    */
-  public function __construct($cards, $customerID, $publickey = null, $secretkey = null) {
+  public function __construct($cards, $customerID, $options = array(), $publickey = null, $secretkey = null) {
+    if (!is_array($options) && func_num_args() == 4) {
+      $publickey = func_get_arg(2);
+      $secretkey = func_get_arg(3);
+    }
+
     parent::__construct($publickey, $secretkey);
     $this->_customerID = $customerID;
-    $this->refresh($cards);
+
+    if (is_array($options))
+      parent::g_reload($this->getUrl('?'. http_build_query($options)));
+    else
+      $this->refresh($cards);
   }
   
   /**
