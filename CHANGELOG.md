@@ -1,5 +1,8 @@
 # Change Log
 
+## [2.4.1] 2015-12-03
+- [Added] Add fetching options to customer cards (bde7986)
+
 ## [2.4.0] 2015-11-13
 - [Added] Add Omise-Version header to request.
 - [Added] Add `OMISE_USER_AGENT_SUFFIX` constant that let's people add the suffix into the `user-agent` string.
