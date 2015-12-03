@@ -53,6 +53,23 @@ class CustomerTest extends TestConfig {
   }
 
   /**
+   * Assert that a customer object is returned after a successful retrieve.
+   *
+   */
+  public function testRetrieveCardObjectFromCustomer() {
+    $customer = OmiseCustomer::retrieve('cust_test_5234fzk37pi2mz0cen3');
+    $cards    = $customer->cards(array('limit' => 1));
+
+    $this->assertArrayHasKey('object', $cards);
+    $this->assertEquals('list', $cards['object']);
+
+    if (!empty($cards['data'])) {
+      $this->assertEquals('card', $cards['data'][0]['object']);
+      $this->assertEquals(1, count($cards['data']));
+    }
+  }
+
+  /**
    * Assert that a customer is successfully updated with the given parameters set.
    *
    */
