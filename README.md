@@ -1,5 +1,7 @@
 # Omise PHP Client
 
+[![Join the chat at https://gitter.im/omise/omise-php](https://badges.gitter.im/omise/omise-php.svg)](https://gitter.im/omise/omise-php?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 `omise-php` is Omise API library written in PHP.
 
 ## Requirements
