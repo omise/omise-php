@@ -10,6 +10,7 @@ class ChargeTest extends TestConfig {
     $this->assertTrue(method_exists('OmiseCharge', 'create'));
     $this->assertTrue(method_exists('OmiseCharge', 'update'));
     $this->assertTrue(method_exists('OmiseCharge', 'capture'));
+    $this->assertTrue(method_exists('OmiseCharge', 'reverse'));
     $this->assertTrue(method_exists('OmiseCharge', 'refunds'));
     $this->assertTrue(method_exists('OmiseCharge', 'getUrl'));
   }
@@ -77,5 +78,18 @@ class ChargeTest extends TestConfig {
     $this->assertArrayHasKey('object', $charge);
     $this->assertEquals('charge', $charge['object']);
     $this->assertTrue($charge['captured']);
+  }
+
+  /**
+   * Assert that a reversed flag is set after charge is successfully reversed.
+   *
+   */
+  public function testReverse() {
+    $charge = OmiseCharge::retrieve('chrg_test_53z5zoeovi39e1erbj0');
+    $charge->reverse();
+
+    $this->assertArrayHasKey('object', $charge);
+    $this->assertEquals('charge', $charge['object']);
+    $this->assertTrue($charge['reversed']);
   }
 }
