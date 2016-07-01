@@ -1,5 +1,9 @@
 # Change Log
 
+## [2.5.0] 2016-07-01
+- [Added] Add charge reverse method (@zentetsukenz)
+- [Fixed] Change condition when matching phpunit from using fixed string to regex (@zentetsukenz)
+
 ## [2.4.1] 2015-12-03
 - [Added] Add fetching options to customer cards (bde7986)
 
