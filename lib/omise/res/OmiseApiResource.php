@@ -111,7 +111,7 @@ class OmiseApiResource extends OmiseObject {
   protected function execute($url, $requestMethod, $key, $params = null) {
 
     // If this class is execute by phpunit > get test mode.
-    if ($_SERVER['SCRIPT_NAME'] == "./vendor/bin/phpunit") {
+    if (preg_match('/phpunit/', $_SERVER['SCRIPT_NAME'])) {
       $result = $this->_executeTest($url, $requestMethod, $key, $params);
     } else {
       $result = $this->_executeCurl($url, $requestMethod, $key, $params);
