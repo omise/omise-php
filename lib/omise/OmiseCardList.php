@@ -35,7 +35,7 @@ class OmiseCardList extends OmiseApiResource
     /**
      * retrieve
      *
-     * @param stroing $id
+     * @param  string $id
      *
      * @return OmiseCard
      */
@@ -48,7 +48,7 @@ class OmiseCardList extends OmiseApiResource
   
 
     /**
-     * @param string $id
+     * @param  string $id
      *
      * @return string
      */

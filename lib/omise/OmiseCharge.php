@@ -98,7 +98,7 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
-     * @param string $id
+     * @param  string $id
      *
      * @return string
      */

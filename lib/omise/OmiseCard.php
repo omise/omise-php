@@ -66,7 +66,7 @@ class OmiseCard extends OmiseApiResource
     }
 
     /**
-     * @param string $cardID
+     * @param  string $cardID
      *
      * @return string
      */

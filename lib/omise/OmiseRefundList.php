@@ -23,7 +23,7 @@ class OmiseRefundList extends OmiseApiResource
     }
 
     /**
-     * @param array $amount
+     * @param  array $amount
      *
      * @return OmiseRefund
      */
