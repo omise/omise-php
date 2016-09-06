@@ -42,7 +42,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
      */
     public function refresh($values, $clear = false)
     {
-        if($clear) {
+        if ($clear) {
             $this->_values = array();
         }
 

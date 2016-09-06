@@ -147,12 +147,14 @@ class OmiseApiResource extends OmiseObject
         $array = json_decode($result, true);
 
         // If response is invalid or not a JSON.
-        if (count($array) === 0 || ! isset($array['object']))
+        if (count($array) === 0 || ! isset($array['object'])) {
             throw new Exception('Unknown error. (Bad Response)');
+        }
 
         // If response is an error object.
-        if ($array['object'] === 'error')
+        if ($array['object'] === 'error') {
             throw OmiseException::getInstance($array);
+        }
 
         return $array;
     }
@@ -208,7 +210,6 @@ class OmiseApiResource extends OmiseObject
 
         // Make a request from Curl if json file was not exists.
         if (! file_exists($request_url)) {
-
             // Get a directory that's file should contain.
             $request_dir = explode('/', $request_url);
             unset($request_dir[count($request_dir) - 1]);
@@ -286,7 +287,9 @@ class OmiseApiResource extends OmiseObject
         }
 
         // Also merge POST parameters with the option.
-        if (count($params) > 0) $options += array(CURLOPT_POSTFIELDS => http_build_query($params));
+        if (count($params) > 0) {
+            $options += array(CURLOPT_POSTFIELDS => http_build_query($params));
+        }
 
         return $options;
     }
