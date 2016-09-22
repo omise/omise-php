@@ -33,7 +33,7 @@ class OmiseCardList extends OmiseApiResource
     }
   
     /**
-     * retrieve
+     * retrieve a card
      *
      * @param  string $id
      *

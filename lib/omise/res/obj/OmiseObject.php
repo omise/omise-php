@@ -38,7 +38,8 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
     /**
      * Reload the object.
      *
-     * @param array $values
+     * @param array   $values
+     * @param boolean $clear
      */
     public function refresh($values, $clear = false)
     {

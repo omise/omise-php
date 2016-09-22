@@ -82,6 +82,8 @@ class OmiseCustomer extends OmiseApiResource
     /**
      * Gets a list of all cards belongs to this customer.
      *
+     * @param  array $options
+     *
      * @return OmiseCardList
      */
     public function cards($options = array())

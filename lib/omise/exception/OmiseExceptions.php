@@ -14,6 +14,7 @@ class OmiseException extends Exception
      * Returns an instance of an exception class from the given error response.
      *
      * @param  array $array
+     *
      * @return OmiseAuthenticationFailureException|OmiseNotFoundException|OmiseUsedTokenException|OmiseInvalidCardException|OmiseInvalidCardTokenException|OmiseMissingCardException|OmiseInvalidChargeException|OmiseFailedCaptureException|OmiseFailedFraudCheckException|OmiseUndefinedException
      */
     public static function getInstance($array)
