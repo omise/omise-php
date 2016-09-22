@@ -2,33 +2,43 @@
 
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
-class OmiseEvent extends OmiseApiResource {
-  const ENDPOINT = 'events';
+class OmiseEvent extends OmiseApiResource
+{
+    const ENDPOINT = 'events';
 
-  /**
-   * Retrieves an event.
-   * @param string $id
-   * @param string $publickey
-   * @param string $secretkey
-   * @return OmiseEvent
-   */
-  public static function retrieve($id = '', $publickey = null, $secretkey = null) {
-    return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
-  }
+    /**
+     * Retrieves an event.
+     *
+     * @param  string $id
+     * @param  string $publickey
+     * @param  string $secretkey
+     *
+     * @return OmiseEvent
+     */
+    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    {
+        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+    }
 
-  /**
-   * (non-PHPdoc)
-   * @see OmiseApiResource::g_reload()
-   */
-  public function reload() {
-    parent::g_reload(self::getUrl());
-  }
+    /**
+     * (non-PHPdoc)
+     *
+     * @see OmiseApiResource::g_reload()
+     */
+    public function reload()
+    {
+        parent::g_reload(self::getUrl());
+    }
 
-  /**
-   * @param string $id
-   * @return string
-   */
-  private static function getUrl($id = '') {
-    return OMISE_API_URL.self::ENDPOINT.'/'.$id;
-  }
+    /**
+     * Generate request url.
+     *
+     * @param string $id
+     *
+     * @return string
+     */
+    private static function getUrl($id = '')
+    {
+        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+    }
 }
