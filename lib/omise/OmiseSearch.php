@@ -23,7 +23,7 @@ class OmiseSearch extends OmiseApiResource
     /**
      * Generate request url.
      *
-     * @param string $querystring
+     * @param  string $querystring
      *
      * @return string
      */
