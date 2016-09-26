@@ -27,13 +27,17 @@ class OmiseEvent extends OmiseApiResource
      */
     public function reload()
     {
-        parent::g_reload(self::getUrl());
+        if ($this['object'] === 'event') {
+            parent::g_reload(self::getUrl($this['id']));
+        } else {
+            parent::g_reload(self::getUrl());
+        }
     }
 
     /**
      * Generate request url.
      *
-     * @param string $id
+     * @param  string $id
      *
      * @return string
      */
