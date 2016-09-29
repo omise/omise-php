@@ -29,6 +29,6 @@ class OmiseSearch extends OmiseApiResource
      */
     private static function getUrl($querystring = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/?'.$querystring;
+        return OMISE_API_URL.self::ENDPOINT.'/'.$querystring;
     }
 }
