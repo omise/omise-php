@@ -19,7 +19,7 @@ class SearchTest extends TestConfig
      */
     public function testRetrieveSearchResultBySpecificScope()
     {
-        $search = OmiseSearch::retrieve('scope=charge');
+        $search = OmiseSearch::retrieve('?scope=charge');
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
@@ -33,7 +33,7 @@ class SearchTest extends TestConfig
      */
     public function testRetrieveSearchObjectBySpecificScopeAndQuery()
     {
-        $search = OmiseSearch::retrieve('scope=charge&query=thb');
+        $search = OmiseSearch::retrieve('?scope=charge&query=thb');
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
@@ -48,7 +48,7 @@ class SearchTest extends TestConfig
      */
     public function testRetrieveSearchObjectBySpecificScopeAndQueryAndFilter()
     {
-        $search = OmiseSearch::retrieve('scope=charge&query=thb&filters[captured]=true');
+        $search = OmiseSearch::retrieve('?scope=charge&query=thb&filters[captured]=true');
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
