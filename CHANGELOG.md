@@ -1,5 +1,10 @@
 # Change Log
 
+An [unreleased] version is not available on `master` branch and is subject to changes and must not be considered final. Elements of unreleased list may be edited or removed at any time.
+
+## [unreleased]
+- [Added] Add OmiseEvent class to support Omise's Event API.
+
 ## [2.5.0] 2016-07-01
 - [Added] Add charge reverse method (@zentetsukenz)
 - [Fixed] Change condition when matching phpunit from using fixed string to regex (@zentetsukenz)
