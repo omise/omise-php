@@ -3,6 +3,9 @@
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 require_once dirname(__FILE__).'/OmiseCustomer.php';
 
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseCard extends OmiseApiResource
 {
     const ENDPOINT = 'cards';

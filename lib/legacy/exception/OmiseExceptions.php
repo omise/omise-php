@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseException extends Exception
 {
     private $_omiseError = null;
@@ -80,15 +83,62 @@ class OmiseException extends Exception
     }
 }
 
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseAuthenticationFailureException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseNotFoundException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseUsedTokenException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseInvalidCardException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseInvalidCardTokenException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseMissingCardException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseInvalidChargeException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseFailedCaptureException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseFailedFraudCheckException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseInvalidRecipientException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseInvalidBankAccountException extends OmiseException { }
+
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseUndefinedException extends OmiseException { }
