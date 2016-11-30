@@ -1,7 +1,4 @@
 <?php
-/**
- * @deprecated 3.0.0 not recommended, please implement with namespace approach.
- */
 require_once dirname(__FILE__).'/legacy/OmiseAccount.php';
 require_once dirname(__FILE__).'/legacy/OmiseBalance.php';
 require_once dirname(__FILE__).'/legacy/OmiseCard.php';
