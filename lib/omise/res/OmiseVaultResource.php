@@ -1,4 +1,5 @@
 <?php
+namespace Omise\Res;
 
 require_once dirname(__FILE__).'/OmiseApiResource.php';
 

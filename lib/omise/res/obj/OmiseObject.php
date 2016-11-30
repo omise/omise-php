@@ -1,4 +1,9 @@
 <?php
+namespace Omise\Res\Obj;
+
+use ArrayAccess;
+use Countable;
+use Iterator;
 
 class OmiseObject implements ArrayAccess, Iterator, Countable
 {

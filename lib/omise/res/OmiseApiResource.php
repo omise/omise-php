@@ -1,7 +1,8 @@
 <?php
+namespace Omise\Res;
 
-require_once dirname(__FILE__).'/obj/OmiseObject.php';
-require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
+use Omise\Res\Obj\OmiseObject;
+use Omise\Exception\OmiseException;
 
 define('OMISE_PHP_LIB_VERSION', '2.5.0');
 define('OMISE_API_URL', 'https://api.omise.co/');

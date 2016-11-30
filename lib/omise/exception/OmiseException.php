@@ -1,4 +1,7 @@
 <?php
+namespace Omise\Exception;
+
+use Exception;
 
 class OmiseException extends Exception
 {

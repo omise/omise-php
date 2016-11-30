@@ -1,7 +1,8 @@
 <?php
+namespace Omise;
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/OmiseCard.php';
+use Omise\Res\OmiseApiResource;
+use Omise\OmiseCard;
 
 class OmiseCardList extends OmiseApiResource
 {

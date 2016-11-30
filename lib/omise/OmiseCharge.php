@@ -1,7 +1,8 @@
 <?php
+namespace Omise;
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/OmiseRefundList.php';
+use Omise\Res\OmiseApiResource;
+use Omise\OmiseRefundList;
 
 class OmiseCharge extends OmiseApiResource
 {
