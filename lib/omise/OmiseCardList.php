@@ -9,8 +9,8 @@ class OmiseCardList extends OmiseApiResource
 
     private $_customerID;
 
-    protected $publickey;
-    protected $secretkey;
+    private $publickey;
+    private $secretkey;
 
     /**
      * @param array  $cards
