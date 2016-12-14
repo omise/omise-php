@@ -1,20 +1,22 @@
 <?php
-namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
-class OmiseTransfer extends OmiseApiResource
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
+class OmiseRecipient extends OmiseApiResource
 {
-    const ENDPOINT = 'transfers';
+    const ENDPOINT = 'recipients';
 
     /**
-     * Retrieves a transfer.
+     * Retrieves recipients.
      *
      * @param  string $id
      * @param  string $publickey
      * @param  string $secretkey
      *
-     * @return OmiseTransfer
+     * @return OmiseRecipient
      */
     public static function retrieve($id = '', $publickey = null, $secretkey = null)
     {
@@ -22,13 +24,13 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
-     * Creates a transfer.
+     * Creates a new recipient.
      *
-     * @param  mixed  $params
+     * @param  array  $params
      * @param  string $publickey
      * @param  string $secretkey
      *
-     * @return OmiseTransfer
+     * @return OmiseRecipient
      */
     public static function create($params, $publickey = null, $secretkey = null)
     {
@@ -38,31 +40,9 @@ class OmiseTransfer extends OmiseApiResource
     /**
      * (non-PHPdoc)
      *
-     * @see OmiseApiResource::g_reload()
-     */
-    public function reload()
-    {
-        if ($this['object'] === 'transfers') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
-    }
-
-    /**
-     * Updates the transfer amount.
-     */
-    public function save()
-    {
-        $this->update(array('amount' => $this['amount']));
-    }
-
-    /**
-     * (non-PHPdoc)
-     *
      * @see OmiseApiResource::g_update()
      */
-    protected function update($params)
+    public function update($params)
     {
         parent::g_update(self::getUrl($this['id']), $params);
     }

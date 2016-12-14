@@ -1,20 +1,22 @@
 <?php
-namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
-class OmiseTransaction extends OmiseApiResource
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
+class OmiseEvent extends OmiseApiResource
 {
-    const ENDPOINT = 'transactions';
+    const ENDPOINT = 'events';
 
     /**
-     * Retrieves a transaction.
+     * Retrieves an event.
      *
      * @param  string $id
      * @param  string $publickey
      * @param  string $secretkey
      *
-     * @return OmiseTransaction
+     * @return OmiseEvent
      */
     public static function retrieve($id = '', $publickey = null, $secretkey = null)
     {
@@ -28,14 +30,16 @@ class OmiseTransaction extends OmiseApiResource
      */
     public function reload()
     {
-        if ($this['object'] === 'transaction') {
-            parent::reload(self::getUrl($this['id']));
+        if ($this['object'] === 'event') {
+            parent::g_reload(self::getUrl($this['id']));
         } else {
             parent::g_reload(self::getUrl());
         }
     }
 
     /**
+     * Generate request url.
+     *
      * @param  string $id
      *
      * @return string

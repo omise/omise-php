@@ -1,20 +1,23 @@
 <?php
-namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/OmiseCardList.php';
 
-class OmiseTransfer extends OmiseApiResource
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
+class OmiseCustomer extends OmiseApiResource
 {
-    const ENDPOINT = 'transfers';
+    const ENDPOINT = 'customers';
 
     /**
-     * Retrieves a transfer.
+     * Retrieves a customer.
      *
      * @param  string $id
      * @param  string $publickey
      * @param  string $secretkey
      *
-     * @return OmiseTransfer
+     * @return OmiseCustomer
      */
     public static function retrieve($id = '', $publickey = null, $secretkey = null)
     {
@@ -22,13 +25,13 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
-     * Creates a transfer.
+     * Creates a new customer.
      *
-     * @param  mixed  $params
+     * @param  array  $params
      * @param  string $publickey
      * @param  string $secretkey
      *
-     * @return OmiseTransfer
+     * @return OmiseCustomer
      */
     public static function create($params, $publickey = null, $secretkey = null)
     {
@@ -42,7 +45,7 @@ class OmiseTransfer extends OmiseApiResource
      */
     public function reload()
     {
-        if ($this['object'] === 'transfers') {
+        if ($this['object'] === 'customer') {
             parent::g_reload(self::getUrl($this['id']));
         } else {
             parent::g_reload(self::getUrl());
@@ -50,19 +53,11 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
-     * Updates the transfer amount.
-     */
-    public function save()
-    {
-        $this->update(array('amount' => $this['amount']));
-    }
-
-    /**
      * (non-PHPdoc)
      *
      * @see OmiseApiResource::g_update()
      */
-    protected function update($params)
+    public function update($params)
     {
         parent::g_update(self::getUrl($this['id']), $params);
     }
@@ -85,6 +80,34 @@ class OmiseTransfer extends OmiseApiResource
     public function isDestroyed()
     {
         return parent::isDestroyed();
+    }
+
+    /**
+     * Gets a list of all cards belongs to this customer.
+     *
+     * @param  array $options
+     *
+     * @return OmiseCardList
+     */
+    public function cards($options = array())
+    {
+        if ($this['object'] === 'customer' && ! empty($options)) {
+            return new OmiseCardList($this['cards'], $this['id'], $options, $this->_publickey, $this->_secretkey);
+        } else if ($this['object'] === 'customer') {
+            return new OmiseCardList($this['cards'], $this['id'], $this->_publickey, $this->_secretkey);
+        }
+    }
+  
+    /**
+     * cards() alias
+     *
+     * @deprecated deprecated since version 2.0.0 use '$customer->cards()'
+     *
+     * @return     OmiseCardList
+     */
+    public function getCards($options = array())
+    {
+        return $this->cards($options);
     }
 
     /**

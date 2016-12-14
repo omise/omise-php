@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/../../TestConfig.php';
-require_once dirname(__FILE__).'/../../../../lib/omise/OmiseTest.php';
+require_once dirname(__FILE__).'/../../../../lib/legacy/OmiseTest.php';
 
 class OmiseObjectTest extends TestConfig {
   static $obj;

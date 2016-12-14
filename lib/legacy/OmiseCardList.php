@@ -1,9 +1,11 @@
 <?php
-namespace Omise;
 
-use Omise\Res\OmiseApiResource;
-use Omise\OmiseCard;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/OmiseCard.php';
 
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseCardList extends OmiseApiResource
 {
     const ENDPOINT = 'cards';

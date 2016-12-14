@@ -1,19 +1,21 @@
 <?php
-namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
-class OmiseBalance extends OmiseApiResource
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
+class OmiseAccount extends OmiseApiResource
 {
-    const ENDPOINT = 'balance';
+    const ENDPOINT = 'account';
 
     /**
-     * Retrieves a current balance in the account.
+     * Retrieves an account.
      *
      * @param  string $publickey
      * @param  string $secretkey
      *
-     * @return OmiseBalance
+     * @return OmiseAccount
      */
     public static function retrieve($publickey = null, $secretkey = null)
     {

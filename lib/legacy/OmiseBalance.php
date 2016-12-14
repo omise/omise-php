@@ -1,8 +1,10 @@
 <?php
-namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseBalance extends OmiseApiResource
 {
     const ENDPOINT = 'balance';

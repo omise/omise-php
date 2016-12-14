@@ -1,10 +1,8 @@
 <?php
-namespace Omise\Res\Obj;
 
-use ArrayAccess;
-use Countable;
-use Iterator;
-
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseObject implements ArrayAccess, Iterator, Countable
 {
     // Store the attributes of the object.

@@ -1,6 +1,7 @@
 <?php
+namespace Omise;
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+use Omise\Res\OmiseApiResource;
 
 class OmiseDispute extends OmiseApiResource
 {

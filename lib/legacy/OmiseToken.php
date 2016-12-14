@@ -1,8 +1,10 @@
 <?php
-namespace Omise;
 
-use Omise\Res\OmiseVaultResource;
+require_once dirname(__FILE__).'/res/OmiseVaultResource.php';
 
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseToken extends OmiseVaultResource
 {
     const ENDPOINT = 'tokens';

@@ -1,9 +1,11 @@
 <?php
-namespace Omise;
 
-use Omise\Res\OmiseApiResource;
-use Omise\OmiseRefundList;
+require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/OmiseRefundList.php';
 
+/**
+ * @deprecated 3.0.0 not recommended, please implement with namespace approach.
+ */
 class OmiseCharge extends OmiseApiResource
 {
     const ENDPOINT = 'charges';
