@@ -25,6 +25,7 @@ class ClassExistsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(class_exists('OmiseToken'));
         $this->assertTrue(class_exists('OmiseTransaction'));
         $this->assertTrue(class_exists('OmiseTransfer'));
+        $this->assertTrue(class_exists('OmiseLink'));
     }
 
     /**
