@@ -4,6 +4,7 @@ An [unreleased] version is not available on `master` branch and is subject to ch
 
 ## [unreleased]
 - [Added] Add OmiseEvent class to support Omise's Event API.
+- [Added] Add OmiseLink class to support Omise's Link API.
 
 ## [2.5.0] 2016-07-01
 - [Added] Add charge reverse method (@zentetsukenz)
