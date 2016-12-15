@@ -8,7 +8,10 @@ class OmiseCardList extends OmiseApiResource
     const ENDPOINT = 'cards';
 
     private $_customerID;
-  
+
+    private $publickey;
+    private $secretkey;
+
     /**
      * @param array  $cards
      * @param string $customerID
@@ -18,11 +21,14 @@ class OmiseCardList extends OmiseApiResource
     public function __construct($cards, $customerID, $options = array(), $publickey = null, $secretkey = null)
     {
         if (! is_array($options) && func_num_args() == 4) {
-            $publickey = func_get_arg(2);
-            $secretkey = func_get_arg(3);
+            $this->publickey = func_get_arg(2);
+            $this->secretkey = func_get_arg(3);
+        } else {
+            $this->publickey = func_get_arg(3);
+            $this->secretkey = func_get_arg(4);
         }
 
-        parent::__construct($publickey, $secretkey);
+        parent::__construct($this->publickey, $this->secretkey);
         $this->_customerID = $customerID;
 
         if (is_array($options)) {
@@ -31,7 +37,7 @@ class OmiseCardList extends OmiseApiResource
             $this->refresh($cards);
         }
     }
-  
+
     /**
      * retrieve a card
      *
@@ -45,7 +51,6 @@ class OmiseCardList extends OmiseApiResource
 
         return new OmiseCard($result, $this->_customerID, $this->_publickey, $this->_secretkey);
     }
-  
 
     /**
      * @param  string $id
