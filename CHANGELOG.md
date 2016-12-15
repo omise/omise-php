@@ -1,10 +1,14 @@
 # Change Log
 
-An [unreleased] version is not available on `master` branch and is subject to changes and must not be considered final. Elements of unreleased list may be edited or removed at any time.
+## [2.6.0] 2016-12-15
+- [added] OmiseLink api is now available. (@turboza)
+- [added] OmiseRecipient object be able to reload resource itself (@guzzilar)
+- [added] OmiseEvent api is now available. (@guzzilar)
+- [updated]  phpunit configuration file. (@oaattia)
+- [updated] Revised code style to match with PSR-2 (http://www.php-fig.org/psr/psr-2) spec. (@guzzilar)
+- [fixed] Autoload OmiseDispute class in lib/Omise.php file (@guzzilar)
 
-## [unreleased]
-- [Added] Add OmiseEvent class to support Omise's Event API.
-- [Added] Add OmiseLink class to support Omise's Link API.
+For more information, please visit https://github.com/omise/omise-php/releases/tag/v2.6.0
 
 ## [2.5.0] 2016-07-01
 - [Added] Add charge reverse method (@zentetsukenz)
