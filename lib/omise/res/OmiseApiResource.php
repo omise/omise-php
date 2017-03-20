@@ -203,7 +203,15 @@ class OmiseApiResource extends OmiseObject
         $request_url = preg_replace('#^(http|https)://#', '', $url);
 
         // Remove slash if it had in last letter.
-        $request_url = rtrim($request_url, '/');
+        $parsed = parse_url($request_url);
+        $request_url = rtrim($parsed['path'], '/');
+
+        // Handle query string
+        if (!empty($parsed['query'])) {
+            $query = base64_encode($parsed['query']);
+            $query = str_replace(['+', '/', '='], ['-', '_', ''], $query);
+            $request_url = $request_url.'-'.$query;
+        }
 
         // Finally.
         $request_url = dirname(__FILE__).'/../../../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
