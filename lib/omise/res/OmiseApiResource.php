@@ -209,7 +209,7 @@ class OmiseApiResource extends OmiseObject
         // Handle query string
         if (!empty($parsed['query'])) {
             $query = base64_encode($parsed['query']);
-            $query = str_replace(['+', '/', '='], ['-', '_', ''], $query);
+            $query = str_replace(array('+', '/', '='), array('-', '_', ''), $query);
             $request_url = $request_url.'-'.$query;
         }
 
