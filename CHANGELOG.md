@@ -1,4 +1,18 @@
-# Change Log
+# CHANGELOG
+
+### [v2.7.0 _(March 21, 2017)_](https://github.com/omise/omise-php/releases/tag/v2.7.0)
+
+#### 🚀 Enhancements
+
+- Correct the Docblock at OmiseApiResource::isDestroy() method. (PR [#57](https://github.com/omise/omise-php/pull/57))
+- Include PHP Version to the `USER-AGENT` header when make a request to Omise API. (PR [#56](https://github.com/omise/omise-php/pull/56))
+
+#### 👾 Bug Fixes
+
+- Remove questionmark from fixture filename. (PR [#55](https://github.com/omise/omise-php/pull/55))
+- Remove unreasonable conditional block from OmiseCustomer lib. (PR [#51](https://github.com/omise/omise-php/pull/51))
+
+---
 
 ## [2.6.0] 2016-12-15
 - [added] OmiseLink api is now available. (@turboza)

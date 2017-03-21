@@ -39,11 +39,11 @@ You can install the library via [Composer](https://getcomposer.org/). If you don
     require_once dirname(__FILE__).'/vendor/autoload.php';
     ```
 
-4. Now you are ready to start using the library, please see the [configuration](https://github.com/omise/omise-php#configuration) and [usage](https://github.com/omise/omise-php#usage) sections below for usage examples.
+4. Now you are ready to start using the library, please see the [configuration](https://github.com/omise/omise-php#configuration) and [quick start](https://github.com/omise/omise-php#quick-start) sections below for usage examples.
 
 ### Manually
 
-If you're not using Composer, you can also download [the latest version of Omise-PHP](https://github.com/omise/omise-php/archive/v2.6.0.zip).
+If you're not using Composer, you can also download [the latest version of Omise-PHP](https://github.com/omise/omise-php/archive/v2.7.0.zip).
 Then, follows the instruction below to install **Omise-PHP** to the project.
 
 1. Extract the library to your project.
