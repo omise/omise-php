@@ -199,11 +199,11 @@ class OmiseApiResource extends OmiseObject
      */
     private function _executeTest($url, $requestMethod, $key, $params = null)
     {
-        // Remove slash if it had in last letter.
+        // Extract only hostname and URL path without trailing slash.
         $parsed = parse_url($url);
         $request_url = $parsed['host'] . rtrim($parsed['path'], '/');
 
-        // Handle query string
+        // Convert query string into filename friendly format.
         if (!empty($parsed['query'])) {
             $query = base64_encode($parsed['query']);
             $query = str_replace(array('+', '/', '='), array('-', '_', ''), $query);
