@@ -302,7 +302,7 @@ class OmiseApiResource extends OmiseObject
     /**
      * Checks whether the resource has been destroyed.
      *
-     * @return OmiseApiResource
+     * @return bool|null
      */
     protected function isDestroyed()
     {
