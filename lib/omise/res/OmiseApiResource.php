@@ -199,12 +199,9 @@ class OmiseApiResource extends OmiseObject
      */
     private function _executeTest($url, $requestMethod, $key, $params = null)
     {
-        // Remove Http, Https protocal from $url (string).
-        $request_url = preg_replace('#^(http|https)://#', '', $url);
-
         // Remove slash if it had in last letter.
-        $parsed = parse_url($request_url);
-        $request_url = rtrim($parsed['path'], '/');
+        $parsed = parse_url($url);
+        $request_url = $parsed['host'] . rtrim($parsed['path'], '/');
 
         // Handle query string
         if (!empty($parsed['query'])) {
