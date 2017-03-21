@@ -250,7 +250,7 @@ class OmiseApiResource extends OmiseObject
      */
     private function genOptions($requestMethod, $userpwd, $params)
     {
-        $user_agent        = "OmisePHP/" . OMISE_PHP_LIB_VERSION . " PHP/" . phpversion();
+        $user_agent        = "OmisePHP/".OMISE_PHP_LIB_VERSION." PHP/".phpversion();
         $omise_api_version = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
 
         $options = array(
