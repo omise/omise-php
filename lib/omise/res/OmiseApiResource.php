@@ -199,11 +199,16 @@ class OmiseApiResource extends OmiseObject
      */
     private function _executeTest($url, $requestMethod, $key, $params = null)
     {
-        // Remove Http, Https protocal from $url (string).
-        $request_url = preg_replace('#^(http|https)://#', '', $url);
+        // Extract only hostname and URL path without trailing slash.
+        $parsed = parse_url($url);
+        $request_url = $parsed['host'] . rtrim($parsed['path'], '/');
 
-        // Remove slash if it had in last letter.
-        $request_url = rtrim($request_url, '/');
+        // Convert query string into filename friendly format.
+        if (!empty($parsed['query'])) {
+            $query = base64_encode($parsed['query']);
+            $query = str_replace(array('+', '/', '='), array('-', '_', ''), $query);
+            $request_url = $request_url.'-'.$query;
+        }
 
         // Finally.
         $request_url = dirname(__FILE__).'/../../../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
