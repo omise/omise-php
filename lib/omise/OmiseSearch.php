@@ -15,9 +15,9 @@ class OmiseSearch extends OmiseApiResource
      *
      * @return OmiseSearch
      */
-    public static function retrieve($querystring = '', $publickey = null, $secretkey = null)
+    public static function retrieve($scope, $query= '', $filter = array(), $page = 1, $order = 'chronological', $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($querystring), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($scope, $query, $filter, $page, $order), $publickey, $secretkey);
     }
 
     /**
@@ -27,8 +27,31 @@ class OmiseSearch extends OmiseApiResource
      *
      * @return string
      */
-    private static function getUrl($querystring = '')
+    private static function getUrl($scope, $query, $filter, $page, $order)
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$querystring;
+        $querybuild = array('scope' => $scope);
+
+        if (strlen($query) > 0) {
+            $querybuild['query'] = $query;
+        }
+
+        foreach ($filter as $key => $value) {
+            if (is_bool($value)) {
+                $value = $value ? 'true' : 'false';
+            }
+            $querybuild['filters['.$key.']'] = $value;
+        }
+
+        if ($page != 1) {
+            $querybuild['page'] = $page;
+        }
+
+        if ($order != 'chronological') {
+            $querybuild['chronological'] = $order;
+        }
+
+        $querystring = http_build_query($querybuild);
+
+        return OMISE_API_URL.self::ENDPOINT.'/?'.$querystring;
     }
 }
