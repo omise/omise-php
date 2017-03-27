@@ -1,0 +1,72 @@
+{
+  "object": "event",
+  "id": "evnt_test_531zv1nto0a5pimuiza",
+  "livemode": false,
+  "location": "/events/evnt_test_531zv1nto0a5pimuiza",
+  "key": "charge.update",
+  "created": "2016-02-17T12:23:56Z",
+  "data": {
+    "object": "charge",
+    "id": "chrg_test_531gma9h6fqosrlhzsy",
+    "livemode": false,
+    "location": "/charges/chrg_test_531gma9h6fqosrlhzsy",
+    "amount": 100000,
+    "currency": "thb",
+    "description": "xqqq",
+    "status": "successful",
+    "capture": true,
+    "authorized": true,
+    "paid": true,
+    "transaction": "trxn_test_531gmach2dl3003h770",
+    "refunded": 100000,
+    "refunds": {
+      "object": "list",
+      "from": "1970-01-01T00:00:00+00:00",
+      "to": "2016-02-17T12:23:56+00:00",
+      "offset": 0,
+      "limit": 20,
+      "total": 1,
+      "order": null,
+      "location": "/charges/chrg_test_531gma9h6fqosrlhzsy/refunds",
+      "data": [
+        {
+          "object": "refund",
+          "id": "rfnd_test_531gmp0os1l6pyku3wr",
+          "location": "/charges/chrg_test_531gma9h6fqosrlhzsy/refunds/rfnd_test_531gmp0os1l6pyku3wr",
+          "amount": 100000,
+          "currency": "thb",
+          "charge": "chrg_test_531gma9h6fqosrlhzsy",
+          "transaction": "trxn_test_531gmp1f22n1fdfr3kx",
+          "created": "2016-02-16T03:37:08Z"
+        }
+      ]
+    },
+    "return_uri": "http://www.example.com/orders/3947/complete",
+    "reference": "paym_test_531gmaa3dhrlvuzkw6m",
+    "authorize_uri": "https://api.omise.co/payments/paym_test_531gmaa3dhrlvuzkw6m/authorize",
+    "failure_code": null,
+    "failure_message": null,
+    "card": {
+      "object": "card",
+      "id": "card_test_531gm7nhvx8y83nasq7",
+      "livemode": false,
+      "country": "us",
+      "city": "Bangkok",
+      "postal_code": "10320",
+      "financing": "",
+      "bank": "",
+      "last_digits": "4242",
+      "brand": "Visa",
+      "expiration_month": 2,
+      "expiration_year": 2018,
+      "fingerprint": "b7ETDh/GD7EcJvppdJWZICfDs5QsvCJCXBkWHTJCCGc=",
+      "name": "JOHN DOE",
+      "security_code_check": true,
+      "created": "2016-02-16T03:35:46Z"
+    },
+    "customer": null,
+    "ip": null,
+    "dispute": null,
+    "created": "2016-02-16T03:35:59Z"
+  }
+}

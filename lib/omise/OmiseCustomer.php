@@ -88,10 +88,8 @@ class OmiseCustomer extends OmiseApiResource
      */
     public function cards($options = array())
     {
-        if ($this['object'] === 'customer' && ! empty($options)) {
+        if ($this['object'] === 'customer') {
             return new OmiseCardList($this['cards'], $this['id'], $options, $this->_publickey, $this->_secretkey);
-        } else if ($this['object'] === 'customer') {
-            return new OmiseCardList($this['cards'], $this['id'], $this->_publickey, $this->_secretkey);
         }
     }
   

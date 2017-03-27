@@ -3,7 +3,7 @@
 require_once dirname(__FILE__).'/obj/OmiseObject.php';
 require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
 
-define('OMISE_PHP_LIB_VERSION', '2.5.0');
+define('OMISE_PHP_LIB_VERSION', '2.7.1');
 define('OMISE_API_URL', 'https://api.omise.co/');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
@@ -199,11 +199,16 @@ class OmiseApiResource extends OmiseObject
      */
     private function _executeTest($url, $requestMethod, $key, $params = null)
     {
-        // Remove Http, Https protocal from $url (string).
-        $request_url = preg_replace('#^(http|https)://#', '', $url);
+        // Extract only hostname and URL path without trailing slash.
+        $parsed = parse_url($url);
+        $request_url = $parsed['host'] . rtrim($parsed['path'], '/');
 
-        // Remove slash if it had in last letter.
-        $request_url = rtrim($request_url, '/');
+        // Convert query string into filename friendly format.
+        if (!empty($parsed['query'])) {
+            $query = base64_encode($parsed['query']);
+            $query = str_replace(array('+', '/', '='), array('-', '_', ''), $query);
+            $request_url = $request_url.'-'.$query;
+        }
 
         // Finally.
         $request_url = dirname(__FILE__).'/../../../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
@@ -245,7 +250,7 @@ class OmiseApiResource extends OmiseObject
      */
     private function genOptions($requestMethod, $userpwd, $params)
     {
-        $user_agent        = "OmisePHP/".OMISE_PHP_LIB_VERSION;
+        $user_agent        = "OmisePHP/".OMISE_PHP_LIB_VERSION." PHP/".phpversion();
         $omise_api_version = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
 
         $options = array(
@@ -297,7 +302,7 @@ class OmiseApiResource extends OmiseObject
     /**
      * Checks whether the resource has been destroyed.
      *
-     * @return OmiseApiResource
+     * @return bool|null
      */
     protected function isDestroyed()
     {

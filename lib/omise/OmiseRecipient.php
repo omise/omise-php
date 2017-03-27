@@ -65,6 +65,20 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
+     * (non-PHPdoc)
+     *
+     * @see OmiseApiResource::g_reload()
+     */
+    public function reload()
+    {
+        if ($this['object'] === 'recipient') {
+            parent::g_reload(self::getUrl($this['id']));
+        } else {
+            parent::g_reload(self::getUrl());
+        }
+    }
+
+    /**
      * @param  string $id
      *
      * @return string

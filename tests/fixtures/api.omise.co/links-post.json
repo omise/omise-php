@@ -1,0 +1,27 @@
+{
+  "object": "link",
+  "id": "link_test_56bsm9kvk1nxwpvs3o8",
+  "livemode": false,
+  "location": "/links/link_test_56bsm9kvk1nxwpvs3o8",
+  "amount": 100000,
+  "currency": "thb",
+  "used": false,
+  "multiple": false,
+  "title": "Order-384",
+  "description": "New Product",
+  "charges": {
+    "object": "list",
+    "from": "1970-01-01T00:00:00+00:00",
+    "to": "2016-12-14T16:34:20+00:00",
+    "offset": 0,
+    "limit": 20,
+    "total": 0,
+    "order": null,
+    "location": "/links/link_test_56bsm9kvk1nxwpvs3o8/charges",
+    "data": [
+
+    ]
+  },
+  "payment_uri": "https://link.omise.co/FE6E1759",
+  "created": "2016-12-14T16:34:20Z"
+}
