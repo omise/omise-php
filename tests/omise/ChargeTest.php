@@ -92,4 +92,65 @@ class ChargeTest extends TestConfig {
     $this->assertEquals('charge', $charge['object']);
     $this->assertTrue($charge['reversed']);
   }
+
+  /**
+   * Assert that OmiseCharge can search for some object with simple query.
+   */
+  public function testSearchWithQuery() {
+    $result = OmiseCharge::search('thb');
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('charge', $item['object']);
+    }
+  }
+
+  /**
+   * Assert that OmiseCharge can search for some object with filter.
+   */
+  public function testSearchWithQueryAndFilter() {
+    $result = OmiseCharge::search('thb', array('captured' => true));
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('charge', $item['object']);
+    }
+  }
+
+  /**
+   * Assert that OmiseCharge can search for some object with filter and page.
+   */
+  public function testSearchWithQueryAndFilterAndPage() {
+    $result = OmiseCharge::search('thb', array('captured' => true), 1);
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('charge', $item['object']);
+    }
+  }
+
+  /**
+   * Assert that OmiseCharge can search for some object with filter and page
+   * and order.
+   */
+  public function testSearchWithQueryAndFilterAndPageAndOrder() {
+    $result = OmiseCharge::search('thb', array('captured' => true), 1, 'chronological');
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('charge', $item['object']);
+    }
+  }
 }
