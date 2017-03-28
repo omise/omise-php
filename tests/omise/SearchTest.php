@@ -33,12 +33,12 @@ class SearchTest extends TestConfig
      */
     public function testRetrieveSearchObjectBySpecificScopeAndQuery()
     {
-        $search = OmiseSearch::retrieve('charge', 'thb');
+        $search = OmiseSearch::retrieve('charge', 'demo');
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
-        $this->assertEquals('thb', $search['query']);
+        $this->assertEquals('demo', $search['query']);
     }
 
     /**
@@ -48,12 +48,12 @@ class SearchTest extends TestConfig
      */
     public function testRetrieveSearchObjectBySpecificScopeAndQueryAndFilter()
     {
-        $search = OmiseSearch::retrieve('charge', 'thb', array('captured' => true));
+        $search = OmiseSearch::retrieve('charge', 'demo', array('captured' => true));
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
-        $this->assertEquals('thb', $search['query']);
+        $this->assertEquals('demo', $search['query']);
         $this->assertEquals(array('captured' => 'true'), $search['filters']);
     }
 
@@ -64,12 +64,12 @@ class SearchTest extends TestConfig
      */
     public function testRetrieveSearchObjectBySpecificScopeAndQueryAndFilterAndPage()
     {
-        $search = OmiseSearch::retrieve('charge', 'thb', array('captured' => true), 1);
+        $search = OmiseSearch::retrieve('charge', 'demo', array('captured' => true), 1);
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
-        $this->assertEquals('thb', $search['query']);
+        $this->assertEquals('demo', $search['query']);
         $this->assertEquals(array('captured' => 'true'), $search['filters']);
     }
 
@@ -80,12 +80,12 @@ class SearchTest extends TestConfig
      */
     public function testRetrieveSearchObjectBySpecificScopeAndQueryAndFilterAndPageAndOrder()
     {
-        $search = OmiseSearch::retrieve('charge', 'thb', array('captured' => true), 1, 'chronological');
+        $search = OmiseSearch::retrieve('charge', 'demo', array('captured' => true), 1, 'chronological');
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
-        $this->assertEquals('thb', $search['query']);
+        $this->assertEquals('demo', $search['query']);
         $this->assertEquals(array('captured' => 'true'), $search['filters']);
     }
 }

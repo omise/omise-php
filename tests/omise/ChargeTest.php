@@ -97,7 +97,7 @@ class ChargeTest extends TestConfig {
    * Assert that OmiseCharge can search for some object with simple query.
    */
   public function testSearchWithQuery() {
-    $result = OmiseCharge::search('thb');
+    $result = OmiseCharge::search('demo');
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);
@@ -112,7 +112,7 @@ class ChargeTest extends TestConfig {
    * Assert that OmiseCharge can search for some object with filter.
    */
   public function testSearchWithQueryAndFilter() {
-    $result = OmiseCharge::search('thb', array('captured' => true));
+    $result = OmiseCharge::search('demo', array('captured' => true));
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);
@@ -127,7 +127,7 @@ class ChargeTest extends TestConfig {
    * Assert that OmiseCharge can search for some object with filter and page.
    */
   public function testSearchWithQueryAndFilterAndPage() {
-    $result = OmiseCharge::search('thb', array('captured' => true), 1);
+    $result = OmiseCharge::search('demo', array('captured' => true), 1);
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);
@@ -143,7 +143,7 @@ class ChargeTest extends TestConfig {
    * and order.
    */
   public function testSearchWithQueryAndFilterAndPageAndOrder() {
-    $result = OmiseCharge::search('thb', array('captured' => true), 1, 'chronological');
+    $result = OmiseCharge::search('demo', array('captured' => true), 1, 'chronological');
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);
