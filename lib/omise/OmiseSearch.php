@@ -68,6 +68,7 @@ class OmiseSearch extends OmiseApiResource
         }
 
         $this->g_reload($this->getUrl());
+        return $this;
     }
 
     /**

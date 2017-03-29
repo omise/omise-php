@@ -100,7 +100,8 @@ class ChargeTest extends TestConfig {
     $result = OmiseCharge::search('order')
       ->where(array('captured' => true))
       ->page(2)
-      ->order('reverse_chronological');
+      ->order('reverse_chronological')
+      ->retrieve();
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);
