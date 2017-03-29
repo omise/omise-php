@@ -110,5 +110,15 @@ class ChargeTest extends TestConfig {
       $this->assertArrayHasKey('object', $item);
       $this->assertEquals('charge', $item['object']);
     }
+
+    $result = $result->page(1);
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('charge', $item['object']);
+    }
   }
 }
