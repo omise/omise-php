@@ -11,12 +11,12 @@ class OmiseSearch extends OmiseApiResource
 {
     const ENDPOINT = 'search';
 
-    private $_dirty = true;
-    private $_scope = null;
-    private $_query = '';
-    private $_conditions = array();
-    private $_page = 1;
-    private $_order = 'chronological';
+    private $dirty = true;
+    private $scope = null;
+    private $query = '';
+    private $conditions = array();
+    private $page = 1;
+    private $order = 'chronological';
 
     public static function scope($scope)
     {
@@ -26,28 +26,28 @@ class OmiseSearch extends OmiseApiResource
     protected function __construct($scope, $publickey = null, $secretkey = null)
     {
         parent::__construct($publickey, $secretkey);
-        $this->_dirty = true;
-        $this->_scope = $scope;
+        $this->dirty = true;
+        $this->scope = $scope;
     }
 
     public function query($query)
     {
-        $this->_dirty = true;
-        $this->_query = $query;
+        $this->dirty = true;
+        $this->query = $query;
         return $this;
     }
 
     public function where(array $conditions = array())
     {
-        $this->_dirty = true;
-        $this->_conditions = $conditions;
+        $this->dirty = true;
+        $this->conditions = $conditions;
         return $this;
     }
 
     public function page($page)
     {
-        $this->_dirty = true;
-        $this->_page = $page;
+        $this->dirty = true;
+        $this->page = $page;
         return $this;
     }
 
@@ -56,14 +56,14 @@ class OmiseSearch extends OmiseApiResource
         if (!in_array($order, array('chronological', 'reverse_chronological'))) {
             throw new InvalidArgumentException();
         }
-        $this->_dirty = true;
-        $this->_order = $order;
+        $this->dirty = true;
+        $this->order = $order;
         return $this;
     }
 
     public function retrieve()
     {
-        if (!$this->_dirty) {
+        if (!$this->dirty) {
             return;
         }
 
@@ -80,25 +80,25 @@ class OmiseSearch extends OmiseApiResource
      */
     private function getUrl()
     {
-        $querybuild = array('scope' => $this->_scope);
+        $querybuild = array('scope' => $this->scope);
 
-        if (strlen($this->_query) > 0) {
-            $querybuild['query'] = $this->_query;
+        if (strlen($this->query) > 0) {
+            $querybuild['query'] = $this->query;
         }
 
-        foreach ($this->_conditions as $key => $value) {
+        foreach ($this->conditions as $key => $value) {
             if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
             $querybuild['filters['.$key.']'] = $value;
         }
 
-        if ($this->_page != 1) {
-            $querybuild['page'] = $this->_page;
+        if ($this->page != 1) {
+            $querybuild['page'] = $this->page;
         }
 
-        if ($this->_order != 'chronological') {
-            $querybuild['chronological'] = $this->_order;
+        if ($this->order != 'chronological') {
+            $querybuild['chronological'] = $this->order;
         }
 
         $querystring = http_build_query($querybuild);
