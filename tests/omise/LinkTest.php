@@ -45,4 +45,22 @@ class LinkTest extends TestConfig {
     $this->assertArrayHasKey('object', $link);
     $this->assertEquals('link', $link['object']);
   }
+
+  /**
+   * Assert that OmiseLink  can search for links.
+   */
+  public function testSearch() {
+    $result = OmiseLink::search('demo')
+      ->where(array('used' => true))
+      ->page(1)
+      ->order('reverse_chronological');
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('link', $item['object']);
+    }
+  }
 }

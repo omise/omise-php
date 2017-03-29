@@ -14,4 +14,16 @@ class OmiseRefund extends OmiseApiResource
         parent::__construct($publickey, $secretkey);
         $this->refresh($refund);
     }
+
+    /**
+     * Search for refunds.
+     *
+     * @param string query
+     *
+     * @return OmiseSearch
+     */
+    public static function search($query = '')
+    {
+        return OmiseSearch::scope('refund')->query($query);
+    }
 }

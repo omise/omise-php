@@ -85,4 +85,22 @@ class OmiseDisputeTest extends TestConfig {
     $this->assertArrayHasKey('object', $dispute);
     $this->assertEquals('dispute', $dispute['object']);
   }
+
+  /**
+   * Assert that OmiseDispute can search for disputes.
+   */
+  public function testSearch() {
+    $result = OmiseDispute::search('demo')
+      ->where(array('card_last_digits' => '5454'))
+      ->page(1)
+      ->order('chronological');
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('dispute', $item['object']);
+    }
+  }
 }

@@ -1,6 +1,10 @@
 <?php
-define('OMISE_PUBLIC_KEY', 'pkey');
-define('OMISE_SECRET_KEY', 'skey');
+if (!defined('OMISE_PUBLIC_KEY')) {
+    define('OMISE_PUBLIC_KEY', 'pkey');
+}
+if (!defined('OMISE_SECRET_KEY')) {
+    define('OMISE_SECRET_KEY', 'skey');
+}
 
 require_once dirname(__FILE__).'/../../lib/Omise.php';
 

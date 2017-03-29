@@ -21,6 +21,18 @@ class OmiseDispute extends OmiseApiResource
     }
 
     /**
+     * Search for disputes.
+     *
+     * @param string query
+     *
+     * @return OmiseSearch
+     */
+    public static function search($query = '')
+    {
+        return OmiseSearch::scope('dispute')->query($query);
+    }
+
+    /**
      * (non-PHPdoc)
      *
      * @see OmiseApiResource::g_reload()

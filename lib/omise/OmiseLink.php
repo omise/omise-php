@@ -21,6 +21,18 @@ class OmiseLink extends OmiseApiResource
     }
 
     /**
+     * Search for links.
+     *
+     * @param string query
+     *
+     * @return OmiseSearch
+     */
+    public static function search($query = '')
+    {
+        return OmiseSearch::scope('link')->query($query);
+    }
+
+    /**
      * (non-PHPdoc)
      *
      * @see OmiseApiResource::g_reload()

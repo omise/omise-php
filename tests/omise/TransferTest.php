@@ -73,4 +73,22 @@ class TransferTest extends TestConfig {
 
     $this->assertTrue($transfer->isDestroyed());
   }
+
+  /**
+   * Assert that OmiseTransfer can search for transfers.
+   */
+  public function testSearch() {
+    $result = OmiseTransfer::search('demo@omise.co')
+      ->where(array('currency' => 'thb'))
+      ->page(1)
+      ->order('chronological');
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('transfer', $item['object']);
+    }
+  }
 }

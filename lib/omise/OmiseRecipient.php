@@ -21,6 +21,18 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
+     * Search for recipients.
+     *
+     * @param string query
+     *
+     * @return OmiseSearch
+     */
+    public static function search($query = '')
+    {
+        return OmiseSearch::scope('recipient')->query($query);
+    }
+
+    /**
      * Creates a new recipient.
      *
      * @param  array  $params

@@ -22,6 +22,18 @@ class OmiseCustomer extends OmiseApiResource
     }
 
     /**
+     * Search for customers.
+     *
+     * @param string query
+     *
+     * @return OmiseSearch
+     */
+    public static function search($query = '')
+    {
+        return OmiseSearch::scope('customer')->query($query);
+    }
+
+    /**
      * Creates a new customer.
      *
      * @param  array  $params

@@ -94,56 +94,13 @@ class ChargeTest extends TestConfig {
   }
 
   /**
-   * Assert that OmiseCharge can search for some object with simple query.
+   * Assert that OmiseCharge can search for charges.
    */
-  public function testSearchWithQuery() {
-    $result = OmiseCharge::search('demo');
-
-    $this->assertArrayHasKey('object', $result);
-    $this->assertEquals('search', $result['object']);
-
-    foreach ($result['data'] as $item) {
-      $this->assertArrayHasKey('object', $item);
-      $this->assertEquals('charge', $item['object']);
-    }
-  }
-
-  /**
-   * Assert that OmiseCharge can search for some object with filter.
-   */
-  public function testSearchWithQueryAndFilter() {
-    $result = OmiseCharge::search('demo', array('captured' => true));
-
-    $this->assertArrayHasKey('object', $result);
-    $this->assertEquals('search', $result['object']);
-
-    foreach ($result['data'] as $item) {
-      $this->assertArrayHasKey('object', $item);
-      $this->assertEquals('charge', $item['object']);
-    }
-  }
-
-  /**
-   * Assert that OmiseCharge can search for some object with filter and page.
-   */
-  public function testSearchWithQueryAndFilterAndPage() {
-    $result = OmiseCharge::search('demo', array('captured' => true), 1);
-
-    $this->assertArrayHasKey('object', $result);
-    $this->assertEquals('search', $result['object']);
-
-    foreach ($result['data'] as $item) {
-      $this->assertArrayHasKey('object', $item);
-      $this->assertEquals('charge', $item['object']);
-    }
-  }
-
-  /**
-   * Assert that OmiseCharge can search for some object with filter and page
-   * and order.
-   */
-  public function testSearchWithQueryAndFilterAndPageAndOrder() {
-    $result = OmiseCharge::search('demo', array('captured' => true), 1, 'chronological');
+  public function testSearch() {
+    $result = OmiseCharge::search('order')
+      ->where(array('captured' => true))
+      ->page(2)
+      ->order('reverse_chronological');
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);

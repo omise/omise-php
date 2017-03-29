@@ -21,9 +21,16 @@ class OmiseCharge extends OmiseApiResource
         return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
     }
 
-    public static function search($query, $filter = array(), $page = 1, $order = 'chronological', $publickey = null, $secretkey = null)
+    /**
+     * Search for charges.
+     *
+     * @param string query
+     *
+     * @return OmiseSearch
+     */
+    public static function search($query = '')
     {
-        return OmiseSearch::retrieve('charge', $query, $filter, $page, $order, $publickey, $secretkey);
+        return OmiseSearch::scope('charge')->query($query);
     }
 
     /**

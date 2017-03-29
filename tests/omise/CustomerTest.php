@@ -92,4 +92,22 @@ class CustomerTest extends TestConfig {
 
     $this->assertTrue($customer->isDestroyed());
   }
+
+  /**
+   * Assert that OmiseCustomer can search for customers.
+   */
+  public function testSearch() {
+    $result = OmiseCustomer::search('doe')
+      ->where(array('created' => '2017-01-01..2017-08-30'))
+      ->page(1)
+      ->order('chronological');
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('customer', $item['object']);
+    }
+  }
 }
