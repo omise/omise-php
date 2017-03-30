@@ -14,12 +14,12 @@ class OmiseSearch extends OmiseApiResource
     private $dirty = true;
     private $attributes = array();
 
-    public static function scope($scope)
+    public static function scope($scope, $publickey = null, $secretkey = null)
     {
-        return new OmiseSearch($scope);
+        return new OmiseSearch($scope, $publickey, $secretkey);
     }
 
-    protected function __construct($scope, $publickey = null, $secretkey = null)
+    protected function __construct($scope, $publickey, $secretkey)
     {
         parent::__construct($publickey, $secretkey);
         $this->mergeAttributes('scope', $scope);

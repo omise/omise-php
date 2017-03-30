@@ -28,9 +28,9 @@ class OmiseCustomer extends OmiseApiResource
      *
      * @return OmiseSearch
      */
-    public static function search($query = '')
+    public static function search($query = '', $publickey = null, $secretkey = null)
     {
-        return OmiseSearch::scope('customer')->query($query);
+        return OmiseSearch::scope('customer', $publickey, $secretkey)->query($query);
     }
 
     /**

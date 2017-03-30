@@ -22,8 +22,8 @@ class OmiseRefund extends OmiseApiResource
      *
      * @return OmiseSearch
      */
-    public static function search($query = '')
+    public static function search($query = '', $publickey = null, $secretkey = null)
     {
-        return OmiseSearch::scope('refund')->query($query);
+        return OmiseSearch::scope('refund', $publickey, $secretkey)->query($query);
     }
 }

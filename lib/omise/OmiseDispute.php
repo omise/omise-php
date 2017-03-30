@@ -27,9 +27,9 @@ class OmiseDispute extends OmiseApiResource
      *
      * @return OmiseSearch
      */
-    public static function search($query = '')
+    public static function search($query = '', $publickey = null, $secretkey = null)
     {
-        return OmiseSearch::scope('dispute')->query($query);
+        return OmiseSearch::scope('dispute', $publickey, $secretkey)->query($query);
     }
 
     /**

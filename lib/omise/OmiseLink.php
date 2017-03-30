@@ -27,9 +27,9 @@ class OmiseLink extends OmiseApiResource
      *
      * @return OmiseSearch
      */
-    public static function search($query = '')
+    public static function search($query = '', $publickey = null, $secretkey = null)
     {
-        return OmiseSearch::scope('link')->query($query);
+        return OmiseSearch::scope('link', $publickey, $secretkey)->query($query);
     }
 
     /**

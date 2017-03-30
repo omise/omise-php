@@ -28,6 +28,20 @@ class SearchTest extends TestConfig
 
     /**
      * Assert that a list of search object could be retrieved charge object by
+     * specific scope.
+     *
+     */
+    public function testRetrieveSearchResultWithOmiseKeys()
+    {
+        $search = OmiseSearch::scope('charge', OMISE_PUBLIC_KEY, OMISE_SECRET_KEY);
+
+        $this->assertArrayHasKey('object', $search);
+        $this->assertEquals('search', $search['object']);
+        $this->assertEquals('charge', $search['scope']);
+    }
+
+    /**
+     * Assert that a list of search object could be retrieved charge object by
      * specific scope and query.
      *
      */

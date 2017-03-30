@@ -27,9 +27,9 @@ class OmiseRecipient extends OmiseApiResource
      *
      * @return OmiseSearch
      */
-    public static function search($query = '')
+    public static function search($query = '', $publickey = null, $secretkey = null)
     {
-        return OmiseSearch::scope('recipient')->query($query);
+        return OmiseSearch::scope('recipient', $publickey, $secretkey)->query($query);
     }
 
     /**

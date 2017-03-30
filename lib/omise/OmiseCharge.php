@@ -28,9 +28,9 @@ class OmiseCharge extends OmiseApiResource
      *
      * @return OmiseSearch
      */
-    public static function search($query = '')
+    public static function search($query = '', $publickey = null, $secretkey = null)
     {
-        return OmiseSearch::scope('charge')->query($query);
+        return OmiseSearch::scope('charge', $publickey, $secretkey)->query($query);
     }
 
     /**
