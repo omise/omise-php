@@ -81,9 +81,7 @@ class OmiseRecipientTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseRecipient::search('demo')
-      ->filter(array('active' => true))
-      ->page(1)
-      ->order('chronological');
+      ->filter(array('active' => true));
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);

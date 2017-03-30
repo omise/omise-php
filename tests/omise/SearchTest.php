@@ -69,7 +69,7 @@ class SearchTest extends TestConfig
         $search = OmiseSearch::scope('charge')
             ->query('demo')
             ->filter(array('captured' => true))
-            ->page(1);
+            ->page(2);
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
@@ -88,8 +88,8 @@ class SearchTest extends TestConfig
         $search = OmiseSearch::scope('charge')
             ->query('demo')
             ->filter(array('captured' => true))
-            ->page(1)
-            ->order('chronological');
+            ->page(2)
+            ->order('reverse_chronological');
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);

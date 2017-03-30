@@ -46,9 +46,7 @@ class RefundTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseRefund::search()
-      ->filter(array('voided' => true))
-      ->page(1)
-      ->order('chronological');
+      ->filter(array('voided' => true));
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);

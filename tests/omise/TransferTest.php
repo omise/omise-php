@@ -79,9 +79,7 @@ class TransferTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseTransfer::search('demo@omise.co')
-      ->filter(array('currency' => 'thb'))
-      ->page(1)
-      ->order('chronological');
+      ->filter(array('currency' => 'thb'));
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);

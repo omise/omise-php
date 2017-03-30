@@ -52,7 +52,6 @@ class LinkTest extends TestConfig {
   public function testSearch() {
     $result = OmiseLink::search('demo')
       ->filter(array('used' => true))
-      ->page(1)
       ->order('reverse_chronological');
 
     $this->assertArrayHasKey('object', $result);

@@ -91,9 +91,7 @@ class OmiseDisputeTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseDispute::search('demo')
-      ->filter(array('card_last_digits' => '5454'))
-      ->page(1)
-      ->order('chronological');
+      ->filter(array('card_last_digits' => '5454'));
 
     $this->assertArrayHasKey('object', $result);
     $this->assertEquals('search', $result['object']);

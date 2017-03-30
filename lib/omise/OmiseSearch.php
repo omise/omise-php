@@ -15,8 +15,8 @@ class OmiseSearch extends OmiseApiResource
     private $scope = null;
     private $query = '';
     private $filters = array();
-    private $page = 1;
-    private $order = 'chronological';
+    private $page = null;
+    private $order = null;
 
     public static function scope($scope)
     {
@@ -53,9 +53,6 @@ class OmiseSearch extends OmiseApiResource
 
     public function order($order)
     {
-        if (!in_array($order, array('chronological', 'reverse_chronological'))) {
-            throw new InvalidArgumentException();
-        }
         $this->dirty = true;
         $this->order = $order;
         return $this;
@@ -93,11 +90,11 @@ class OmiseSearch extends OmiseApiResource
             $querybuild['filters['.$key.']'] = $value;
         }
 
-        if ($this->page != 1) {
+        if ($this->page != null) {
             $querybuild['page'] = $this->page;
         }
 
-        if ($this->order != 'chronological') {
+        if ($this->order != null) {
             $querybuild['chronological'] = $this->order;
         }
 
