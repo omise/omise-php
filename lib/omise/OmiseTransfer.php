@@ -23,7 +23,9 @@ class OmiseTransfer extends OmiseApiResource
     /**
      * Search for transfers.
      *
-     * @param string query
+     * @param  string $query
+     * @param  string $publickey
+     * @param  string $secretkey
      *
      * @return OmiseSearch
      */

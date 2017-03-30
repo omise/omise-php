@@ -23,7 +23,9 @@ class OmiseLink extends OmiseApiResource
     /**
      * Search for links.
      *
-     * @param string query
+     * @param  string $query
+     * @param  string $publickey
+     * @param  string $secretkey
      *
      * @return OmiseSearch
      */

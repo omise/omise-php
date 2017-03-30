@@ -24,7 +24,9 @@ class OmiseCharge extends OmiseApiResource
     /**
      * Search for charges.
      *
-     * @param string query
+     * @param  string $query
+     * @param  string $publickey
+     * @param  string $secretkey
      *
      * @return OmiseSearch
      */

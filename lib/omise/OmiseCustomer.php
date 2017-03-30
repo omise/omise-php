@@ -24,7 +24,9 @@ class OmiseCustomer extends OmiseApiResource
     /**
      * Search for customers.
      *
-     * @param string query
+     * @param  string $query
+     * @param  string $publickey
+     * @param  string $secretkey
      *
      * @return OmiseSearch
      */

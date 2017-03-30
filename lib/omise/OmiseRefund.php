@@ -18,7 +18,9 @@ class OmiseRefund extends OmiseApiResource
     /**
      * Search for refunds.
      *
-     * @param string query
+     * @param  string $query
+     * @param  string $publickey
+     * @param  string $secretkey
      *
      * @return OmiseSearch
      */
