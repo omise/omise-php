@@ -12,11 +12,7 @@ class OmiseSearch extends OmiseApiResource
     const ENDPOINT = 'search';
 
     private $dirty = true;
-    private $scope = null;
-    private $query = '';
-    private $filters = array();
-    private $page = null;
-    private $order = null;
+    private $attributes = array();
 
     public static function scope($scope)
     {
@@ -26,36 +22,32 @@ class OmiseSearch extends OmiseApiResource
     protected function __construct($scope, $publickey = null, $secretkey = null)
     {
         parent::__construct($publickey, $secretkey);
-        $this->dirty = true;
-        $this->scope = $scope;
+        $this->mergeAttributes('scope', $scope);
     }
 
     public function query($query)
     {
-        $this->dirty = true;
-        $this->query = $query;
-        return $this;
+        return $this->mergeAttributes('query', $query);
     }
 
     public function filter(array $filters = array())
     {
-        $this->dirty = true;
-        $this->filters = $filters;
-        return $this;
+        foreach ($filters as $k => $v) {
+            if (is_bool($v)) {
+                $filters[$k] = $v ? 'true' : 'false';
+            }
+        }
+        return $this->mergeAttributes('filters', $filters);
     }
 
     public function page($page)
     {
-        $this->dirty = true;
-        $this->page = $page;
-        return $this;
+        return $this->mergeAttributes('page', $page);
     }
 
     public function order($order)
     {
-        $this->dirty = true;
-        $this->order = $order;
-        return $this;
+        return $this->mergeAttributes('order', $order);
     }
 
     public function retrieve()
@@ -68,6 +60,14 @@ class OmiseSearch extends OmiseApiResource
         return $this;
     }
 
+    private function mergeAttributes($key, $value)
+    {
+        $this->dirty = true;
+        $this->attributes[$key] = $value;
+
+        return $this;
+    }
+
     /**
      * Generate request url.
      *
@@ -77,29 +77,7 @@ class OmiseSearch extends OmiseApiResource
      */
     private function getUrl()
     {
-        $querybuild = array('scope' => $this->scope);
-
-        if (strlen($this->query) > 0) {
-            $querybuild['query'] = $this->query;
-        }
-
-        foreach ($this->filters as $key => $value) {
-            if (is_bool($value)) {
-                $value = $value ? 'true' : 'false';
-            }
-            $querybuild['filters['.$key.']'] = $value;
-        }
-
-        if ($this->page != null) {
-            $querybuild['page'] = $this->page;
-        }
-
-        if ($this->order != null) {
-            $querybuild['chronological'] = $this->order;
-        }
-
-        $querystring = http_build_query($querybuild);
-
+        $querystring = http_build_query($this->attributes);
         return OMISE_API_URL.self::ENDPOINT.'/?'.$querystring;
     }
 

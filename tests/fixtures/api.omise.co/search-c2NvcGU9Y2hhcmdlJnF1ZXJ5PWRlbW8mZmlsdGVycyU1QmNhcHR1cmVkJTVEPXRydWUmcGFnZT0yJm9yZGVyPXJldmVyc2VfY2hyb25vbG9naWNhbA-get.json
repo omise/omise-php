@@ -1,6 +1,6 @@
 {
   "object": "search",
-  "order": "chronological",
+  "order": "reverse_chronological",
   "scope": "charge",
   "query": "demo",
   "filters": {
