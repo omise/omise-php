@@ -50,6 +50,10 @@ class OmiseSearch extends OmiseApiResource
         return $this->mergeAttributes('order', $order);
     }
 
+    public function isDirty() {
+        return $this->dirty;
+    }
+
     public function retrieve()
     {
         if (!$this->dirty) {
@@ -57,6 +61,7 @@ class OmiseSearch extends OmiseApiResource
         }
 
         $this->g_reload($this->getUrl());
+        $this->dirty = false;
         return $this;
     }
 
