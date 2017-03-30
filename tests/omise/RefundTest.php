@@ -46,7 +46,7 @@ class RefundTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseRefund::search()
-      ->where(array('voided' => true))
+      ->filter(array('voided' => true))
       ->page(1)
       ->order('chronological');
 

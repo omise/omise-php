@@ -79,7 +79,7 @@ class TransferTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseTransfer::search('demo@omise.co')
-      ->where(array('currency' => 'thb'))
+      ->filter(array('currency' => 'thb'))
       ->page(1)
       ->order('chronological');
 

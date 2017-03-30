@@ -51,7 +51,7 @@ class LinkTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseLink::search('demo')
-      ->where(array('used' => true))
+      ->filter(array('used' => true))
       ->page(1)
       ->order('reverse_chronological');
 

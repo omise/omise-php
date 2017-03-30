@@ -81,7 +81,7 @@ class OmiseRecipientTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseRecipient::search('demo')
-      ->where(array('active' => true))
+      ->filter(array('active' => true))
       ->page(1)
       ->order('chronological');
 

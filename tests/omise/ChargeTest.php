@@ -98,7 +98,7 @@ class ChargeTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseCharge::search('order')
-      ->where(array('captured' => true))
+      ->filter(array('captured' => true))
       ->page(2)
       ->order('reverse_chronological')
       ->retrieve();

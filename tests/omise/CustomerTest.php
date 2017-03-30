@@ -98,7 +98,7 @@ class CustomerTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseCustomer::search('doe')
-      ->where(array('created' => '2017-01-01..2017-08-30'))
+      ->filter(array('created' => '2017-01-01..2017-08-30'))
       ->page(1)
       ->order('chronological');
 

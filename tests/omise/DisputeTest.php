@@ -91,7 +91,7 @@ class OmiseDisputeTest extends TestConfig {
    */
   public function testSearch() {
     $result = OmiseDispute::search('demo')
-      ->where(array('card_last_digits' => '5454'))
+      ->filter(array('card_last_digits' => '5454'))
       ->page(1)
       ->order('chronological');
 

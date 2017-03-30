@@ -14,7 +14,7 @@ class OmiseSearch extends OmiseApiResource
     private $dirty = true;
     private $scope = null;
     private $query = '';
-    private $conditions = array();
+    private $filters = array();
     private $page = 1;
     private $order = 'chronological';
 
@@ -37,10 +37,10 @@ class OmiseSearch extends OmiseApiResource
         return $this;
     }
 
-    public function where(array $conditions = array())
+    public function filter(array $filters = array())
     {
         $this->dirty = true;
-        $this->conditions = $conditions;
+        $this->filters = $filters;
         return $this;
     }
 
@@ -86,7 +86,7 @@ class OmiseSearch extends OmiseApiResource
             $querybuild['query'] = $this->query;
         }
 
-        foreach ($this->conditions as $key => $value) {
+        foreach ($this->filters as $key => $value) {
             if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
