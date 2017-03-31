@@ -75,4 +75,20 @@ class OmiseRecipientTest extends TestConfig {
 
     $this->assertTrue($recipient->isDestroyed());
   }
+
+  /**
+   * Assert that OmiseRecipient can search for recipients.
+   */
+  public function testSearch() {
+    $result = OmiseRecipient::search('demo')
+      ->filter(array('active' => true));
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('recipient', $item['object']);
+    }
+  }
 }

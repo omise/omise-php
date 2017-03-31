@@ -21,6 +21,20 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
+     * Search for transfers.
+     *
+     * @param  string $query
+     * @param  string $publickey
+     * @param  string $secretkey
+     *
+     * @return OmiseSearch
+     */
+    public static function search($query = '', $publickey = '', $secretkey = '')
+    {
+        return OmiseSearch::scope('transfer', $publickey, $secretkey)->query($query);
+    }
+
+    /**
      * Creates a transfer.
      *
      * @param  mixed  $params

@@ -1,0 +1,98 @@
+{
+  "object": "search",
+  "order": "chronological",
+  "scope": "customer",
+  "query": "doe",
+  "filters": {
+    "created": "2017-01-01..2017-08-30"
+  },
+  "page": 1,
+  "per_page": 30,
+  "location": "/search",
+  "total_pages": 1,
+  "total": 2,
+  "data": [
+    {
+      "object": "customer",
+      "id": "cust_test_57gq8v6xx22dgt8o46l",
+      "livemode": false,
+      "location": "/customers/cust_test_57gq8v6xx22dgt8o46l",
+      "default_card": "card_test_57gq98nmimh8jvpw58m",
+      "email": "jane.doe@example.com",
+      "description": "Jane Doe (id: 31)",
+      "created": "2017-03-29T08:18:10Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2017-03-30T07:44:22+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 1,
+        "order": null,
+        "location": "/customers/cust_test_57gq8v6xx22dgt8o46l/cards",
+        "data": [
+          {
+            "object": "card",
+            "id": "card_test_57gq98nmimh8jvpw58m",
+            "livemode": false,
+            "location": "/customers/cust_test_57gq8v6xx22dgt8o46l/cards/card_test_57gq98nmimh8jvpw58m",
+            "country": "pl",
+            "city": "Bangkok",
+            "postal_code": "10310",
+            "financing": "",
+            "bank": "BANK HANDLOWY W WARSZAWIE, S.A.",
+            "last_digits": "5454",
+            "brand": "MasterCard",
+            "expiration_month": 3,
+            "expiration_year": 2019,
+            "fingerprint": "vdhTa4B+XwHpLxTXOXxahCeCXJ7I56ocXMotaYAD1LM=",
+            "name": "JANE DOE",
+            "security_code_check": true,
+            "created": "2017-03-29T08:19:14Z"
+          }
+        ]
+      }
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_57d8ez4hsi2ervc7h6b",
+      "livemode": false,
+      "location": "/customers/cust_test_57d8ez4hsi2ervc7h6b",
+      "default_card": "card_test_57d8ew15ty9gyaoptht",
+      "email": "john.doe@example.com",
+      "description": "John Doe (id: 30)",
+      "created": "2017-03-20T09:49:51Z",
+      "cards": {
+        "object": "list",
+        "from": "1970-01-01T00:00:00+00:00",
+        "to": "2017-03-30T07:44:22+00:00",
+        "offset": 0,
+        "limit": 20,
+        "total": 1,
+        "order": null,
+        "location": "/customers/cust_test_57d8ez4hsi2ervc7h6b/cards",
+        "data": [
+          {
+            "object": "card",
+            "id": "card_test_57d8ew15ty9gyaoptht",
+            "livemode": false,
+            "location": "/customers/cust_test_57d8ez4hsi2ervc7h6b/cards/card_test_57d8ew15ty9gyaoptht",
+            "country": "us",
+            "city": "Bangkok",
+            "postal_code": "10320",
+            "financing": "",
+            "bank": "",
+            "last_digits": "4242",
+            "brand": "Visa",
+            "expiration_month": 3,
+            "expiration_year": 2019,
+            "fingerprint": "WhPlRltXQvfe2G2AAzQriXcFWCu0dMpb/Tq4lhyFHVg=",
+            "name": "JOHN DOE",
+            "security_code_check": true,
+            "created": "2017-03-20T09:49:36Z"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -92,4 +92,37 @@ class ChargeTest extends TestConfig {
     $this->assertEquals('charge', $charge['object']);
     $this->assertTrue($charge['reversed']);
   }
+
+  /**
+   * Assert that OmiseCharge can search for charges.
+   */
+  public function testSearch() {
+    $result = OmiseCharge::search('order')
+      ->filter(array('captured' => true))
+      ->page(2)
+      ->order('reverse_chronological');
+
+    $this->assertTrue($result->isDirty());
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+    $this->assertFalse($result->isDirty());
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('charge', $item['object']);
+    }
+
+    $result = $result->page(1);
+    $this->assertTrue($result->isDirty());
+    $result->reload();
+    $this->assertFalse($result->isDirty());
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('charge', $item['object']);
+    }
+  }
 }

@@ -21,6 +21,20 @@ class OmiseDispute extends OmiseApiResource
     }
 
     /**
+     * Search for disputes.
+     *
+     * @param  string $query
+     * @param  string $publickey
+     * @param  string $secretkey
+     *
+     * @return OmiseSearch
+     */
+    public static function search($query = '', $publickey = null, $secretkey = null)
+    {
+        return OmiseSearch::scope('dispute', $publickey, $secretkey)->query($query);
+    }
+
+    /**
      * (non-PHPdoc)
      *
      * @see OmiseApiResource::g_reload()

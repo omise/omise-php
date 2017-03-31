@@ -40,4 +40,20 @@ class RefundTest extends TestConfig {
     $this->assertArrayHasKey('object', $refund);
     $this->assertEquals('refund', $refund['object']);
   }
+
+  /**
+   * Assert that OmiseRefund can search for refunds.
+   */
+  public function testSearch() {
+    $result = OmiseRefund::search()
+      ->filter(array('voided' => true));
+
+    $this->assertArrayHasKey('object', $result);
+    $this->assertEquals('search', $result['object']);
+
+    foreach ($result['data'] as $item) {
+      $this->assertArrayHasKey('object', $item);
+      $this->assertEquals('refund', $item['object']);
+    }
+  }
 }
