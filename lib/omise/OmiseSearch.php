@@ -35,7 +35,7 @@ class OmiseSearch extends OmiseApiResource
      * @param  string $publickey
      * @param  string $secretkey
      *
-     * @return  OmiseSearch  The created instance.
+     * @return OmiseSearch  The created instance.
      */
     public static function scope($scope, $publickey = null, $secretkey = null)
     {
@@ -47,11 +47,9 @@ class OmiseSearch extends OmiseApiResource
      *
      * This constructor is `protected` thus not intended to be used directly.
      *
-     * @param  string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
-     * @param  string $publickey
-     * @param  string $secretkey
-     *
-     * @return  OmiseSearch  The created instance.
+     * @param string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
+     * @param string $publickey
+     * @param string $secretkey
      */
     protected function __construct($scope, $publickey, $secretkey)
     {
@@ -64,7 +62,7 @@ class OmiseSearch extends OmiseApiResource
      *
      * @param  string $query  Searching text within the scope.
      *
-     * @return  OmiseSearch  This instance.
+     * @return OmiseSearch  This instance.
      */
     public function query($query)
     {
@@ -76,7 +74,7 @@ class OmiseSearch extends OmiseApiResource
      *
      * @param  string $filters  Searching text with specific key within the scope.
      *
-     * @return  OmiseSearch  This instance.
+     * @return OmiseSearch  This instance.
      */
     public function filter(array $filters = array())
     {
@@ -93,7 +91,7 @@ class OmiseSearch extends OmiseApiResource
      *
      * @param  int $page  Specific number of searching page.
      *
-     * @return  OmiseSearch  This instance.
+     * @return OmiseSearch  This instance.
      */
     public function page($page)
     {
@@ -105,9 +103,9 @@ class OmiseSearch extends OmiseApiResource
      *
      * @param  string $order  The order of the list returned.
      *
-     * @see https://www.omise.co/search-api
+     * @see    https://www.omise.co/search-api
      *
-     * @return  OmiseSearch  This instance.
+     * @return OmiseSearch  This instance.
      */
     public function order($order)
     {
@@ -124,9 +122,10 @@ class OmiseSearch extends OmiseApiResource
      *     $search = OmiseCharge::query('demo'); // the instance is dirty
      *     echo $search['object'];               // this will automatically retrive remote value
      *
-     * @return  bool  true if the instance is dirty and needs to be reloaded
+     * @return bool  true if the instance is dirty and needs to be reloaded
      */
-    public function isDirty() {
+    public function isDirty()
+    {
         return $this->dirty;
     }
 
@@ -156,8 +155,10 @@ class OmiseSearch extends OmiseApiResource
      * Merge the given key and value to search attributes, and set instance state
      * as dirty.
      *
-     * @param  string  $key  Search attribute key.
+     * @param  string $key    Search attribute key.
      * @param  mixed  $value  Search attribute value.
+     *
+     * @return OmiseSearch  This instance.
      */
     private function mergeAttributes($key, $value)
     {
@@ -169,8 +170,6 @@ class OmiseSearch extends OmiseApiResource
 
     /**
      * Generate request url.
-     *
-     * @param  string $querystring
      *
      * @return string
      */
@@ -185,7 +184,7 @@ class OmiseSearch extends OmiseApiResource
     /*
      * (non-PHPdoc)
      *
-     * @see  OmiseObject::offsetSet()
+     * @see OmiseObject::offsetSet()
      */
     public function offsetSet($key, $value)
     {
@@ -196,7 +195,7 @@ class OmiseSearch extends OmiseApiResource
     /*
      * (non-PHPdoc)
      *
-     * @see  OmiseObject::offsetExists()
+     * @see OmiseObject::offsetExists()
      */
     public function offsetExists($key)
     {
@@ -207,7 +206,7 @@ class OmiseSearch extends OmiseApiResource
     /*
      * (non-PHPdoc)
      *
-     * @see  OmiseObject::offsetUnset()
+     * @see OmiseObject::offsetUnset()
      */
     public function offsetUnset($key)
     {
@@ -218,7 +217,7 @@ class OmiseSearch extends OmiseApiResource
     /*
      * (non-PHPdoc)
      *
-     * @see  OmiseObject::offsetGet()
+     * @see OmiseObject::offsetGet()
      */
     public function offsetGet($key)
     {
