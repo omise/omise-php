@@ -117,35 +117,39 @@ class OmiseSearch extends OmiseApiResource
     /**
      * Check whether this search instance is dirty or not.
      *
-     * Dirty search instance needs to be retrieved before further usage. The
-     * dirty search instance automatically retrieves its data when client code
+     * Dirty search instance needs to be reloaded before further usage. The
+     * dirty search instance automatically reloads its data when client code
      * tries to access its array element.
      *
      *     $search = OmiseCharge::query('demo'); // the instance is dirty
      *     echo $search['object'];               // this will automatically retrive remote value
      *
-     * @return  bool  true if the instance is dirty and needs to be retrieved
+     * @return  bool  true if the instance is dirty and needs to be reloaded
      */
     public function isDirty() {
         return $this->dirty;
     }
 
     /**
-     * Retrieve search data from Omise server.
+     * Reload search data from Omise server.
      *
-     * This method does nothing if the current instance is not dirty.
-     *
-     * @return  OmiseSearch  This instance.
+     * This method does not consider the dirty status of the instance and will
+     * always call backend server and reset dirty flag.
      */
-    public function retrieve()
+    public function reload()
     {
-        if (!$this->dirty) {
-            return;
-        }
-
-        $this->g_reload($this->getUrl());
         $this->dirty = false;
-        return $this;
+        $this->g_reload($this->getUrl());
+    }
+
+    /**
+     * Reload search data from Omise server if this instance is in dirty state.
+     */
+    private function reloadIfDirty()
+    {
+        if ($this->isDirty()) {
+            $this->reload();
+        }
     }
 
     /**
@@ -185,7 +189,7 @@ class OmiseSearch extends OmiseApiResource
      */
     public function offsetSet($key, $value)
     {
-        $this->retrieve();
+        $this->reloadIfDirty();
         return parent::offsetSet($key, $value);
     }
 
@@ -196,7 +200,7 @@ class OmiseSearch extends OmiseApiResource
      */
     public function offsetExists($key)
     {
-        $this->retrieve();
+        $this->reloadIfDirty();
         return parent::offsetExists($key);
     }
 
@@ -207,7 +211,7 @@ class OmiseSearch extends OmiseApiResource
      */
     public function offsetUnset($key)
     {
-        $this->retrieve();
+        $this->reloadIfDirty();
         return parent::offsetUnset($key);
     }
 
@@ -218,7 +222,7 @@ class OmiseSearch extends OmiseApiResource
      */
     public function offsetGet($key)
     {
-        $this->retrieve();
+        $this->reloadIfDirty();
         return parent::offsetGet($key);
     }
 }
