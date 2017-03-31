@@ -91,7 +91,7 @@ class OmiseSearch extends OmiseApiResource
     /**
      * Update `page` parameter.
      *
-     * @param  string $page  Specific number of searching page.
+     * @param  int $page  Specific number of searching page.
      *
      * @return  OmiseSearch  This instance.
      */
