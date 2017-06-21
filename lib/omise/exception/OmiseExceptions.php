@@ -23,6 +23,9 @@ class OmiseException extends Exception
             case 'authentication_failure':
                 return new OmiseAuthenticationFailureException($array['message'], $array);
 
+            case 'bad_request':
+                return new OmiseBadRequestException($array['message'], $array);
+
             case 'not_found':
                 return new OmiseNotFoundException($array['message'], $array);
 
@@ -46,6 +49,12 @@ class OmiseException extends Exception
 
             case 'failed_fraud_check':
                 return new OmiseFailedFraudCheckException($array['message'], $array);
+
+            case 'failed_refund':
+                return new OmiseFailedRefundException($array['message'], $array);
+
+            case 'invalid_link':
+                return new OmiseInvalidLinkException($array['message'], $array);
 
             case 'invalid_recipient':
                 return new OmiseInvalidRecipientException($array['message'], $array);
@@ -81,6 +90,7 @@ class OmiseException extends Exception
 }
 
 class OmiseAuthenticationFailureException extends OmiseException { }
+class OmiseBadRequestException extends OmiseException { }
 class OmiseNotFoundException extends OmiseException { }
 class OmiseUsedTokenException extends OmiseException { }
 class OmiseInvalidCardException extends OmiseException { }
@@ -89,6 +99,8 @@ class OmiseMissingCardException extends OmiseException { }
 class OmiseInvalidChargeException extends OmiseException { }
 class OmiseFailedCaptureException extends OmiseException { }
 class OmiseFailedFraudCheckException extends OmiseException { }
+class OmiseFailedRefundException extends OmiseException { }
+class OmiseInvalidLinkException extends OmiseException { }
 class OmiseInvalidRecipientException extends OmiseException { }
 class OmiseInvalidBankAccountException extends OmiseException { }
 class OmiseUndefinedException extends OmiseException { }

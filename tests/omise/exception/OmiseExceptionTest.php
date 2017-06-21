@@ -34,6 +34,19 @@ class OmiseExceptionTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
+   * @expectedException         OmiseBadRequestException
+   * @expectedExceptionMessage  offsite is not valid
+   */
+  public function testOmiseBadRequestException() {
+    $mock = array('object'    => 'error',
+                  'location'  => 'https://www.omise.co/api-errors#bad-request',
+                  'code'      => 'bad_request',
+                  'message'   => 'offsite is not valid');
+
+    throw OmiseException::getInstance($mock);
+  }
+
+  /**
    * @expectedException         OmiseNotFoundException
    * @expectedExceptionMessage  customer cust_test_000000000000 was not found
    */
@@ -86,6 +99,19 @@ class OmiseExceptionTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
+   * @expectedException         OmiseInvalidLinkException
+   * @expectedExceptionMessage  amount must be less than or equal to 1000000.0
+   */
+  public function testInvalidLinkException () {
+    $mock = array('object'    => 'error',
+                  'location'  => 'https://www.omise.co/api-errors#invalid-link',
+                  'code'      => 'invalid_link',
+                  'message'   => 'amount must be less than or equal to 1000000.0');
+
+    throw OmiseException::getInstance($mock);
+  }
+
+  /**
    * @expectedException         OmiseMissingCardException
    * @expectedExceptionMessage  request contains no card parameters
    */
@@ -120,6 +146,19 @@ class OmiseExceptionTest extends PHPUnit_Framework_TestCase {
                   'location'  => 'https://docs.omise.co/api/errors#failed-capture',
                   'code'      => 'failed_capture',
                   'message'   => 'Charge is not authorized');
+
+    throw OmiseException::getInstance($mock);
+  }
+
+  /**
+   * @expectedException         OmiseFailedRefundException
+   * @expectedExceptionMessage  amount is not a number
+   */
+  public function testFailedRefundException () {
+    $mock = array('object'    => 'error',
+                  'location'  => 'https://www.omise.co/api-errors#failed-refund',
+                  'code'      => 'failed_refund',
+                  'message'   => 'amount is not a number');
 
     throw OmiseException::getInstance($mock);
   }
