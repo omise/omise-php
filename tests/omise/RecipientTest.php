@@ -91,4 +91,19 @@ class OmiseRecipientTest extends TestConfig {
       $this->assertEquals('recipient', $item['object']);
     }
   }
+
+  /**
+   * @test
+   */
+  public function retrieve_schedules()
+  {
+    $recipient  = OmiseRecipient::retrieve('recp_test_508a9dytz793gxv9m77');
+    $schedules = $recipient->schedules();
+
+    $this->assertArrayHasKey('object', $schedules);
+    $this->assertEquals('list', $schedules['object']);
+    $this->assertEquals('schedule', $schedules['data'][0]['object']);
+    $this->assertArrayHasKey('transfer', $schedules['data'][0]);
+    $this->assertEquals('recp_test_508a9dytz793gxv9m77', $schedules['data'][0]['transfer']['recipient']);
+  }
 }

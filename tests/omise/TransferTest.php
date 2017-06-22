@@ -89,4 +89,17 @@ class TransferTest extends TestConfig {
       $this->assertEquals('transfer', $item['object']);
     }
   }
+
+  /**
+   * @test
+   */
+  public function retrieve_schedules()
+  {
+    $schedules = OmiseTransfer::schedules();
+
+    $this->assertArrayHasKey('object', $schedules);
+    $this->assertEquals('list', $schedules['object']);
+    $this->assertEquals('schedule', $schedules['data'][0]['object']);
+    $this->assertArrayHasKey('transfer', $schedules['data'][0]);
+  }
 }

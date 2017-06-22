@@ -108,4 +108,19 @@ class CustomerTest extends TestConfig {
       $this->assertEquals('customer', $item['object']);
     }
   }
+
+  /**
+   * @test
+   */
+  public function retrieve_schedules()
+  {
+    $customer  = OmiseCustomer::retrieve('cust_test_5234fzk37pi2mz0cen3');
+    $schedules = $customer->schedules();
+
+    $this->assertArrayHasKey('object', $schedules);
+    $this->assertEquals('list', $schedules['object']);
+    $this->assertEquals('schedule', $schedules['data'][0]['object']);
+    $this->assertArrayHasKey('charge', $schedules['data'][0]);
+    $this->assertEquals('cust_test_5234fzk37pi2mz0cen3', $schedules['data'][0]['charge']['customer']);
+  }
 }

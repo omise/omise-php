@@ -125,4 +125,17 @@ class ChargeTest extends TestConfig {
       $this->assertEquals('charge', $item['object']);
     }
   }
+
+  /**
+   * @test
+   */
+  public function retrieve_schedules()
+  {
+    $schedules = OmiseCharge::schedules();
+
+    $this->assertArrayHasKey('object', $schedules);
+    $this->assertEquals('list', $schedules['object']);
+    $this->assertEquals('schedule', $schedules['data'][0]['object']);
+    $this->assertArrayHasKey('charge', $schedules['data'][0]);
+  }
 }
