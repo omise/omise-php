@@ -99,6 +99,40 @@ class ScheduleTest extends TestConfig
     /**
      * @test
      */
+    public function retrieve_occurrences_list()
+    {
+        $schedule    = OmiseSchedule::retrieve('schd_test_585t7iomh2dte3ejxh5');
+        $occurrences = $schedule->occurrences();
+
+        $this->assertArrayHasKey('object', $occurrences);
+        $this->assertEquals('list', $occurrences['object']);
+    }
+
+    /**
+     * @test
+     */
+    public function retrieve_occurrences_by_a_given_id()
+    {
+        $schedule   = OmiseSchedule::retrieve('schd_test_585t7iomh2dte3ejxh5');
+        $occurrence = $schedule->occurrences()->retrieve('occu_test_58dt3strf4m1y7bqii8');
+
+        $this->assertArrayHasKey('object', $occurrence);
+        $this->assertEquals('occurrence', $occurrence['object']);
+    }
+
+    /**
+     * @test
+     */
+    public function retrieve_null_occurrence()
+    {
+        $schedules = OmiseSchedule::retrieve();
+
+        $this->assertNull($schedules->occurrences());
+    }
+
+    /**
+     * @test
+     */
     public function destroy()
     {
         $schedule = OmiseSchedule::retrieve('schd_test_585t7iomh2dte3ejxh5');

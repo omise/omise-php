@@ -9,6 +9,7 @@ require_once dirname(__FILE__).'/omise/OmiseEvent.php';
 require_once dirname(__FILE__).'/omise/OmiseToken.php';
 require_once dirname(__FILE__).'/omise/OmiseCharge.php';
 require_once dirname(__FILE__).'/omise/OmiseCustomer.php';
+require_once dirname(__FILE__).'/omise/OmiseOccurrence.php';
 require_once dirname(__FILE__).'/omise/OmiseRefund.php';
 require_once dirname(__FILE__).'/omise/OmiseRefundList.php';
 require_once dirname(__FILE__).'/omise/OmiseSearch.php';

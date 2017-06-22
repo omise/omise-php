@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/OmiseOccurrenceList.php';
 
 class OmiseSchedule extends OmiseApiResource
 {
@@ -44,6 +45,22 @@ class OmiseSchedule extends OmiseApiResource
     public static function create($params, $publickey = null, $secretkey = null)
     {
         return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+    }
+
+    /**
+     * @param  array|string $options
+     *
+     * @return OmiseOccurrenceList|null
+     */
+    public function occurrences($options = array())
+    {
+        if ($this['object'] === 'schedule') {
+            if (is_array($options)) {
+                $options = '?' . http_build_query($options);
+            }
+
+            return parent::g_retrieve('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options), $this->_publickey, $this->_secretkey);
+        }
     }
 
     /**
