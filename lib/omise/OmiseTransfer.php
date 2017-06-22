@@ -37,6 +37,20 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
+     * Schedule a transfer.
+     *
+     * @param  string $params
+     * @param  string $publickey
+     * @param  string $secretkey
+     *
+     * @return OmiseScheduler
+     */
+    public static function schedule($params, $publickey = null, $secretkey = null)
+    {
+        return new OmiseScheduler('transfer', $params, $publickey, $secretkey);
+    }
+
+    /**
      * Creates a transfer.
      *
      * @param  mixed  $params

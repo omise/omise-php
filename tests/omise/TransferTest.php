@@ -102,4 +102,19 @@ class TransferTest extends TestConfig {
     $this->assertEquals('schedule', $schedules['data'][0]['object']);
     $this->assertArrayHasKey('transfer', $schedules['data'][0]);
   }
+
+  /**
+   * @test
+   */
+  public function create_scheduler()
+  {
+    $transfer = array(
+      'recipient' => 'recp_test_508a9dytz793gxv9m77',
+      'amount'    => 100000
+    );
+
+    $scheduler = OmiseTransfer::schedule($transfer);
+
+    $this->assertEquals($transfer, $scheduler['transfer']);
+  }
 }

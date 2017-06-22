@@ -51,6 +51,20 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
+     * Schedule a charge.
+     *
+     * @param  string $params
+     * @param  string $publickey
+     * @param  string $secretkey
+     *
+     * @return OmiseScheduler
+     */
+    public static function schedule($params, $publickey = null, $secretkey = null)
+    {
+        return new OmiseScheduler('charge', $params, $publickey, $secretkey);
+    }
+
+    /**
      * Creates a new charge.
      *
      * @param  array  $params
