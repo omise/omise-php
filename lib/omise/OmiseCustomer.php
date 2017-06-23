@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 require_once dirname(__FILE__).'/OmiseCardList.php';
+require_once dirname(__FILE__).'/OmiseScheduleList.php';
 
 class OmiseCustomer extends OmiseApiResource
 {
@@ -117,6 +118,24 @@ class OmiseCustomer extends OmiseApiResource
     public function getCards($options = array())
     {
         return $this->cards($options);
+    }
+
+    /**
+     * Gets a list of charge schedules that belongs to a given customer.
+     *
+     * @param  array|string $options
+     *
+     * @return OmiseScheduleList
+     */
+    public function schedules($options = array())
+    {
+        if ($this['object'] === 'customer') {
+            if (is_array($options)) {
+                $options = '?' . http_build_query($options);
+            }
+
+            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
+        }
     }
 
     /**

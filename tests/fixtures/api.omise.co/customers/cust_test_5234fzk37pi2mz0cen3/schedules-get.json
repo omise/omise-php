@@ -1,0 +1,22 @@
+{
+  "object": "list",
+  "from": "1970-01-01T00:00:00+00:00",
+  "to": "2017-06-01T14:31:03+00:00",
+  "offset": 0,
+  "limit": 20,
+  "total": 10,
+  "order": "chronological",
+  "location": "/schedules",
+  "data": [
+  	{
+      "object": "schedule",
+      "charge": {
+        "amount": 100000,
+        "currency": "thb",
+        "description": "Membership Fee",
+        "customer": "cust_test_5234fzk37pi2mz0cen3",
+        "card": null
+      }
+  	}
+  ]
+}

@@ -93,6 +93,24 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
+     * Gets a list of transfer schedules that belongs to a given recipient.
+     *
+     * @param  array|string $options
+     *
+     * @return OmiseScheduleList
+     */
+    public function schedules($options = array())
+    {
+        if ($this['object'] === 'recipient') {
+            if (is_array($options)) {
+                $options = '?' . http_build_query($options);
+            }
+
+            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
+        }
+    }
+
+    /**
      * @param  string $id
      *
      * @return string

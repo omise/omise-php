@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 require_once dirname(__FILE__).'/OmiseRefundList.php';
+require_once dirname(__FILE__).'/OmiseScheduleList.php';
 
 class OmiseCharge extends OmiseApiResource
 {
@@ -47,6 +48,20 @@ class OmiseCharge extends OmiseApiResource
         } else {
             parent::g_reload(self::getUrl());
         }
+    }
+
+    /**
+     * Schedule a charge.
+     *
+     * @param  string $params
+     * @param  string $publickey
+     * @param  string $secretkey
+     *
+     * @return OmiseScheduler
+     */
+    public static function schedule($params, $publickey = null, $secretkey = null)
+    {
+        return new OmiseScheduler('charge', $params, $publickey, $secretkey);
     }
 
     /**
@@ -109,6 +124,24 @@ class OmiseCharge extends OmiseApiResource
         $result = parent::execute(self::getUrl($this['id']).'/refunds', parent::REQUEST_GET, parent::getResourceKey());
 
         return new OmiseRefundList($result, $this['id'], $this->_publickey, $this->_secretkey);
+    }
+
+    /**
+     * Gets a list of charge schedules.
+     *
+     * @param  array|string $options
+     * @param  string       $publickey
+     * @param  string       $secretkey
+     *
+     * @return OmiseScheduleList
+     */
+    public static function schedules($options = array(), $publickey = null, $secretkey = null)
+    {
+        if (is_array($options)) {
+            $options = '?' . http_build_query($options);
+        }
+
+        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
     }
 
     /**

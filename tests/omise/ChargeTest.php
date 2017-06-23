@@ -125,4 +125,32 @@ class ChargeTest extends TestConfig {
       $this->assertEquals('charge', $item['object']);
     }
   }
+
+  /**
+   * @test
+   */
+  public function retrieve_schedules()
+  {
+    $schedules = OmiseCharge::schedules();
+
+    $this->assertArrayHasKey('object', $schedules);
+    $this->assertEquals('list', $schedules['object']);
+    $this->assertEquals('schedule', $schedules['data'][0]['object']);
+    $this->assertArrayHasKey('charge', $schedules['data'][0]);
+  }
+
+  /**
+   * @test
+   */
+  public function create_scheduler()
+  {
+    $charge = array(
+      'customer' => 'cust_test_58e7azwu6owk31ok81y',
+      'amount'   => 99900
+    );
+
+    $scheduler = OmiseCharge::schedule($charge);
+
+    $this->assertEquals($charge, $scheduler['charge']);
+  }
 }

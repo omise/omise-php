@@ -2,6 +2,8 @@
 
 require_once dirname(__FILE__).'/res/OmiseApiResource.php';
 
+require_once dirname(__FILE__).'/OmiseScheduleList.php';
+
 class OmiseTransfer extends OmiseApiResource
 {
     const ENDPOINT = 'transfers';
@@ -32,6 +34,20 @@ class OmiseTransfer extends OmiseApiResource
     public static function search($query = '', $publickey = '', $secretkey = '')
     {
         return OmiseSearch::scope('transfer', $publickey, $secretkey)->query($query);
+    }
+
+    /**
+     * Schedule a transfer.
+     *
+     * @param  string $params
+     * @param  string $publickey
+     * @param  string $secretkey
+     *
+     * @return OmiseScheduler
+     */
+    public static function schedule($params, $publickey = null, $secretkey = null)
+    {
+        return new OmiseScheduler('transfer', $params, $publickey, $secretkey);
     }
 
     /**
@@ -78,6 +94,24 @@ class OmiseTransfer extends OmiseApiResource
     protected function update($params)
     {
         parent::g_update(self::getUrl($this['id']), $params);
+    }
+
+    /**
+     * Gets a list of transfer schedules.
+     *
+     * @param  array|string $options
+     * @param  string       $publickey
+     * @param  string       $secretkey
+     *
+     * @return OmiseScheduleList
+     */
+    public static function schedules($options = array(), $publickey = null, $secretkey = null)
+    {
+        if (is_array($options)) {
+            $options = '?' . http_build_query($options);
+        }
+
+        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
     }
 
     /**
