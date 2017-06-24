@@ -1,5 +1,21 @@
 # CHANGELOG
 
+### [v2.8.0 _(June 24, 2017)_](https://github.com/omise/omise-php/releases/tag/v2.8.0)
+
+#### ✨ Highlights
+
+- Support Omise [Forex API](https://www.omise.co/forex-api). (PR [#64](https://github.com/omise/omise-php/pull/64))
+- Support Omise [Schedule APIs](https://www.omise.co/schedules-api). (PR [#63](https://github.com/omise/omise-php/pull/63))
+- Support Omise [Search APIs](https://www.omise.co/search-api). (PR [#58](https://github.com/omise/omise-php/pull/58))
+
+#### 🚀 Enhancements
+
+- Provide exception classes for `invalid_link`, `failed_refund` and `bad_request` error code.  (PR [#61](https://github.com/omise/omise-php/pull/61))
+
+For more information, please visit https://github.com/omise/omise-php/releases/tag/v2.8.0
+
+---
+
 ### [v2.7.1 _(March 22, 2017)_](https://github.com/omise/omise-php/releases/tag/v2.7.1)
 
 #### 👾 Bug Fixes
