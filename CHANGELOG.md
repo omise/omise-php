@@ -1,5 +1,16 @@
 # CHANGELOG
 
+### [v2.9.0 _(November 6, 2017)_](https://github.com/omise/omise-php/releases/tag/v2.9.0)
+
+#### ✨ Highlights
+
+- Support Omise [Source API](https://www.omise.co/source-api). (PR [#68](https://github.com/omise/omise-php/pull/68))
+- Link to Omise Forum instead of Gitter (deprecate Gitter channel). (PR [#67](https://github.com/omise/omise-php/pull/67))
+
+For more information, please visit https://github.com/omise/omise-php/releases/tag/v2.9.0
+
+---
+
 ### [v2.8.0 _(June 24, 2017)_](https://github.com/omise/omise-php/releases/tag/v2.8.0)
 
 #### ✨ Highlights
