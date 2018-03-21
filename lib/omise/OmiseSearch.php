@@ -99,6 +99,18 @@ class OmiseSearch extends OmiseApiResource
     }
 
     /**
+     * Update `per_page` parameter.
+     *
+     * @param  int $limit   Number of items that will be shown per page.
+     *
+     * @return OmiseSearch  This instance.
+     */
+    public function per_page($limit)
+    {
+        return $this->mergeAttributes('per_page', $limit);
+    }
+
+    /**
      * Update `order` parameter.
      *
      * @param  string $order  The order of the list returned.
