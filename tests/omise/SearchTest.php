@@ -111,4 +111,22 @@ class SearchTest extends TestConfig
         $this->assertEquals('demo', $search['query']);
         $this->assertEquals(array('captured' => 'true'), $search['filters']);
     }
+
+    /**
+     * Assert that items of search object can be shown at a specific amount
+     * given by 'per_page' number.
+     */
+    public function testSetLimit()
+    {
+        $search = OmiseSearch::scope('charge')
+            ->query('demo')
+            ->per_page(2)
+            ->order('reverse_chronological');
+
+        $this->assertArrayHasKey('object', $search);
+        $this->assertEquals('search', $search['object']);
+        $this->assertEquals('charge', $search['scope']);
+        $this->assertEquals('demo', $search['query']);
+        $this->assertEquals(2, $search['per_page']);
+    }
 }

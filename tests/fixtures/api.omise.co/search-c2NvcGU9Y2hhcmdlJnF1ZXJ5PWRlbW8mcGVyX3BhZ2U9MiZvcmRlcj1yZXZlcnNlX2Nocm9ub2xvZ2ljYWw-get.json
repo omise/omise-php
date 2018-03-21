@@ -1,0 +1,16 @@
+{
+  "object": "search",
+  "order": "reverse_chronological",
+  "scope": "charge",
+  "query": "demo",
+  "filters": {
+  },
+  "page": 1,
+  "per_page": 2,
+  "location": "/search",
+  "total_pages": 0,
+  "total": 0,
+  "data": [
+
+  ]
+}
