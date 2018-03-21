@@ -1,5 +1,15 @@
 # CHANGELOG
 
+### [v2.9.1 _(March 21, 2018)_](https://github.com/omise/omise-php/releases/tag/v2.9.1)
+
+#### 🚀 Enhancements
+
+- Be able to limit items that will be shown at the Search Object. (PR [#75](https://github.com/omise/omise-php/pull/75))
+
+#### 👾 Bug Fixes
+
+- Fix PHP v7.2 raise a warning message when execute OmiseApiResource::execute() with non-array assigned at the first argument. (PR [#71](https://github.com/omise/omise-php/pull/71), thanks @forfunza)
+
 ### [v2.9.0 _(November 6, 2017)_](https://github.com/omise/omise-php/releases/tag/v2.9.0)
 
 #### ✨ Highlights
