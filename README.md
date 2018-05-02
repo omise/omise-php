@@ -8,8 +8,10 @@ Please pop onto our [community forum](https://forum.omise.co) or contact [suppor
 
 ## Requirements
 
-* PHP 5.3 and above.
-* Built-in libcurl support.
+* PHP v5.3 and above.
+* Built-in [libcurl](http://php.net/manual/en/book.curl.php) support.
+
+> Note that, due to the PHP [END OF LIFE](http://php.net/supported-versions.php) cycle, we encourage you to run Omise-PHP library on a PHP version 5.6 or higher as there is no longer security support for any below 5.6 and that could cause you any security vulnerable issues in the future.
 
 ## Installation
 
@@ -61,84 +63,94 @@ _However, using Composer is recommended as you can easily keep the library up-to
 
 ## Configuration
 
-### Config your public and secret keys
+### • Config your public and secret keys
 
-In order to make any request to Omise API through Omise-PHP library, you will need to config your public and secret key to the project.
-Type the following code in any place before executing the library.
+First thing first, before you make a very-first request to Omise API, you will need to config your public and secret key (can be found at the [Omise Dashboard](https://dashboard.omise.co). Log in then go to **Keys** from the sidebar menu).
+
+Place the following code next to a line where Omise-PHP library is loaded.
 
 ```php
 define('OMISE_PUBLIC_KEY', 'pkey_can_find_at_omise_dashboard');
 define('OMISE_SECRET_KEY', 'skey_can_find_at_omise_dashboard');
 ```
 
-Note, you can get your public and secret keys at Omise Dashboard.
+![configuring omise-php, public and secret keys](https://user-images.githubusercontent.com/2154669/39510239-3f9727b6-4e13-11e8-8930-e3a825c1f07c.png)
 
-_As for reference, you can check our document at [https://www.omise.co/api-authentication](https://www.omise.co/api-authentication)._
+_Reference: [https://www.omise.co/api-authentication](https://www.omise.co/api-authentication)._
 
-### API version
+ー
 
-> This parameter most uses specially for backward-compatible reason, it's not necessary to config when using the library.
-> 
-> **It is highly recommended to set this version to the current version you're using.**  
-> **(or you can just skip this section, Omise will then use your current API version as an default in any requests).**
+### • API version
 
-You can choose which API version to use with Omise. Each API version has new features and might not be compatible with previous versions. You can change the default version by visiting your Omise Dashboard.
-
-To overwrite the API version to use, you can specify it by defining `OMISE_API_VERSION`.  
-The version configured here will have **higher priority** than the version set in your Omise account.
-This is useful if you have multiple environments with different API versions for testing.
-(e.g. Development on the latest version but production is on an older version).
+In case you want to enforce API version the application use, you can specify it by defining the `OMISE_API_VERSION`.  
+The version specified by this settings will override the version setting in your account. This is useful if you have multiple environments with different API versions (e.g. development on the latest but production on the older version).
 
 ```php
-define('OMISE_API_VERSION', '2014-07-27');
+define('OMISE_API_VERSION', '2017-11-02');
 ```
 
-You can check your current API version at Omise Dashboard.
+_API version can be found at [Omise Dashboard](https://dashboard.omise.co). Log in then go to **API versions** from the top-right menu._
 
-![screen shot 2560-03-21 at 4 46 07 pm](https://cloud.githubusercontent.com/assets/2154669/24141410/ef0faf46-0e55-11e7-8e25-26e2a6fc403b.png)
+![configuring omise-php, API version](https://cloud.githubusercontent.com/assets/2154669/24141410/ef0faf46-0e55-11e7-8e25-26e2a6fc403b.png)
+
+> It is highly recommended to set `OMISE_API_VERSION` to the current version that you're using to prevent any trouble from accidentally click update Omise-API version at the dashboard.
 
 ## Quick Start
 
-The following code demonstrates how to make a charge with Omise-PHP library.
-
-Now from the above sections, your code will looks similar like the below.
+From the above sections, your code will look similar like the following code:
 
 ```php
+<?php
 require_once dirname(__FILE__).'/vendor/autoload.php';
 
 define('OMISE_PUBLIC_KEY', 'pkey_test_54ot96fkr3i2op60cng');
 define('OMISE_SECRET_KEY', 'skey_test_54ot96fkr3i2op60cng');
+define('OMISE_API_VERSION', '2017-11-02');
 ```
 
-Now, let's add the below code to create a charge through the library.
+Now, let's add the below code to retrieve your account information:
 
 ```php
-$charge = OmiseCharge::create(array(
-    'amount'   => 100000,
-    'currency' => 'THB',
-    'card'     => 'tokn_test_4xs9408a642a1htto8z'
-));
+$account = OmiseAccount::retrieve();
+
+echo $account['email']; // your email will be printed on a screen.
 ```
 
-To see a real implementation code, you can check from the link below.
-[https://github.com/omise/examples/tree/master/php](https://github.com/omise/examples/tree/master/php)
+And that's it! You have just made a request to Omise API, easy huh?
 
-After this, you can check the complete documentation at [https://www.omise.co/docs](https://www.omise.co/docs). 
+Now you are free from our instruction :D  
+Feel free to integrate Omise Payment Gateway service anyway you like to make it fit with your business flow.  
+Also, stop by [documents](https://www.omise.co/docs) or [example code](https://github.com/omise/examples/tree/master/php) sometime to get more informations if you need any helps.
+
+Have fun!
 
 ## Development and Testing
 
 To run an automated test suite, make sure you already have a [PHPUnit](https://phpunit.de) in your local machine.
 Then run the PHPUnit:
 
-```shell
+```ssh
 phpunit omise-php/tests
 ```
 
-If you want to run with a specific test, let's try
+## Contributing
 
-```bash
-phpunit omise-php/tests/omise/AccountTest
-```
+Thanks for your interest in contributing to Omise PHP. We're looking forward to hearing your thoughts and willing to review your changes.
+
+The following subjects are instructions for contributors who consider to submit changes and/or issues.
+
+### Submit the changes
+
+You're all welcome to submit a pull request.
+Please consider the [pull request template](https://github.com/omise/omise-php/blob/master/.github/PULL_REQUEST_TEMPLATE.md) and fill the form when you submit a new pull request.
+
+Learn more about submitting pull request here: [https://help.github.com/articles/about-pull-requests](https://help.github.com/articles/about-pull-requests)
+
+### Submit the issue
+
+Submit the issue through [GitHub's issue channel](https://github.com/omise/omise-php/issues).
+
+Learn more about submitting an issue here: [https://guides.github.com/features/issues](https://guides.github.com/features/issues)
 
 ## License
 
