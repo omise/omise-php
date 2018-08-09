@@ -1,17 +1,19 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseRefund extends OmiseApiResource
 {
     /**
-     * @param array  $refund
-     * @param string $publickey
-     * @param string $secretkey
+     * @param array $refund
+     * @param string $publicKey
+     * @param string $secretKey
      */
-    public function __construct($refund, $publickey = null, $secretkey = null)
+    public function __construct($refund, $publicKey = null, $secretKey = null)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct($publicKey, $secretKey);
         $this->refresh($refund);
     }
 
@@ -19,13 +21,13 @@ class OmiseRefund extends OmiseApiResource
      * Search for refunds.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseSearch
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '', $publicKey = null, $secretKey = null)
     {
-        return OmiseSearch::scope('refund', $publickey, $secretkey)->query($query);
+        return OmiseSearch::scope('refund', $publicKey, $secretKey)->query($query);
     }
 }

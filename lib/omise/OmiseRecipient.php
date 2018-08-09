@@ -1,6 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseRecipient extends OmiseApiResource
 {
@@ -10,48 +12,51 @@ class OmiseRecipient extends OmiseApiResource
      * Retrieves recipients.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
-     * @return OmiseRecipient
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '', $publicKey = null, $secretKey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id), $publicKey, $secretKey);
     }
 
     /**
      * Search for recipients.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseSearch
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '', $publicKey = null, $secretKey = null)
     {
-        return OmiseSearch::scope('recipient', $publickey, $secretkey)->query($query);
+        return OmiseSearch::scope('recipient', $publicKey, $secretKey)->query($query);
     }
 
     /**
      * Creates a new recipient.
      *
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
-     * @return OmiseRecipient
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+     * @throws Exceptions\OmiseException
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params, $publicKey = null, $secretKey = null)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params, $publicKey, $secretKey);
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_update()
+     * @param $params
+     * @throws Exceptions\OmiseException
      */
     public function update($params)
     {
@@ -59,9 +64,10 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_destroy()
+     * @throws Exceptions\OmiseException
      */
     public function destroy()
     {
@@ -69,7 +75,7 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::isDestroyed()
      */
@@ -79,9 +85,10 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_reload()
+     * @throws Exceptions\OmiseException
      */
     public function reload()
     {
@@ -97,7 +104,7 @@ class OmiseRecipient extends OmiseApiResource
      *
      * @param  array|string $options
      *
-     * @return OmiseScheduleList
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
     public function schedules($options = array())
     {
@@ -106,8 +113,10 @@ class OmiseRecipient extends OmiseApiResource
                 $options = '?' . http_build_query($options);
             }
 
-            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
+            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publicKey, $this->_secretKey);
         }
+
+        return null;
     }
 
     /**
@@ -117,6 +126,6 @@ class OmiseRecipient extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

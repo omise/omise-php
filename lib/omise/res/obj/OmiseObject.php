@@ -1,35 +1,41 @@
 <?php
 
+namespace Omise\Res\Obj;
+
+use ArrayAccess;
+use Countable;
+use Iterator;
+
 class OmiseObject implements ArrayAccess, Iterator, Countable
 {
     // Store the attributes of the object.
     protected $_values = array();
 
     // Omise secret key.
-    protected $_secretkey;
+    protected $_secretKey;
 
     // Omise public key.
-    protected $_publickey;
+    protected $_publicKey;
 
     /**
      * Setup the Omise object. If no secret and public are passed the one defined
      * in config.php will be used.
      *
-     * @param string $publickey
-     * @param string $secretkey
+     * @param string $publicKey
+     * @param string $secretKey
      */
-    protected function __construct($publickey = null, $secretkey = null)
+    protected function __construct($publicKey = null, $secretKey = null)
     {
-        if ($publickey !== null) {
-            $this->_publickey = $publickey;
+        if ($publicKey !== null) {
+            $this->_publicKey = $publicKey;
         } else {
-            $this->_publickey = OMISE_PUBLIC_KEY;
+            $this->_publicKey = OMISE_PUBLIC_KEY;
         }
 
-        if ($secretkey !== null) {
-            $this->_secretkey = $secretkey;
+        if ($secretKey !== null) {
+            $this->_secretKey = $secretKey;
         } else {
-            $this->_secretkey = OMISE_SECRET_KEY;
+            $this->_secretKey = OMISE_SECRET_KEY;
         }
 
         $this->_values = array();
@@ -38,7 +44,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
     /**
      * Reload the object.
      *
-     * @param array   $values
+     * @param array $values
      * @param boolean $clear
      */
     public function refresh($values, $clear = false)

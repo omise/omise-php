@@ -1,5 +1,8 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
+
+namespace Tests\Omise;
+
+use Omise\OmiseSource;
 
 class SourceTest extends TestConfig
 {

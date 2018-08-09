@@ -1,6 +1,10 @@
 <?php
 
+namespace Tests\Omise;
+
 // Omise keys.
+use PHPUnit_Framework_TestCase;
+
 define('OMISE_PUBLIC_KEY', 'pkey');
 define('OMISE_SECRET_KEY', 'skey');
 

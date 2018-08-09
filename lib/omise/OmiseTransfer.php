@@ -1,8 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
 
-require_once dirname(__FILE__).'/OmiseScheduleList.php';
+use Omise\Res\OmiseApiResource;
 
 class OmiseTransfer extends OmiseApiResource
 {
@@ -12,62 +12,64 @@ class OmiseTransfer extends OmiseApiResource
      * Retrieves a transfer.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseTransfer
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '', $publicKey = null, $secretKey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id), $publicKey, $secretKey);
     }
 
     /**
      * Search for transfers.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseSearch
      */
-    public static function search($query = '', $publickey = '', $secretkey = '')
+    public static function search($query = '', $publicKey = '', $secretKey = '')
     {
-        return OmiseSearch::scope('transfer', $publickey, $secretkey)->query($query);
+        return OmiseSearch::scope('transfer', $publicKey, $secretKey)->query($query);
     }
 
     /**
      * Schedule a transfer.
      *
      * @param  string $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseScheduler
      */
-    public static function schedule($params, $publickey = null, $secretkey = null)
+    public static function schedule($params, $publicKey = null, $secretKey = null)
     {
-        return new OmiseScheduler('transfer', $params, $publickey, $secretkey);
+        return new OmiseScheduler('transfer', $params, $publicKey, $secretKey);
     }
 
     /**
      * Creates a transfer.
      *
-     * @param  mixed  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  mixed $params
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseTransfer
+     * @throws Exceptions\OmiseException
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params, $publicKey = null, $secretKey = null)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params, $publicKey, $secretKey);
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_reload()
+     * @throws Exceptions\OmiseException
      */
     public function reload()
     {
@@ -80,6 +82,7 @@ class OmiseTransfer extends OmiseApiResource
 
     /**
      * Updates the transfer amount.
+     * @throws Exceptions\OmiseException
      */
     public function save()
     {
@@ -87,9 +90,11 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_update()
+     * @param $params
+     * @throws Exceptions\OmiseException
      */
     protected function update($params)
     {
@@ -100,24 +105,25 @@ class OmiseTransfer extends OmiseApiResource
      * Gets a list of transfer schedules.
      *
      * @param  array|string $options
-     * @param  string       $publickey
-     * @param  string       $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
-     * @return OmiseScheduleList
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    public static function schedules($options = array(), $publickey = null, $secretkey = null)
+    public static function schedules($options = array(), $publicKey = null, $secretKey = null)
     {
         if (is_array($options)) {
             $options = '?' . http_build_query($options);
         }
 
-        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
+        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publicKey, $secretKey);
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_destroy()
+     * @throws Exceptions\OmiseException
      */
     public function destroy()
     {
@@ -125,7 +131,7 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::isDestroyed()
      */
@@ -141,6 +147,6 @@ class OmiseTransfer extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

@@ -1,16 +1,18 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseScheduleList extends OmiseApiResource
 {
-	/**
-	 * @param  string $id
-	 *
-	 * @return OmiseOccurrence
-	 */
+    /**
+     * @param  string $id
+     *
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+     */
 	public function retrieve($id)
 	{
-	    return OmiseSchedule::retrieve($id, $this->_publickey, $this->_secretkey);
+	    return OmiseSchedule::retrieve($id, $this->_publicKey, $this->_secretKey);
 	}
 }

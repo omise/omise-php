@@ -1,6 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseDispute extends OmiseApiResource
 {
@@ -10,34 +12,35 @@ class OmiseDispute extends OmiseApiResource
      * Retrieves a dispute.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
-     * @return OmiseDispute
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '', $publicKey = null, $secretKey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id), $publicKey, $secretKey);
     }
 
     /**
      * Search for disputes.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseSearch
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '', $publicKey = null, $secretKey = null)
     {
-        return OmiseSearch::scope('dispute', $publickey, $secretkey)->query($query);
+        return OmiseSearch::scope('dispute', $publicKey, $secretKey)->query($query);
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_reload()
+     * @throws Exceptions\OmiseException
      */
     public function reload()
     {
@@ -49,9 +52,11 @@ class OmiseDispute extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_update()
+     * @param $params
+     * @throws Exceptions\OmiseException
      */
     public function update($params)
     {
@@ -67,6 +72,6 @@ class OmiseDispute extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

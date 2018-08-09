@@ -1,4 +1,8 @@
-<?php require_once dirname(__FILE__).'/TestConfig.php';
+<?php
+
+namespace Tests\Omise;
+
+use Omise\OmiseCharge;
 
 class ChargeTest extends TestConfig {
   /**

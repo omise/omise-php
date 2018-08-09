@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__).'/OmiseApiResource.php';
+namespace Omise\Res;
 
 class OmiseVaultResource extends OmiseApiResource
 {
@@ -11,6 +11,6 @@ class OmiseVaultResource extends OmiseApiResource
      */
     protected function getResourceKey()
     {
-        return $this->_publickey;
+        return $this->_publicKey;
     }
 }

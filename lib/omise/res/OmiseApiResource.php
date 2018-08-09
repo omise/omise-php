@@ -1,7 +1,18 @@
 <?php
 
-require_once dirname(__FILE__).'/obj/OmiseObject.php';
-require_once dirname(__FILE__).'/../exception/OmiseExceptions.php';
+
+namespace Omise\Res;
+
+use Exception;
+use Omise\Exceptions\OmiseException;
+use Omise\OmiseAccount;
+use Omise\OmiseBalance;
+use Omise\OmiseCharge;
+use Omise\OmiseCustomer;
+use Omise\OmiseToken;
+use Omise\OmiseTransaction;
+use Omise\OmiseTransfer;
+use Omise\Res\Obj\OmiseObject;
 
 define('OMISE_PHP_LIB_VERSION', '2.9.1');
 define('OMISE_API_URL', 'https://api.omise.co/');
@@ -16,24 +27,24 @@ class OmiseApiResource extends OmiseObject
     const REQUEST_PATCH = 'PATCH';
 
     // Timeout settings
-    private $OMISE_CONNECTTIMEOUT = 30;
+    private $OMISE_CONNECT_TIMEOUT = 30;
     private $OMISE_TIMEOUT = 60;
 
     /**
      * Returns an instance of the class given in $clazz or raise an error.
      *
      * @param  string $clazz
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @throws Exception
      *
      * @return OmiseResource
      */
-    protected static function getInstance($clazz, $publickey = null, $secretkey = null)
+    protected static function getInstance($clazz, $publicKey = null, $secretKey = null)
     {
         if (class_exists($clazz)) {
-            return new $clazz($publickey, $secretkey);
+            return new $clazz($publicKey, $secretKey);
         }
 
         throw new Exception('Undefined class.');
@@ -43,17 +54,18 @@ class OmiseApiResource extends OmiseObject
      * Retrieves the resource.
      *
      * @param  string $clazz
-     * @param  string $publickey
-     * @param  string $secretkey
-     *
-     * @throws Exception|OmiseException
+     * @param  string $url
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null)
+    protected static function g_retrieve($clazz, $url, $publicKey = null, $secretKey = null)
     {
-        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
-        $result   = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publicKey, $secretKey);
+
+        $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+
         $resource->refresh($result);
 
         return $resource;
@@ -64,18 +76,18 @@ class OmiseApiResource extends OmiseObject
      *
      * @param  string $clazz
      * @param  string $url
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @throws Exception|OmiseException
      *
      * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null)
+    protected static function g_create($clazz, $url, $params, $publicKey = null, $secretKey = null)
     {
-        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
-        $result   = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
+        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publicKey, $secretKey);
+        $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
         $resource->refresh($result);
 
         return $resource;
@@ -85,7 +97,7 @@ class OmiseApiResource extends OmiseObject
      * Updates the resource with the given parameters in an associative array.
      *
      * @param  string $url
-     * @param  array  $params
+     * @param  array $params
      *
      * @throws Exception|OmiseException
      */
@@ -100,9 +112,8 @@ class OmiseApiResource extends OmiseObject
      *
      * @param  string $url
      *
-     * @throws Exception|OmiseException
-     *
-     * @return OmiseApiResource
+     * @return void
+     * @throws OmiseException
      */
     protected function g_destroy($url)
     {
@@ -128,11 +139,22 @@ class OmiseApiResource extends OmiseObject
      *
      * @param  string $url
      * @param  string $requestMethod
-     * @param  array  $params
-     *
-     * @throws OmiseException
+     * @param $key
+     * @param  array $params
      *
      * @return array
+     * @throws OmiseException
+     * @throws \Omise\Exceptions\OmiseAuthenticationFailureException
+     * @throws \Omise\Exceptions\OmiseFailedCaptureException
+     * @throws \Omise\Exceptions\OmiseFailedFraudCheckException
+     * @throws \Omise\Exceptions\OmiseInvalidCardException
+     * @throws \Omise\Exceptions\OmiseInvalidCardTokenException
+     * @throws \Omise\Exceptions\OmiseInvalidChargeException
+     * @throws \Omise\Exceptions\OmiseMissingCardException
+     * @throws \Omise\Exceptions\OmiseNotFoundException
+     * @throws \Omise\Exceptions\OmiseUndefinedException
+     * @throws \Omise\Exceptions\OmiseUsedTokenException
+     * @throws Exception
      */
     protected function execute($url, $requestMethod, $key, $params = null)
     {
@@ -147,7 +169,7 @@ class OmiseApiResource extends OmiseObject
         $array = json_decode($result, true);
 
         // If response is invalid or not a JSON.
-        if (count($array) === 0 || ! isset($array['object'])) {
+        if (count($array) === 0 || !isset($array['object'])) {
             throw new Exception('Unknown error. (Bad Response)');
         }
 
@@ -162,17 +184,17 @@ class OmiseApiResource extends OmiseObject
     /**
      * @param  string $url
      * @param  string $requestMethod
-     * @param  array  $params
-     *
-     * @throws OmiseException
+     * @param $key
+     * @param  array $params
      *
      * @return string
+     * @throws Exception
      */
     private function _executeCurl($url, $requestMethod, $key, $params = null)
     {
         $ch = curl_init($url);
 
-        curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
+        curl_setopt_array($ch, $this->genOptions($requestMethod, $key . ':', $params));
 
         // Make a request or thrown an exception.
         if (($result = curl_exec($ch)) === false) {
@@ -191,11 +213,11 @@ class OmiseApiResource extends OmiseObject
     /**
      * @param  string $url
      * @param  string $requestMethod
-     * @param  array  $params
-     *
-     * @throws OmiseException
+     * @param  string $key
+     * @param  array $params
      *
      * @return string
+     * @throws Exception
      */
     private function _executeTest($url, $requestMethod, $key, $params = null)
     {
@@ -207,21 +229,21 @@ class OmiseApiResource extends OmiseObject
         if (!empty($parsed['query'])) {
             $query = base64_encode($parsed['query']);
             $query = str_replace(array('+', '/', '='), array('-', '_', ''), $query);
-            $request_url = $request_url.'-'.$query;
+            $request_url = $request_url . '-' . $query;
         }
 
         // Finally.
-        $request_url = dirname(__FILE__).'/../../../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
+        $request_url = dirname(__FILE__) . '/../../../tests/fixtures/' . $request_url . '-' . strtolower($requestMethod) . '.json';
 
         // Make a request from Curl if json file was not exists.
-        if (! file_exists($request_url)) {
+        if (!file_exists($request_url)) {
             // Get a directory that's file should contain.
             $request_dir = explode('/', $request_url);
             unset($request_dir[count($request_dir) - 1]);
             $request_dir = implode('/', $request_dir);
 
             // Create directory if it not exists.
-            if (! file_exists($request_dir)) {
+            if (!file_exists($request_dir)) {
                 mkdir($request_dir, 0777, true);
             }
 
@@ -244,49 +266,50 @@ class OmiseApiResource extends OmiseObject
      * Creates an option for php-curl from the given request method and parameters in an associative array.
      *
      * @param  string $requestMethod
-     * @param  array  $params
+     * @param $userPwd
+     * @param  array $params
      *
      * @return array
      */
-    private function genOptions($requestMethod, $userpwd, $params)
+    private function genOptions($requestMethod, $userPwd, $params)
     {
-        $user_agent        = "OmisePHP/".OMISE_PHP_LIB_VERSION." PHP/".phpversion();
+        $user_agent = "OmisePHP/" . OMISE_PHP_LIB_VERSION . " PHP/" . phpversion();
         $omise_api_version = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
 
         $options = array(
             // Set the HTTP version to 1.1.
-            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             // Set the request method.
-            CURLOPT_CUSTOMREQUEST  => $requestMethod,
+            CURLOPT_CUSTOMREQUEST => $requestMethod,
             // Make php-curl returns the data as string.
             CURLOPT_RETURNTRANSFER => true,
             // Do not include the header in the output.
-            CURLOPT_HEADER         => false,
+            CURLOPT_HEADER => false,
             // Track the header request string and set the referer on redirect.
-            CURLINFO_HEADER_OUT    => true,
-            CURLOPT_AUTOREFERER    => true,
+            CURLINFO_HEADER_OUT => true,
+            CURLOPT_AUTOREFERER => true,
             // Make HTTP error code above 400 an error.
             // CURLOPT_FAILONERROR => true,
             // Time before the request is aborted.
-            CURLOPT_TIMEOUT        => $this->OMISE_TIMEOUT,
+            CURLOPT_TIMEOUT => $this->OMISE_TIMEOUT,
             // Time before the request is aborted when attempting to connect.
-            CURLOPT_CONNECTTIMEOUT => $this->OMISE_CONNECTTIMEOUT,
+            CURLOPT_CONNECTTIMEOUT => $this->OMISE_CONNECT_TIMEOUT,
             // Authentication.
-            CURLOPT_USERPWD        => $userpwd,
+            CURLOPT_USERPWD => $userPwd,
             // CA bundle.
-            CURLOPT_CAINFO         => dirname(__FILE__).'/../../../data/ca_certificates.pem'
+            CURLOPT_CAINFO => dirname(__FILE__) . '/../../../data/ca_certificates.pem'
         );
 
         // Config Omise API Version
         if ($omise_api_version) {
-            $options += array(CURLOPT_HTTPHEADER => array("Omise-Version: ".$omise_api_version));
+            $options += array(CURLOPT_HTTPHEADER => array("Omise-Version: " . $omise_api_version));
 
-            $user_agent .= ' OmiseAPI/'.$omise_api_version;
+            $user_agent .= ' OmiseAPI/' . $omise_api_version;
         }
 
         // Config UserAgent
         if (defined('OMISE_USER_AGENT_SUFFIX')) {
-            $options += array(CURLOPT_USERAGENT => $user_agent." ".OMISE_USER_AGENT_SUFFIX);
+            $options += array(CURLOPT_USERAGENT => $user_agent . " " . OMISE_USER_AGENT_SUFFIX);
         } else {
             $options += array(CURLOPT_USERAGENT => $user_agent);
         }
@@ -319,6 +342,6 @@ class OmiseApiResource extends OmiseObject
      */
     protected function getResourceKey()
     {
-        return $this->_secretkey;
+        return $this->_secretKey;
     }
 }

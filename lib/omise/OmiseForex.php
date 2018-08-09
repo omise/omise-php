@@ -1,6 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseForex extends OmiseApiResource
 {
@@ -10,18 +12,19 @@ class OmiseForex extends OmiseApiResource
      * Retrieves a forex data.
      *
      * @param  string $currency
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
-     * @return OmiseForex
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    public static function retrieve($currency = '', $publickey = null, $secretkey = null)
+    public static function retrieve($currency = '', $publicKey = null, $secretKey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($currency), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($currency), $publicKey, $secretKey);
     }
 
     /**
      * @see OmiseApiResource::g_reload()
+     * @throws Exceptions\OmiseException
      */
     public function reload()
     {

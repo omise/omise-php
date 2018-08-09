@@ -1,8 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/OmiseRefundList.php';
-require_once dirname(__FILE__).'/OmiseScheduleList.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseSource extends OmiseApiResource
 {
@@ -11,15 +11,16 @@ class OmiseSource extends OmiseApiResource
     /**
      * Creates a new source.
      *
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
-     * @return OmiseSource
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+     * @throws Exceptions\OmiseException
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params, $publicKey = null, $secretKey = null)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params, $publicKey, $secretKey);
     }
 
     /**
@@ -27,6 +28,6 @@ class OmiseSource extends OmiseApiResource
      */
     private static function getUrl()
     {
-        return OMISE_API_URL.self::ENDPOINT;
+        return OMISE_API_URL . self::ENDPOINT;
     }
 }

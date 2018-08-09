@@ -1,16 +1,18 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseOccurrenceList extends OmiseApiResource
 {
     /**
      * @param  string $id
      *
-     * @return OmiseOccurrence
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
     public function retrieve($id)
     {
-        return OmiseOccurrence::retrieve($id, $this->_publickey, $this->_secretkey);
+        return OmiseOccurrence::retrieve($id, $this->_publicKey, $this->_secretKey);
     }
 }

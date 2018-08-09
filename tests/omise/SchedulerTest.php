@@ -1,5 +1,6 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
+
+namespace Tests\Omise;
 
 class SchedulerTest extends TestConfig
 {

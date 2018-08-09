@@ -1,7 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/OmiseOccurrenceList.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseSchedule extends OmiseApiResource
 {
@@ -11,18 +12,19 @@ class OmiseSchedule extends OmiseApiResource
      * Retrieves a schedule.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
-     * @return OmiseSchedule
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '', $publicKey = null, $secretKey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id), $publicKey, $secretKey);
     }
 
     /**
      * @return void
+     * @throws Exceptions\OmiseException
      */
     public function reload()
     {
@@ -36,21 +38,22 @@ class OmiseSchedule extends OmiseApiResource
     /**
      * Creates a new schedule.
      *
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
-     * @return OmiseSchedule
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+     * @throws Exceptions\OmiseException
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params, $publicKey = null, $secretKey = null)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params, $publicKey, $secretKey);
     }
 
     /**
      * @param  array|string $options
      *
-     * @return OmiseOccurrenceList|null
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
     public function occurrences($options = array())
     {
@@ -59,12 +62,15 @@ class OmiseSchedule extends OmiseApiResource
                 $options = '?' . http_build_query($options);
             }
 
-            return parent::g_retrieve('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options), $this->_publickey, $this->_secretkey);
+            return parent::g_retrieve('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options), $this->_publicKey, $this->_secretKey);
         }
+
+        return null;
     }
 
     /**
      * @return void
+     * @throws Exceptions\OmiseException
      */
     public function destroy()
     {
@@ -88,6 +94,6 @@ class OmiseSchedule extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT . '/' . $id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/OmiseRefundList.php';
-require_once dirname(__FILE__).'/OmiseScheduleList.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseCharge extends OmiseApiResource
 {
@@ -12,34 +12,35 @@ class OmiseCharge extends OmiseApiResource
      * Retrieves a charge.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseCharge
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '', $publicKey = null, $secretKey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id), $publicKey, $secretKey);
     }
 
     /**
      * Search for charges.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseSearch
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '', $publicKey = null, $secretKey = null)
     {
-        return OmiseSearch::scope('charge', $publickey, $secretkey)->query($query);
+        return OmiseSearch::scope('charge', $publicKey, $secretKey)->query($query);
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_reload()
+     * @throws Exceptions\OmiseException
      */
     public function reload()
     {
@@ -67,21 +68,24 @@ class OmiseCharge extends OmiseApiResource
     /**
      * Creates a new charge.
      *
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseCharge
+     * @throws Exceptions\OmiseException
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params, $publicKey = null, $secretKey = null)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params, $publicKey, $secretKey);
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::g_update()
+     * @param $params
+     * @throws Exceptions\OmiseException
      */
     public function update($params)
     {
@@ -92,10 +96,21 @@ class OmiseCharge extends OmiseApiResource
      * Captures a charge.
      *
      * @return OmiseCharge
+     * @throws Exceptions\OmiseAuthenticationFailureException
+     * @throws Exceptions\OmiseException
+     * @throws Exceptions\OmiseFailedCaptureException
+     * @throws Exceptions\OmiseFailedFraudCheckException
+     * @throws Exceptions\OmiseInvalidCardException
+     * @throws Exceptions\OmiseInvalidCardTokenException
+     * @throws Exceptions\OmiseInvalidChargeException
+     * @throws Exceptions\OmiseMissingCardException
+     * @throws Exceptions\OmiseNotFoundException
+     * @throws Exceptions\OmiseUndefinedException
+     * @throws Exceptions\OmiseUsedTokenException
      */
     public function capture()
     {
-        $result = parent::execute(self::getUrl($this['id']).'/capture', parent::REQUEST_POST, parent::getResourceKey());
+        $result = parent::execute(self::getUrl($this['id']) . '/capture', parent::REQUEST_POST, parent::getResourceKey());
         $this->refresh($result);
 
         return $this;
@@ -105,10 +120,21 @@ class OmiseCharge extends OmiseApiResource
      * Reverses a charge.
      *
      * @return OmiseCharge
+     * @throws Exceptions\OmiseAuthenticationFailureException
+     * @throws Exceptions\OmiseException
+     * @throws Exceptions\OmiseFailedCaptureException
+     * @throws Exceptions\OmiseFailedFraudCheckException
+     * @throws Exceptions\OmiseInvalidCardException
+     * @throws Exceptions\OmiseInvalidCardTokenException
+     * @throws Exceptions\OmiseInvalidChargeException
+     * @throws Exceptions\OmiseMissingCardException
+     * @throws Exceptions\OmiseNotFoundException
+     * @throws Exceptions\OmiseUndefinedException
+     * @throws Exceptions\OmiseUsedTokenException
      */
     public function reverse()
     {
-        $result = parent::execute(self::getUrl($this['id']).'/reverse', parent::REQUEST_POST, parent::getResourceKey());
+        $result = parent::execute(self::getUrl($this['id']) . '/reverse', parent::REQUEST_POST, parent::getResourceKey());
         $this->refresh($result);
 
         return $this;
@@ -118,30 +144,41 @@ class OmiseCharge extends OmiseApiResource
      * list refunds
      *
      * @return OmiseRefundList
+     * @throws Exceptions\OmiseAuthenticationFailureException
+     * @throws Exceptions\OmiseException
+     * @throws Exceptions\OmiseFailedCaptureException
+     * @throws Exceptions\OmiseFailedFraudCheckException
+     * @throws Exceptions\OmiseInvalidCardException
+     * @throws Exceptions\OmiseInvalidCardTokenException
+     * @throws Exceptions\OmiseInvalidChargeException
+     * @throws Exceptions\OmiseMissingCardException
+     * @throws Exceptions\OmiseNotFoundException
+     * @throws Exceptions\OmiseUndefinedException
+     * @throws Exceptions\OmiseUsedTokenException
      */
     public function refunds()
     {
-        $result = parent::execute(self::getUrl($this['id']).'/refunds', parent::REQUEST_GET, parent::getResourceKey());
+        $result = parent::execute(self::getUrl($this['id']) . '/refunds', parent::REQUEST_GET, parent::getResourceKey());
 
-        return new OmiseRefundList($result, $this['id'], $this->_publickey, $this->_secretkey);
+        return new OmiseRefundList($result, $this['id'], $this->_publicKey, $this->_secretKey);
     }
 
     /**
      * Gets a list of charge schedules.
      *
      * @param  array|string $options
-     * @param  string       $publickey
-     * @param  string       $secretkey
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
-     * @return OmiseScheduleList
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    public static function schedules($options = array(), $publickey = null, $secretkey = null)
+    public static function schedules($options = array(), $publicKey = null, $secretKey = null)
     {
         if (is_array($options)) {
             $options = '?' . http_build_query($options);
         }
 
-        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
+        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publicKey, $secretKey);
     }
 
     /**
@@ -151,6 +188,6 @@ class OmiseCharge extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

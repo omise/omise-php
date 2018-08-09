@@ -1,7 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/OmiseRefund.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseRefundList extends OmiseApiResource
 {
@@ -10,40 +11,61 @@ class OmiseRefundList extends OmiseApiResource
     private $_chargeID;
 
     /**
-     * @param array  $refunds
+     * @param array $refunds
      * @param string $chargeID
-     * @param string $publickey
-     * @param string $secretkey
+     * @param string $publicKey
+     * @param string $secretKey
      */
-    public function __construct($refunds, $chargeID, $publickey = null, $secretkey = null)
+    public function __construct($refunds, $chargeID, $publicKey = null, $secretKey = null)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct($publicKey, $secretKey);
         $this->_chargeID = $chargeID;
         $this->refresh($refunds);
     }
 
     /**
-     * @param  array $amount
-     *
+     * @param $params
      * @return OmiseRefund
+     * @throws Exceptions\OmiseAuthenticationFailureException
+     * @throws Exceptions\OmiseException
+     * @throws Exceptions\OmiseFailedCaptureException
+     * @throws Exceptions\OmiseFailedFraudCheckException
+     * @throws Exceptions\OmiseInvalidCardException
+     * @throws Exceptions\OmiseInvalidCardTokenException
+     * @throws Exceptions\OmiseInvalidChargeException
+     * @throws Exceptions\OmiseMissingCardException
+     * @throws Exceptions\OmiseNotFoundException
+     * @throws Exceptions\OmiseUndefinedException
+     * @throws Exceptions\OmiseUsedTokenException
      */
     public function create($params)
     {
         $result = parent::execute($this->getUrl(), parent::REQUEST_POST, self::getResourceKey(), $params);
 
-        return new OmiseRefund($result, $this->_publickey, $this->_secretkey);
+        return new OmiseRefund($result, $this->_publicKey, $this->_secretKey);
     }
 
     /**
      * @param  string $id
      *
      * @return OmiseRefund
+     * @throws Exceptions\OmiseAuthenticationFailureException
+     * @throws Exceptions\OmiseException
+     * @throws Exceptions\OmiseFailedCaptureException
+     * @throws Exceptions\OmiseFailedFraudCheckException
+     * @throws Exceptions\OmiseInvalidCardException
+     * @throws Exceptions\OmiseInvalidCardTokenException
+     * @throws Exceptions\OmiseInvalidChargeException
+     * @throws Exceptions\OmiseMissingCardException
+     * @throws Exceptions\OmiseNotFoundException
+     * @throws Exceptions\OmiseUndefinedException
+     * @throws Exceptions\OmiseUsedTokenException
      */
     public function retrieve($id)
     {
         $result = parent::execute($this->getUrl($id), parent::REQUEST_GET, self::getResourceKey());
 
-        return new OmiseRefund($result, $this->_publickey, $this->_secretkey);
+        return new OmiseRefund($result, $this->_publicKey, $this->_secretKey);
     }
 
     /**
@@ -53,6 +75,6 @@ class OmiseRefundList extends OmiseApiResource
      */
     private function getUrl($id = '')
     {
-        return OMISE_API_URL.'charges/'.$this->_chargeID.'/'.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . 'charges/' . $this->_chargeID . '/' . self::ENDPOINT . '/' . $id;
     }
 }

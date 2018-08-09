@@ -1,6 +1,9 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
+
+use Omise\Exceptions\OmiseBadRequestException;
+use Omise\Res\OmiseApiResource;
 
 class OmiseScheduler extends OmiseApiResource
 {
@@ -9,14 +12,14 @@ class OmiseScheduler extends OmiseApiResource
     /**
      * Create an instance of `OmiseScheduler` with the given type.
      *
-     * @param string $type        Either 'charge' or 'transfer'
-     * @param string $attributes  See supported attributes at [Charge Schedule API](https://www.omise.co/charge-schedules-api#charge_schedules-create) page.
-     * @param string $publickey
-     * @param string $secretkey
+     * @param string $type Either 'charge' or 'transfer'
+     * @param array $attributes See supported attributes at [Charge Schedule API](https://www.omise.co/charge-schedules-api#charge_schedules-create) page.
+     * @param string $publicKey
+     * @param string $secretKey
      */
-    public function __construct($type, $attributes = array(), $publickey = null, $secretkey = null)
+    public function __construct($type, $attributes = array(), $publicKey = null, $secretKey = null)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct($publicKey, $secretKey);
 
         $this->mergeAttributes($type, $attributes);
     }
@@ -52,19 +55,20 @@ class OmiseScheduler extends OmiseApiResource
     }
 
     /**
-     * @param  string|array $on  An array (or string) of weekday names. ('Monday' ... 'Sunday')
+     * @param  string|array $on An array (or string) of weekday names. ('Monday' ... 'Sunday')
      *
      * @return self
      */
     public function weeks($on)
     {
         return $this->mergeAttributes('period', 'week')
-                    ->mergeAttributes('on', array('weekdays' => is_string($on) ? array($on) : $on));
+            ->mergeAttributes('on', array('weekdays' => is_string($on) ? array($on) : $on));
     }
 
     /**
      * Alias of OmiseScheduler::weeks($on)
      *
+     * @param $on
      * @return self
      *
      * @see    OmiseScheduler::weeks($on)
@@ -75,11 +79,12 @@ class OmiseScheduler extends OmiseApiResource
     }
 
     /**
-     * @param  string|array $on  Be an Array if set to 'days of month'. i.e. [1, 15, 25]
+     * @param  string|array $on Be an Array if set to 'days of month'. i.e. [1, 15, 25]
      *                           and a string when set to 'weekday of month'.
      *                           i.e. 'first_monday', 'second_monday', 'third_monday', 'fourth_monday', 'last_monday'
      *
      * @return self
+     * @throws OmiseBadRequestException
      */
     public function months($on)
     {
@@ -107,8 +112,10 @@ class OmiseScheduler extends OmiseApiResource
     /**
      * Alias of OmiseScheduler::months($on)
      *
+     * @param $on
      * @return self
      *
+     * @throws OmiseBadRequestException
      * @see    OmiseScheduler::months($on)
      */
     public function month($on)
@@ -117,7 +124,7 @@ class OmiseScheduler extends OmiseApiResource
     }
 
     /**
-     * @param  Date $date  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DD).
+     * @param  $date [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DD).
      *
      * @return self
      */
@@ -127,7 +134,7 @@ class OmiseScheduler extends OmiseApiResource
     }
 
     /**
-     * @param  Date $date  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DD).
+     * @param  $date [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DD).
      *
      * @return self
      */
@@ -139,18 +146,19 @@ class OmiseScheduler extends OmiseApiResource
     /**
      * Start create a schedule
      *
-     * @return OmiseSchedule
+     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+     * @throws Exceptions\OmiseException
      */
     public function start()
     {
-        return OmiseSchedule::create($this->attributes, $this->_publickey, $this->_secretkey);
+        return OmiseSchedule::create($this->attributes, $this->_publicKey, $this->_secretKey);
     }
 
     /**
      * Merge the given key and value to attributes.
      *
-     * @param  string $key    attribute key.
-     * @param  mixed  $value  attribute value.
+     * @param  string $key attribute key.
+     * @param  mixed $value attribute value.
      *
      * @return self
      */

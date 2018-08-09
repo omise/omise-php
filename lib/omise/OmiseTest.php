@@ -1,13 +1,16 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 class OmiseTest extends OmiseApiResource
 {
     /**
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseApiResource::getInstance()
+     * @throws \Exception
      */
     public static function resource()
     {

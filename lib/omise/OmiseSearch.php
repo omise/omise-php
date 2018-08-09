@@ -1,6 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
+namespace Omise;
+
+use Omise\Res\OmiseApiResource;
 
 /**
  * This class is not intended to be used directly from client code.
@@ -31,15 +33,15 @@ class OmiseSearch extends OmiseApiResource
     /**
      * Create an instance of `OmiseSearch` with the given scope.
      *
-     * @param  string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $scope See supported scope at [Search API](https://www.omise.co/search-api) page.
+     * @param  string $publicKey
+     * @param  string $secretKey
      *
      * @return OmiseSearch  The created instance.
      */
-    public static function scope($scope, $publickey = null, $secretkey = null)
+    public static function scope($scope, $publicKey = null, $secretKey = null)
     {
-        return new OmiseSearch($scope, $publickey, $secretkey);
+        return new OmiseSearch($scope, $publicKey, $secretKey);
     }
 
     /**
@@ -47,20 +49,20 @@ class OmiseSearch extends OmiseApiResource
      *
      * This constructor is `protected` thus not intended to be used directly.
      *
-     * @param string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
-     * @param string $publickey
-     * @param string $secretkey
+     * @param string $scope See supported scope at [Search API](https://www.omise.co/search-api) page.
+     * @param string $publicKey
+     * @param string $secretKey
      */
-    protected function __construct($scope, $publickey, $secretkey)
+    protected function __construct($scope, $publicKey, $secretKey)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct($publicKey, $secretKey);
         $this->mergeAttributes('scope', $scope);
     }
 
     /**
      * Update `query` parameter.
      *
-     * @param  string $query  Searching text within the scope.
+     * @param  string $query Searching text within the scope.
      *
      * @return OmiseSearch  This instance.
      */
@@ -72,7 +74,7 @@ class OmiseSearch extends OmiseApiResource
     /**
      * Update `filters` parameter.
      *
-     * @param  string $filters  Searching text with specific key within the scope.
+     * @param array $filters Searching text with specific key within the scope.
      *
      * @return OmiseSearch  This instance.
      */
@@ -83,13 +85,14 @@ class OmiseSearch extends OmiseApiResource
                 $filters[$k] = $v ? 'true' : 'false';
             }
         }
+
         return $this->mergeAttributes('filters', $filters);
     }
 
     /**
      * Update `page` parameter.
      *
-     * @param  int $page  Specific number of searching page.
+     * @param  int $page Specific number of searching page.
      *
      * @return OmiseSearch  This instance.
      */
@@ -101,7 +104,7 @@ class OmiseSearch extends OmiseApiResource
     /**
      * Update `per_page` parameter.
      *
-     * @param  int $limit   Number of items that will be shown per page.
+     * @param  int $limit Number of items that will be shown per page.
      *
      * @return OmiseSearch  This instance.
      */
@@ -113,7 +116,7 @@ class OmiseSearch extends OmiseApiResource
     /**
      * Update `order` parameter.
      *
-     * @param  string $order  The order of the list returned.
+     * @param  string $order The order of the list returned.
      *
      * @see    https://www.omise.co/search-api
      *
@@ -146,6 +149,7 @@ class OmiseSearch extends OmiseApiResource
      *
      * This method does not consider the dirty status of the instance and will
      * always call backend server and reset dirty flag.
+     * @throws Exceptions\OmiseException
      */
     public function reload()
     {
@@ -155,6 +159,7 @@ class OmiseSearch extends OmiseApiResource
 
     /**
      * Reload search data from Omise server if this instance is in dirty state.
+     * @throws Exceptions\OmiseException
      */
     private function reloadIfDirty()
     {
@@ -167,8 +172,8 @@ class OmiseSearch extends OmiseApiResource
      * Merge the given key and value to search attributes, and set instance state
      * as dirty.
      *
-     * @param  string $key    Search attribute key.
-     * @param  mixed  $value  Search attribute value.
+     * @param  string $key Search attribute key.
+     * @param  mixed $value Search attribute value.
      *
      * @return OmiseSearch  This instance.
      */
@@ -188,15 +193,20 @@ class OmiseSearch extends OmiseApiResource
     private function getUrl()
     {
         $querystring = http_build_query($this->attributes);
-        return OMISE_API_URL.self::ENDPOINT.'/?'.$querystring;
+        return OMISE_API_URL . self::ENDPOINT . '/?' . $querystring;
     }
 
     // Override methods of ArrayAccess
 
     /*
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseObject::offsetSet()
+     */
+    /**
+     * @param mixed $key
+     * @param mixed $value
+     * @throws Exceptions\OmiseException
      */
     public function offsetSet($key, $value)
     {
@@ -205,7 +215,7 @@ class OmiseSearch extends OmiseApiResource
     }
 
     /*
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseObject::offsetExists()
      */
@@ -216,7 +226,7 @@ class OmiseSearch extends OmiseApiResource
     }
 
     /*
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseObject::offsetUnset()
      */
@@ -227,7 +237,7 @@ class OmiseSearch extends OmiseApiResource
     }
 
     /*
-     * (non-PHPdoc)
+     * (non-PHPDoc)
      *
      * @see OmiseObject::offsetGet()
      */
