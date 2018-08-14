@@ -1,16 +1,30 @@
 {
     "name": "omise/omise-php",
-    "description": "Omise API PHP Lib",
-    "keywords": ["payment", "omise", "creditcard"],
+    "description": "A PHP library designed specifically to connect with Omise API.",
     "type": "library",
+    "keywords": [
+        "alipay payment",
+        "credit card payment",
+        "internet banking payment",
+        "konbini payment",
+        "omise",
+        "payment",
+        "payment processing"
+    ],
+    "homepage": "https://www.omise.co",
+    "readme": "https://github.com/omise/omise-php/blob/master/README.md",
     "license": "MIT",
-    "homepage": "https://github.com/omise/omise-php.git",
     "authors": [
         {
-            "name": "omise",
-            "email": "apps@omise.co"
+            "name": "Omise and contributors",
+            "homepage": "https://github.com/omise/omise-php/graphs/contributors"
         }
     ],
+    "support": {
+        "email": "support@omise.co",
+        "issues": "https://github.com/omise/omise-php/issues",
+        "forum": "https://forum.omise.co"
+    },
     "require": {
         "php": ">=5.3.2"
     },
