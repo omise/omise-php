@@ -2,73 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a45f03e7-2852-4c1a-87ee-925acb0202a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/OmiseServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseAuthenticationFailureException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseBadRequestException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseFailedCaptureException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseFailedFraudCheckException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseFailedRefundException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseInvalidBankAccountException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseInvalidCardException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseInvalidCardTokenException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseInvalidChargeException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseInvalidLinkException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseInvalidRecipientException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseMissingCardException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseNotFoundException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseUndefinedException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseUsedTokenException.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseAccount.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseAccount.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseBalance.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseBalance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseCard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseCardList.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseCardList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseCharge.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseCharge.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseCustomer.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseCustomer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseDispute.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseDispute.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseEvent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseForex.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseForex.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseLink.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseLink.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseOccurrence.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseOccurrence.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseOccurrenceList.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseOccurrenceList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseRecipient.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseRecipient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseRefund.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseRefund.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseRefundList.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseRefundList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseSchedule.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseSchedule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseScheduleList.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseScheduleList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseScheduler.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseScheduler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseSearch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseSource.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseSource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseTransaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseTransaction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/OmiseTransfer.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/OmiseTransfer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/exception/OmiseExceptions.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/exception/OmiseExceptions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/res/OmiseApiResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/res/OmiseApiResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/res/OmiseVaultResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/res/OmiseVaultResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/omise/res/obj/OmiseObject.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/omise/res/obj/OmiseObject.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/AccountTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/AccountTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/BalanceTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/BalanceTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/CardTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/CardTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/ChargeTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/ChargeTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/CustomerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/CustomerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/DisputeTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/DisputeTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/EventTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/EventTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/ForexTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/ForexTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/LinkTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/LinkTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/OccurrenceTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/OccurrenceTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/RecipientTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/RecipientTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/RefundTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/RefundTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/ScheduleTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/ScheduleTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/SchedulerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/SchedulerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/SearchTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/SearchTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/SourceTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/SourceTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/TestConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/TestConfig.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/TokenTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/TokenTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/TransactionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/TransactionTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/TransferTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/TransferTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/exception/OmiseExceptionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/exception/OmiseExceptionTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/omise/res/obj/OmiseObjectTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/omise/res/obj/OmiseObjectTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/carl.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/omise-php.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,37 +16,42 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="655675102">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="gitignore" value="2" />
           <entry key="json" value="1" />
-          <entry key="php" value="154" />
+          <entry key="php" value="157" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="Git file" value="2" />
           <entry key="JSON" value="1" />
-          <entry key="PHP" value="154" />
+          <entry key="PHP" value="157" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="gitignore" value="11" />
           <entry key="json" value="82" />
           <entry key="php" value="498" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="Git file" value="11" />
           <entry key="JSON" value="82" />
           <entry key="PHP" value="498" />
         </counts>
@@ -119,11 +64,11 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/omise/SearchTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="736">
+            <state relative-caret-position="1008">
               <caret line="63" column="54" selection-start-line="63" selection-start-column="54" selection-end-line="63" selection-end-column="54" />
             </state>
           </provider>
@@ -168,35 +113,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/omise/TransferTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1177">
+            <state relative-caret-position="1296">
               <caret line="81" column="56" selection-start-line="81" selection-start-column="56" selection-end-line="81" selection-end-column="56" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/omise/exception/OmiseExceptionTest.php">
+        <entry file="file://$PROJECT_DIR$/lib/omise/OmiseSource.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="496">
+              <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/composer.json">
+        <entry file="file://$PROJECT_DIR$/lib/omise/OmiseSearch.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="732">
+              <caret line="220" column="7" selection-start-line="220" selection-start-column="7" selection-end-line="220" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/omise/OmiseCardList.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1024">
+              <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/OmiseServiceProvider.php">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="16" column="57" lean-forward="true" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+            <state relative-caret-position="48">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -219,7 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/omise/res/OmiseVaultResource.php" />
         <option value="$PROJECT_DIR$/lib/omise/res/OmiseApiResource.php" />
         <option value="$PROJECT_DIR$/lib/omise/exception/OmiseExceptions.php" />
         <option value="$PROJECT_DIR$/lib/omise/OmiseBalance.php" />
@@ -270,6 +223,7 @@
         <option value="$PROJECT_DIR$/tests/omise/exception/OmiseExceptionTest.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/lib/OmiseServiceProvider.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -309,7 +263,7 @@
       <path value="$PROJECT_DIR$/vendor/illuminate/support" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="4">
     <option name="x" value="3840" />
     <option name="width" value="1920" />
     <option name="height" value="2160" />
@@ -322,6 +276,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -329,33 +284,10 @@
               <item name="omise-php" type="b2602c69:ProjectViewProjectNode" />
               <item name="omise-php" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="omise-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="omise-php" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="omise-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="omise-php" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="omise" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="omise-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="omise-php" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="omise-php" type="b2602c69:ProjectViewProjectNode" />
-              <item name="omise-php" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="omise" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -390,25 +322,21 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533803604851</updated>
-      <workItem from="1533803606021" duration="3901000" />
+      <workItem from="1533803606021" duration="4749000" />
+      <workItem from="1534234305240" duration="209000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3901000" />
+    <option name="totallyTimeSpent" value="4958000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="3840" y="0" width="3840" height="2160" extended-state="6" />
+    <frame x="3840" y="0" width="1920" height="2160" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.104166664" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21229947" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32971907" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32971907" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -416,10 +344,15 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.330366" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,27 +362,10 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/omise/OmiseAccount.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
-          <folding>
-            <element signature="e#25#61#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/omise/OmiseCard.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
           <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/omise/OmiseCardList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="50" column="33" lean-forward="true" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -548,23 +464,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="430">
           <caret line="120" column="26" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
-          <folding>
-            <element signature="e#25#71#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/omise/OmiseSearch.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1036">
-          <caret line="237" selection-start-line="237" selection-end-line="237" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/omise/OmiseSource.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -717,9 +616,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/omise/res/obj/OmiseObjectTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-423">
+          <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/omise/AccountTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/OmiseServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/omise/exception/OmiseExceptionTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/omise/SearchTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
+        <state relative-caret-position="1008">
           <caret line="63" column="54" selection-start-line="63" selection-start-column="54" selection-end-line="63" selection-end-column="54" />
         </state>
       </provider>
@@ -754,46 +688,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/omise/TransferTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1177">
+        <state relative-caret-position="1296">
           <caret line="81" column="56" selection-start-line="81" selection-start-column="56" selection-end-line="81" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/omise/res/obj/OmiseObjectTest.php">
+    <entry file="file://$PROJECT_DIR$/lib/omise/OmiseSource.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-423">
-          <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
-          <folding>
-            <element signature="e#39#59#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="496">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/omise/exception/OmiseExceptionTest.php">
+    <entry file="file://$PROJECT_DIR$/lib/omise/OmiseSearch.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="732">
+          <caret line="220" column="7" selection-start-line="220" selection-start-column="7" selection-end-line="220" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/omise/AccountTest.php">
+    <entry file="file://$PROJECT_DIR$/lib/omise/OmiseCardList.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="1024">
+          <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/OmiseServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" column="57" lean-forward="true" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+        <state relative-caret-position="48">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
