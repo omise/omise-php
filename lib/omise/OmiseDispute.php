@@ -1,7 +1,5 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-
 class OmiseDispute extends OmiseApiResource
 {
     const ENDPOINT = 'disputes';
