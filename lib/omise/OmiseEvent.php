@@ -1,7 +1,5 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-
 class OmiseEvent extends OmiseApiResource
 {
     const ENDPOINT = 'events';

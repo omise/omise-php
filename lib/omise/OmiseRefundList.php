@@ -1,8 +1,5 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/OmiseRefund.php';
-
 class OmiseRefundList extends OmiseApiResource
 {
     const ENDPOINT = 'refunds';
