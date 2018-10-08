@@ -1,0 +1,50 @@
+aliases:
+  - &phpunit
+    run: 
+      name: 'PHPUnit'
+      command: |
+        php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+        php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer invalid'; unlink('composer-setup.php'); } echo PHP_EOL;"
+        php composer-setup.php
+        php -r "unlink('composer-setup.php');"
+        php ./composer.phar install
+        php ./vendor/bin/phpunit tests
+
+version: 2
+jobs:
+  php72:
+    docker:
+      - image: circleci/php:7.2-cli-browsers-legacy
+    steps:
+      - checkout
+      - *phpunit
+
+  php71:
+    docker:
+      - image: circleci/php:7.1-cli-jessie-browsers-legacy
+    steps:
+      - checkout
+      - *phpunit
+
+  php70:
+    docker:
+      - image: circleci/php:7.0-cli-jessie-browsers-legacy
+    steps:
+      - checkout
+      - *phpunit
+
+  php56:
+    docker:
+      - image: circleci/php:5.6.38-cli-jessie-node-browsers
+    steps:
+      - checkout
+      - *phpunit
+
+workflows:
+  version: 2
+  omisephp:
+    jobs:
+      - php72
+      - php71
+      - php70
+      - php56
