@@ -21,6 +21,10 @@ class Handler
         return $result;
     }
 
+    /**
+     * @param  mixed $result
+     * @return bool
+     */
     public function isJson($result)
     {
         if (is_string($result) && json_decode($result)) {
