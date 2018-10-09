@@ -140,20 +140,8 @@ class OmiseApiResource extends OmiseObject
             $result = $this->_executeCurl($url, $requestMethod, $key, $params);
         }
 
-        // Decode the JSON response as an associative array.
-        $array = json_decode($result, true);
-
-        // If response is invalid or not a JSON.
-        if (count($array) === 0 || ! isset($array['object'])) {
-            throw new Exception('Unknown error. (Bad Response)');
-        }
-
-        // If response is an error object.
-        if ($array['object'] === 'error') {
-            throw OmiseException::getInstance($array);
-        }
-
-        return $array;
+        $responseHandler = new \Omise\Http\Response\Handler;
+        return $responseHandler->handle($result);
     }
 
     /**
