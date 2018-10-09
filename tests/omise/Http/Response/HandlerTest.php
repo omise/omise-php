@@ -48,4 +48,25 @@ class HandlerTest extends \TestConfig
     {
         $this->responseHandler->handle(100);
     }
+
+    /**
+     * @test
+     * @expectedException \Exception
+     */
+    public function throw_an_exception_if_response_is_a_boolean()
+    {
+        $this->responseHandler->handle(true);
+    }
+
+    /**
+     * @test
+     */
+    public function valid_json_response()
+    {
+        $result = $this->responseHandler->handle('{"object":"account","id":"acct_test"}');
+
+        $this->assertTrue(is_array($result));
+        $this->assertArrayHasKey('id', $result);
+        $this->assertSame($result['id'], 'acct_test');
+    }
 }
