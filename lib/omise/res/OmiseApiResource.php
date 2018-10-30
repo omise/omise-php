@@ -149,7 +149,7 @@ class OmiseApiResource extends OmiseObject
         }
 
         // If response is an error object.
-        if ($array['object'] === 'error') {
+        if (!empty($array['object']) && $array['object'] === 'error') {
             throw OmiseException::getInstance($array);
         }
 
