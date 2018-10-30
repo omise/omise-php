@@ -58,9 +58,8 @@ class OmiseCapabilities extends OmiseApiResource
      */
     public static function combineFilters($filters) {
         return function($a) use ($filters) {
-            $res = true;
-            foreach ($filters as $filter) $res &= $filter($a);
-            return $res;
+            foreach ($filters as $filter) if (!$filter($a)) return false;
+            return true;
         };
     }
 
