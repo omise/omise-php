@@ -18,7 +18,9 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
-     * Retrieves array of payment backends.
+     * Retrieves array of payment backends. Optionally pass in as many filter functions as you want
+     *
+     * @param [function,...]
      *    
      * @return array
      */
@@ -37,27 +39,50 @@ class OmiseCapabilities extends OmiseApiResource
         return !empty($filter) ? array_filter($res, $filter) : $res;
     }
 
-
-    public static function backendSupportsCurrency($currency) {
+    /**
+     * Makes a filter function to check supported currency for backend.
+     *
+     * @param  string $currency
+     *
+     * @return function
+     */
+    public function backendSupportsCurrency($currency) {
         return function($backend) use ($currency) { return in_array($currency, $backend->currencies); };
     }
 
-    public static function backendTypeIs($type) {
+    /**
+     * Makes a filter function to check type of backend.
+     *
+     * @param  string $type
+     *
+     * @return function
+     */
+    public function backendTypeIs($type) {
         return function($backend) use ($type) { return $backend->type==$type; };
     }
 
-    public static function backendSupportsAmount($amount) {
-        return function($backend) use ($amount) {
-            if (!empty($backend->amount['min']) && $backend->amount['min'] > $amount) return false;
-            if (!empty($backend->amount['max']) && $backend->amount['max'] < $amount) return false;
-            return true;
+    /**
+     * Makes a filter function to check if backends can handle given amount.
+     *
+     * @param  int $amount
+     *
+     * @return function
+     */
+    public function backendSupportsChargeAmount($amount) {
+        $defMin = $this['limits']['charge_amount']['min'];
+        $defMax = $this['limits']['charge_amount']['max'];
+        return function($backend) use ($amount, $defMin, $defMax) {
+            $min = empty($backend->amount['min']) ? $defMin : $backend->amount['min'];
+            $max = empty($backend->amount['max']) ? $defMax : $backend->amount['max'];
+            return $amount < $min || $amount > $max;
         };
     }
 
-
     /**
      * Combines boolean filters.
-     *    
+     *
+     * @param  [functions] $filters
+     *
      * @return function
      */
     public static function combineFilters($filters) {
@@ -106,5 +131,4 @@ class OmiseCapabilities extends OmiseApiResource
     {
         return $this->_publickey;
     }
-
 }
