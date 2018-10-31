@@ -34,7 +34,7 @@ class OmiseCapabilities extends OmiseApiResource
             }
         );
         $res = array_map(function($a) { return (object)reset($a);}, $res);
-        return $filter ? array_filter($res, $filter) : $res;
+        return !empty($filter) ? array_filter($res, $filter) : $res;
     }
 
 
@@ -83,7 +83,8 @@ class OmiseCapabilities extends OmiseApiResource
     private static function getUrl()
     {
         ////// return OMISE_API_URL.self::ENDPOINT;
-        return "http://www.mocky.io/v2/5bd695e33500004900fd7bf4";
+        return 'https://api-staging.omise.co/'.self::ENDPOINT;
+        // return "http://www.mocky.io/v2/5bd695e33500004900fd7bf4";
     }
 
     /**
@@ -96,6 +97,16 @@ class OmiseCapabilities extends OmiseApiResource
     protected function isValidAPIResponse($array)
     {
         return count($array);
+    }
+
+    /**
+     * Returns the public key.
+     *
+     * @return string
+     */
+    protected function getResourceKey()
+    {
+        return $this->_publickey;
     }
 
 }
