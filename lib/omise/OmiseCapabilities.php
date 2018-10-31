@@ -47,7 +47,11 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     public static function backendSupportsAmount($amount) {
-        return function($backend) use ($amount) { return !empty($backend->amount) && $backend->amount['min']<=$amount && $backend->amount['max']>=$amount; };
+        return function($backend) use ($amount) {
+            if (!empty($backend->amount['min']) && $backend->amount['min'] > $amount) return false;
+            if (!empty($backend->amount['max']) && $backend->amount['max'] < $amount) return false;
+            return true;
+        };
     }
 
 
