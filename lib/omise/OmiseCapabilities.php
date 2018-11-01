@@ -74,7 +74,7 @@ class OmiseCapabilities extends OmiseApiResource
         return function($backend) use ($amount, $defMin, $defMax) {
             $min = empty($backend->amount['min']) ? $defMin : $backend->amount['min'];
             $max = empty($backend->amount['max']) ? $defMax : $backend->amount['max'];
-            return $amount < $min || $amount > $max;
+            return $amount >= $min && $amount <= $max;
         };
     }
 
