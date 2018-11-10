@@ -2,6 +2,11 @@
 
 class OmiseObject implements ArrayAccess, Iterator, Countable
 {
+    /**
+     * @var string  id of an object.
+     */
+    protected $id;
+
     // Store the attributes of the object.
     protected $_values = array();
 
@@ -11,15 +16,27 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
     // Omise public key.
     protected $_publickey;
 
+    public static function build($objectId, $values)
+    {
+        $object = new static(($objectId) ? $objectId : null);
+        $object->refresh($values);
+        return $object;
+    }
+
     /**
      * Setup the Omise object. If no secret and public are passed the one defined
      * in config.php will be used.
      *
+     * @param string $objectId
      * @param string $publickey
      * @param string $secretkey
      */
-    protected function __construct($publickey = null, $secretkey = null)
+    protected function __construct($objectId, $publickey = null, $secretkey = null)
     {
+        if ($objectId) {
+            $this->id = $objectId;
+        }
+
         if ($publickey !== null) {
             $this->_publickey = $publickey;
         } else {

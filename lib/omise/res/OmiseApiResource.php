@@ -30,7 +30,7 @@ class OmiseApiResource extends OmiseObject
     protected static function getInstance($clazz, $publickey = null, $secretkey = null)
     {
         if (class_exists($clazz)) {
-            return new $clazz($publickey, $secretkey);
+            return new $clazz(null, $publickey, $secretkey); // TODO: Refactor this part (arguments are ambiguous).
         }
 
         throw new Exception('Undefined class.');
