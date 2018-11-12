@@ -8,6 +8,19 @@ class OmiseObjectTest extends TestConfig
 
     /**
      * @test
+     */
+    public function build_a_new_object_using_given_data()
+    {
+        $object = OmiseCharge::build('chrg_test', array('object' => 'charge', 'id' => 'chrg_test'));
+
+        $this->assertInstanceOf('OmiseCharge', $object);
+        $this->assertArrayHasKey('id', $object);
+        $this->assertEquals('charge', $object['object']);
+        $this->assertEquals('chrg_test', $object['id']);
+    }
+
+    /**
+     * @test
      * Retrieve OmiseObject attributes.
      */
     public function create_object()
