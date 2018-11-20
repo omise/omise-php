@@ -56,7 +56,7 @@ class OmiseSchedule extends OmiseApiResource
                 $options = '?' . http_build_query($options);
             }
 
-            return parent::g_retrieve('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options), $this->_publickey, $this->_secretkey);
+            return parent::g_retrieve('OmiseOccurrenceList', self::getUrl($this['id']) . '/occurrences' . $options, $this->_publickey, $this->_secretkey);
         }
     }
 
@@ -76,15 +76,5 @@ class OmiseSchedule extends OmiseApiResource
     public function isDestroyed()
     {
         return parent::isDestroyed();
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return OMISE_API_URL.self::ENDPOINT . '/' . $id;
     }
 }

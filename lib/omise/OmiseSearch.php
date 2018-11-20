@@ -183,7 +183,7 @@ class OmiseSearch extends OmiseApiResource
      *
      * @return string
      */
-    private function getUrl()
+    protected function getUrl()
     {
         $querystring = http_build_query($this->attributes);
         return OMISE_API_URL.self::ENDPOINT.'/?'.$querystring;

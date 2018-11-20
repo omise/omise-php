@@ -25,14 +25,4 @@ class OmiseForex extends OmiseApiResource
     {
         parent::g_reload(self::getUrl($this['from']));
     }
-
-    /**
-     * @param  string $currency
-     *
-     * @return string
-     */
-    private static function getUrl($currency = '')
-    {
-        return OMISE_API_URL . self::ENDPOINT . '/' . $currency;
-    }
 }

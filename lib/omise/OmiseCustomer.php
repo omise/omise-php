@@ -134,17 +134,7 @@ class OmiseCustomer extends OmiseApiResource
                 $options = '?' . http_build_query($options);
             }
 
-            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
+            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id']) . '/schedules' . $options, $this->_publickey, $this->_secretkey);
         }
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
     }
 }

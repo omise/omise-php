@@ -129,14 +129,4 @@ class OmiseTransfer extends OmiseApiResource
     {
         return parent::isDestroyed();
     }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
-    }
 }

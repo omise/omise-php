@@ -59,14 +59,4 @@ class OmiseLink extends OmiseApiResource
     {
         return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
     }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
-    }
 }

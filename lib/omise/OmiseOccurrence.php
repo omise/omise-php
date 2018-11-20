@@ -22,14 +22,4 @@ class OmiseOccurrence extends OmiseApiResource
     {
         parent::g_reload(self::getUrl($this['id']));
     }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return OMISE_API_URL.self::ENDPOINT . '/' . $id;
-    }
 }

@@ -42,14 +42,4 @@ class OmiseRefundList extends OmiseApiResource
 
         return new OmiseRefund($result, $this->_publickey, $this->_secretkey);
     }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private function getUrl($id = '')
-    {
-        return OMISE_API_URL.'charges/'.$this->_chargeID.'/'.self::ENDPOINT.'/'.$id;
-    }
 }

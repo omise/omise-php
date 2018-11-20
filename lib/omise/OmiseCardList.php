@@ -17,6 +17,10 @@ class OmiseCardList extends OmiseApiResource
         parent::__construct($publickey, $secretkey);
         $this->_customerID = $customerID;
         $this->refresh($cards);
+
+        if (!isset($this['location'])) {
+            $this['location'] = '/customers/' . $this->_customerID . '/' . self::ENDPOINT;
+        }
     }
   
     /**
@@ -31,16 +35,5 @@ class OmiseCardList extends OmiseApiResource
         $result = parent::execute($this->getUrl($id), parent::REQUEST_GET, self::getResourceKey());
 
         return new OmiseCard($result, $this->_customerID, $this->_publickey, $this->_secretkey);
-    }
-  
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private function getUrl($id = '')
-    {
-        return OMISE_API_URL.'customers/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$id;
     }
 }

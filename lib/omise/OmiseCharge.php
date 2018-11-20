@@ -150,14 +150,4 @@ class OmiseCharge extends OmiseApiResource
 
         return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
     }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
-    }
 }

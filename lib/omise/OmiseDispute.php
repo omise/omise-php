@@ -55,16 +55,4 @@ class OmiseDispute extends OmiseApiResource
     {
         parent::g_update(self::getUrl($this['id']), $params);
     }
-
-    /**
-     * Generate request url.
-     *
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
-    }
 }

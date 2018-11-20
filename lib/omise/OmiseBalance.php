@@ -26,14 +26,4 @@ class OmiseBalance extends OmiseApiResource
     {
         parent::g_reload(self::getUrl());
     }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
-    }
 }
