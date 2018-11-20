@@ -27,7 +27,7 @@ class OmiseTransfer extends OmiseApiResource
      *
      * @return OmiseSearch
      */
-    public static function search($query = '', $publickey = '', $secretkey = '')
+    public static function search($query = '', $publickey = null, $secretkey = null)
     {
         return OmiseSearch::scope('transfer', $publickey, $secretkey)->query($query);
     }
