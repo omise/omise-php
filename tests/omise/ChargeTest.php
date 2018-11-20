@@ -13,6 +13,7 @@ class ChargeTest extends TestConfig
         $this->assertTrue(method_exists('OmiseCharge', 'update'));
         $this->assertTrue(method_exists('OmiseCharge', 'capture'));
         $this->assertTrue(method_exists('OmiseCharge', 'reverse'));
+        $this->assertTrue(method_exists('OmiseCharge', 'refund'));
         $this->assertTrue(method_exists('OmiseCharge', 'refunds'));
         $this->assertTrue(method_exists('OmiseCharge', 'getUrl'));
     }
@@ -85,6 +86,19 @@ class ChargeTest extends TestConfig
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
         $this->assertTrue($charge['captured']);
+    }
+
+    /**
+     * @test
+     */
+    public function refund()
+    {
+        $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
+        $refund = $charge->refund(array('amount' => 10000));
+
+        $this->assertArrayHasKey('object', $refund);
+        $this->assertEquals('refund', $refund['object']);
+        $this->assertEquals(10000, $refund['amount']);
     }
 
     /**

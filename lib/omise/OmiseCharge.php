@@ -98,6 +98,17 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
+     * Refund a charge.
+     *
+     * @return OmiseRefund
+     */
+    public function refund($params)
+    {
+        $result = parent::execute(self::getUrl($this['id']) . '/refunds', parent::REQUEST_POST, parent::getResourceKey(), $params);
+        return new OmiseRefund($result, $this->_publickey, $this->_secretkey);
+    }
+
+    /**
      * Reverses a charge.
      *
      * @return OmiseCharge
