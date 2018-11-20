@@ -318,4 +318,25 @@ class OmiseApiResource extends OmiseObject
     {
         return $this->_secretkey;
     }
+
+    /**
+     * @param  string $id
+     *
+     * @return string
+     */
+    protected function getUrl($id = '')
+    {
+        if (isset($this['object']) && $this['location']) {
+            $pos   = strrpos($this['location'], '/');
+            $urlId = $pos === false ? $this['location'] : substr($this['location'], $pos + 1);
+
+            if ( $id && $urlId == $id ) {
+                return OMISE_API_URL . $this['location'];
+            } else {
+                return OMISE_API_URL . $this['location'] . '/' . $id;
+            }
+        }
+
+        return OMISE_API_URL . static::ENDPOINT . '/' . $id;
+    }
 }
