@@ -15,7 +15,6 @@ class ChargeTest extends TestConfig
         $this->assertTrue(method_exists('OmiseCharge', 'reverse'));
         $this->assertTrue(method_exists('OmiseCharge', 'refund'));
         $this->assertTrue(method_exists('OmiseCharge', 'refunds'));
-        $this->assertTrue(method_exists('OmiseCharge', 'getUrl'));
     }
 
     /**

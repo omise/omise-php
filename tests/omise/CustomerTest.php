@@ -16,7 +16,6 @@ class CustomerTest extends TestConfig
         $this->assertTrue(method_exists('OmiseCustomer', 'isDestroyed'));
         $this->assertTrue(method_exists('OmiseCustomer', 'cards'));
         $this->assertTrue(method_exists('OmiseCustomer', 'getCards'));
-        $this->assertTrue(method_exists('OmiseCustomer', 'getUrl'));
     }
 
     /**

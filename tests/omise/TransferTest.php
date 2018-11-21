@@ -16,7 +16,6 @@ class TransferTest extends TestConfig
         $this->assertTrue(method_exists('OmiseTransfer', 'update'));
         $this->assertTrue(method_exists('OmiseTransfer', 'destroy'));
         $this->assertTrue(method_exists('OmiseTransfer', 'isDestroyed'));
-        $this->assertTrue(method_exists('OmiseTransfer', 'getUrl'));
     }
 
     /**

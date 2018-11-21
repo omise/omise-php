@@ -9,7 +9,6 @@ class SearchTest extends TestConfig
     public function testMethodExists()
     {
         $this->assertTrue(method_exists('OmiseSearch', 'scope'));
-        $this->assertTrue(method_exists('OmiseSearch', 'getUrl'));
     }
 
     /**

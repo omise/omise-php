@@ -13,7 +13,6 @@ class ScheduleTest extends TestConfig
         $this->assertTrue(method_exists('OmiseSchedule', 'create'));
         $this->assertTrue(method_exists('OmiseSchedule', 'destroy'));
         $this->assertTrue(method_exists('OmiseSchedule', 'isDestroyed'));
-        $this->assertTrue(method_exists('OmiseSchedule', 'getUrl'));
     }
 
     /**

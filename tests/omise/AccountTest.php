@@ -11,7 +11,6 @@ class OmiseAccountTest extends TestConfig
     {
         $this->assertTrue(method_exists('OmiseAccount', 'retrieve'));
         $this->assertTrue(method_exists('OmiseAccount', 'reload'));
-        $this->assertTrue(method_exists('OmiseAccount', 'getUrl'));
     }
 
     /**

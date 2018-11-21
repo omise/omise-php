@@ -11,7 +11,6 @@ class TransactionTest extends TestConfig
     {
         $this->assertTrue(method_exists('OmiseTransaction', 'retrieve'));
         $this->assertTrue(method_exists('OmiseTransaction', 'reload'));
-        $this->assertTrue(method_exists('OmiseTransaction', 'getUrl'));
     }
 
     /**

@@ -11,7 +11,6 @@ class EventTest extends TestConfig
     {
         $this->assertTrue(method_exists('OmiseEvent', 'retrieve'));
         $this->assertTrue(method_exists('OmiseEvent', 'reload'));
-        $this->assertTrue(method_exists('OmiseEvent', 'getUrl'));
     }
 
     /**

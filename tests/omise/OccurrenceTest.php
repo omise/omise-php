@@ -9,7 +9,6 @@ class OccurrenceTest extends TestConfig
     public function existing_methods()
     {
         $this->assertTrue(method_exists('OmiseOccurrence', 'retrieve'));
-        $this->assertTrue(method_exists('OmiseOccurrence', 'getUrl'));
     }
 
     /**

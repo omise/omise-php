@@ -11,7 +11,6 @@ class OmiseBalanceTest extends TestConfig
     {
         $this->assertTrue(method_exists('OmiseBalance', 'retrieve'));
         $this->assertTrue(method_exists('OmiseBalance', 'reload'));
-        $this->assertTrue(method_exists('OmiseBalance', 'getUrl'));
     }
 
     /**

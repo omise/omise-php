@@ -11,7 +11,6 @@ class LinkTest extends TestConfig
     {
         $this->assertTrue(method_exists('OmiseLink', 'retrieve'));
         $this->assertTrue(method_exists('OmiseLink', 'create'));
-        $this->assertTrue(method_exists('OmiseLink', 'getUrl'));
     }
 
     /**

@@ -13,7 +13,6 @@ class CardTest extends TestConfig
         $this->assertTrue(method_exists('OmiseCard', 'update'));
         $this->assertTrue(method_exists('OmiseCard', 'destroy'));
         $this->assertTrue(method_exists('OmiseCard', 'isDestroyed'));
-        $this->assertTrue(method_exists('OmiseCard', 'getUrl'));
     }
 
     /**

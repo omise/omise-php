@@ -10,7 +10,6 @@ class ForexTest extends TestConfig
     {
         $this->assertTrue(method_exists('OmiseSchedule', 'retrieve'));
         $this->assertTrue(method_exists('OmiseSchedule', 'reload'));
-        $this->assertTrue(method_exists('OmiseSchedule', 'getUrl'));
     }
 
     /**

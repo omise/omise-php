@@ -12,7 +12,6 @@ class OmiseDisputeTest extends TestConfig
         $this->assertTrue(method_exists('OmiseDispute', 'retrieve'));
         $this->assertTrue(method_exists('OmiseDispute', 'reload'));
         $this->assertTrue(method_exists('OmiseDispute', 'update'));
-        $this->assertTrue(method_exists('OmiseDispute', 'getUrl'));
     }
 
     /**

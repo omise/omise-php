@@ -12,7 +12,6 @@ class TokenTest extends TestConfig
         $this->assertTrue(method_exists('OmiseToken', 'retrieve'));
         $this->assertTrue(method_exists('OmiseToken', 'create'));
         $this->assertTrue(method_exists('OmiseToken', 'reload'));
-        $this->assertTrue(method_exists('OmiseToken', 'getUrl'));
     }
 
     /**

@@ -10,7 +10,6 @@ class OmiseRecipientTest extends TestConfig
     public function method_exists()
     {
         $this->assertTrue(method_exists('OmiseRecipient', 'retrieve'));
-        $this->assertTrue(method_exists('OmiseRecipient', 'getUrl'));
     }
 
     /**
