@@ -47,10 +47,12 @@ class OmiseApiResource extends OmiseObject
      *
      * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null)
+    protected static function g_retrieve($clazz, $id, $publickey = null, $secretkey = null)
     {
-        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
-        $result   = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+        $resource        = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+        $requestEndpoint = $resource->getUrl($id);
+
+        $result = $resource->execute($requestEndpoint, self::REQUEST_GET, $resource->getResourceKey());
         $resource->refresh($result);
 
         return $resource;
