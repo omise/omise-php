@@ -1,5 +1,28 @@
 # CHANGELOG
 
+### [v2.10.0 _(December 2, 2018)_](https://github.com/omise/omise-php/releases/tag/v2.10.0)
+
+#### ✨ Highlights
+
+- Refundable within charge class. (PR [#92](https://github.com/omise/omise-php/pull/92))
+
+#### 🚀 Enhancements
+
+- Be able to filter when retrieving a Refund List from a Charge object. (PR [#91](https://github.com/omise/omise-php/pull/91))
+- OmiseCardList, relocate the card-fetching logic back to its parent class (OmiseCustomer). (PR [#90](https://github.com/omise/omise-php/pull/90))
+- Apply PSR Code Styling Standard to the library. (PR [#89](https://github.com/omise/omise-php/pull/89))
+- Add PHP Code Sniffer 3.x to the composer package. (PR [#88](https://github.com/omise/omise-php/pull/88))
+- Update Composer Spec. (PR [#87](https://github.com/omise/omise-php/pull/87))
+- Upgrade CircleCI to v2. (PR [#82](https://github.com/omise/omise-php/pull/82))
+- Centralising all loaders into one file, `lib/Omise.php`. (PR [#81](https://github.com/omise/omise-php/pull/81))
+- README.md: enhancing 'how-to' and other contents, make it clearer and easy to follow. (PR [#77](https://github.com/omise/omise-php/pull/77))
+
+#### 👾 Bug Fixes
+
+- Fix bug "authentication failed" when executing OmiseTransfer::search(). (PR [#94](https://github.com/omise/omise-php/pull/94))
+
+---
+
 ### [v2.9.1 _(March 21, 2018)_](https://github.com/omise/omise-php/releases/tag/v2.9.1)
 
 #### 🚀 Enhancements
