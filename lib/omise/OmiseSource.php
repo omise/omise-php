@@ -23,6 +23,6 @@ class OmiseSource extends OmiseApiResource
      */
     private static function getUrl()
     {
-        return OMISE_API_URL.self::ENDPOINT;
+        return \Omise\ApiRequestor::OMISE_API_URL.self::ENDPOINT;
     }
 }
