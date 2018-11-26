@@ -100,7 +100,7 @@ class OmiseCustomer extends OmiseApiResource
     public function cards($options = array())
     {
         if (is_array($options) && ! empty($options)) {
-            $cards = parent::execute(self::getUrl($this['id']) . '/cards?' . http_build_query($options), parent::REQUEST_GET, parent::getResourceKey());
+            $cards = $this->apiRequestor->get(self::getUrl($this['id']) . '/cards?' . http_build_query($options), parent::getResourceKey());
         } else {
             $cards = $this['cards'];
         }
@@ -145,6 +145,6 @@ class OmiseCustomer extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return \Omise\ApiRequestor::OMISE_API_URL.self::ENDPOINT.'/'.$id;
     }
 }

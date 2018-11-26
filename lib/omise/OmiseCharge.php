@@ -91,7 +91,7 @@ class OmiseCharge extends OmiseApiResource
      */
     public function capture()
     {
-        $result = parent::execute(self::getUrl($this['id']).'/capture', parent::REQUEST_POST, parent::getResourceKey());
+        $result = $this->apiRequestor->post(self::getUrl($this['id']).'/capture', parent::getResourceKey());
         $this->refresh($result);
 
         return $this;
@@ -104,7 +104,7 @@ class OmiseCharge extends OmiseApiResource
      */
     public function refund($params)
     {
-        $result = parent::execute(self::getUrl($this['id']) . '/refunds', parent::REQUEST_POST, parent::getResourceKey(), $params);
+        $result = $this->apiRequestor->post(self::getUrl($this['id']) . '/refunds', parent::getResourceKey(), $params);
         return new OmiseRefund($result, $this->_publickey, $this->_secretkey);
     }
 
@@ -115,7 +115,7 @@ class OmiseCharge extends OmiseApiResource
      */
     public function reverse()
     {
-        $result = parent::execute(self::getUrl($this['id']).'/reverse', parent::REQUEST_POST, parent::getResourceKey());
+        $result = $this->apiRequestor->post(self::getUrl($this['id']).'/reverse', parent::getResourceKey());
         $this->refresh($result);
 
         return $this;
@@ -129,7 +129,7 @@ class OmiseCharge extends OmiseApiResource
     public function refunds($options = array())
     {
         if (is_array($options) && ! empty($options)) {
-            $refunds = parent::execute(self::getUrl($this['id']) . '/refunds?' . http_build_query($options), parent::REQUEST_GET, parent::getResourceKey());
+            $refunds = $this->apiRequestor->get(self::getUrl($this['id']) . '/refunds?' . http_build_query($options), parent::getResourceKey());
         } else {
             $refunds = $this['refunds'];
         }
@@ -162,6 +162,6 @@ class OmiseCharge extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return \Omise\ApiRequestor::OMISE_API_URL.self::ENDPOINT.'/'.$id;
     }
 }
