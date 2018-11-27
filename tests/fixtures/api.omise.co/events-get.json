@@ -6,6 +6,7 @@
   "limit": 20,
   "total": 9,
   "order": "chronological",
+  "location": "/events",
   "data": [
     {
       "object": "event",
