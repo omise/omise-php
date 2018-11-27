@@ -1,7 +1,9 @@
 {
   "object": "balance",
   "livemode": false,
+  "location": "/balance",
   "available": 5646205,
   "total": 5646205,
-  "currency": "thb"
+  "currency": "thb",
+  "reserve_amount": 0
 }

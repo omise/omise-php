@@ -1,6 +1,17 @@
 {
   "object": "account",
   "id": "acct_4yyvy93tmab34q2ywlo",
+  "livemode": false,
+  "location": "/account",
   "email": "iam.nuttanon@gmail.com",
+  "currency": "thb",
+  "supported_currencies": [
+    "thb",
+    "jpy",
+    "usd",
+    "eur",
+    "gbp",
+    "sgd"
+  ],
   "created": "2015-02-06T09:45:48Z"
 }
