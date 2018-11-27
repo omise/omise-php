@@ -18,11 +18,6 @@ class OmiseOccurrence extends OmiseApiResource
         return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
     }
 
-    public function reload()
-    {
-        parent::g_reload(self::getUrl($this['id']));
-    }
-
     /**
      * @param  string $id
      *

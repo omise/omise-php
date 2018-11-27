@@ -19,14 +19,6 @@ class OmiseForex extends OmiseApiResource
     }
 
     /**
-     * @see OmiseApiResource::g_reload()
-     */
-    public function reload()
-    {
-        parent::g_reload(self::getUrl($this['from']));
-    }
-
-    /**
      * @param  string $currency
      *
      * @return string

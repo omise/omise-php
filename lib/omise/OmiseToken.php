@@ -42,7 +42,8 @@ class OmiseToken extends OmiseVaultResource
      */
     public function reload()
     {
-        parent::g_reload(self::getUrl($this['id']));
+        $result = $this->apiRequestor->get($this['location'], $this->getResourceKey());
+        $this->refresh($result);
     }
 
     /**
