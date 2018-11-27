@@ -19,18 +19,6 @@ class OmiseSchedule extends OmiseApiResource
     }
 
     /**
-     * @return void
-     */
-    public function reload()
-    {
-        if ($this['object'] === 'schedule') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
-    }
-
-    /**
      * Creates a new schedule.
      *
      * @param  array  $params

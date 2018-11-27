@@ -49,20 +49,6 @@ class OmiseCustomer extends OmiseApiResource
     /**
      * (non-PHPdoc)
      *
-     * @see OmiseApiResource::g_reload()
-     */
-    public function reload()
-    {
-        if ($this['object'] === 'customer') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
-    }
-
-    /**
-     * (non-PHPdoc)
-     *
      * @see OmiseApiResource::g_update()
      */
     public function update($params)

@@ -77,20 +77,6 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
-     */
-    public function reload()
-    {
-        if ($this['object'] === 'recipient') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
-    }
-
-    /**
      * Gets a list of transfer schedules that belongs to a given recipient.
      *
      * @param  array|string $options

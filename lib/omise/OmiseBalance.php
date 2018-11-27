@@ -18,16 +18,6 @@ class OmiseBalance extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
-     */
-    public function reload()
-    {
-        parent::g_reload(self::getUrl());
-    }
-
-    /**
      * @param  string $id
      *
      * @return string

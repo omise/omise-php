@@ -148,7 +148,9 @@ class OmiseSearch extends OmiseApiResource
     public function reload()
     {
         $this->dirty = false;
-        $this->g_reload($this->getUrl());
+
+        $result = $this->apiRequestor->get($this->getUrl(), $this->getResourceKey());
+        $this->refresh($result);
     }
 
     /**

@@ -25,16 +25,6 @@ class OmiseCard extends OmiseApiResource
     /**
      * (non-PHPdoc)
      *
-     * @see OmiseApiResource::g_reload()
-     */
-    public function reload()
-    {
-        parent::g_reload($this->getUrl($this['id']));
-    }
-
-    /**
-     * (non-PHPdoc)
-     *
      * @see OmiseApiResource::g_update()
      */
     public function update($params)
