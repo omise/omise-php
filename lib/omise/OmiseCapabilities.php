@@ -72,7 +72,12 @@ class OmiseCapabilities extends OmiseApiResource
         $defMin = $this['limits']['charge_amount']['min'];
         $defMax = $this['limits']['charge_amount']['max'];
         return function($backend) use ($amount, $defMin, $defMax) {
-            $min = empty($backend->amount['min']) ? $defMin : $backend->amount['min'];
+            // temporary hack for now to correct min value for instalments to 500000
+            if ($backend->type == 'installment') {
+                $min = 500000;
+            } else {
+                $min = empty($backend->amount['min']) ? $defMin : $backend->amount['min'];
+            }
             $max = empty($backend->amount['max']) ? $defMax : $backend->amount['max'];
             return $amount >= $min && $amount <= $max;
         };
