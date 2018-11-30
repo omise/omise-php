@@ -17,10 +17,12 @@ class ApiRequestor
      * Request methods
      * @var string
      */
-    const REQUEST_GET    = 'GET';
-    const REQUEST_POST   = 'POST';
-    const REQUEST_PATCH  = 'PATCH';
-    const REQUEST_DELETE = 'DELETE';
+    const REQUEST_GET     = 'GET';
+    const REQUEST_POST    = 'POST';
+    const REQUEST_PATCH   = 'PATCH';
+    const REQUEST_DELETE  = 'DELETE';
+    const REQUEST_METHODS = array(self::REQUEST_GET, self::REQUEST_POST, self::REQUEST_PATCH, self::REQUEST_DELETE);
+
 
     /**
      * Timeout setting
@@ -30,43 +32,18 @@ class ApiRequestor
     private $OMISE_TIMEOUT        = 60;
 
     /**
-     * @param string $url
-     * @param string $key
-     * @param array  $params
+     * @param string $arguments[0]  An API endpoint
+     * @param string $arguments[1]  Omise secret key
+     * @param array  $arguments[2]  Parameters
      */
-    public function get($url, $key, $params = null)
+    public function __call($name, $arguments)
     {
-        return $this->request($url, self::REQUEST_GET, $key, $params);
-    }
+        $requestMethodName = strtoupper($name);
+        if (! in_array($requestMethodName, self::REQUEST_METHODS)) {
+            throw new Exception('Request method "' . $requestMethodName . '" not supported.', 1);
+        }
 
-    /**
-     * @param string $url
-     * @param string $key
-     * @param array  $params
-     */
-    public function post($url, $key, $params = null)
-    {
-        return $this->request($url, self::REQUEST_POST, $key, $params);
-    }
-
-    /**
-     * @param string $url
-     * @param string $key
-     * @param array  $params
-     */
-    public function patch($url, $key, $params = null)
-    {
-        return $this->request($url, self::REQUEST_PATCH, $key, $params);
-    }
-
-    /**
-     * @param string $url
-     * @param string $key
-     * @param array  $params
-     */
-    public function delete($url, $key, $params = null)
-    {
-        return $this->request($url, self::REQUEST_DELETE, $key, $params);
+        return $this->request($arguments[0], $requestMethodName, $arguments[1], count($arguments) > 2 ? $arguments[2] : null);
     }
 
     /**
