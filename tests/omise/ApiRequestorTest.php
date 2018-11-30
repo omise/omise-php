@@ -76,4 +76,14 @@ class ApiRequestorTest extends \TestConfig
         $this->assertSame($result['object'], 'customer');
         $this->assertTrue($result['deleted']);
     }
+
+    /**
+     * @test
+     * @expectedException        \Exception
+     * @expectedExceptionMessage Request method "GOT" not supported.
+     */
+    public function make_unsupported_method_request()
+    {
+        $this->apiRequestor->got('http://test', 'secretkey');
+    }
 }
