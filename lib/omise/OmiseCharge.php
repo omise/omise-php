@@ -126,11 +126,15 @@ class OmiseCharge extends OmiseApiResource
      *
      * @return OmiseRefundList
      */
-    public function refunds()
+    public function refunds($options = array())
     {
-        $result = parent::execute(self::getUrl($this['id']).'/refunds', parent::REQUEST_GET, parent::getResourceKey());
+        if (is_array($options) && ! empty($options)) {
+            $refunds = parent::execute(self::getUrl($this['id']) . '/refunds?' . http_build_query($options), parent::REQUEST_GET, parent::getResourceKey());
+        } else {
+            $refunds = $this['refunds'];
+        }
 
-        return new OmiseRefundList($result, $this['id'], $this->_publickey, $this->_secretkey);
+        return new OmiseRefundList($refunds, $this['id'], $this->_publickey, $this->_secretkey);
     }
 
     /**
