@@ -46,7 +46,7 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    public function backendSupportsCurrency($currency) {
+    public function makeBackendFilterCurrency($currency) {
         return function($backend) use ($currency) { return in_array($currency, $backend->currencies); };
     }
 
@@ -57,7 +57,7 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    public function backendTypeIs($type) {
+    public function makeBackendFilterType($type) {
         return function($backend) use ($type) { return $backend->type==$type; };
     }
 
@@ -68,7 +68,7 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    public function backendSupportsChargeAmount($amount) {
+    public function makeBackendFilterChargeAmount($amount) {
         $defMin = $this['limits']['charge_amount']['min'];
         $defMax = $this['limits']['charge_amount']['max'];
         return function($backend) use ($amount, $defMin, $defMax) {
