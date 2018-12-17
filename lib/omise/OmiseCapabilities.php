@@ -48,14 +48,15 @@ class OmiseCapabilities extends OmiseApiResource
 
     /**
      * Retrieves array of payment backends. Optionally pass in as many filter functions as you want
+     * (muliple arguments, or a single array)
      *
-     * @param [function,...]
+     * @param [func1,fun2,...] OR func1, func2,...
      *    
      * @return array
      */
     public function getBackends() {
         // check for filters
-        if ($filters = func_get_args()) $filter = self::combineFilters($filters);
+        if ($filters = func_get_args()) $filter = self::combineFilters(is_array($filters[0]) ? $filters[0] : $filters);
         $res = $this['payment_backends'];
         array_walk(
             $res,
