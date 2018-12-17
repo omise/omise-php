@@ -4,6 +4,35 @@ class OmiseCapabilities extends OmiseApiResource
 {
     const ENDPOINT = 'capability';
 
+    const FILTERS = [
+        'backend' => [ 'currency', 'type', 'chargeAmount' ]
+    ];
+
+    protected function __construct($publickey = null, $secretkey = null)
+    {
+        parent::__construct($publickey, $secretkey);
+        $this->_setupFilterShortcuts();
+    }
+
+    /**
+     * Sets up 'shortcuts' to filters so they may be used thus:
+     *    $capabilities->backendFilter['currency']('THB')
+     * As well as the original:
+     *    $capabilities->makeBackendFilterCurrency('THB')
+     */
+    protected function _setupFilterShortcuts()
+    {
+        foreach (self::FILTERS as $filterSubject=>$availableFilters) {
+            $filterArrayName = $filterSubject.'Filter';
+            $this->$filterArrayName = [];
+            $tempArr = &$this->$filterArrayName;
+            foreach ($availableFilters as $type) {
+                $funcName = "make".ucfirst($filterSubject).'Filter'.$type;
+                $tempArr[$type] = function() use ($funcName) { return call_user_func_array([$this, $funcName], func_get_args()); };
+            }
+        }
+    }
+
     /**
      * Retrieves capabilities.
      *
@@ -47,7 +76,7 @@ class OmiseCapabilities extends OmiseApiResource
      * @return function
      */
     public function makeBackendFilterCurrency($currency) {
-        return function($backend) use ($currency) { return in_array($currency, $backend->currencies); };
+        return function($backend) use ($currency) { return in_array(strtoupper($currency), $backend->currencies); };
     }
 
     /**
