@@ -56,7 +56,7 @@ class OmiseCapabilities extends OmiseApiResource
      */
     public function getBackends() {
         // check for filters
-        if ($filters = func_get_args()) $filter = self::combineFilters(is_array($filters[0]) ? $filters[0] : $filters);
+        if ($filters = func_get_args()) $filter = self::_combineFilters(self::_fixArgs($filters));
         $res = $this['payment_backends'];
         array_walk(
             $res,
@@ -120,11 +120,22 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    public static function combineFilters($filters) {
+    private static function _combineFilters($filters) {
         return function($a) use ($filters) {
             foreach ($filters as $filter) if (!$filter($a)) return false;
             return true;
         };
+    }
+
+    /**
+     * Combines boolean filters.
+     *
+     * @param  [functions] $filters
+     *
+     * @return function
+     */
+    private static function _fixArgs($argArray) {
+        return count($argArray)==1 && is_array($argArray[0]) ? $argArray[0] : $argArray;
     }
 
     /**
