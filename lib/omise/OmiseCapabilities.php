@@ -56,7 +56,7 @@ class OmiseCapabilities extends OmiseApiResource
      */
     public function getBackends() {
         // check for filters
-        if ($filters = func_get_args()) $filter = self::_combineFilters(self::_fixArgs($filters));
+        if ($filters = func_get_args()) $filter = self::_combineFilters(self::_argsToVariadic($filters));
         $res = $this['payment_backends'];
         array_walk(
             $res,
@@ -128,13 +128,13 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
-     * Combines boolean filters.
+     * Converts args to variadic fashion, rather than as a single array
      *
      * @param  [functions] $filters
      *
      * @return function
      */
-    private static function _fixArgs($argArray) {
+    private static function _argsToVariadic($argArray) {
         return count($argArray)==1 && is_array($argArray[0]) ? $argArray[0] : $argArray;
     }
 
