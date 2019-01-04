@@ -1,4 +1,5 @@
 <?php
+use Omise\Res\OmiseApiResource;
 
 class OmiseCard extends OmiseApiResource
 {

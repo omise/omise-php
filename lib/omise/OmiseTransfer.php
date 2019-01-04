@@ -1,4 +1,5 @@
 <?php
+use Omise\Res\OmiseApiResource;
 
 class OmiseTransfer extends OmiseApiResource
 {

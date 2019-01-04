@@ -1,4 +1,5 @@
 <?php
+use Omise\Res\OmiseApiResource;
 
 /**
  * This class is not intended to be used directly from client code.

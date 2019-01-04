@@ -3,6 +3,7 @@
 require_once dirname(__FILE__).'/omise/ApiRequestor.php';
 require_once dirname(__FILE__).'/omise/res/obj/OmiseObject.php';
 require_once dirname(__FILE__).'/omise/res/OmiseApiResource.php';
+require_once dirname(__FILE__).'/omise/res/OmiseVaultResource.php';
 require_once dirname(__FILE__).'/omise/Http/Response/Handler.php';
 
 // Errors

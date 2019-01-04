@@ -1,6 +1,8 @@
 <?php
+namespace Omise\Res;
 
 use Omise\ApiRequestor;
+use Omise\Res\Obj\OmiseObject;
 
 class OmiseApiResource extends OmiseObject
 {
