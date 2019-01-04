@@ -4,9 +4,9 @@ class OmiseCapabilities extends OmiseApiResource
 {
     const ENDPOINT = 'capability';
 
-    const FILTERS = [
-        'backend' => [ 'currency', 'type', 'chargeAmount' ]
-    ];
+    const FILTERS = array(
+        'backend' => array('currency', 'type', 'chargeAmount')
+    );
 
     protected function __construct($publickey = null, $secretkey = null)
     {
@@ -24,11 +24,11 @@ class OmiseCapabilities extends OmiseApiResource
     {
         foreach (self::FILTERS as $filterSubject=>$availableFilters) {
             $filterArrayName = $filterSubject.'Filter';
-            $this->$filterArrayName = [];
+            $this->$filterArrayName = array();
             $tempArr = &$this->$filterArrayName;
             foreach ($availableFilters as $type) {
                 $funcName = "make".ucfirst($filterSubject).'Filter'.$type;
-                $tempArr[$type] = function() use ($funcName) { return call_user_func_array([$this, $funcName], func_get_args()); };
+                $tempArr[$type] = function() use ($funcName) { return call_user_func_array(array($this, $funcName), func_get_args()); };
             }
         }
     }
@@ -66,7 +66,7 @@ class OmiseCapabilities extends OmiseApiResource
                 $res[$k][$id]['_id'] = $id;
             }
         );
-        $res = array_map(function($a) { return (object)reset($a);}, $res);
+        $res = array_map(function($a) { return (object)reset($a); }, $res);
         return !empty($filter) ? array_filter($res, $filter) : $res;
     }
 
