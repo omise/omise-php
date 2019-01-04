@@ -54,7 +54,8 @@ class OmiseCapabilities extends OmiseApiResource
      *    
      * @return array
      */
-    public function getBackends() {
+    public function getBackends()
+    {
         // check for filters
         if ($filters = func_get_args()) $filter = self::_combineFilters(self::_argsToVariadic($filters));
         $res = $this['payment_backends'];
@@ -76,7 +77,8 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    public function makeBackendFilterCurrency($currency) {
+    public function makeBackendFilterCurrency($currency)
+    {
         return function($backend) use ($currency) { return in_array(strtoupper($currency), $backend->currencies); };
     }
 
@@ -87,7 +89,8 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    public function makeBackendFilterType($type) {
+    public function makeBackendFilterType($type)
+    {
         return function($backend) use ($type) { return $backend->type==$type; };
     }
 
@@ -98,7 +101,8 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    public function makeBackendFilterChargeAmount($amount) {
+    public function makeBackendFilterChargeAmount($amount)
+    {
         $defMin = $this['limits']['charge_amount']['min'];
         $defMax = $this['limits']['charge_amount']['max'];
         return function($backend) use ($amount, $defMin, $defMax) {
@@ -120,7 +124,8 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    private static function _combineFilters($filters) {
+    private static function _combineFilters($filters)
+    {
         return function($a) use ($filters) {
             foreach ($filters as $filter) if (!$filter($a)) return false;
             return true;
@@ -134,7 +139,8 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    private static function _argsToVariadic($argArray) {
+    private static function _argsToVariadic($argArray)
+    {
         return count($argArray)==1 && is_array($argArray[0]) ? $argArray[0] : $argArray;
     }
 
@@ -154,18 +160,6 @@ class OmiseCapabilities extends OmiseApiResource
     private static function getUrl()
     {
         return OMISE_API_URL.self::ENDPOINT;
-    }
-
-    /**
-     * Checks if response from API was valid.
-     *
-     * @param  array  $array  - decoded JSON response
-     * 
-     * @return boolean
-     */
-    protected function isValidAPIResponse($array)
-    {
-        return count($array);
     }
 
     /**
