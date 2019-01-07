@@ -1,6 +1,7 @@
 <?php
 namespace Omise\Res;
 
+use Exception;
 use Omise\ApiRequestor;
 use Omise\Res\Obj\OmiseObject;
 
