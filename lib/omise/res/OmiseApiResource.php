@@ -160,7 +160,7 @@ class OmiseApiResource extends OmiseObject
      * Checks if response from API was valid.
      *
      * @param  array  $array  - decoded JSON response
-     * 
+     *
      * @return boolean
      */
     protected function isValidAPIResponse($array)

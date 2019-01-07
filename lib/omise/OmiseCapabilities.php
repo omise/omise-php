@@ -45,23 +45,28 @@ class OmiseCapabilities extends OmiseApiResource
      * (muliple arguments, or a single array)
      *
      * @param [func1,fun2,...] OR func1, func2,...
-     *    
+     *
      * @return array
      */
     public function getBackends()
     {
-        // check for filters
-        if ($filters = func_get_args()) $filter = self::combineFilters(self::argsToVariadic($filters));
-        $backends = $this['payment_backends'];
-        array_walk(
-            $backends,
-            function($value, $key) use (&$backends) {
-                $id = array_keys($value)[0];
-                $backends[$key][$id]['_id'] = $id;
-            }
+        $backends = array_map(
+            function ($backend) {
+                $id = array_keys($backend)[0];
+                $backend[$id]['_id'] = $id;
+                return (object)reset($backend);
+            },
+            $this['payment_backends']
         );
-        $backends = array_map(function($backend) { return (object)reset($backend); }, $backends);
-        return !empty($filter) ? array_filter($backends, $filter) : $backends;
+
+        // check for filters
+        if ($filters = func_get_args()) {
+            $filter   = self::combineFilters(self::argsToVariadic($filters));
+            $backends = array_filter($backends, $filter);
+            sort($backends);
+        }
+
+        return $backends;
     }
 
     /**
@@ -73,7 +78,9 @@ class OmiseCapabilities extends OmiseApiResource
      */
     public function makeBackendFilterCurrency($currency)
     {
-        return function($backend) use ($currency) { return in_array(strtoupper($currency), $backend->currencies); };
+        return function ($backend) use ($currency) {
+            return in_array(strtoupper($currency), $backend->currencies);
+        };
     }
 
     /**
@@ -85,7 +92,9 @@ class OmiseCapabilities extends OmiseApiResource
      */
     public function makeBackendFilterType($type)
     {
-        return function($backend) use ($type) { return $backend->type==$type; };
+        return function ($backend) use ($type) {
+            return $backend->type == $type;
+        };
     }
 
     /**
@@ -99,7 +108,7 @@ class OmiseCapabilities extends OmiseApiResource
     {
         $defMin = $this['limits']['charge_amount']['min'];
         $defMax = $this['limits']['charge_amount']['max'];
-        return function($backend) use ($amount, $defMin, $defMax) {
+        return function ($backend) use ($amount, $defMin, $defMax) {
             // temporary hack for now to correct min value for instalments to 500000
             if ($backend->type == 'installment') {
                 $min = 500000;
@@ -125,7 +134,9 @@ class OmiseCapabilities extends OmiseApiResource
             $tempArr = &$this->$filterArrayName;
             foreach ($availableFilters as $type) {
                 $funcName = 'make' . ucfirst($filterSubject) . 'Filter' . $type;
-                $tempArr[$type] = function() use ($funcName) { return call_user_func_array(array($this, $funcName), func_get_args()); };
+                $tempArr[$type] = function () use ($funcName) {
+                    return call_user_func_array(array($this, $funcName), func_get_args());
+                };
             }
         }
     }
@@ -139,8 +150,12 @@ class OmiseCapabilities extends OmiseApiResource
      */
     private static function combineFilters($filters)
     {
-        return function($a) use ($filters) {
-            foreach ($filters as $filter) if (!$filter($a)) return false;
+        return function ($value) use ($filters) {
+            foreach ($filters as $filter) {
+                if (!$filter($value)) {
+                    return false;
+                }
+            }
             return true;
         };
     }
