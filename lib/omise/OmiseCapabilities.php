@@ -4,6 +4,9 @@ class OmiseCapabilities extends OmiseApiResource
 {
     const ENDPOINT = 'capability';
 
+    /**
+     * @var array  of the filterable keys.
+     */
     const FILTERS = array(
         'backend' => array('currency', 'type', 'chargeAmount')
     );
@@ -11,26 +14,7 @@ class OmiseCapabilities extends OmiseApiResource
     protected function __construct($publickey = null, $secretkey = null)
     {
         parent::__construct($publickey, $secretkey);
-        $this->_setupFilterShortcuts();
-    }
-
-    /**
-     * Sets up 'shortcuts' to filters so they may be used thus:
-     *    $capabilities->backendFilter['currency']('THB')
-     * As well as the original:
-     *    $capabilities->makeBackendFilterCurrency('THB')
-     */
-    protected function _setupFilterShortcuts()
-    {
-        foreach (self::FILTERS as $filterSubject=>$availableFilters) {
-            $filterArrayName = $filterSubject.'Filter';
-            $this->$filterArrayName = array();
-            $tempArr = &$this->$filterArrayName;
-            foreach ($availableFilters as $type) {
-                $funcName = "make".ucfirst($filterSubject).'Filter'.$type;
-                $tempArr[$type] = function() use ($funcName) { return call_user_func_array(array($this, $funcName), func_get_args()); };
-            }
-        }
+        $this->setupFilterShortcuts();
     }
 
     /**
@@ -47,6 +31,16 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
+     * (non-PHPdoc)
+     *
+     * @see OmiseApiResource::g_reload()
+     */
+    public function reload()
+    {
+        parent::g_reload(self::getUrl());
+    }
+
+    /**
      * Retrieves array of payment backends. Optionally pass in as many filter functions as you want
      * (muliple arguments, or a single array)
      *
@@ -57,17 +51,17 @@ class OmiseCapabilities extends OmiseApiResource
     public function getBackends()
     {
         // check for filters
-        if ($filters = func_get_args()) $filter = self::_combineFilters(self::_argsToVariadic($filters));
-        $res = $this['payment_backends'];
+        if ($filters = func_get_args()) $filter = self::combineFilters(self::argsToVariadic($filters));
+        $backends = $this['payment_backends'];
         array_walk(
-            $res,
-            function($v, $k) use (&$res) {
-                $id = array_keys($v)[0];
-                $res[$k][$id]['_id'] = $id;
+            $backends,
+            function($value, $key) use (&$backends) {
+                $id = array_keys($value)[0];
+                $backends[$key][$id]['_id'] = $id;
             }
         );
-        $res = array_map(function($a) { return (object)reset($a); }, $res);
-        return !empty($filter) ? array_filter($res, $filter) : $res;
+        $backends = array_map(function($backend) { return (object)reset($backend); }, $backends);
+        return !empty($filter) ? array_filter($backends, $filter) : $backends;
     }
 
     /**
@@ -118,13 +112,32 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
+     * Sets up 'shortcuts' to filters so they may be used thus:
+     *    $capabilities->backendFilter['currency']('THB')
+     * As well as the original:
+     *    $capabilities->makeBackendFilterCurrency('THB')
+     */
+    protected function setupFilterShortcuts()
+    {
+        foreach (self::FILTERS as $filterSubject => $availableFilters) {
+            $filterArrayName = $filterSubject . 'Filter';
+            $this->$filterArrayName = array();
+            $tempArr = &$this->$filterArrayName;
+            foreach ($availableFilters as $type) {
+                $funcName = 'make' . ucfirst($filterSubject) . 'Filter' . $type;
+                $tempArr[$type] = function() use ($funcName) { return call_user_func_array(array($this, $funcName), func_get_args()); };
+            }
+        }
+    }
+
+    /**
      * Combines boolean filters.
      *
      * @param  [functions] $filters
      *
      * @return function
      */
-    private static function _combineFilters($filters)
+    private static function combineFilters($filters)
     {
         return function($a) use ($filters) {
             foreach ($filters as $filter) if (!$filter($a)) return false;
@@ -139,19 +152,9 @@ class OmiseCapabilities extends OmiseApiResource
      *
      * @return function
      */
-    private static function _argsToVariadic($argArray)
+    private static function argsToVariadic($argArray)
     {
-        return count($argArray)==1 && is_array($argArray[0]) ? $argArray[0] : $argArray;
-    }
-
-    /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
-     */
-    public function reload()
-    {
-        parent::g_reload(self::getUrl());
+        return count($argArray) == 1 && is_array($argArray[0]) ? $argArray[0] : $argArray;
     }
 
     /**
@@ -159,7 +162,7 @@ class OmiseCapabilities extends OmiseApiResource
      */
     private static function getUrl()
     {
-        return OMISE_API_URL.self::ENDPOINT;
+        return OMISE_API_URL . self::ENDPOINT;
     }
 
     /**
