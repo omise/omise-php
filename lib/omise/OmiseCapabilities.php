@@ -18,6 +18,27 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
+     * Sets up 'shortcuts' to filters so they may be used thus:
+     *    $capabilities->backendFilter['currency']('THB')
+     * As well as the original:
+     *    $capabilities->makeBackendFilterCurrency('THB')
+     */
+    protected function setupFilterShortcuts()
+    {
+        foreach (self::FILTERS as $filterSubject => $availableFilters) {
+            $filterArrayName = $filterSubject . 'Filter';
+            $this->$filterArrayName = array();
+            $tempArr = &$this->$filterArrayName;
+            foreach ($availableFilters as $type) {
+                $funcName = 'make' . ucfirst($filterSubject) . 'Filter' . $type;
+                $tempArr[$type] = function () use ($funcName) {
+                    return call_user_func_array(array($this, $funcName), func_get_args());
+                };
+            }
+        }
+    }
+
+    /**
      * Retrieves capabilities.
      *
      * @param  string $publickey
@@ -61,9 +82,7 @@ class OmiseCapabilities extends OmiseApiResource
 
         // check for filters
         if ($filters = func_get_args()) {
-            $filter   = self::combineFilters(self::argsToVariadic($filters));
-            $backends = array_filter($backends, $filter);
-            sort($backends);
+            $backends = array_filter($backends, self::combineFilters(self::argsToVariadic($filters)));
         }
 
         return $backends;
@@ -118,27 +137,6 @@ class OmiseCapabilities extends OmiseApiResource
             $max = empty($backend->amount['max']) ? $defMax : $backend->amount['max'];
             return $amount >= $min && $amount <= $max;
         };
-    }
-
-    /**
-     * Sets up 'shortcuts' to filters so they may be used thus:
-     *    $capabilities->backendFilter['currency']('THB')
-     * As well as the original:
-     *    $capabilities->makeBackendFilterCurrency('THB')
-     */
-    protected function setupFilterShortcuts()
-    {
-        foreach (self::FILTERS as $filterSubject => $availableFilters) {
-            $filterArrayName = $filterSubject . 'Filter';
-            $this->$filterArrayName = array();
-            $tempArr = &$this->$filterArrayName;
-            foreach ($availableFilters as $type) {
-                $funcName = 'make' . ucfirst($filterSubject) . 'Filter' . $type;
-                $tempArr[$type] = function () use ($funcName) {
-                    return call_user_func_array(array($this, $funcName), func_get_args());
-                };
-            }
-        }
     }
 
     /**
