@@ -8,7 +8,7 @@ Please pop onto our [community forum](https://forum.omise.co) or contact [suppor
 
 ## Requirements
 
-* PHP v5.3 and above.
+* PHP v5.4 and above.
 * Built-in [libcurl](http://php.net/manual/en/book.curl.php) support.
 
 > Note that, due to the PHP [END OF LIFE](http://php.net/supported-versions.php) cycle, we encourage you to run Omise-PHP library on a PHP version 5.6 or higher as there is no longer security support for any below 5.6 and that could cause you any security vulnerable issues in the future.
