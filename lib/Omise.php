@@ -11,6 +11,28 @@ require_once dirname(__FILE__).'/omise/exception/OmiseExceptions.php';
 
 // API Resources.
 require_once dirname(__FILE__).'/Account.php';
+require_once dirname(__FILE__).'/Balance.php';
+require_once dirname(__FILE__).'/Card.php';
+require_once dirname(__FILE__).'/CardList.php';
+require_once dirname(__FILE__).'/Charge.php';
+require_once dirname(__FILE__).'/Customer.php';
+require_once dirname(__FILE__).'/Dispute.php';
+require_once dirname(__FILE__).'/Event.php';
+require_once dirname(__FILE__).'/Forex.php';
+require_once dirname(__FILE__).'/Link.php';
+require_once dirname(__FILE__).'/Occurrence.php';
+require_once dirname(__FILE__).'/OccurrenceList.php';
+require_once dirname(__FILE__).'/Recipient.php';
+require_once dirname(__FILE__).'/Refund.php';
+require_once dirname(__FILE__).'/RefundList.php';
+require_once dirname(__FILE__).'/Schedule.php';
+require_once dirname(__FILE__).'/ScheduleList.php';
+require_once dirname(__FILE__).'/Scheduler.php';
+require_once dirname(__FILE__).'/Search.php';
+require_once dirname(__FILE__).'/Source.php';
+require_once dirname(__FILE__).'/Token.php';
+require_once dirname(__FILE__).'/Transaction.php';
+require_once dirname(__FILE__).'/Transfer.php';
 
 // API Resources - Legacy classes.
 require_once dirname(__FILE__).'/omise/OmiseAccount.php';
