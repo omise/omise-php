@@ -50,15 +50,19 @@
       "credit_card": {
         "type": "card",
         "currencies": [
-          "THB",
-          "JPY",
-          "USD",
-          "EUR",
-          "GBP",
-          "SGD"
+          "thb",
+          "jpy",
+          "usd",
+          "eur",
+          "gbp",
+          "sgd"
         ],
         "brands": [
-
+          "JCB",
+          "Visa",
+          "MasterCard",
+          "American Express",
+          "Diners Club"
         ]
       }
     },
@@ -66,7 +70,7 @@
       "installment_bay": {
         "type": "installment",
         "currencies": [
-          "THB"
+          "thb"
         ],
         "allowed_installment_terms": [
           3,
@@ -85,7 +89,7 @@
       "installment_first_choice": {
         "type": "installment",
         "currencies": [
-          "THB"
+          "thb"
         ],
         "allowed_installment_terms": [
           3,
@@ -108,7 +112,7 @@
       "installment_kbank": {
         "type": "installment",
         "currencies": [
-          "THB"
+          "thb"
         ],
         "allowed_installment_terms": [
           3,
@@ -126,7 +130,7 @@
       "installment_bbl": {
         "type": "installment",
         "currencies": [
-          "THB"
+          "thb"
         ],
         "allowed_installment_terms": [
           4,
@@ -145,7 +149,7 @@
       "installment_ktc": {
         "type": "installment",
         "currencies": [
-          "THB"
+          "thb"
         ],
         "allowed_installment_terms": [
           3,
