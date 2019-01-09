@@ -66,7 +66,7 @@ class OmiseCapabilities extends OmiseApiResource
      * (muliple arguments, or a single array)
      *
      * @param [func1,fun2,...] OR func1, func2,...
-     *    
+     *
      * @return array
      */
     public function getBackends()
@@ -81,7 +81,6 @@ class OmiseCapabilities extends OmiseApiResource
         // return backends (filtered if requested)
         return ($filters = func_get_args()) ? array_filter($backends, self::combineFilters(self::argsToVariadic($filters))) : $backends;
     }
-
 
     /**
      * Makes a filter function to check supported currency for backend.
