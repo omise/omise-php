@@ -66,27 +66,22 @@ class OmiseCapabilities extends OmiseApiResource
      * (muliple arguments, or a single array)
      *
      * @param [func1,fun2,...] OR func1, func2,...
-     *
+     *    
      * @return array
      */
     public function getBackends()
     {
         $backends = array_map(
             function ($backend) {
-                $id = array_keys($backend)[0];
-                $backend[$id]['_id'] = $id;
-                return (object)reset($backend);
+                $new = (object)(array_merge(reset($backend), ['_id'=>array_keys($backend)[0]]));
+                return $new;
             },
             $this['payment_backends']
         );
-
-        // check for filters
-        if ($filters = func_get_args()) {
-            $backends = array_filter($backends, self::combineFilters(self::argsToVariadic($filters)));
-        }
-
-        return $backends;
+        // return backends (filtered if requested)
+        return ($filters = func_get_args()) ? array_filter($backends, self::combineFilters(self::argsToVariadic($filters))) : $backends;
     }
+
 
     /**
      * Makes a filter function to check supported currency for backend.
@@ -98,7 +93,7 @@ class OmiseCapabilities extends OmiseApiResource
     public function makeBackendFilterCurrency($currency)
     {
         return function ($backend) use ($currency) {
-            return in_array(strtoupper($currency), $backend->currencies);
+            return in_array(strtolower($currency), array_map('strtolower', $backend->currencies));
         };
     }
 
