@@ -8,7 +8,7 @@ Please pop onto our [community forum](https://forum.omise.co) or contact [suppor
 
 ## Requirements
 
-* PHP v5.3 and above.
+* PHP v5.4 and above.
 * Built-in [libcurl](http://php.net/manual/en/book.curl.php) support.
 
 > Note that, due to the PHP [END OF LIFE](http://php.net/supported-versions.php) cycle, we encourage you to run Omise-PHP library on a PHP version 5.6 or higher as there is no longer security support for any below 5.6 and that could cause you any security vulnerable issues in the future.
@@ -47,7 +47,7 @@ You can install the library via [Composer](https://getcomposer.org/). If you don
 
 ### Manually
 
-If you're not using Composer, you can also download [the latest version of Omise-PHP](https://github.com/omise/omise-php/archive/v2.10.0.zip).
+If you're not using Composer, you can also download [the latest version of Omise-PHP](https://github.com/omise/omise-php/archive/v2.11.0.zip).
 Then, follows the instruction below to install **Omise-PHP** to the project.
 
 1. Extract the library to your project.

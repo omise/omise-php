@@ -1,5 +1,14 @@
 # CHANGELOG
 
+### [v2.11.0 _(Jan 9, 2019)_](https://github.com/omise/omise-php/releases/tag/v2.11.0)
+
+#### ✨ Highlights
+
+- Introducing Capability API. (PR [#100](https://github.com/omise/omise-php/pull/100))
+- Officially dropping support of PHP v5.3. (PR [#101](https://github.com/omise/omise-php/pull/101))
+
+---
+
 ### [v2.10.0 _(December 2, 2018)_](https://github.com/omise/omise-php/releases/tag/v2.10.0)
 
 #### ✨ Highlights
