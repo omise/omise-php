@@ -7,9 +7,9 @@ class OmiseCapabilities extends OmiseApiResource
     /**
      * @var array  of the filterable keys.
      */
-    const FILTERS = array(
-        'backend' => array('currency', 'type', 'chargeAmount')
-    );
+    static $filters = [
+        'backend' => ['currency', 'type', 'chargeAmount']
+    ];
 
     protected function __construct($publickey = null, $secretkey = null)
     {
@@ -25,14 +25,14 @@ class OmiseCapabilities extends OmiseApiResource
      */
     protected function setupFilterShortcuts()
     {
-        foreach (self::FILTERS as $filterSubject => $availableFilters) {
+        foreach (self::$filters as $filterSubject => $availableFilters) {
             $filterArrayName = $filterSubject . 'Filter';
-            $this->$filterArrayName = array();
+            $this->$filterArrayName = [];
             $tempArr = &$this->$filterArrayName;
             foreach ($availableFilters as $type) {
                 $funcName = 'make' . ucfirst($filterSubject) . 'Filter' . $type;
                 $tempArr[$type] = function () use ($funcName) {
-                    return call_user_func_array(array($this, $funcName), func_get_args());
+                    return call_user_func_array([$this, $funcName], func_get_args());
                 };
             }
         }
