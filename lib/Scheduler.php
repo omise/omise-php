@@ -2,6 +2,7 @@
 namespace Omise;
 
 use Omise\Res\OmiseApiResource;
+use Omise\Schedule;
 
 class Scheduler extends OmiseApiResource
 {
@@ -144,7 +145,7 @@ class Scheduler extends OmiseApiResource
      */
     public function start()
     {
-        return OmiseSchedule::create($this->attributes, $this->_publickey, $this->_secretkey);
+        return Schedule::create($this->attributes, $this->_publickey, $this->_secretkey);
     }
 
     /**
