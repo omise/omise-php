@@ -1,4 +1,5 @@
 <?php
+namespace Omise\Res;
 
 class OmiseVaultResource extends OmiseApiResource
 {

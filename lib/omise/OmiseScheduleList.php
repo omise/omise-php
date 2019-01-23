@@ -1,14 +1,6 @@
 <?php
-
-class OmiseScheduleList extends OmiseApiResource
-{
-    /**
-     * @param  string $id
-     *
-     * @return OmiseOccurrence
-     */
-    public function retrieve($id)
-    {
-        return OmiseSchedule::retrieve($id, $this->_publickey, $this->_secretkey);
-    }
-}
+/**
+ * @deprecated 3.0.0  No longer used this class and will be removed on Jan 4th, 2020.
+ * phpcs:disable
+ */
+class OmiseScheduleList extends \Omise\ScheduleList { }

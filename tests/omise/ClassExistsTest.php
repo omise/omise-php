@@ -37,9 +37,9 @@ class ClassExistsTest extends PHPUnit_Framework_TestCase
      */
     public function testResourceClassesExists()
     {
-        $this->assertTrue(class_exists('OmiseApiResource'));
-        $this->assertTrue(class_exists('OmiseVaultResource'));
-        $this->assertTrue(class_exists('OmiseObject'));
+        $this->assertTrue(class_exists('Omise\Res\OmiseApiResource'));
+        $this->assertTrue(class_exists('Omise\Res\OmiseVaultResource'));
+        $this->assertTrue(class_exists('Omise\Res\Obj\OmiseObject'));
         $this->assertTrue(class_exists('OmiseException'));
     }
 }

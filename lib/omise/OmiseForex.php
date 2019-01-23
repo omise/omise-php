@@ -1,38 +1,6 @@
 <?php
-
-class OmiseForex extends OmiseApiResource
-{
-    const ENDPOINT = 'forex';
-
-    /**
-     * Retrieves a forex data.
-     *
-     * @param  string $currency
-     * @param  string $publickey
-     * @param  string $secretkey
-     *
-     * @return OmiseForex
-     */
-    public static function retrieve($currency = '', $publickey = null, $secretkey = null)
-    {
-        return parent::g_retrieve(get_class(), self::getUrl($currency), $publickey, $secretkey);
-    }
-
-    /**
-     * @see OmiseApiResource::g_reload()
-     */
-    public function reload()
-    {
-        parent::g_reload(self::getUrl($this['from']));
-    }
-
-    /**
-     * @param  string $currency
-     *
-     * @return string
-     */
-    private static function getUrl($currency = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $currency;
-    }
-}
+/**
+ * @deprecated 3.0.0  No longer used this class and will be removed on Jan 4th, 2020.
+ * phpcs:disable
+ */
+class OmiseForex extends \Omise\Forex { }

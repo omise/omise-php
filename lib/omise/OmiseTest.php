@@ -1,4 +1,5 @@
 <?php
+use Omise\Res\OmiseApiResource;
 
 class OmiseTest extends OmiseApiResource
 {
