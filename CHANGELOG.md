@@ -1,5 +1,13 @@
 # CHANGELOG
 
+### [v2.11.1 _(Jan 16, 2019)_](https://github.com/omise/omise-php/releases/tag/v2.11.1)
+
+#### 👾 Bug Fixes
+
+- Fixes issue with use of array constant (mandated PHP 5.6+). (PR [#106](https://github.com/omise/omise-php/pull/106))
+
+---
+
 ### [v2.11.0 _(Jan 9, 2019)_](https://github.com/omise/omise-php/releases/tag/v2.11.0)
 
 #### ✨ Highlights

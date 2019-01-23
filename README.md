@@ -47,7 +47,7 @@ You can install the library via [Composer](https://getcomposer.org/). If you don
 
 ### Manually
 
-If you're not using Composer, you can also download [the latest version of Omise-PHP](https://github.com/omise/omise-php/archive/v2.11.0.zip).
+If you're not using Composer, you can also download [the latest version of Omise-PHP](https://github.com/omise/omise-php/archive/v2.11.1.zip).
 Then, follows the instruction below to install **Omise-PHP** to the project.
 
 1. Extract the library to your project.
