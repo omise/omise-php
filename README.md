@@ -65,7 +65,7 @@ _However, using Composer is recommended as you can easily keep the library up-to
 
 ### • Config your public and secret keys
 
-First thing first, before you make a very-first request to Omise API, you will need to config your **public key** and **secret key** (can be found at the [Omise Dashboard](https://dashboard.omise.co). Log in then go to **Keys** from the sidebar menu).
+First thing first, before you make a very first request to Omise API, you will need to configure your **public key** and **secret key** (these can be found at the [Omise Dashboard](https://dashboard.omise.co). Log in then go to **Keys** from the sidebar menu).
 
 Place the following code next to a line where Omise-PHP library is loaded.
 
