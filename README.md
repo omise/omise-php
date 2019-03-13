@@ -65,16 +65,16 @@ _However, using Composer is recommended as you can easily keep the library up-to
 
 ### • Config your public and secret keys
 
-First thing first, before you make a very-first request to Omise API, you will need to config your public and secret key (can be found at the [Omise Dashboard](https://dashboard.omise.co). Log in then go to **Keys** from the sidebar menu).
+First thing first, before you make a very-first request to Omise API, you will need to config your **public key** and **secret key** (can be found at the [Omise Dashboard](https://dashboard.omise.co). Log in then go to **Keys** from the sidebar menu).
 
 Place the following code next to a line where Omise-PHP library is loaded.
 
 ```php
-define('OMISE_PUBLIC_KEY', 'pkey_can_find_at_omise_dashboard');
-define('OMISE_SECRET_KEY', 'skey_can_find_at_omise_dashboard');
+define('OMISE_PUBLIC_KEY', 'pkey_test_***');
+define('OMISE_SECRET_KEY', 'skey_test_***');
 ```
 
-![configuring omise-php, public and secret keys](https://user-images.githubusercontent.com/2154669/39510239-3f9727b6-4e13-11e8-8930-e3a825c1f07c.png)
+![configuring omise-php, public and secret keys](https://user-images.githubusercontent.com/2154669/54261954-9eed9e00-459f-11e9-96b1-747061640fab.png)
 
 _Reference: [https://www.omise.co/api-authentication](https://www.omise.co/api-authentication)._
 
@@ -103,8 +103,8 @@ From the above sections, your code will look similar like the following code:
 <?php
 require_once dirname(__FILE__).'/vendor/autoload.php';
 
-define('OMISE_PUBLIC_KEY', 'pkey_test_54ot96fkr3i2op60cng');
-define('OMISE_SECRET_KEY', 'skey_test_54ot96fkr3i2op60cng');
+define('OMISE_PUBLIC_KEY', 'pkey_test_***');
+define('OMISE_SECRET_KEY', 'skey_test_***');
 define('OMISE_API_VERSION', '2017-11-02');
 ```
 
