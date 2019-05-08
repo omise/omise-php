@@ -3,6 +3,7 @@
 class OmiseCapabilities extends OmiseApiResource
 {
     const ENDPOINT = 'capability';
+    const INSTALLMENT_MINIMUM = 300000;
 
     /**
      * @var array  of the filterable keys.
@@ -122,9 +123,9 @@ class OmiseCapabilities extends OmiseApiResource
         $defMin = $this['limits']['charge_amount']['min'];
         $defMax = $this['limits']['charge_amount']['max'];
         return function ($backend) use ($amount, $defMin, $defMax) {
-            // temporary hack for now to correct min value for instalments to 500000
+            // temporary hack for now to correct min value for instalments to fixed minium (different to normal charge minimum)
             if ($backend->type == 'installment') {
-                $min = 500000;
+                $min = self::INSTALLMENT_MINIMUM;
             } else {
                 $min = empty($backend->amount['min']) ? $defMin : $backend->amount['min'];
             }
