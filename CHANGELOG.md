@@ -1,5 +1,17 @@
 # CHANGELOG
 
+### [v2.11.2 _(May 8, 2019)_](https://github.com/omise/omise-php/releases/tag/v2.11.2)
+
+#### 🚀 Enhancements
+
+- Changes hacked instalment minimum to 300000 subunits. (PR [#113](https://github.com/omise/omise-php/pull/113))
+
+#### 📝 Documents
+
+- Removing Omise (demo) keys out from README document. (PR [#111](https://github.com/omise/omise-php/pull/111))
+
+---
+
 ### [v2.11.1 _(Jan 16, 2019)_](https://github.com/omise/omise-php/releases/tag/v2.11.1)
 
 #### 👾 Bug Fixes
