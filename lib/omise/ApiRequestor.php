@@ -172,15 +172,15 @@ class ApiRequestor
         );
 
         // Config Omise API Version
-        if (defined('OMISE_API_VERSION')) {
-            $options += array(CURLOPT_HTTPHEADER => array('Omise-Version: ' . OMISE_API_VERSION));
+        if ($apiVersion = \Omise\Omise::apiVersion()) {
+            $options += array(CURLOPT_HTTPHEADER => array('Omise-Version: ' . $apiVersion));
 
-            $userAgent .= ' OmiseAPI/' . OMISE_API_VERSION;
+            $userAgent .= ' OmiseAPI/' . $apiVersion;
         }
 
         // Config UserAgent
-        if (defined('OMISE_USER_AGENT_SUFFIX')) {
-            $userAgent .= $userAgent . ' ' . OMISE_USER_AGENT_SUFFIX;
+        if ($suffixUserAgent = \Omise\Omise::userAgent()) {
+            $userAgent .= ' ' . $suffixUserAgent;
         }
 
         $options += array(CURLOPT_USERAGENT => $userAgent);

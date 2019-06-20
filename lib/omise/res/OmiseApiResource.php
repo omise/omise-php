@@ -9,13 +9,9 @@ class OmiseApiResource extends OmiseObject
 {
     public $apiRequestor;
 
-    /**
-     * @param string $publickey
-     * @param string $secretkey
-     */
-    protected function __construct($publickey = null, $secretkey = null)
+    protected function __construct()
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
         $this->apiRequestor = new ApiRequestor;
     }
 
@@ -23,36 +19,33 @@ class OmiseApiResource extends OmiseObject
      * Returns an instance of the class given in $clazz or raise an error.
      *
      * @param  string $clazz
-     * @param  string $publickey
-     * @param  string $secretkey
      *
      * @throws Exception
      *
      * @return OmiseResource
      */
-    protected static function getInstance($clazz, $publickey = null, $secretkey = null)
+    protected static function getInstance($clazz)
     {
-        if (class_exists($clazz)) {
-            return new $clazz($publickey, $secretkey);
+        if (! class_exists($clazz)) {
+            throw new Exception('Undefined class.');
         }
 
-        throw new Exception('Undefined class.');
+        return new $clazz;
     }
 
     /**
      * Retrieves the resource.
      *
      * @param  string $clazz
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  string $url
      *
      * @throws Exception|OmiseException
      *
      * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null)
+    protected static function g_retrieve($clazz, $url)
     {
-        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+        $resource = call_user_func(array($clazz, 'getInstance'), $clazz);
         $result   = $resource->apiRequestor->get($url, $resource->getResourceKey());
         $resource->refresh($result);
 
@@ -65,16 +58,14 @@ class OmiseApiResource extends OmiseObject
      * @param  string $clazz
      * @param  string $url
      * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
      *
      * @throws Exception|OmiseException
      *
      * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null)
+    protected static function g_create($clazz, $url, $params)
     {
-        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+        $resource = call_user_func(array($clazz, 'getInstance'), $clazz);
         $result   = $resource->apiRequestor->post($url, $resource->getResourceKey(), $params);
         $resource->refresh($result);
 
