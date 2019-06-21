@@ -33,14 +33,12 @@ class Search extends OmiseApiResource
      * Create an instance of `OmiseSearch` with the given scope.
      *
      * @param  string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseSearch  The created instance.
+     * @return Omise\Search  The created instance.
      */
-    public static function scope($scope, $publickey = null, $secretkey = null)
+    public static function scope($scope)
     {
-        return new static($scope, $publickey, $secretkey);
+        return new static($scope);
     }
 
     /**
@@ -49,12 +47,10 @@ class Search extends OmiseApiResource
      * This constructor is `protected` thus not intended to be used directly.
      *
      * @param string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
-     * @param string $publickey
-     * @param string $secretkey
      */
-    protected function __construct($scope, $publickey, $secretkey)
+    protected function __construct($scope)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
         $this->mergeAttributes('scope', $scope);
     }
 
@@ -63,7 +59,7 @@ class Search extends OmiseApiResource
      *
      * @param  string $query  Searching text within the scope.
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function query($query)
     {
@@ -75,7 +71,7 @@ class Search extends OmiseApiResource
      *
      * @param  string $filters  Searching text with specific key within the scope.
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function filter(array $filters = array())
     {
@@ -92,7 +88,7 @@ class Search extends OmiseApiResource
      *
      * @param  int $page  Specific number of searching page.
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function page($page)
     {
@@ -104,7 +100,7 @@ class Search extends OmiseApiResource
      *
      * @param  int $limit   Number of items that will be shown per page.
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function per_page($limit)
     {
@@ -118,7 +114,7 @@ class Search extends OmiseApiResource
      *
      * @see    https://www.omise.co/search-api
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function order($order)
     {
@@ -132,7 +128,7 @@ class Search extends OmiseApiResource
      * dirty search instance automatically reloads its data when client code
      * tries to access its array element.
      *
-     *     $search = OmiseCharge::query('demo'); // the instance is dirty
+     *     $search = Omise\Charge::query('demo'); // the instance is dirty
      *     echo $search['object'];               // this will automatically retrive remote value
      *
      * @return bool  true if the instance is dirty and needs to be reloaded
@@ -171,7 +167,7 @@ class Search extends OmiseApiResource
      * @param  string $key    Search attribute key.
      * @param  mixed  $value  Search attribute value.
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     private function mergeAttributes($key, $value)
     {

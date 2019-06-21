@@ -12,14 +12,12 @@ class Schedule extends OmiseApiResource
      * Retrieves a schedule.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseSchedule
+     * @return Omise\Schedule
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '')
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id));
     }
 
     /**
@@ -37,21 +35,19 @@ class Schedule extends OmiseApiResource
     /**
      * Creates a new schedule.
      *
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
      *
-     * @return OmiseSchedule
+     * @return Omise\Schedule
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params);
     }
 
     /**
      * @param  array|string $options
      *
-     * @return OmiseOccurrenceList|null
+     * @return Omise\OccurrenceList|null
      */
     public function occurrences($options = array())
     {
@@ -60,7 +56,7 @@ class Schedule extends OmiseApiResource
                 $options = '?' . http_build_query($options);
             }
 
-            return parent::g_retrieve('\Omise\OccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options), $this->_publickey, $this->_secretkey);
+            return parent::g_retrieve('\Omise\OccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options));
         }
     }
 
@@ -75,7 +71,7 @@ class Schedule extends OmiseApiResource
     /**
      * @return bool
      *
-     * @see    OmiseApiResource::isDestroyed()
+     * @see    Omise\Res\OmiseApiResource::isDestroyed()
      */
     public function isDestroyed()
     {

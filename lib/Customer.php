@@ -14,48 +14,40 @@ class Customer extends OmiseApiResource
      * Retrieves a customer.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseCustomer
+     * @return Omise\Customer
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '')
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id));
     }
 
     /**
      * Search for customers.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseSearch
+     * @return Omise\Search
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '')
     {
-        return Search::scope('customer', $publickey, $secretkey)->query($query);
+        return Search::scope('customer')->query($query);
     }
 
     /**
      * Creates a new customer.
      *
      * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseCustomer
+     * @return Omise\Customer
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params);
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
@@ -67,9 +59,7 @@ class Customer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_update()
+     * @see Omise\Res\OmiseApiResource::g_update()
      */
     public function update($params)
     {
@@ -77,9 +67,7 @@ class Customer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * @see Omise\Res\OmiseApiResource::g_destroy()
      */
     public function destroy()
     {
@@ -87,9 +75,7 @@ class Customer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::isDestroyed()
+     * @see Omise\Res\OmiseApiResource::isDestroyed()
      */
     public function isDestroyed()
     {
@@ -101,7 +87,7 @@ class Customer extends OmiseApiResource
      *
      * @param  array $options
      *
-     * @return OmiseCardList
+     * @return Omise\CardList
      */
     public function cards($options = array())
     {
@@ -111,7 +97,7 @@ class Customer extends OmiseApiResource
             $cards = $this['cards'];
         }
 
-        return new CardList($cards, $this['id'], $this->_publickey, $this->_secretkey);
+        return new CardList($cards, $this['id']);
     }
   
     /**
@@ -119,7 +105,7 @@ class Customer extends OmiseApiResource
      *
      * @deprecated deprecated since version 2.0.0 use '$customer->cards()'
      *
-     * @return     OmiseCardList
+     * @return     Omise\CardList
      */
     public function getCards($options = array())
     {
@@ -131,7 +117,7 @@ class Customer extends OmiseApiResource
      *
      * @param  array|string $options
      *
-     * @return OmiseScheduleList
+     * @return Omise\ScheduleList
      */
     public function schedules($options = array())
     {
@@ -140,7 +126,7 @@ class Customer extends OmiseApiResource
                 $options = '?' . http_build_query($options);
             }
 
-            return parent::g_retrieve('\Omise\ScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
+            return parent::g_retrieve('\Omise\ScheduleList', self::getUrl($this['id'] . '/schedules' . $options));
         }
     }
 

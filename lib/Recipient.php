@@ -13,48 +13,40 @@ class Recipient extends OmiseApiResource
      * Retrieves recipients.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseRecipient
+     * @return Omise\Recipient
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '')
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id));
     }
 
     /**
      * Search for recipients.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseSearch
+     * @return Omise\Search
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '')
     {
-        return Search::scope('recipient', $publickey, $secretkey)->query($query);
+        return Search::scope('recipient')->query($query);
     }
 
     /**
      * Creates a new recipient.
      *
      * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseRecipient
+     * @return Omise\Recipient
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params);
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_update()
+     * @see Omise\Res\OmiseApiResource::g_update()
      */
     public function update($params)
     {
@@ -62,9 +54,7 @@ class Recipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * @see Omise\Res\OmiseApiResource::g_destroy()
      */
     public function destroy()
     {
@@ -72,9 +62,7 @@ class Recipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::isDestroyed()
+     * @see Omise\Res\OmiseApiResource::isDestroyed()
      */
     public function isDestroyed()
     {
@@ -82,9 +70,7 @@ class Recipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
@@ -100,7 +86,7 @@ class Recipient extends OmiseApiResource
      *
      * @param  array|string $options
      *
-     * @return OmiseScheduleList
+     * @return Omise\ScheduleList
      */
     public function schedules($options = array())
     {
@@ -109,7 +95,7 @@ class Recipient extends OmiseApiResource
                 $options = '?' . http_build_query($options);
             }
 
-            return parent::g_retrieve('\Omise\ScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
+            return parent::g_retrieve('\Omise\ScheduleList', self::getUrl($this['id'] . '/schedules' . $options));
         }
     }
 

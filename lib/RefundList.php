@@ -13,12 +13,10 @@ class RefundList extends OmiseApiResource
     /**
      * @param array  $refunds
      * @param string $chargeID
-     * @param string $publickey
-     * @param string $secretkey
      */
-    public function __construct($refunds, $chargeID, $publickey = null, $secretkey = null)
+    public function __construct($refunds, $chargeID)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
         $this->_chargeID = $chargeID;
         $this->refresh($refunds);
     }
@@ -26,25 +24,25 @@ class RefundList extends OmiseApiResource
     /**
      * @param  array $amount
      *
-     * @return OmiseRefund
+     * @return Omise\Refund
      */
     public function create($params)
     {
         $result = $this->apiRequestor->post($this->getUrl(), self::getResourceKey(), $params);
 
-        return new Refund($result, $this->_publickey, $this->_secretkey);
+        return new Refund($result);
     }
 
     /**
      * @param  string $id
      *
-     * @return OmiseRefund
+     * @return Omise\Refund
      */
     public function retrieve($id)
     {
         $result = $this->apiRequestor->get($this->getUrl($id), self::getResourceKey());
 
-        return new Refund($result, $this->_publickey, $this->_secretkey);
+        return new Refund($result);
     }
 
     /**

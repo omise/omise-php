@@ -1,4 +1,126 @@
 <?php
+namespace Omise;
+
+/**
+ * @method public static publicKey
+ * @method public static secretKey
+ * @method public static apiVersion
+ * @method public static userAgent
+ * @method public static setPublicKey
+ * @method public static setSecretKey
+ * @method public static setApiVersion
+ * @method public static setUserAgent
+ *
+ * @since 3.0.0
+ */
+class Omise
+{
+    /**
+     * @var string  Of Omise credentials (public key, secret key).
+     */
+    protected static $publicKey;
+    protected static $secretKey;
+
+    /**
+     * @var string  Of Omise API version.
+     */
+    protected static $apiVersion;
+
+    /**
+     * @var string  Of a custom USER-AGENT.
+     */
+    protected static $userAgent;
+
+    /**
+     * @return string
+     */
+    public static function publicKey()
+    {
+        // Backward compatible with v2.x and below.
+        if (is_null(static::$publicKey) && defined('OMISE_PUBLIC_KEY')) {
+            Omise::setPublicKey(OMISE_PUBLIC_KEY);
+        }
+
+        return static::$publicKey;
+    }
+
+    /**
+     * @return string
+     */
+    public static function secretKey()
+    {
+        // Backward compatible with v2.x and below.
+        if (is_null(static::$secretKey) && defined('OMISE_SECRET_KEY')) {
+            Omise::setSecretKey(OMISE_SECRET_KEY);
+        }
+
+        return static::$secretKey;
+    }
+
+    /**
+     * @return string
+     */
+    public static function apiVersion()
+    {
+        // Backward compatible with v2.x and below.
+        if (is_null(static::$apiVersion) && defined('OMISE_API_VERSION')) {
+            Omise::setApiVersion(OMISE_API_VERSION);
+        }
+
+        return static::$apiVersion;
+    }
+
+    /**
+     * @return string
+     */
+    public static function userAgent()
+    {
+        // Backward compatible with v2.x and below.
+        if (is_null(static::$userAgent) && defined('OMISE_USER_AGENT_SUFFIX')) {
+            Omise::setUserAgent(OMISE_USER_AGENT_SUFFIX);
+        }
+
+        return static::$userAgent;
+    }
+
+    /**
+     * @param string $key
+     */
+    public static function setPublicKey($key)
+    {
+        static::$publicKey = $key;
+    }
+
+    /**
+     * @param string $key
+     */
+    public static function setSecretKey($key)
+    {
+        static::$secretKey = $key;
+    }
+
+    /**
+     * @param string $version  Of a specific Omise API version.
+     *                         All available options are as follow:
+     *                           • 2014-07-27
+     *                           • 2015-11-17
+     *                           • 2017-11-02
+     *                           • 2019-05-29
+     */
+    public static function setApiVersion($version)
+    {
+        static::$apiVersion = $version;
+    }
+
+    /**
+     * @param string $userAgent
+     */
+    public static function setUserAgent($userAgent)
+    {
+        static::$userAgent = $userAgent;
+    }
+}
+
 // Cores and utilities.
 require_once dirname(__FILE__).'/omise/ApiRequestor.php';
 require_once dirname(__FILE__).'/omise/res/obj/OmiseObject.php';

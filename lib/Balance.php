@@ -10,20 +10,15 @@ class Balance extends OmiseApiResource
     /**
      * Retrieves a current balance in the account.
      *
-     * @param  string $publickey
-     * @param  string $secretkey
-     *
-     * @return OmiseBalance
+     * @return Omise\Balance
      */
-    public static function retrieve($publickey = null, $secretkey = null)
+    public static function retrieve()
     {
-        return parent::g_retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl());
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {

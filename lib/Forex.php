@@ -11,18 +11,16 @@ class Forex extends OmiseApiResource
      * Retrieves a forex data.
      *
      * @param  string $currency
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseForex
+     * @return Omise\Forex
      */
-    public static function retrieve($currency = '', $publickey = null, $secretkey = null)
+    public static function retrieve($currency = '')
     {
-        return parent::g_retrieve(get_class(), self::getUrl($currency), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($currency));
     }
 
     /**
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
