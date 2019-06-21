@@ -11,29 +11,25 @@ class Token extends OmiseVaultResource
      * Retrieves a token.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
      *
      * @return OmiseToken
      */
-    public static function retrieve($id, $publickey = null, $secretkey = null)
+    public static function retrieve($id)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id));
     }
 
     /**
      * Creates a new token. Please note that this method should be used only
      * in development. In production please use Omise.js!
      *
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
      *
      * @return OmiseToken
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params);
     }
 
     /**

@@ -7,13 +7,11 @@ use Omise\Search;
 class Refund extends OmiseApiResource
 {
     /**
-     * @param array  $refund
-     * @param string $publickey
-     * @param string $secretkey
+     * @param array $refund
      */
-    public function __construct($refund, $publickey = null, $secretkey = null)
+    public function __construct($refund)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
         $this->refresh($refund);
     }
 
@@ -21,13 +19,11 @@ class Refund extends OmiseApiResource
      * Search for refunds.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
      *
      * @return OmiseSearch
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '')
     {
-        return Search::scope('refund', $publickey, $secretkey)->query($query);
+        return Search::scope('refund')->query($query);
     }
 }

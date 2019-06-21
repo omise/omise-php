@@ -13,12 +13,10 @@ class Scheduler extends OmiseApiResource
      *
      * @param string $type        Either 'charge' or 'transfer'
      * @param string $attributes  See supported attributes at [Charge Schedule API](https://www.omise.co/charge-schedules-api#charge_schedules-create) page.
-     * @param string $publickey
-     * @param string $secretkey
      */
-    public function __construct($type, $attributes = array(), $publickey = null, $secretkey = null)
+    public function __construct($type, $attributes = array())
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
 
         $this->mergeAttributes($type, $attributes);
     }

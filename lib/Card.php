@@ -15,12 +15,10 @@ class Card extends OmiseApiResource
      *
      * @param array  $array
      * @param string $customerID
-     * @param string $publickey
-     * @param string $secretkey
      */
-    public function __construct($array, $customerID, $publickey = null, $secretkey = null)
+    public function __construct($array, $customerID)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
 
         $this->_customerID = $customerID;
         $this->refresh($array);

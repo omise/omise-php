@@ -14,9 +14,9 @@ class Capabilities extends OmiseApiResource
         'backend' => ['currency', 'type', 'chargeAmount']
     ];
 
-    protected function __construct($publickey = null, $secretkey = null)
+    protected function __construct()
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
         $this->setupFilterShortcuts();
     }
 
@@ -44,14 +44,11 @@ class Capabilities extends OmiseApiResource
     /**
      * Retrieves capabilities.
      *
-     * @param  string $publickey
-     * @param  string $secretkey
-     *
      * @return OmiseCapabilities
      */
-    public static function retrieve($publickey = null, $secretkey = null)
+    public static function retrieve()
     {
-        return parent::g_retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl());
     }
 
     /**

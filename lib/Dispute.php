@@ -12,28 +12,24 @@ class Dispute extends OmiseApiResource
      * Retrieves a dispute.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
      *
      * @return OmiseDispute
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '')
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id));
     }
 
     /**
      * Search for disputes.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
      *
      * @return OmiseSearch
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '')
     {
-        return Search::scope('dispute', $publickey, $secretkey)->query($query);
+        return Search::scope('dispute')->query($query);
     }
 
     /**
