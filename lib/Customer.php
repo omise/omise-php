@@ -15,7 +15,7 @@ class Customer extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseCustomer
+     * @return Omise\Customer
      */
     public static function retrieve($id = '')
     {
@@ -27,7 +27,7 @@ class Customer extends OmiseApiResource
      *
      * @param  string $query
      *
-     * @return OmiseSearch
+     * @return Omise\Search
      */
     public static function search($query = '')
     {
@@ -39,7 +39,7 @@ class Customer extends OmiseApiResource
      *
      * @param  array  $params
      *
-     * @return OmiseCustomer
+     * @return Omise\Customer
      */
     public static function create($params)
     {
@@ -47,9 +47,7 @@ class Customer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
@@ -61,9 +59,7 @@ class Customer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_update()
+     * @see Omise\Res\OmiseApiResource::g_update()
      */
     public function update($params)
     {
@@ -71,9 +67,7 @@ class Customer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * @see Omise\Res\OmiseApiResource::g_destroy()
      */
     public function destroy()
     {
@@ -81,9 +75,7 @@ class Customer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::isDestroyed()
+     * @see Omise\Res\OmiseApiResource::isDestroyed()
      */
     public function isDestroyed()
     {
@@ -95,7 +87,7 @@ class Customer extends OmiseApiResource
      *
      * @param  array $options
      *
-     * @return OmiseCardList
+     * @return Omise\CardList
      */
     public function cards($options = array())
     {
@@ -113,7 +105,7 @@ class Customer extends OmiseApiResource
      *
      * @deprecated deprecated since version 2.0.0 use '$customer->cards()'
      *
-     * @return     OmiseCardList
+     * @return     Omise\CardList
      */
     public function getCards($options = array())
     {
@@ -125,7 +117,7 @@ class Customer extends OmiseApiResource
      *
      * @param  array|string $options
      *
-     * @return OmiseScheduleList
+     * @return Omise\ScheduleList
      */
     public function schedules($options = array())
     {

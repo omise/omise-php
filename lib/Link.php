@@ -13,7 +13,7 @@ class Link extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseLink
+     * @return Omise\Link
      */
     public static function retrieve($id = '')
     {
@@ -25,7 +25,7 @@ class Link extends OmiseApiResource
      *
      * @param  string $query
      *
-     * @return OmiseSearch
+     * @return Omise\Search
      */
     public static function search($query = '')
     {
@@ -33,9 +33,7 @@ class Link extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
@@ -49,9 +47,9 @@ class Link extends OmiseApiResource
     /**
      * Creates a new link.
      *
-     * @param  array  $params
+     * @param  array $params
      *
-     * @return OmiseLink
+     * @return Omise\Link
      */
     public static function create($params)
     {

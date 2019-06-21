@@ -13,7 +13,7 @@ class Dispute extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseDispute
+     * @return Omise\Dispute
      */
     public static function retrieve($id = '')
     {
@@ -25,7 +25,7 @@ class Dispute extends OmiseApiResource
      *
      * @param  string $query
      *
-     * @return OmiseSearch
+     * @return Omise\Search
      */
     public static function search($query = '')
     {
@@ -33,9 +33,7 @@ class Dispute extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
@@ -47,9 +45,7 @@ class Dispute extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_update()
+     * @see Omise\Res\OmiseApiResource::g_update()
      */
     public function update($params)
     {

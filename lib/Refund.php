@@ -20,7 +20,7 @@ class Refund extends OmiseApiResource
      *
      * @param  string $query
      *
-     * @return OmiseSearch
+     * @return Omise\Search
      */
     public static function search($query = '')
     {

@@ -13,7 +13,7 @@ class Schedule extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseSchedule
+     * @return Omise\Schedule
      */
     public static function retrieve($id = '')
     {
@@ -35,9 +35,9 @@ class Schedule extends OmiseApiResource
     /**
      * Creates a new schedule.
      *
-     * @param  array  $params
+     * @param  array $params
      *
-     * @return OmiseSchedule
+     * @return Omise\Schedule
      */
     public static function create($params)
     {
@@ -47,7 +47,7 @@ class Schedule extends OmiseApiResource
     /**
      * @param  array|string $options
      *
-     * @return OmiseOccurrenceList|null
+     * @return Omise\OccurrenceList|null
      */
     public function occurrences($options = array())
     {
@@ -71,7 +71,7 @@ class Schedule extends OmiseApiResource
     /**
      * @return bool
      *
-     * @see    OmiseApiResource::isDestroyed()
+     * @see    Omise\Res\OmiseApiResource::isDestroyed()
      */
     public function isDestroyed()
     {

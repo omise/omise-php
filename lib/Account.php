@@ -10,7 +10,7 @@ class Account extends OmiseApiResource
     /**
      * Retrieves an account.
      *
-     * @return OmiseAccount
+     * @return Omise\Account
      */
     public static function retrieve()
     {
@@ -18,9 +18,7 @@ class Account extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {

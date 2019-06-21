@@ -12,13 +12,16 @@ class Occurrence extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseOccurrence
+     * @return Omise\Occurrence
      */
     public static function retrieve($id)
     {
         return parent::g_retrieve(get_class(), self::getUrl($id));
     }
 
+    /**
+     * @see Omise\Res\OmiseApiResource::g_reload()
+     */
     public function reload()
     {
         parent::g_reload(self::getUrl($this['id']));

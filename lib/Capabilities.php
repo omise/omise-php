@@ -44,7 +44,7 @@ class Capabilities extends OmiseApiResource
     /**
      * Retrieves capabilities.
      *
-     * @return OmiseCapabilities
+     * @return Omise\Capabilities
      */
     public static function retrieve()
     {
@@ -52,9 +52,7 @@ class Capabilities extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {

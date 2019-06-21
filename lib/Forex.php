@@ -12,7 +12,7 @@ class Forex extends OmiseApiResource
      *
      * @param  string $currency
      *
-     * @return OmiseForex
+     * @return Omise\Forex
      */
     public static function retrieve($currency = '')
     {
@@ -20,7 +20,7 @@ class Forex extends OmiseApiResource
     }
 
     /**
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {

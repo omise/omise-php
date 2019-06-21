@@ -17,7 +17,7 @@ class Charge extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseCharge
+     * @return Omise\Charge
      */
     public static function retrieve($id = '')
     {
@@ -29,7 +29,7 @@ class Charge extends OmiseApiResource
      *
      * @param  string $query
      *
-     * @return OmiseSearch
+     * @return Omise\Search
      */
     public static function search($query = '')
     {
@@ -37,9 +37,7 @@ class Charge extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
@@ -55,7 +53,7 @@ class Charge extends OmiseApiResource
      *
      * @param  string $params
      *
-     * @return OmiseScheduler
+     * @return Omise\Scheduler
      */
     public static function schedule($params)
     {
@@ -65,9 +63,9 @@ class Charge extends OmiseApiResource
     /**
      * Creates a new charge.
      *
-     * @param  array  $params
+     * @param  array $params
      *
-     * @return OmiseCharge
+     * @return Omise\Charge
      */
     public static function create($params)
     {
@@ -75,9 +73,7 @@ class Charge extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_update()
+     * @see Omise\Res\OmiseApiResource::g_update()
      */
     public function update($params)
     {
@@ -87,7 +83,7 @@ class Charge extends OmiseApiResource
     /**
      * Captures a charge.
      *
-     * @return OmiseCharge
+     * @return Omise\Charge
      */
     public function capture()
     {
@@ -100,7 +96,7 @@ class Charge extends OmiseApiResource
     /**
      * Refund a charge.
      *
-     * @return OmiseRefund
+     * @return Omise\Refund
      */
     public function refund($params)
     {
@@ -111,7 +107,7 @@ class Charge extends OmiseApiResource
     /**
      * Reverses a charge.
      *
-     * @return OmiseCharge
+     * @return Omise\Charge
      */
     public function reverse()
     {
@@ -124,7 +120,7 @@ class Charge extends OmiseApiResource
     /**
      * list refunds
      *
-     * @return OmiseRefundList
+     * @return Omise\RefundList
      */
     public function refunds($options = array())
     {
@@ -142,7 +138,7 @@ class Charge extends OmiseApiResource
      *
      * @param  array|string $options
      *
-     * @return OmiseScheduleList
+     * @return Omise\ScheduleList
      */
     public static function schedules($options = array())
     {

@@ -14,7 +14,7 @@ class Recipient extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseRecipient
+     * @return Omise\Recipient
      */
     public static function retrieve($id = '')
     {
@@ -26,7 +26,7 @@ class Recipient extends OmiseApiResource
      *
      * @param  string $query
      *
-     * @return OmiseSearch
+     * @return Omise\Search
      */
     public static function search($query = '')
     {
@@ -38,7 +38,7 @@ class Recipient extends OmiseApiResource
      *
      * @param  array  $params
      *
-     * @return OmiseRecipient
+     * @return Omise\Recipient
      */
     public static function create($params)
     {
@@ -46,9 +46,7 @@ class Recipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_update()
+     * @see Omise\Res\OmiseApiResource::g_update()
      */
     public function update($params)
     {
@@ -56,9 +54,7 @@ class Recipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * @see Omise\Res\OmiseApiResource::g_destroy()
      */
     public function destroy()
     {
@@ -66,9 +62,7 @@ class Recipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::isDestroyed()
+     * @see Omise\Res\OmiseApiResource::isDestroyed()
      */
     public function isDestroyed()
     {
@@ -76,9 +70,7 @@ class Recipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
@@ -94,7 +86,7 @@ class Recipient extends OmiseApiResource
      *
      * @param  array|string $options
      *
-     * @return OmiseScheduleList
+     * @return Omise\ScheduleList
      */
     public function schedules($options = array())
     {

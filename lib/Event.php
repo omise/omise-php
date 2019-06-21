@@ -12,7 +12,7 @@ class Event extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseEvent
+     * @return Omise\Event
      */
     public static function retrieve($id = '')
     {
@@ -20,9 +20,7 @@ class Event extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {

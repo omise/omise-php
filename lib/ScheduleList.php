@@ -9,7 +9,7 @@ class ScheduleList extends OmiseApiResource
     /**
      * @param  string $id
      *
-     * @return OmiseOccurrence
+     * @return Omise\Occurrence
      */
     public function retrieve($id)
     {

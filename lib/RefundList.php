@@ -24,7 +24,7 @@ class RefundList extends OmiseApiResource
     /**
      * @param  array $amount
      *
-     * @return OmiseRefund
+     * @return Omise\Refund
      */
     public function create($params)
     {
@@ -36,7 +36,7 @@ class RefundList extends OmiseApiResource
     /**
      * @param  string $id
      *
-     * @return OmiseRefund
+     * @return Omise\Refund
      */
     public function retrieve($id)
     {

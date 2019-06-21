@@ -26,7 +26,7 @@ class CardList extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseCard
+     * @return Omise\Card
      */
     public function retrieve($id)
     {

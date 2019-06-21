@@ -10,7 +10,7 @@ class Balance extends OmiseApiResource
     /**
      * Retrieves a current balance in the account.
      *
-     * @return OmiseBalance
+     * @return Omise\Balance
      */
     public static function retrieve()
     {
@@ -18,9 +18,7 @@ class Balance extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
