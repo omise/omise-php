@@ -1,10 +1,10 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\ApiResource;
 use Omise\OccurrenceList;
 
-class Schedule extends OmiseApiResource
+class Schedule extends ApiResource
 {
     const ENDPOINT = 'schedules';
 

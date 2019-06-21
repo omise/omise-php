@@ -1,23 +1,13 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
 use Omise\Search;
 
-class Refund extends OmiseApiResource
+class Refund extends \Omise\ApiResource
 {
-    /**
-     * @param array $refund
-     */
-    public function __construct($refund)
-    {
-        parent::__construct();
-        $this->refresh($refund);
-    }
+    const OBJECT_NAME = 'refund';
 
     /**
-     * Search for refunds.
-     *
      * @param  string $query
      *
      * @return Omise\Search

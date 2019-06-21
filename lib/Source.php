@@ -1,29 +1,19 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
-
-class Source extends OmiseApiResource
+class Source extends \Omise\ApiResource
 {
-    const ENDPOINT = 'sources';
+    const OBJECT_NAME = 'source';
 
     /**
      * Creates a new source.
      *
      * @param  array $params
      *
-     * @return OmiseSource
+     * @return Omise\Source
      */
     public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params);
-    }
-
-    /**
-     * @return string
-     */
-    private static function getUrl()
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT;
+        return parent::resourceCreate($params);
     }
 }

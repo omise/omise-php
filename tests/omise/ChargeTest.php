@@ -4,30 +4,13 @@ class ChargeTest extends TestConfig
 {
     /**
      * @test
-     * OmiseCharge class must be contain some method below.
-     */
-    public function method_exists()
-    {
-        $this->assertTrue(method_exists('OmiseCharge', 'reload'));
-        $this->assertTrue(method_exists('OmiseCharge', 'create'));
-        $this->assertTrue(method_exists('OmiseCharge', 'update'));
-        $this->assertTrue(method_exists('OmiseCharge', 'capture'));
-        $this->assertTrue(method_exists('OmiseCharge', 'reverse'));
-        $this->assertTrue(method_exists('OmiseCharge', 'refund'));
-        $this->assertTrue(method_exists('OmiseCharge', 'refunds'));
-        $this->assertTrue(method_exists('OmiseCharge', 'getUrl'));
-    }
-
-    /**
-     * @test
      * Assert that a list of charge object could be successfully retrieved.
      */
-    public function retrieve_charge_list_object()
+    public function retrieve_charge_collection()
     {
-        $charge = OmiseCharge::retrieve();
+        $charge = OmiseCharge::all();
 
-        $this->assertArrayHasKey('object', $charge);
-        $this->assertEquals('list', $charge['object']);
+        $this->assertEquals('charge', $charge['collection']);
     }
 
     /**
@@ -36,11 +19,15 @@ class ChargeTest extends TestConfig
      */
     public function create()
     {
-        $charge = OmiseCharge::create(array('amount'      => 100000,
-                                            'currency'    => 'thb',
-                                            'description' => 'Order-384',
-                                            'ip'          => '127.0.0.1',
-                                            'card'        => 'tokn_test_4zmrjhuk2rndz24a6x0'));
+        $params = array(
+            'amount'      => 100000,
+            'currency'    => 'thb',
+            'description' => 'Order-384',
+            'ip'          => '127.0.0.1',
+            'card'        => 'tokn_test_fixture'
+        );
+
+        $charge = OmiseCharge::create($params);
 
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
@@ -52,7 +39,7 @@ class ChargeTest extends TestConfig
      */
     public function retrieve_specific_charge_object()
     {
-        $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
+        $charge = OmiseCharge::retrieve('chrg_test_fixture');
 
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
@@ -64,11 +51,12 @@ class ChargeTest extends TestConfig
      */
     public function update()
     {
-        $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
-        $charge->update(array('description' => 'Another description'));
+        $charge = OmiseCharge::retrieve('chrg_test_fixture');
+        $charge->update(array('description' => 'mock'));
 
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
+        $this->assertEquals('mock', $charge['description']);
     }
 
     /**
@@ -80,12 +68,12 @@ class ChargeTest extends TestConfig
      */
     public function capture()
     {
-        $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
+        $charge = OmiseCharge::retrieve('chrg_test_fixture');
         $charge->capture();
 
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
-        $this->assertTrue($charge['captured']);
+        $this->assertTrue($charge['paid']);
     }
 
     /**

@@ -6,15 +6,19 @@ namespace Omise;
  * @method public static secretKey
  * @method public static apiVersion
  * @method public static userAgent
+ * @method public static client
  * @method public static setPublicKey
  * @method public static setSecretKey
  * @method public static setApiVersion
  * @method public static setUserAgent
+ * @method public static setClient
  *
  * @since 3.0.0
  */
 class Omise
 {
+    const VERSION = '3.0.0-dev';
+
     /**
      * @var string  Of Omise credentials (public key, secret key).
      */
@@ -30,6 +34,11 @@ class Omise
      * @var string  Of a custom USER-AGENT.
      */
     protected static $userAgent;
+
+    /**
+     * @var Omise\Client\ClientInterface
+     */
+    protected static $client = '\Omise\Client\CurlClient';
 
     /**
      * @return string
@@ -84,6 +93,14 @@ class Omise
     }
 
     /**
+     * @return \Omise\Client\ClientInterface  A new instance of a ClientInterface-implemented object.
+     */
+    public static function client()
+    {
+        return new static::$client;
+    }
+
+    /**
      * @param string $key
      */
     public static function setPublicKey($key)
@@ -119,66 +136,81 @@ class Omise
     {
         static::$userAgent = $userAgent;
     }
+
+    /**
+     * @param string $client  Client class name
+     */
+    public static function setClient($client)
+    {
+        static::$client = $client;
+    }
 }
 
 // Cores and utilities.
-require_once dirname(__FILE__).'/omise/ApiRequestor.php';
-require_once dirname(__FILE__).'/omise/res/obj/OmiseObject.php';
-require_once dirname(__FILE__).'/omise/res/OmiseApiResource.php';
-require_once dirname(__FILE__).'/omise/res/OmiseVaultResource.php';
-require_once dirname(__FILE__).'/omise/Http/Response/Handler.php';
+require_once __DIR__ . '/omise/Client/ClientInterface.php';
+require_once __DIR__ . '/omise/Client/CurlClient.php';
+require_once __DIR__ . '/omise/Client/UnitTestClient.php';
+require_once __DIR__ . '/omise/Http/Response/Handler.php';
+require_once __DIR__ . '/omise/OmiseObject.php';
+require_once __DIR__ . '/omise/ApiRequestor.php';
+require_once __DIR__ . '/omise/ApiResource.php';
+require_once __DIR__ . '/omise/Resource.php';
+require_once __DIR__ . '/Collection.php';
+// require_once __DIR__ . '/omise/res/obj/OmiseObject.php';
+// require_once __DIR__ . '/omise/res/OmiseApiResource.php';
+// require_once __DIR__ . '/omise/res/OmiseVaultResource.php';
 
 // Errors
-require_once dirname(__FILE__).'/omise/exception/OmiseExceptions.php';
+require_once __DIR__ . '/omise/exception/OmiseExceptions.php';
 
 // API Resources.
-require_once dirname(__FILE__).'/Account.php';
-require_once dirname(__FILE__).'/Balance.php';
-require_once dirname(__FILE__).'/Capabilities.php';
-require_once dirname(__FILE__).'/Card.php';
-require_once dirname(__FILE__).'/CardList.php';
-require_once dirname(__FILE__).'/Charge.php';
-require_once dirname(__FILE__).'/Customer.php';
-require_once dirname(__FILE__).'/Dispute.php';
-require_once dirname(__FILE__).'/Event.php';
-require_once dirname(__FILE__).'/Forex.php';
-require_once dirname(__FILE__).'/Link.php';
-require_once dirname(__FILE__).'/Occurrence.php';
-require_once dirname(__FILE__).'/OccurrenceList.php';
-require_once dirname(__FILE__).'/Recipient.php';
-require_once dirname(__FILE__).'/Refund.php';
-require_once dirname(__FILE__).'/RefundList.php';
-require_once dirname(__FILE__).'/Schedule.php';
-require_once dirname(__FILE__).'/ScheduleList.php';
-require_once dirname(__FILE__).'/Scheduler.php';
-require_once dirname(__FILE__).'/Search.php';
-require_once dirname(__FILE__).'/Source.php';
-require_once dirname(__FILE__).'/Token.php';
-require_once dirname(__FILE__).'/Transaction.php';
-require_once dirname(__FILE__).'/Transfer.php';
+require_once __DIR__ . '/Account.php';
+require_once __DIR__ . '/Balance.php';
+require_once __DIR__ . '/Capabilities.php';
+// require_once __DIR__ . '/Card.php';
+// require_once __DIR__ . '/CardList.php';
+require_once __DIR__ . '/Charge.php';
+require_once __DIR__ . '/Customer.php';
+require_once __DIR__ . '/Dispute.php';
+require_once __DIR__ . '/Event.php';
+require_once __DIR__ . '/Forex.php';
+require_once __DIR__ . '/Link.php';
+// require_once __DIR__ . '/Occurrence.php';
+// require_once __DIR__ . '/OccurrenceList.php';
+// require_once __DIR__ . '/Recipient.php';
+require_once __DIR__ . '/Refund.php';
+// require_once __DIR__ . '/RefundList.php';
+require_once __DIR__ . '/Schedule.php';
+// require_once __DIR__ . '/ScheduleList.php';
+// require_once __DIR__ . '/Scheduler.php';
+require_once __DIR__ . '/Search.php';
+require_once __DIR__ . '/Source.php';
+require_once __DIR__ . '/Token.php';
+require_once __DIR__ . '/Transaction.php';
+require_once __DIR__ . '/Transfer.php';
 
 // API Resources - Legacy classes.
-require_once dirname(__FILE__).'/omise/OmiseAccount.php';
-require_once dirname(__FILE__).'/omise/OmiseBalance.php';
-require_once dirname(__FILE__).'/omise/OmiseCapabilities.php';
-require_once dirname(__FILE__).'/omise/OmiseCard.php';
-require_once dirname(__FILE__).'/omise/OmiseCardList.php';
-require_once dirname(__FILE__).'/omise/OmiseDispute.php';
-require_once dirname(__FILE__).'/omise/OmiseEvent.php';
-require_once dirname(__FILE__).'/omise/OmiseForex.php';
-require_once dirname(__FILE__).'/omise/OmiseToken.php';
-require_once dirname(__FILE__).'/omise/OmiseCharge.php';
-require_once dirname(__FILE__).'/omise/OmiseCustomer.php';
-require_once dirname(__FILE__).'/omise/OmiseOccurrence.php';
-require_once dirname(__FILE__).'/omise/OmiseOccurrenceList.php';
-require_once dirname(__FILE__).'/omise/OmiseRefund.php';
-require_once dirname(__FILE__).'/omise/OmiseRefundList.php';
-require_once dirname(__FILE__).'/omise/OmiseSearch.php';
-require_once dirname(__FILE__).'/omise/OmiseSchedule.php';
-require_once dirname(__FILE__).'/omise/OmiseScheduleList.php';
-require_once dirname(__FILE__).'/omise/OmiseScheduler.php';
-require_once dirname(__FILE__).'/omise/OmiseSource.php';
-require_once dirname(__FILE__).'/omise/OmiseTransfer.php';
-require_once dirname(__FILE__).'/omise/OmiseTransaction.php';
-require_once dirname(__FILE__).'/omise/OmiseRecipient.php';
-require_once dirname(__FILE__).'/omise/OmiseLink.php';
+require_once __DIR__ . '/omise/OmiseAccount.php';
+require_once __DIR__ . '/omise/OmiseBalance.php';
+require_once __DIR__ . '/omise/OmiseCapabilities.php';
+// require_once __DIR__ . '/omise/OmiseCard.php';
+// require_once __DIR__ . '/omise/OmiseCardList.php';
+require_once __DIR__ . '/omise/OmiseCharge.php';
+require_once __DIR__ . '/omise/OmiseCustomer.php';
+require_once __DIR__ . '/omise/OmiseDispute.php';
+require_once __DIR__ . '/omise/OmiseEvent.php';
+require_once __DIR__ . '/omise/OmiseForex.php';
+require_once __DIR__ . '/omise/OmiseLink.php';
+// require_once __DIR__ . '/omise/OmiseOccurrence.php';
+// require_once __DIR__ . '/omise/OmiseOccurrenceList.php';
+// require_once __DIR__ . '/omise/OmiseRecipient.php';
+require_once __DIR__ . '/omise/OmiseRefund.php';
+// require_once __DIR__ . '/omise/OmiseRefundList.php';
+require_once __DIR__ . '/omise/OmiseSchedule.php';
+// require_once __DIR__ . '/omise/OmiseScheduleList.php';
+// require_once __DIR__ . '/omise/OmiseScheduler.php';
+require_once __DIR__ . '/omise/OmiseSearch.php';
+require_once __DIR__ . '/omise/OmiseSource.php';
+require_once __DIR__ . '/omise/OmiseToken.php';
+require_once __DIR__ . '/omise/OmiseTransaction.php';
+require_once __DIR__ . '/omise/OmiseTransfer.php';

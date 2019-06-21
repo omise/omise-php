@@ -22,7 +22,7 @@ class ForexTest extends TestConfig
 
         $this->assertArrayHasKey('object', $forex);
         $this->assertEquals('forex', $forex['object']);
-        $this->assertEquals('usd', $forex['from']);
+        $this->assertEquals('USD', $forex['base']);
     }
 
     /**
@@ -35,6 +35,6 @@ class ForexTest extends TestConfig
 
         $this->assertArrayHasKey('object', $forex);
         $this->assertEquals('forex', $forex['object']);
-        $this->assertEquals('usd', $forex['from']);
+        $this->assertEquals('USD', $forex['base']);
     }
 }

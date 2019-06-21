@@ -1,11 +1,27 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\Collection;
+use Omise\Resource;
 
-class Event extends OmiseApiResource
+class Event extends \Omise\ApiResource
 {
-    const ENDPOINT = 'events';
+    const OBJECT_NAME = 'event';
+
+    /**
+     * Retrieves a collection of event objects.
+     *
+     * @param  array $query
+     *
+     * @return Omise\Collection
+     */
+    public static function all($query = array())
+    {
+        $resource = Resource::newObject(static::OBJECT_NAME);
+        $result   = $resource->request()->get($resource->url(), $resource->credential(), $query);
+
+        return new Collection($result);
+    }
 
     /**
      * Retrieves an event.
@@ -14,32 +30,16 @@ class Event extends OmiseApiResource
      *
      * @return Omise\Event
      */
-    public static function retrieve($id = '')
+    public static function retrieve($id)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id));
+        return parent::resourceRetrieve($id);
     }
 
     /**
-     * @see Omise\Res\OmiseApiResource::g_reload()
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        if ($this['object'] === 'event') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
-    }
-
-    /**
-     * Generate request url.
-     *
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
+        parent::resourceReload();
     }
 }

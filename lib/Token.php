@@ -1,54 +1,61 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseVaultResource;
+use Omise\ApiRequestor;
+use Omise\Omise;
+use Omise\Resource;
 
-class Token extends OmiseVaultResource
+class Token extends \Omise\ApiResource
 {
-    const ENDPOINT = 'tokens';
+    const OBJECT_NAME = 'token';
 
     /**
-     * Retrieves a token.
+     * Retrieves a token object.
      *
      * @param  string $id
      *
-     * @return OmiseToken
+     * @return Omise\Token
      */
     public static function retrieve($id)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id));
+        return parent::resourceRetrieve($id);
     }
 
     /**
-     * Creates a new token. Please note that this method should be used only
-     * in development. In production please use Omise.js!
+     * Creates a new token.
+     * PLEASE NOTE THAT THIS METHOD SHOULD BE USED ONLY
+     * IN DEVELOPMENT. IN PRODUCTION, PLEASE USE OMISE.JS!
      *
      * @param  array $params
      *
-     * @return OmiseToken
+     * @return Omise\Token
      */
     public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params);
+        return parent::resourceCreate($params);
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        parent::g_reload(self::getUrl($this['id']));
+        parent::resourceReload();
     }
 
     /**
-     * @param  string $id
-     *
      * @return string
      */
-    private static function getUrl($id = '')
+    protected function url()
     {
-        return \Omise\ApiRequestor::OMISE_VAULT_URL . self::ENDPOINT . '/' . $id;
+        return ApiRequestor::OMISE_VAULT_URL . Resource::getEndpoint(static::OBJECT_NAME) . '/' . $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    protected function credential()
+    {
+        return Omise::publicKey();
     }
 }

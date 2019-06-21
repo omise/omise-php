@@ -1,17 +1,18 @@
 <?php
 require_once dirname(__FILE__).'/TestConfig.php';
 
+use Omise\Transaction;
+
 class TransactionTest extends TestConfig
 {
     /**
      * @test
-     * OmiseTransaction should contain some method like below.
      */
-    public function omise_transaction_method_exists()
+    public function method_exists()
     {
-        $this->assertTrue(method_exists('OmiseTransaction', 'retrieve'));
-        $this->assertTrue(method_exists('OmiseTransaction', 'reload'));
-        $this->assertTrue(method_exists('OmiseTransaction', 'getUrl'));
+        $this->assertTrue(method_exists('Omise\Transaction', 'retrieve'));
+        $this->assertTrue(method_exists('Omise\Transaction', 'reload'));
+        $this->assertTrue(method_exists('Omise\Transaction', 'getUrl'));
     }
 
     /**

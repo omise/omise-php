@@ -1,11 +1,11 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\ApiResource;
 
-class Capabilities extends OmiseApiResource
+class Capabilities extends ApiResource
 {
-    const ENDPOINT = 'capability';
+    const OBJECT_NAME = 'capability';
 
     /**
      * @var array  of the filterable keys.
@@ -14,7 +14,7 @@ class Capabilities extends OmiseApiResource
         'backend' => ['currency', 'type', 'chargeAmount']
     ];
 
-    protected function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->setupFilterShortcuts();
@@ -48,22 +48,22 @@ class Capabilities extends OmiseApiResource
      */
     public static function retrieve()
     {
-        return parent::g_retrieve(get_class(), self::getUrl());
+        return parent::resourceRetrieve();
     }
 
     /**
-     * @see Omise\Res\OmiseApiResource::g_reload()
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        parent::g_reload(self::getUrl());
+        parent::resourceReload();
     }
 
     /**
      * Retrieves array of payment backends. Optionally pass in as many filter functions as you want
      * (muliple arguments, or a single array)
      *
-     * @param [func1,fun2,...] OR func1, func2,...
+     * @param  [func1,fun2,...] OR func1, func2,...
      *
      * @return array
      */
@@ -165,18 +165,8 @@ class Capabilities extends OmiseApiResource
     /**
      * @return string
      */
-    private static function getUrl()
+    protected function credential()
     {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT;
-    }
-
-    /**
-     * Returns the public key.
-     *
-     * @return string
-     */
-    protected function getResourceKey()
-    {
-        return $this->_publickey;
+        return 'pkey_test_5fcnkn4378pmguq5zpy';
     }
 }

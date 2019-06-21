@@ -133,4 +133,9 @@ class OmiseApiResource extends OmiseObject
     {
         return $this->_secretkey;
     }
+
+    protected function client()
+    {
+        return \Omise\Omise::client();
+    }
 }

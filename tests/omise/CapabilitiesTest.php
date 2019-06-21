@@ -1,6 +1,8 @@
 <?php
 require_once dirname(__FILE__).'/TestConfig.php';
 
+use Omise\Capabilities;
+
 class CapabilitiesTest extends TestConfig
 {
     /**
@@ -10,22 +12,11 @@ class CapabilitiesTest extends TestConfig
 
     protected function setUp()
     {
-        $this->capabilities = OmiseCapabilities::retrieve();
+        $this->capabilities = Capabilities::retrieve();
     }
 
     /**
      * @test
-     * OmiseCapabilities class must be contain some method below.
-     */
-    public function method_exists()
-    {
-        $this->assertTrue(method_exists('OmiseCapabilities', 'retrieve'));
-        $this->assertTrue(method_exists('OmiseCapabilities', 'reload'));
-    }
-
-    /**
-     * @test
-     * Assert that a capabilities object is returned after a successful retrieve.
      */
     public function retrieve_omise_capabilities_object()
     {
@@ -34,7 +25,6 @@ class CapabilitiesTest extends TestConfig
   
     /**
      * @test
-     * Assert that a capabilities object is returned after a successful reload.
      */
     public function reload()
     {

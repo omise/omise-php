@@ -1,26 +1,13 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
-use Omise\CardList;
-use Omise\ScheduleList;
+use Omise\Collection;
+use Omise\Resource;
 use Omise\Search;
 
-class Customer extends OmiseApiResource
+class Customer extends \Omise\ApiResource
 {
-    const ENDPOINT = 'customers';
-
-    /**
-     * Retrieves a customer.
-     *
-     * @param  string $id
-     *
-     * @return Omise\Customer
-     */
-    public static function retrieve($id = '')
-    {
-        return parent::g_retrieve(get_class(), self::getUrl($id));
-    }
+    const OBJECT_NAME = 'customer';
 
     /**
      * Search for customers.
@@ -35,6 +22,33 @@ class Customer extends OmiseApiResource
     }
 
     /**
+     * Retrieves customer objects.
+     *
+     * @param  string $id
+     *
+     * @return Omise\Collection
+     */
+    public static function all($query = array())
+    {
+        $resource = Resource::newObject(static::OBJECT_NAME);
+        $result   = $resource->request()->get($resource->url(), $resource->credential(), $query);
+
+        return new Collection($result);
+    }
+
+    /**
+     * Retrieves a customer.
+     *
+     * @param  string $id
+     *
+     * @return Omise\Customer
+     */
+    public static function retrieve($id)
+    {
+        return parent::resourceRetrieve($id);
+    }
+
+    /**
      * Creates a new customer.
      *
      * @param  array  $params
@@ -43,19 +57,15 @@ class Customer extends OmiseApiResource
      */
     public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params);
+        return parent::resourceCreate($params);
     }
 
     /**
-     * @see Omise\Res\OmiseApiResource::g_reload()
+     * @see Omise\ApiResource::g_reload()
      */
     public function reload()
     {
-        if ($this['object'] === 'customer') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
+        parent::resourceReload();
     }
 
     /**
@@ -63,15 +73,15 @@ class Customer extends OmiseApiResource
      */
     public function update($params)
     {
-        parent::g_update(self::getUrl($this['id']), $params);
+        parent::resourceUpdate($params);
     }
 
     /**
-     * @see Omise\Res\OmiseApiResource::g_destroy()
+     * @see Omise\xApiResource::g_destroy()
      */
     public function destroy()
     {
-        parent::g_destroy(self::getUrl($this['id']));
+        parent::resourceDestroy();
     }
 
     /**
@@ -87,17 +97,12 @@ class Customer extends OmiseApiResource
      *
      * @param  array $options
      *
-     * @return Omise\CardList
+     * @return Omise\Collection
      */
     public function cards($options = array())
     {
-        if (is_array($options) && ! empty($options)) {
-            $cards = $this->apiRequestor->get(self::getUrl($this['id']) . '/cards?' . http_build_query($options), parent::getResourceKey());
-        } else {
-            $cards = $this['cards'];
-        }
-
-        return new CardList($cards, $this['id']);
+        $cards = is_array($options) && ! empty($options) ? $this->chainRequest('get', 'cards', $options) : $this['cards'];
+        return new Collection($cards);
     }
   
     /**
@@ -105,7 +110,7 @@ class Customer extends OmiseApiResource
      *
      * @deprecated deprecated since version 2.0.0 use '$customer->cards()'
      *
-     * @return     Omise\CardList
+     * @return     Omise\Collection
      */
     public function getCards($options = array())
     {
@@ -121,22 +126,7 @@ class Customer extends OmiseApiResource
      */
     public function schedules($options = array())
     {
-        if ($this['object'] === 'customer') {
-            if (is_array($options)) {
-                $options = '?' . http_build_query($options);
-            }
-
-            return parent::g_retrieve('\Omise\ScheduleList', self::getUrl($this['id'] . '/schedules' . $options));
-        }
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
+        $schedules = $this->chainRequest('get', 'schedules', $options);
+        return new Collection($schedules);
     }
 }

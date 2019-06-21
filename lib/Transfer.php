@@ -1,12 +1,12 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\ApiResource;
 use Omise\ScheduleList;
 use Omise\Scheduler;
 use Omise\Search;
 
-class Transfer extends OmiseApiResource
+class Transfer extends ApiResource
 {
     const ENDPOINT = 'transfers';
 
@@ -15,11 +15,11 @@ class Transfer extends OmiseApiResource
      *
      * @param  string $id
      *
-     * @return OmiseTransfer
+     * @return Omise\Transfer
      */
     public static function retrieve($id = '')
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id));
+        return parent::resourceRetrieve($id);
     }
 
     /**
@@ -49,27 +49,21 @@ class Transfer extends OmiseApiResource
     /**
      * Creates a transfer.
      *
-     * @param  mixed  $params
+     * @param  array $params
      *
-     * @return OmiseTransfer
+     * @return Omise\Transfer
      */
     public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params);
+        return parent::resourceCreate($params);
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        if ($this['object'] === 'transfers') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
+        parent::resourceReload();
     }
 
     /**
@@ -85,9 +79,9 @@ class Transfer extends OmiseApiResource
      *
      * @see OmiseApiResource::g_update()
      */
-    protected function update($params)
+    public function update($params)
     {
-        parent::g_update(self::getUrl($this['id']), $params);
+        parent::resourceUpdate($params);
     }
 
     /**
@@ -124,15 +118,5 @@ class Transfer extends OmiseApiResource
     public function isDestroyed()
     {
         return parent::isDestroyed();
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

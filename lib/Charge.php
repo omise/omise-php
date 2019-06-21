@@ -1,32 +1,18 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\Collection;
 use Omise\Refund;
-use Omise\RefundList;
+use Omise\Resource;
 use Omise\ScheduleList;
 use Omise\Scheduler;
 use Omise\Search;
 
-class Charge extends OmiseApiResource
+class Charge extends \Omise\ApiResource
 {
-    const ENDPOINT = 'charges';
+    const OBJECT_NAME = 'charge';
 
     /**
-     * Retrieves a charge.
-     *
-     * @param  string $id
-     *
-     * @return Omise\Charge
-     */
-    public static function retrieve($id = '')
-    {
-        return parent::g_retrieve(get_class(), self::getUrl($id));
-    }
-
-    /**
-     * Search for charges.
-     *
      * @param  string $query
      *
      * @return Omise\Search
@@ -37,15 +23,38 @@ class Charge extends OmiseApiResource
     }
 
     /**
-     * @see Omise\Res\OmiseApiResource::g_reload()
+     * Retrieves a collection of charge objects.
+     *
+     * @param  array $query
+     *
+     * @return Omise\Collection
+     */
+    public static function all($query = array())
+    {
+        $resource = Resource::newObject(static::OBJECT_NAME);
+        $result   = $resource->request()->get($resource->url(), $resource->credential(), $query);
+
+        return new Collection($result);
+    }
+
+    /**
+     * Retrieves a charge.
+     *
+     * @param  string $id
+     *
+     * @return Omise\Charge
+     */
+    public static function retrieve($id)
+    {
+        return parent::resourceRetrieve($id);
+    }
+
+    /**
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        if ($this['object'] === 'charge') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
+        parent::resourceReload();
     }
 
     /**
@@ -69,15 +78,15 @@ class Charge extends OmiseApiResource
      */
     public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params);
+        return parent::resourceCreate($params);
     }
 
     /**
-     * @see Omise\Res\OmiseApiResource::g_update()
+     * @see Omise\ApiResource::resourceUpdate()
      */
     public function update($params)
     {
-        parent::g_update(self::getUrl($this['id']), $params);
+        parent::resourceUpdate($params);
     }
 
     /**
@@ -87,9 +96,7 @@ class Charge extends OmiseApiResource
      */
     public function capture()
     {
-        $result = $this->apiRequestor->post(self::getUrl($this['id']).'/capture', parent::getResourceKey());
-        $this->refresh($result);
-
+        $this->refresh($this->chainRequest('post', 'capture'));
         return $this;
     }
 
@@ -100,7 +107,9 @@ class Charge extends OmiseApiResource
      */
     public function refund($params)
     {
-        $result = $this->apiRequestor->post(self::getUrl($this['id']) . '/refunds', parent::getResourceKey(), $params);
+        $result = $this->chainRequest('post', 'refunds', $params);
+
+        $this->reload();
         return new Refund($result);
     }
 
@@ -111,26 +120,19 @@ class Charge extends OmiseApiResource
      */
     public function reverse()
     {
-        $result = $this->apiRequestor->post(self::getUrl($this['id']).'/reverse', parent::getResourceKey());
-        $this->refresh($result);
-
+        $this->refresh($this->chainRequest('post', 'reverse'));
         return $this;
     }
 
     /**
      * list refunds
      *
-     * @return Omise\RefundList
+     * @return \Omise\Collection  Of Omise\Refund objects.
      */
     public function refunds($options = array())
     {
-        if (is_array($options) && ! empty($options)) {
-            $refunds = $this->apiRequestor->get(self::getUrl($this['id']) . '/refunds?' . http_build_query($options), parent::getResourceKey());
-        } else {
-            $refunds = $this['refunds'];
-        }
-
-        return new RefundList($refunds, $this['id']);
+        $refunds = is_array($options) && ! empty($options) ? $this->chainRequest('get', 'refunds', $options) : $this['refunds'];
+        return new Collection($refunds);
     }
 
     /**
@@ -147,15 +149,5 @@ class Charge extends OmiseApiResource
         }
 
         return parent::g_retrieve('\Omise\ScheduleList', self::getUrl('schedules' . $options));
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

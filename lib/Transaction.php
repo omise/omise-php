@@ -1,45 +1,45 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\Collection;
+use Omise\Resource;
 
-class Transaction extends OmiseApiResource
+class Transaction extends \Omise\ApiResource
 {
-    const ENDPOINT = 'transactions';
+    const OBJECT_NAME = 'transaction';
 
     /**
-     * Retrieves a transaction.
+     * Retrieves a collection of transaction objects.
      *
-     * @param  string $id
+     * @param  array $query
      *
-     * @return OmiseTransaction
+     * @return Omise\Collection
      */
-    public static function retrieve($id = '')
+    public static function all($query = array())
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id));
+        $resource = Resource::newObject(static::OBJECT_NAME);
+        $result   = $resource->request()->get($resource->url(), $resource->credential(), $query);
+
+        return new Collection($result);
     }
 
     /**
-     * (non-PHPdoc)
+     * Retrieves a link object.
      *
-     * @see OmiseApiResource::g_reload()
+     * @param  string $id
+     *
+     * @return Omise\Transaction
+     */
+    public static function retrieve($id)
+    {
+        return parent::resourceRetrieve($id);
+    }
+
+    /**
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        if ($this['object'] === 'transaction') {
-            parent::reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
+        parent::resourceReload();
     }
 }

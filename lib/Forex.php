@@ -1,11 +1,9 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
-
-class Forex extends OmiseApiResource
+class Forex extends \Omise\ApiResource
 {
-    const ENDPOINT = 'forex';
+    const OBJECT_NAME = 'forex';
 
     /**
      * Retrieves a forex data.
@@ -14,26 +12,16 @@ class Forex extends OmiseApiResource
      *
      * @return Omise\Forex
      */
-    public static function retrieve($currency = '')
+    public static function retrieve($currency)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($currency));
+        return parent::resourceRetrieve($currency);
     }
 
     /**
-     * @see Omise\Res\OmiseApiResource::g_reload()
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        parent::g_reload(self::getUrl($this['from']));
-    }
-
-    /**
-     * @param  string $currency
-     *
-     * @return string
-     */
-    private static function getUrl($currency = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $currency;
+        parent::resourceReload();
     }
 }

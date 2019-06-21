@@ -1,23 +1,27 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\Collection;
+use Omise\Resource;
 use Omise\Search;
 
-class Link extends OmiseApiResource
+class Link extends \Omise\ApiResource
 {
-    const ENDPOINT = 'links';
+    const OBJECT_NAME = 'link';
 
     /**
-     * Retrieves a link.
+     * Retrieves a collection of link objects.
      *
-     * @param  string $id
+     * @param  array $query
      *
-     * @return Omise\Link
+     * @return Omise\Collection
      */
-    public static function retrieve($id = '')
+    public static function all($query = array())
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id));
+        $resource = Resource::newObject(static::OBJECT_NAME);
+        $result   = $resource->request()->get($resource->url(), $resource->credential(), $query);
+
+        return new Collection($result);
     }
 
     /**
@@ -33,15 +37,23 @@ class Link extends OmiseApiResource
     }
 
     /**
-     * @see Omise\Res\OmiseApiResource::g_reload()
+     * Retrieves a link object.
+     *
+     * @param  string $id
+     *
+     * @return Omise\Link
+     */
+    public static function retrieve($id)
+    {
+        return parent::resourceRetrieve($id);
+    }
+
+    /**
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        if ($this['object'] === 'link') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
+        parent::resourceReload();
     }
 
     /**
@@ -53,16 +65,6 @@ class Link extends OmiseApiResource
      */
     public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params);
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
+        return parent::resourceCreate($params);
     }
 }

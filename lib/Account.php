@@ -1,37 +1,25 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
-
-class Account extends OmiseApiResource
+class Account extends \Omise\ApiResource
 {
-    const ENDPOINT = 'account';
+    const OBJECT_NAME = 'account';
 
     /**
-     * Retrieves an account.
+     * Retrieves Omise account info.
      *
      * @return Omise\Account
      */
     public static function retrieve()
     {
-        return parent::g_retrieve(get_class(), self::getUrl());
+        return parent::resourceRetrieve();
     }
 
     /**
-     * @see Omise\Res\OmiseApiResource::g_reload()
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        parent::g_reload(self::getUrl());
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
+        parent::resourceReload();
     }
 }
