@@ -9,7 +9,6 @@ class ApiRequestor
     /**
      * @var string
      */
-    const OMISE_PHP_LIB_VERSION = '3.0.0-dev';
     const OMISE_API_URL         = 'https://api.omise.co/';
     const OMISE_VAULT_URL       = 'https://vault.omise.co/';
 
@@ -156,7 +155,7 @@ class ApiRequestor
     private function genOptions($requestMethod, $userpassword, $params)
     {
         $certificateFileLocation = dirname(__FILE__) . '/../../data/ca_certificates.pem';
-        $userAgent               = 'OmisePHP/' . self::OMISE_PHP_LIB_VERSION . ' PHP/' . phpversion();
+        $userAgent               = 'OmisePHP/' . \Omise\Omise::VERSION . ' PHP/' . phpversion();
 
         $options = array(
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,       // Set the HTTP version to 1.1.

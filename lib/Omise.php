@@ -15,6 +15,8 @@ namespace Omise;
  */
 class Omise
 {
+    const VERSION = '3.0.0-dev';
+
     /**
      * @var string  Of Omise credentials (public key, secret key).
      */
