@@ -1,175 +1,153 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\Collection;
 use Omise\Refund;
-use Omise\RefundList;
+use Omise\Resource;
 use Omise\ScheduleList;
 use Omise\Scheduler;
 use Omise\Search;
 
-class Charge extends OmiseApiResource
+class Charge extends \Omise\ApiResource
 {
-    const ENDPOINT = 'charges';
+    const OBJECT_NAME = 'charge';
+
+    /**
+     * @param  string $query
+     *
+     * @return Omise\Search
+     */
+    public static function search($query = '')
+    {
+        return Search::scope('charge')->query($query);
+    }
+
+    /**
+     * Retrieves a collection of charge objects.
+     *
+     * @param  array $query
+     *
+     * @return Omise\Collection
+     */
+    public static function all($query = array())
+    {
+        $resource = Resource::newObject(static::OBJECT_NAME);
+        $result   = $resource->request()->get($resource->url(), $resource->credential(), $query);
+
+        return new Collection($result);
+    }
 
     /**
      * Retrieves a charge.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseCharge
+     * @return Omise\Charge
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::resourceRetrieve($id);
     }
 
     /**
-     * Search for charges.
-     *
-     * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
-     *
-     * @return OmiseSearch
-     */
-    public static function search($query = '', $publickey = null, $secretkey = null)
-    {
-        return Search::scope('charge', $publickey, $secretkey)->query($query);
-    }
-
-    /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        if ($this['object'] === 'charge') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
+        parent::resourceReload();
     }
 
     /**
      * Schedule a charge.
      *
      * @param  string $params
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseScheduler
+     * @return Omise\Scheduler
      */
-    public static function schedule($params, $publickey = null, $secretkey = null)
+    public static function schedule($params)
     {
-        return new Scheduler('charge', $params, $publickey, $secretkey);
+        return new Scheduler('charge', $params);
     }
 
     /**
      * Creates a new charge.
      *
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
      *
-     * @return OmiseCharge
+     * @return Omise\Charge
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::resourceCreate($params);
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_update()
+     * @see Omise\ApiResource::resourceUpdate()
      */
     public function update($params)
     {
-        parent::g_update(self::getUrl($this['id']), $params);
+        parent::resourceUpdate($params);
     }
 
     /**
      * Captures a charge.
      *
-     * @return OmiseCharge
+     * @return Omise\Charge
      */
     public function capture()
     {
-        $result = $this->apiRequestor->post(self::getUrl($this['id']).'/capture', parent::getResourceKey());
-        $this->refresh($result);
-
+        $this->refresh($this->chainRequest('post', 'capture'));
         return $this;
     }
 
     /**
      * Refund a charge.
      *
-     * @return OmiseRefund
+     * @return Omise\Refund
      */
     public function refund($params)
     {
-        $result = $this->apiRequestor->post(self::getUrl($this['id']) . '/refunds', parent::getResourceKey(), $params);
-        return new Refund($result, $this->_publickey, $this->_secretkey);
+        $result = $this->chainRequest('post', 'refunds', $params);
+
+        $this->reload();
+        return new Refund($result);
     }
 
     /**
      * Reverses a charge.
      *
-     * @return OmiseCharge
+     * @return Omise\Charge
      */
     public function reverse()
     {
-        $result = $this->apiRequestor->post(self::getUrl($this['id']).'/reverse', parent::getResourceKey());
-        $this->refresh($result);
-
+        $this->refresh($this->chainRequest('post', 'reverse'));
         return $this;
     }
 
     /**
      * list refunds
      *
-     * @return OmiseRefundList
+     * @return \Omise\Collection  Of Omise\Refund objects.
      */
     public function refunds($options = array())
     {
-        if (is_array($options) && ! empty($options)) {
-            $refunds = $this->apiRequestor->get(self::getUrl($this['id']) . '/refunds?' . http_build_query($options), parent::getResourceKey());
-        } else {
-            $refunds = $this['refunds'];
-        }
-
-        return new RefundList($refunds, $this['id'], $this->_publickey, $this->_secretkey);
+        $refunds = is_array($options) && ! empty($options) ? $this->chainRequest('get', 'refunds', $options) : $this['refunds'];
+        return new Collection($refunds);
     }
 
     /**
      * Gets a list of charge schedules.
      *
      * @param  array|string $options
-     * @param  string       $publickey
-     * @param  string       $secretkey
      *
-     * @return OmiseScheduleList
+     * @return Omise\ScheduleList
      */
-    public static function schedules($options = array(), $publickey = null, $secretkey = null)
+    public static function schedules($options = array())
     {
         if (is_array($options)) {
             $options = '?' . http_build_query($options);
         }
 
-        return parent::g_retrieve('\Omise\ScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
+        return parent::g_retrieve('\Omise\ScheduleList', self::getUrl('schedules' . $options));
     }
 }

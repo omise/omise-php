@@ -1,15 +1,14 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\ApiResource;
+use Omise\Resource;
 
 /**
  * This class is not intended to be used directly from client code.
- *
  * Use Omise resource classes to begin searching:
  *
  *     $search = OmiseCharge::search('query');
- *
  *     foreach ($search['data'] as $result) {
  *         echo $result['object'];
  *     }
@@ -22,26 +21,12 @@ use Omise\Res\OmiseApiResource;
  * @see OmiseRefund::search()
  * @see OmiseTransfer::search()
  */
-class Search extends OmiseApiResource
+class Search extends ApiResource
 {
-    const ENDPOINT = 'search';
+    const OBJECT_NAME = 'search';
 
     private $dirty = true;
-    private $attributes = array();
-
-    /**
-     * Create an instance of `OmiseSearch` with the given scope.
-     *
-     * @param  string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
-     * @param  string $publickey
-     * @param  string $secretkey
-     *
-     * @return OmiseSearch  The created instance.
-     */
-    public static function scope($scope, $publickey = null, $secretkey = null)
-    {
-        return new static($scope, $publickey, $secretkey);
-    }
+    private $searchAttributes = array();
 
     /**
      * Create an instance of `OmiseSearch` with the given scope.
@@ -49,13 +34,23 @@ class Search extends OmiseApiResource
      * This constructor is `protected` thus not intended to be used directly.
      *
      * @param string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
-     * @param string $publickey
-     * @param string $secretkey
      */
-    protected function __construct($scope, $publickey, $secretkey)
+    public function __construct($scope)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
         $this->mergeAttributes('scope', $scope);
+    }
+
+    /**
+     * Create an instance of `OmiseSearch` with the given scope.
+     *
+     * @param  string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
+     *
+     * @return Omise\Search  The created instance.
+     */
+    public static function scope($scope)
+    {
+        return new static($scope);
     }
 
     /**
@@ -63,7 +58,7 @@ class Search extends OmiseApiResource
      *
      * @param  string $query  Searching text within the scope.
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function query($query)
     {
@@ -75,7 +70,7 @@ class Search extends OmiseApiResource
      *
      * @param  string $filters  Searching text with specific key within the scope.
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function filter(array $filters = array())
     {
@@ -92,7 +87,7 @@ class Search extends OmiseApiResource
      *
      * @param  int $page  Specific number of searching page.
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function page($page)
     {
@@ -104,7 +99,7 @@ class Search extends OmiseApiResource
      *
      * @param  int $limit   Number of items that will be shown per page.
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function per_page($limit)
     {
@@ -118,7 +113,7 @@ class Search extends OmiseApiResource
      *
      * @see    https://www.omise.co/search-api
      *
-     * @return OmiseSearch  This instance.
+     * @return Omise\Search  This instance.
      */
     public function order($order)
     {
@@ -132,7 +127,7 @@ class Search extends OmiseApiResource
      * dirty search instance automatically reloads its data when client code
      * tries to access its array element.
      *
-     *     $search = OmiseCharge::query('demo'); // the instance is dirty
+     *     $search = Omise\Charge::query('demo'); // the instance is dirty
      *     echo $search['object'];               // this will automatically retrive remote value
      *
      * @return bool  true if the instance is dirty and needs to be reloaded
@@ -151,45 +146,14 @@ class Search extends OmiseApiResource
     public function reload()
     {
         $this->dirty = false;
-        $this->g_reload($this->getUrl());
-    }
+        parent::resourceReload();
 
-    /**
-     * Reload search data from Omise server if this instance is in dirty state.
-     */
-    private function reloadIfDirty()
-    {
-        if ($this->isDirty()) {
-            $this->reload();
+        $mappedObject = array();
+        foreach ($this['data'] as $key => $value) {
+            $mappedObject[$key] = Resource::newObject($value['object'], $value);
         }
-    }
 
-    /**
-     * Merge the given key and value to search attributes, and set instance state
-     * as dirty.
-     *
-     * @param  string $key    Search attribute key.
-     * @param  mixed  $value  Search attribute value.
-     *
-     * @return OmiseSearch  This instance.
-     */
-    private function mergeAttributes($key, $value)
-    {
-        $this->dirty = true;
-        $this->attributes[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Generate request url.
-     *
-     * @return string
-     */
-    private function getUrl()
-    {
-        $querystring = http_build_query($this->attributes);
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/?' . $querystring;
+        $this['data'] = $mappedObject;
     }
 
     // Override methods of ArrayAccess
@@ -236,5 +200,59 @@ class Search extends OmiseApiResource
     {
         $this->reloadIfDirty();
         return parent::offsetGet($key);
+    }
+
+    protected function mapObject($objectName, $values)
+    {
+        $knownObject = array(
+            'charge'      => '\Omise\Charge',
+            'card'        => '\Omise\Card',
+            'customer'    => '\Omise\Customer',
+            'refund'      => '\Omise\Refund',
+            'schedule'    => '\Omise\Schedule',
+            'transaction' => '\Omise\Transaction'
+        );
+
+        $object = $knownObject[$objectName];
+        
+        return new $object($values);
+    }
+
+    /**
+     * Generate request url.
+     *
+     * @return string
+     */
+    protected function url()
+    {
+        $querystring = http_build_query($this->searchAttributes);
+        return \Omise\ApiRequestor::OMISE_API_URL . Resource::getEndpoint(static::OBJECT_NAME) . '/?' . $querystring;
+    }
+
+    /**
+     * Merge the given key and value to search attributes, and set instance state
+     * as dirty.
+     *
+     * @param  string $key    Search attribute key.
+     * @param  mixed  $value  Search attribute value.
+     *
+     * @return Omise\Search  This instance.
+     */
+    private function mergeAttributes($key, $value)
+    {
+        $this->dirty = true;
+        $this->searchAttributes[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Reload search data from Omise server if this instance is in dirty state.
+     */
+    private function reloadIfDirty()
+    {
+        if ($this->isDirty()) {
+            $this->reload();
+        }
     }
 }

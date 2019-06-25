@@ -11,16 +11,17 @@ class Occurrence extends OmiseApiResource
      * Retrieves an occurence object.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseOccurrence
+     * @return Omise\Occurrence
      */
-    public static function retrieve($id, $publickey = null, $secretkey = null)
+    public static function retrieve($id)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id));
     }
 
+    /**
+     * @see Omise\Res\OmiseApiResource::g_reload()
+     */
     public function reload()
     {
         parent::g_reload(self::getUrl($this['id']));

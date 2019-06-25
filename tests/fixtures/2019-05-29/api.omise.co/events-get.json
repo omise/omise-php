@@ -1,0 +1,23 @@
+{
+  "object": "list",
+  "from": "1970-01-01T00:00:00Z",
+  "to": "2019-06-23T14:08:45Z",
+  "offset": 0,
+  "limit": 3,
+  "total": 1,
+  "order": "chronological",
+  "location": "/events",
+  "data": [
+    {
+      "object": "event",
+      "id": "evnt_test_531gmadallmweult89k",
+      "livemode": false,
+      "location": "/events/evnt_test_531gmadallmweult89k",
+      "created_at": "2017-11-01T18:16:24Z",
+      "key": "charge.create",
+      "data": {
+        "object": "charge"
+      }
+    }
+  ]
+}

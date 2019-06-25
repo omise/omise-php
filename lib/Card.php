@@ -15,21 +15,17 @@ class Card extends OmiseApiResource
      *
      * @param array  $array
      * @param string $customerID
-     * @param string $publickey
-     * @param string $secretkey
      */
-    public function __construct($array, $customerID, $publickey = null, $secretkey = null)
+    public function __construct($array, $customerID)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
 
         $this->_customerID = $customerID;
         $this->refresh($array);
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\Res\OmiseApiResource::g_reload()
      */
     public function reload()
     {
@@ -37,9 +33,7 @@ class Card extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_update()
+     * @see Omise\Res\OmiseApiResource::g_update()
      */
     public function update($params)
     {
@@ -47,9 +41,7 @@ class Card extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * @see Omise\Res\OmiseApiResource::g_destroy()
      */
     public function destroy()
     {
@@ -57,9 +49,7 @@ class Card extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::isDestroyed()
+     * @see Omise\Res\OmiseApiResource::isDestroyed()
      */
     public function isDestroyed()
     {

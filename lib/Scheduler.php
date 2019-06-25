@@ -13,12 +13,10 @@ class Scheduler extends OmiseApiResource
      *
      * @param string $type        Either 'charge' or 'transfer'
      * @param string $attributes  See supported attributes at [Charge Schedule API](https://www.omise.co/charge-schedules-api#charge_schedules-create) page.
-     * @param string $publickey
-     * @param string $secretkey
      */
-    public function __construct($type, $attributes = array(), $publickey = null, $secretkey = null)
+    public function __construct($type, $attributes = array())
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
 
         $this->mergeAttributes($type, $attributes);
     }
@@ -42,11 +40,11 @@ class Scheduler extends OmiseApiResource
     }
 
     /**
-     * Alias of OmiseScheduler::days()
+     * Alias of Omise\Scheduler::days()
      *
      * @return self
      *
-     * @see    OmiseScheduler::days()
+     * @see    Omise\Scheduler::days()
      */
     public function day()
     {
@@ -69,7 +67,7 @@ class Scheduler extends OmiseApiResource
      *
      * @return self
      *
-     * @see    OmiseScheduler::weeks($on)
+     * @see    Omise\Scheduler::weeks($on)
      */
     public function week($on)
     {
@@ -111,7 +109,7 @@ class Scheduler extends OmiseApiResource
      *
      * @return self
      *
-     * @see    OmiseScheduler::months($on)
+     * @see    Omise\Scheduler::months($on)
      */
     public function month($on)
     {
@@ -141,7 +139,7 @@ class Scheduler extends OmiseApiResource
     /**
      * Start create a schedule
      *
-     * @return OmiseSchedule
+     * @return Omise\Schedule
      */
     public function start()
     {

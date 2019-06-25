@@ -1,16 +1,18 @@
 <?php
 require_once dirname(__FILE__).'/TestConfig.php';
 
+use Omise\ApiRequestor;
+
 class ApiRequestorTest extends \TestConfig
 {
     /**
      * @var \Omise\ApiRequestor
      */
-    private $apiRequestor;
+    private $request;
 
     public function setUp()
     {
-        $this->apiRequestor = new \Omise\ApiRequestor;
+        $this->request = new ApiRequestor;
     }
 
     /**
@@ -19,14 +21,13 @@ class ApiRequestorTest extends \TestConfig
     public function make_get_request()
     {
         // This endpoint will be resolved to a json-mock file,
-        // test/fixtures/api.omise.co/account-get.json
+        // test/fixtures/*api-version*/api.omise.co/account-get.json
         $url = \Omise\ApiRequestor::OMISE_API_URL . 'account';
 
-        $result = $this->apiRequestor->get($url, 'secretkey');
+        $result = $this->request->get($url, 'skey');
 
-        $this->assertArrayHasKey('id', $result);
-        $this->assertSame($result['object'], 'account');
-        $this->assertSame($result['id'], 'acct_4yyvy93tmab34q2ywlo');
+        $this->assertSame('account', $result['object']);
+        $this->assertSame('account_test_fixture', $result['id']);
     }
 
     /**
@@ -35,14 +36,13 @@ class ApiRequestorTest extends \TestConfig
     public function make_post_request()
     {
         // This endpoint will be resolved to a json-mock file,
-        // test/fixtures/api.omise.co/charges-post.json
+        // test/fixtures/*api-version*/api.omise.co/charges-post.json
         $url = \Omise\ApiRequestor::OMISE_API_URL . 'charges';
 
-        $result = $this->apiRequestor->post($url, 'secretkey', array('amount' => 100000));
+        $result = $this->request->post($url, 'skey', array('amount' => 100000));
 
-        $this->assertArrayHasKey('id', $result);
-        $this->assertSame($result['object'], 'charge');
-        $this->assertSame($result['id'], 'chrg_test_4zmrjgxdh4ycj2qncoj');
+        $this->assertSame('charge', $result['object']);
+        $this->assertSame('chrg_test_fixture', $result['id']);
     }
 
     /**
@@ -51,14 +51,13 @@ class ApiRequestorTest extends \TestConfig
     public function make_patch_request()
     {
         // This endpoint will be resolved to a json-mock file,
-        // test/fixtures/api.omise.co/charges/chrg_test_4zmrjgxdh4ycj2qncoj-patch.json
-        $url = \Omise\ApiRequestor::OMISE_API_URL . 'charges/chrg_test_4zmrjgxdh4ycj2qncoj';
+        // test/fixtures/*api-version*/api.omise.co/charges/chrg_test_fixture-patch.json
+        $url = \Omise\ApiRequestor::OMISE_API_URL . 'charges/chrg_test_fixture';
 
-        $result = $this->apiRequestor->patch($url, 'secretkey', array('description' => 'mock'));
+        $result = $this->request->patch($url, 'skey', array('description' => 'mock'));
 
-        $this->assertArrayHasKey('id', $result);
-        $this->assertSame($result['object'], 'charge');
-        $this->assertSame($result['id'], 'chrg_test_4zmrjgxdh4ycj2qncoj');
+        $this->assertSame('charge', $result['object']);
+        $this->assertSame('chrg_test_fixture', $result['id']);
     }
 
     /**
@@ -67,10 +66,10 @@ class ApiRequestorTest extends \TestConfig
     public function make_delete_request()
     {
         // This endpoint will be resolved to a json-mock file,
-        // test/fixtures/api.omise.co/customers/cust_test_4zmrjg2hct06ybwobqc-delete.json
-        $url = \Omise\ApiRequestor::OMISE_API_URL . 'customers/cust_test_4zmrjg2hct06ybwobqc';
+        // test/fixtures/api.omise.co/*api-version*/customers/cust_test_fixture-delete.json
+        $url = \Omise\ApiRequestor::OMISE_API_URL . 'customers/cust_test_fixture';
 
-        $result = $this->apiRequestor->delete($url, 'secretkey');
+        $result = $this->request->delete($url, 'skey');
 
         $this->assertArrayHasKey('id', $result);
         $this->assertSame($result['object'], 'customer');
@@ -84,6 +83,6 @@ class ApiRequestorTest extends \TestConfig
      */
     public function make_unsupported_method_request()
     {
-        $this->apiRequestor->got('http://test', 'secretkey');
+        $this->request->got('http://test', 'skey');
     }
 }

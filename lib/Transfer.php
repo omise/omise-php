@@ -1,12 +1,12 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\ApiResource;
 use Omise\ScheduleList;
 use Omise\Scheduler;
 use Omise\Search;
 
-class Transfer extends OmiseApiResource
+class Transfer extends ApiResource
 {
     const ENDPOINT = 'transfers';
 
@@ -14,70 +14,56 @@ class Transfer extends OmiseApiResource
      * Retrieves a transfer.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseTransfer
+     * @return Omise\Transfer
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '')
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::resourceRetrieve($id);
     }
 
     /**
      * Search for transfers.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
      *
      * @return OmiseSearch
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '')
     {
-        return Search::scope('transfer', $publickey, $secretkey)->query($query);
+        return Search::scope('transfer')->query($query);
     }
 
     /**
      * Schedule a transfer.
      *
      * @param  string $params
-     * @param  string $publickey
-     * @param  string $secretkey
      *
      * @return OmiseScheduler
      */
-    public static function schedule($params, $publickey = null, $secretkey = null)
+    public static function schedule($params)
     {
-        return new Scheduler('transfer', $params, $publickey, $secretkey);
+        return new Scheduler('transfer', $params);
     }
 
     /**
      * Creates a transfer.
      *
-     * @param  mixed  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
      *
-     * @return OmiseTransfer
+     * @return Omise\Transfer
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::resourceCreate($params);
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        if ($this['object'] === 'transfers') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
+        parent::resourceReload();
     }
 
     /**
@@ -93,27 +79,25 @@ class Transfer extends OmiseApiResource
      *
      * @see OmiseApiResource::g_update()
      */
-    protected function update($params)
+    public function update($params)
     {
-        parent::g_update(self::getUrl($this['id']), $params);
+        parent::resourceUpdate($params);
     }
 
     /**
      * Gets a list of transfer schedules.
      *
      * @param  array|string $options
-     * @param  string       $publickey
-     * @param  string       $secretkey
      *
      * @return OmiseScheduleList
      */
-    public static function schedules($options = array(), $publickey = null, $secretkey = null)
+    public static function schedules($options = array())
     {
         if (is_array($options)) {
             $options = '?' . http_build_query($options);
         }
 
-        return parent::g_retrieve('\Omise\ScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
+        return parent::g_retrieve('\Omise\ScheduleList', self::getUrl('schedules' . $options));
     }
 
     /**
@@ -134,15 +118,5 @@ class Transfer extends OmiseApiResource
     public function isDestroyed()
     {
         return parent::isDestroyed();
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

@@ -1,76 +1,70 @@
 <?php
 namespace Omise;
 
-use Omise\Res\OmiseApiResource;
+use Omise\Collection;
+use Omise\Resource;
 use Omise\Search;
 
-class Link extends OmiseApiResource
+class Link extends \Omise\ApiResource
 {
-    const ENDPOINT = 'links';
+    const OBJECT_NAME = 'link';
 
     /**
-     * Retrieves a link.
+     * Retrieves a collection of link objects.
      *
-     * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $query
      *
-     * @return OmiseLink
+     * @return Omise\Collection
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function all($query = array())
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        $resource = Resource::newObject(static::OBJECT_NAME);
+        $result   = $resource->request()->get($resource->url(), $resource->credential(), $query);
+
+        return new Collection($result);
     }
 
     /**
      * Search for links.
      *
      * @param  string $query
-     * @param  string $publickey
-     * @param  string $secretkey
      *
-     * @return OmiseSearch
+     * @return Omise\Search
      */
-    public static function search($query = '', $publickey = null, $secretkey = null)
+    public static function search($query = '')
     {
-        return Search::scope('link', $publickey, $secretkey)->query($query);
+        return Search::scope('link')->query($query);
     }
 
     /**
-     * (non-PHPdoc)
+     * Retrieves a link object.
      *
-     * @see OmiseApiResource::g_reload()
+     * @param  string $id
+     *
+     * @return Omise\Link
+     */
+    public static function retrieve($id)
+    {
+        return parent::resourceRetrieve($id);
+    }
+
+    /**
+     * @see Omise\ApiResource::resourceReload()
      */
     public function reload()
     {
-        if ($this['object'] === 'link') {
-            parent::g_reload(self::getUrl($this['id']));
-        } else {
-            parent::g_reload(self::getUrl());
-        }
+        parent::resourceReload();
     }
 
     /**
      * Creates a new link.
      *
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
      *
-     * @return OmiseLink
+     * @return Omise\Link
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
-    }
-
-    /**
-     * @param  string $id
-     *
-     * @return string
-     */
-    private static function getUrl($id = '')
-    {
-        return \Omise\ApiRequestor::OMISE_API_URL . self::ENDPOINT . '/' . $id;
+        return parent::resourceCreate($params);
     }
 }
