@@ -13,6 +13,6 @@ class ScheduleList extends OmiseApiResource
      */
     public function retrieve($id)
     {
-        return Schedule::retrieve($id, $this->_publickey, $this->_secretkey);
+        return Schedule::retrieve($id);
     }
 }

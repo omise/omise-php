@@ -13,12 +13,10 @@ class CardList extends OmiseApiResource
     /**
      * @param array  $cards
      * @param string $customerID
-     * @param string $publickey
-     * @param string $secretkey
      */
-    public function __construct($cards, $customerID, $publickey = null, $secretkey = null)
+    public function __construct($cards, $customerID)
     {
-        parent::__construct($publickey, $secretkey);
+        parent::__construct();
         $this->_customerID = $customerID;
         $this->refresh($cards);
     }
@@ -34,7 +32,7 @@ class CardList extends OmiseApiResource
     {
         $result = $this->apiRequestor->get($this->getUrl($id), self::getResourceKey());
 
-        return new Card($result, $this->_customerID, $this->_publickey, $this->_secretkey);
+        return new Card($result, $this->_customerID);
     }
   
 

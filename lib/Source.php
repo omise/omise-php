@@ -10,15 +10,13 @@ class Source extends OmiseApiResource
     /**
      * Creates a new source.
      *
-     * @param  array  $params
-     * @param  string $publickey
-     * @param  string $secretkey
+     * @param  array $params
      *
      * @return OmiseSource
      */
-    public static function create($params, $publickey = null, $secretkey = null)
+    public static function create($params)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(get_class(), self::getUrl(), $params);
     }
 
     /**

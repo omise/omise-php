@@ -13,6 +13,6 @@ class OccurrenceList extends OmiseApiResource
      */
     public function retrieve($id)
     {
-        return Occurrence::retrieve($id, $this->_publickey, $this->_secretkey);
+        return Occurrence::retrieve($id);
     }
 }

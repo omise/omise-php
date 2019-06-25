@@ -11,14 +11,12 @@ class Event extends OmiseApiResource
      * Retrieves an event.
      *
      * @param  string $id
-     * @param  string $publickey
-     * @param  string $secretkey
      *
      * @return OmiseEvent
      */
-    public static function retrieve($id = '', $publickey = null, $secretkey = null)
+    public static function retrieve($id = '')
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl($id));
     }
 
     /**

@@ -9,7 +9,6 @@ class ApiRequestor
     /**
      * @var string
      */
-    const OMISE_PHP_LIB_VERSION = '3.0.0-dev';
     const OMISE_API_URL         = 'https://api.omise.co/';
     const OMISE_VAULT_URL       = 'https://vault.omise.co/';
 
@@ -156,7 +155,7 @@ class ApiRequestor
     private function genOptions($requestMethod, $userpassword, $params)
     {
         $certificateFileLocation = dirname(__FILE__) . '/../../data/ca_certificates.pem';
-        $userAgent               = 'OmisePHP/' . self::OMISE_PHP_LIB_VERSION . ' PHP/' . phpversion();
+        $userAgent               = 'OmisePHP/' . \Omise\Omise::VERSION . ' PHP/' . phpversion();
 
         $options = array(
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,       // Set the HTTP version to 1.1.
@@ -172,15 +171,15 @@ class ApiRequestor
         );
 
         // Config Omise API Version
-        if (defined('OMISE_API_VERSION')) {
-            $options += array(CURLOPT_HTTPHEADER => array('Omise-Version: ' . OMISE_API_VERSION));
+        if ($apiVersion = \Omise\Omise::apiVersion()) {
+            $options += array(CURLOPT_HTTPHEADER => array('Omise-Version: ' . $apiVersion));
 
-            $userAgent .= ' OmiseAPI/' . OMISE_API_VERSION;
+            $userAgent .= ' OmiseAPI/' . $apiVersion;
         }
 
         // Config UserAgent
-        if (defined('OMISE_USER_AGENT_SUFFIX')) {
-            $userAgent .= $userAgent . ' ' . OMISE_USER_AGENT_SUFFIX;
+        if ($suffixUserAgent = \Omise\Omise::userAgent()) {
+            $userAgent .= ' ' . $suffixUserAgent;
         }
 
         $options += array(CURLOPT_USERAGENT => $userAgent);

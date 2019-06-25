@@ -10,14 +10,11 @@ class Account extends OmiseApiResource
     /**
      * Retrieves an account.
      *
-     * @param  string $publickey
-     * @param  string $secretkey
-     *
      * @return OmiseAccount
      */
-    public static function retrieve($publickey = null, $secretkey = null)
+    public static function retrieve()
     {
-        return parent::g_retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
+        return parent::g_retrieve(get_class(), self::getUrl());
     }
 
     /**
