@@ -281,9 +281,7 @@ class OmiseApiResource extends OmiseObject
             // Time before the request is aborted when attempting to connect.
             CURLOPT_CONNECTTIMEOUT => $this->OMISE_CONNECTTIMEOUT,
             // Authentication.
-            CURLOPT_USERPWD        => $userpwd,
-            // CA bundle.
-            CURLOPT_CAINFO         => dirname(__FILE__).'/../../../data/ca_certificates.pem'
+            CURLOPT_USERPWD        => $userpwd
         );
 
         // Config Omise API Version
