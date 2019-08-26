@@ -1,5 +1,9 @@
 <?php
 // Cores and utilities.
+require_once dirname(__FILE__).'/Client/ClientInterface.php';
+require_once dirname(__FILE__).'/Client/CurlClient.php';
+require_once dirname(__FILE__).'/Client/UnitTestClient.php';
+
 require_once dirname(__FILE__).'/omise/res/obj/OmiseObject.php';
 require_once dirname(__FILE__).'/omise/res/OmiseApiResource.php';
 
