@@ -33,10 +33,12 @@ class OmiseSource extends OmiseApiResource
     }
 
     /**
+     * @param  string $id
+     *
      * @return string
      */
-    private static function getUrl()
+    private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT;
+        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
     }
 }
