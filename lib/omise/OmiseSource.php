@@ -5,6 +5,20 @@ class OmiseSource extends OmiseApiResource
     const ENDPOINT = 'sources';
 
     /**
+     * Retrieves a source.
+     *
+     * @param  string $id
+     * @param  string $publickey
+     * @param  string $secretkey
+     *
+     * @return OmiseSource
+     */
+    public static function retrieve($id, $publickey = null, $secretkey = null)
+    {
+        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+    }
+    
+    /**
      * Creates a new source.
      *
      * @param  array  $params
