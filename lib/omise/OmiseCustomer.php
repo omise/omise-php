@@ -100,7 +100,7 @@ class OmiseCustomer extends OmiseApiResource
     public function cards($options = array())
     {
         if (is_array($options) && ! empty($options)) {
-            $cards = parent::execute(self::getUrl($this['id']) . '/cards?' . http_build_query($options), parent::REQUEST_GET, parent::getResourceKey());
+            list($cards, $headers) = parent::execute(self::getUrl($this['id']) . '/cards?' . http_build_query($options), parent::REQUEST_GET, parent::getResourceKey());
         } else {
             $cards = $this['cards'];
         }

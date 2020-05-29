@@ -121,7 +121,7 @@ class OmiseApiResource extends OmiseObject
     }
 
     /**
-     * Makes a request and returns a decoded JSON data as an associative array.
+     * Makes a request and returns a decoded JSON data as an associative array, and an array of retured headers.
      *
      * @param  string $url
      * @param  string $requestMethod
