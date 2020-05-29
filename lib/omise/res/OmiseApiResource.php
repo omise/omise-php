@@ -6,6 +6,10 @@ define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
 class OmiseApiResource extends OmiseObject
 {
+
+    // List of alternative classes to use for older API versions
+    protected static $classNamesForAPIVersions = [];
+
     // Request methods
     const REQUEST_GET = 'GET';
     const REQUEST_POST = 'POST';
@@ -37,6 +41,27 @@ class OmiseApiResource extends OmiseObject
     }
 
     /**
+     * Returns the name of the correct class to use for the passed API version.
+     *
+     * @param  string $APIVersion
+     * 
+     * @return string
+     */
+    public static function getClassNameForAPIVersion($APIVersion)
+    {
+        $thisClassName = get_called_class();
+
+        if (!count(static::$classNamesForAPIVersions)) return $thisClassName;
+
+        foreach (static::$classNamesForAPIVersions as $version=>$className) {
+            if ($APIVersion >= $version) return $className;
+        }
+
+        return $thisClassName; // this should never happen :)
+
+    }
+
+    /**
      * Retrieves the resource.
      *
      * @param  string $clazz
@@ -49,8 +74,12 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null)
     {
-        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+        $resource = $clazz::getInstance($clazz, $publickey, $secretkey);
         list($result, $headers) = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+
+        $correctClazz = $clazz::getClassNameForAPIVersion($headers['omise-version'][0]);
+        if ($clazz != $correctClazz) $resource = $correctClazz::getInstance($correctClazz, $publickey, $secretkey);
+
         $resource->refresh($result);
 
         return $resource;
@@ -71,8 +100,12 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null)
     {
-        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+        $resource = $clazz::getInstance($clazz, $publickey, $secretkey);
         list($result, $headers) = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
+
+        $correctClazz = $clazz::getClassNameForAPIVersion($headers['omise-version'][0]);
+        if ($clazz != $correctClazz) $resource = $correctClazz::getInstance($correctClazz, $publickey, $secretkey);
+
         $resource->refresh($result);
 
         return $resource;
