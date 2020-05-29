@@ -19,52 +19,8 @@ class OmiseException extends Exception
      */
     public static function getInstance($array)
     {
-        switch ($array['code']) {
-            case 'authentication_failure':
-                return new OmiseAuthenticationFailureException($array['message'], $array);
-
-            case 'bad_request':
-                return new OmiseBadRequestException($array['message'], $array);
-
-            case 'not_found':
-                return new OmiseNotFoundException($array['message'], $array);
-
-            case 'used_token':
-                return new OmiseUsedTokenException($array['message'], $array);
-
-            case 'invalid_card':
-                return new OmiseInvalidCardException($array['message'], $array);
-
-            case 'invalid_card_token':
-                return new OmiseInvalidCardTokenException($array['message'], $array);
-
-            case 'missing_card':
-                return new OmiseMissingCardException($array['message'], $array);
-
-            case 'invalid_charge':
-                return new OmiseInvalidChargeException($array['message'], $array);
-
-            case 'failed_capture':
-                return new OmiseFailedCaptureException($array['message'], $array);
-
-            case 'failed_fraud_check':
-                return new OmiseFailedFraudCheckException($array['message'], $array);
-
-            case 'failed_refund':
-                return new OmiseFailedRefundException($array['message'], $array);
-
-            case 'invalid_link':
-                return new OmiseInvalidLinkException($array['message'], $array);
-
-            case 'invalid_recipient':
-                return new OmiseInvalidRecipientException($array['message'], $array);
-
-            case 'invalid_bank_account':
-                return new OmiseInvalidBankAccountException($array['message'], $array);
-
-            default:
-                return new OmiseUndefinedException($array['message'], $array);
-        }
+        $exceptionClassName = 'Omise' . str_replace('_', '', ucwords($array['code'], '_')) . 'Exception';
+        return class_exists($exceptionClassName) ? new $exceptionClassName($array['message'], $array) : new OmiseUndefinedException($array['message'], $array);
     }
 
     /**
