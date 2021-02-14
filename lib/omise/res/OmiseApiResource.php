@@ -108,6 +108,19 @@ class OmiseApiResource extends OmiseObject
     }
 
     /**
+     * Revokes the resource.
+     *
+     * @param  string $url
+     *
+     * @throws Exception|OmiseException
+     */
+    protected function g_revoke($url)
+    {
+        $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
+        $this->refresh($result, true);
+    }
+
+    /**
      * Reloads the resource with latest data.
      *
      * @param  string $url
