@@ -17,19 +17,28 @@ class ClassExistsTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue(class_exists('OmiseAccount'));
         $this->assertTrue(class_exists('OmiseBalance'));
+        $this->assertTrue(class_exists('OmiseCapabilities'));
         $this->assertTrue(class_exists('OmiseCard'));
         $this->assertTrue(class_exists('OmiseCardList'));
         $this->assertTrue(class_exists('OmiseCharge'));
         $this->assertTrue(class_exists('OmiseCustomer'));
         $this->assertTrue(class_exists('OmiseDispute'));
         $this->assertTrue(class_exists('OmiseEvent'));
+        $this->assertTrue(class_exists('OmiseForex'));
+        $this->assertTrue(class_exists('OmiseLink'));
+        $this->assertTrue(class_exists('OmiseOccurrence'));
+        $this->assertTrue(class_exists('OmiseOccurrenceList'));
+        $this->assertTrue(class_exists('OmiseReceipt'));
         $this->assertTrue(class_exists('OmiseRecipient'));
         $this->assertTrue(class_exists('OmiseRefund'));
         $this->assertTrue(class_exists('OmiseRefundList'));
+        $this->assertTrue(class_exists('OmiseSchedule'));
+        $this->assertTrue(class_exists('OmiseScheduleList'));
+        $this->assertTrue(class_exists('OmiseScheduler'));
+        $this->assertTrue(class_exists('OmiseSource'));
         $this->assertTrue(class_exists('OmiseToken'));
         $this->assertTrue(class_exists('OmiseTransaction'));
         $this->assertTrue(class_exists('OmiseTransfer'));
-        $this->assertTrue(class_exists('OmiseLink'));
     }
 
     /**
