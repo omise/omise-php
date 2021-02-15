@@ -35,5 +35,7 @@
     "autoload": {
         "classmap": ["lib/omise/"]
     },
-   "test": "vendor/bin/phpunit"
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  }
 }
