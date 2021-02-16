@@ -36,6 +36,6 @@
         "classmap": ["lib/omise/"]
     },
   "scripts": {
-    "test": "vendor/bin/phpunit --version"
+    "test": "vendor/bin/phpunit"
   }
 }
