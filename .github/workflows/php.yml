@@ -33,5 +33,8 @@ jobs:
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
+    - name: What PHP version
+      run: php --version
+
     - name: Run test suite
       run: composer run-script test
