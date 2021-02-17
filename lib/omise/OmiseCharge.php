@@ -85,6 +85,16 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
+     * (non-PHPdoc)
+     *
+     * @see OmiseApiResource::g_expire()
+     */
+    public function expire()
+    {
+        parent::g_expire(self::getUrl($this['id']) . '/expire');
+    }
+
+    /**
      * Captures a charge.
      *
      * @return OmiseCharge
@@ -116,19 +126,6 @@ class OmiseCharge extends OmiseApiResource
     public function reverse()
     {
         $result = parent::execute(self::getUrl($this['id']).'/reverse', parent::REQUEST_POST, parent::getResourceKey());
-        $this->refresh($result);
-
-        return $this;
-    }
-
-    /**
-     * Set a charge to expire. Supported by Alipay (Barcode) charges.
-     *
-     * @return OmiseCharge
-     */
-    public function expire()
-    {
-        $result = parent::execute(self::getUrl($this['id']) . '/expire', parent::REQUEST_POST, parent::getResourceKey());
         $this->refresh($result);
 
         return $this;
