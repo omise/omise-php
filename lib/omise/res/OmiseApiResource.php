@@ -93,6 +93,21 @@ class OmiseApiResource extends OmiseObject
     }
 
     /**
+     * Set the resource to expire.
+     *
+     * @param  string $url
+     *
+     * @throws Exception|OmiseException
+     *
+     * @return OmiseApiResource
+     */
+    protected function g_expire($url)
+    {
+        $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
+        $this->refresh($result, true);
+    }
+
+    /**
      * Destroys the resource.
      *
      * @param  string $url

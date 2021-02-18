@@ -85,6 +85,16 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
+     * (non-PHPdoc)
+     *
+     * @see OmiseApiResource::g_expire()
+     */
+    public function expire()
+    {
+        parent::g_expire(self::getUrl($this['id']) . '/expire');
+    }
+
+    /**
      * Captures a charge.
      *
      * @return OmiseCharge

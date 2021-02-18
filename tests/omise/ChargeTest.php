@@ -13,6 +13,7 @@ class ChargeTest extends TestConfig
         $this->assertTrue(method_exists('OmiseCharge', 'update'));
         $this->assertTrue(method_exists('OmiseCharge', 'capture'));
         $this->assertTrue(method_exists('OmiseCharge', 'reverse'));
+        $this->assertTrue(method_exists('OmiseCharge', 'expire'));
         $this->assertTrue(method_exists('OmiseCharge', 'refund'));
         $this->assertTrue(method_exists('OmiseCharge', 'refunds'));
         $this->assertTrue(method_exists('OmiseCharge', 'getUrl'));
@@ -113,6 +114,20 @@ class ChargeTest extends TestConfig
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
         $this->assertTrue($charge['reversed']);
+    }
+
+    /**
+     * @test
+     * Assert that an expired flag is set after charge is successfully set to expire.
+     */
+    public function expire()
+    {
+        $charge = OmiseCharge::retrieve('chrg_test_53z5zoeovi39e1erbj0');
+        $charge->expire();
+
+        $this->assertArrayHasKey('object', $charge);
+        $this->assertEquals('charge', $charge['object']);
+        $this->assertTrue($charge['expired']);
     }
 
     /**
