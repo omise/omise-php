@@ -57,6 +57,16 @@ class OmiseDispute extends OmiseApiResource
     }
 
     /**
+     * (non-PHPdoc)
+     *
+     * @see OmiseApiResource::g_update()
+     */
+    public function accept()
+    {
+        parent::g_update(self::getUrl($this['id']) . '/accept');
+    }
+
+    /**
      * Generate request url.
      *
      * @param  string $id

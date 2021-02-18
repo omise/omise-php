@@ -20,6 +20,16 @@ class OmiseAccount extends OmiseApiResource
     /**
      * (non-PHPdoc)
      *
+     * @see OmiseApiResource::g_update()
+     */
+    public function update($params)
+    {
+        parent::g_update(self::getUrl(), $params);
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
      * @see OmiseApiResource::g_reload()
      */
     public function reload()
