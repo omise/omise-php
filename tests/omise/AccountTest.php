@@ -10,6 +10,7 @@ class OmiseAccountTest extends TestConfig
     public function method_exists()
     {
         $this->assertTrue(method_exists('OmiseAccount', 'retrieve'));
+        $this->assertTrue(method_exists('OmiseAccount', 'update'));
         $this->assertTrue(method_exists('OmiseAccount', 'reload'));
         $this->assertTrue(method_exists('OmiseAccount', 'getUrl'));
     }
@@ -24,6 +25,20 @@ class OmiseAccountTest extends TestConfig
 
         $this->assertArrayHasKey('object', $account);
         $this->assertEquals('account', $account['object']);
+    }
+
+    /**
+     * @test
+     * Assert that the account is successfully updated.
+     */
+    public function update()
+    {
+        $account = OmiseAccount::retrieve();
+        $account->update(array('chain_return_uri' => 'https://www.omise.co'));
+
+        $this->assertArrayHasKey('object', $account);
+        $this->assertEquals('account', $account['object']);
+        $this->assertEquals('https://www.omise.co', $account['chain_return_uri']);
     }
 
     /**

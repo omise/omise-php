@@ -25,7 +25,7 @@
   "auto_activate_recipients": true,
   "chain_enabled": true,
   "zero_interest_installments": true,
-  "chain_return_uri": "https://dashboard.omise.co/test/settings",
+  "chain_return_uri": "https://www.omise.co",
   "webhook_uri": "https://omise-flask-example.herokuapp.com/webhook",
   "metadata_export_keys": {
     "charge": [
