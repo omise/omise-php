@@ -61,6 +61,26 @@ class OmiseLink extends OmiseApiResource
     }
 
     /**
+     * (non-PHPdoc)
+     *
+     * @see OmiseApiResource::g_destroy()
+     */
+    public function destroy()
+    {
+        parent::g_destroy(self::getUrl($this['id']));
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see OmiseApiResource::isDestroyed()
+     */
+    public function isDestroyed()
+    {
+        return parent::isDestroyed();
+    }
+
+    /**
      * @param  string $id
      *
      * @return string

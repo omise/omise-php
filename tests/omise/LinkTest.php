@@ -11,6 +11,8 @@ class LinkTest extends TestConfig
     {
         $this->assertTrue(method_exists('OmiseLink', 'retrieve'));
         $this->assertTrue(method_exists('OmiseLink', 'create'));
+        $this->assertTrue(method_exists('OmiseLink', 'destroy'));
+        $this->assertTrue(method_exists('OmiseLink', 'isDestroyed'));
         $this->assertTrue(method_exists('OmiseLink', 'getUrl'));
     }
 
@@ -50,6 +52,18 @@ class LinkTest extends TestConfig
 
         $this->assertArrayHasKey('object', $link);
         $this->assertEquals('link', $link['object']);
+    }
+
+    /**
+     * @test
+     * Assert that the link is successfully destroyed.
+     */
+    public function destroy()
+    {
+        $link = OmiseLink::retrieve('link_test_56bsanpa365jnlbc7rt');
+        $link->destroy();
+
+        $this->assertTrue($link->isDestroyed());
     }
 
     /**
