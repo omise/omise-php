@@ -57,7 +57,7 @@ class OmiseApiResource extends OmiseObject
     }
 
     /**
-     * Creates the resource with given parameters.in an associative array.
+     * Creates the resource with given parameters in an associative array.
      *
      * @param  string $clazz
      * @param  string $url
@@ -86,7 +86,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @throws Exception|OmiseException
      */
-    protected function g_update($url, $params)
+    protected function g_update($url, $params = null)
     {
         $result = $this->execute($url, self::REQUEST_PATCH, $this->getResourceKey(), $params);
         $this->refresh($result);

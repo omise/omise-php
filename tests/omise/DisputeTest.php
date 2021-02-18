@@ -12,6 +12,7 @@ class OmiseDisputeTest extends TestConfig
         $this->assertTrue(method_exists('OmiseDispute', 'retrieve'));
         $this->assertTrue(method_exists('OmiseDispute', 'reload'));
         $this->assertTrue(method_exists('OmiseDispute', 'update'));
+        $this->assertTrue(method_exists('OmiseDispute', 'accept'));
         $this->assertTrue(method_exists('OmiseDispute', 'getUrl'));
     }
 
@@ -93,6 +94,20 @@ class OmiseDisputeTest extends TestConfig
 
         $this->assertArrayHasKey('object', $dispute);
         $this->assertEquals('dispute', $dispute['object']);
+    }
+
+    /**
+     * @test
+     * Assert that the dispute is successfully accepted.
+     */
+    public function accept()
+    {
+        $dispute = OmiseDispute::retrieve('dspt_test_4zgf15h89w8t775kcm8');
+        $dispute->accept();
+
+        $this->assertArrayHasKey('object', $dispute);
+        $this->assertEquals('dispute', $dispute['object']);
+        $this->assertEquals('lost', $dispute['status']);
     }
 
     /**
