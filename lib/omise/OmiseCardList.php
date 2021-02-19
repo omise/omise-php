@@ -35,12 +35,12 @@ class OmiseCardList extends OmiseApiResource
   
 
     /**
-     * @param  string $id
+     * @param  string $cardID
      *
      * @return string
      */
-    private function getUrl($id = '')
+    private function getUrl($cardID = '')
     {
-        return OMISE_API_URL.'customers/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . OmiseCustomer::ENDPOINT . '/' . $this->_customerID . '/' . self::ENDPOINT . '/' . $cardID;
     }
 }

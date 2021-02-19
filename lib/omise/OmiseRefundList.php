@@ -44,12 +44,12 @@ class OmiseRefundList extends OmiseApiResource
     }
 
     /**
-     * @param  string $id
+     * @param  string $refundID
      *
      * @return string
      */
-    private function getUrl($id = '')
+    private function getUrl($refundID = '')
     {
-        return OMISE_API_URL.'charges/'.$this->_chargeID.'/'.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . OmiseCharge::ENDPOINT . '/' . $this->_chargeID . '/' . self::ENDPOINT . '/' . $refundID;
     }
 }

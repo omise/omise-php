@@ -38,12 +38,10 @@ class OmiseAccount extends OmiseApiResource
     }
 
     /**
-     * @param  string $id
-     *
      * @return string
      */
-    private static function getUrl($id = '')
+    private static function getUrl()
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT;
     }
 }
