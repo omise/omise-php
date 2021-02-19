@@ -67,7 +67,7 @@ class OmiseTransfer extends OmiseApiResource
      */
     public function reload()
     {
-        if ($this['object'] === 'transfers') {
+        if ($this['object'] === 'transfer') {
             parent::g_reload(self::getUrl($this['id']));
         } else {
             parent::g_reload(self::getUrl());

@@ -25,7 +25,7 @@ class OmiseReceipt extends OmiseApiResource
      */
     public function reload()
     {
-        if ($this['object'] === 'event') {
+        if ($this['object'] === 'receipt') {
             parent::g_reload(self::getUrl($this['id']));
         } else {
             parent::g_reload(self::getUrl());

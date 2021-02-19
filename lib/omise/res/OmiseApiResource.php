@@ -104,7 +104,7 @@ class OmiseApiResource extends OmiseObject
     protected function g_process($url)
     {
         $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
-        $this->refresh($result, true);
+        $this->refresh($result);
     }
 
     /**
