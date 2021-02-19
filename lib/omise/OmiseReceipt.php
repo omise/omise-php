@@ -19,7 +19,7 @@ class OmiseReceipt extends OmiseApiResource
     }
 
     /**
-     * Reloads a receipt.
+     * Reloads the receipt.
      */
     public function reload()
     {

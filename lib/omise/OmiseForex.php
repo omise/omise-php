@@ -23,7 +23,7 @@ class OmiseForex extends OmiseApiResource
      */
     public function reload()
     {
-        parent::g_reload(self::getUrl($this['from']));
+        parent::g_reload(self::getUrl($this['base']));
     }
 
     /**
