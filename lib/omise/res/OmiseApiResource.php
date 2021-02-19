@@ -93,7 +93,7 @@ class OmiseApiResource extends OmiseObject
     }
 
     /**
-     * Set the resource to expire.
+     * Performs an action on the resource.
      *
      * @param  string $url
      *
@@ -101,7 +101,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @return OmiseApiResource
      */
-    protected function g_expire($url)
+    protected function g_process($url)
     {
         $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
         $this->refresh($result, true);
@@ -119,19 +119,6 @@ class OmiseApiResource extends OmiseObject
     protected function g_destroy($url)
     {
         $result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
-        $this->refresh($result, true);
-    }
-
-    /**
-     * Revokes the resource.
-     *
-     * @param  string $url
-     *
-     * @throws Exception|OmiseException
-     */
-    protected function g_revoke($url)
-    {
-        $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
         $this->refresh($result, true);
     }
 

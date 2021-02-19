@@ -91,7 +91,7 @@ class OmiseCharge extends OmiseApiResource
      */
     public function expire()
     {
-        parent::g_expire(self::getUrl($this['id']) . '/expire');
+        parent::g_process(self::getUrl($this['id']) . '/expire');
     }
 
     /**
@@ -101,10 +101,7 @@ class OmiseCharge extends OmiseApiResource
      */
     public function capture()
     {
-        $result = parent::execute(self::getUrl($this['id']).'/capture', parent::REQUEST_POST, parent::getResourceKey());
-        $this->refresh($result);
-
-        return $this;
+        return parent::g_process(self::getUrl($this['id']) . '/capture');
     }
 
     /**
@@ -125,10 +122,7 @@ class OmiseCharge extends OmiseApiResource
      */
     public function reverse()
     {
-        $result = parent::execute(self::getUrl($this['id']).'/reverse', parent::REQUEST_POST, parent::getResourceKey());
-        $this->refresh($result);
-
-        return $this;
+        return parent::g_process(self::getUrl($this['id']) . '/reverse');
     }
 
     /**

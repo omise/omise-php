@@ -39,7 +39,7 @@ class OmiseChain extends OmiseApiResource
      */
     public function revoke()
     {
-        parent::g_revoke(self::getUrl($this['id']) . '/revoke');
+        parent::g_process(self::getUrl($this['id']) . '/revoke');
     }
 
     /**
