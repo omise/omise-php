@@ -2,7 +2,7 @@
   "object": "forex",
   "location": "/forex/usd",
   "livemode": false,
-  "base": "USD",
-  "quote": "THB",
+  "base": "usd",
+  "quote": "thb",
   "rate": 30.4847017
 }
