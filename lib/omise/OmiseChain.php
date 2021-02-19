@@ -19,9 +19,7 @@ class OmiseChain extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads a sub-merchant chain.
      */
     public function reload()
     {
@@ -33,9 +31,7 @@ class OmiseChain extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_revoke()
+     * Revokes a sub-merchant chain.
      */
     public function revoke()
     {
@@ -43,7 +39,7 @@ class OmiseChain extends OmiseApiResource
     }
 
     /**
-     * Generate request url.
+     * Generates a request URL.
      *
      * @param  string $id
      *

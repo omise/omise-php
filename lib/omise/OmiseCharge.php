@@ -19,7 +19,7 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
-     * Search for charges.
+     * Searches for charges.
      *
      * @param  string $query
      * @param  string $publickey
@@ -33,9 +33,7 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the charge.
      */
     public function reload()
     {
@@ -47,7 +45,7 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
-     * Schedule a charge.
+     * Schedules a charge.
      *
      * @param  string $params
      * @param  string $publickey
@@ -75,9 +73,9 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * Updates the charge.
      *
-     * @see OmiseApiResource::g_update()
+     * @param  array  $params
      */
     public function update($params)
     {
@@ -85,9 +83,7 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_expire()
+     * Sets the charge to expire.
      */
     public function expire()
     {
@@ -95,17 +91,17 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
-     * Captures a charge.
-     *
-     * @return OmiseCharge
+     * Captures the charge.
      */
     public function capture()
     {
-        return parent::g_process(self::getUrl($this['id']) . '/capture');
+        parent::g_process(self::getUrl($this['id']) . '/capture');
     }
 
     /**
-     * Refund a charge.
+     * Refunds the charge.
+     *
+     * @param  array  $params
      *
      * @return OmiseRefund
      */
@@ -116,17 +112,17 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
-     * Reverses a charge.
-     *
-     * @return OmiseCharge
+     * Reverses the charge.
      */
     public function reverse()
     {
-        return parent::g_process(self::getUrl($this['id']) . '/reverse');
+        parent::g_process(self::getUrl($this['id']) . '/reverse');
     }
 
     /**
-     * list refunds
+     * Lists refunds of the charge.
+     *
+     * @param  array|string $options
      *
      * @return OmiseRefundList
      */
@@ -142,7 +138,7 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
-     * Gets a list of charge schedules.
+     * Lists charge schedules.
      *
      * @param  array|string $options
      * @param  string       $publickey
@@ -160,6 +156,8 @@ class OmiseCharge extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $id
      *
      * @return string

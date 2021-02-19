@@ -5,7 +5,7 @@ class OmiseAccount extends OmiseApiResource
     const ENDPOINT = 'account';
 
     /**
-     * Retrieves an account.
+     * Retrieves the account information.
      *
      * @param  string $publickey
      * @param  string $secretkey
@@ -18,9 +18,9 @@ class OmiseAccount extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * Updates the account information.
      *
-     * @see OmiseApiResource::g_update()
+     * @param  array  $params
      */
     public function update($params)
     {
@@ -28,9 +28,7 @@ class OmiseAccount extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the account information.
      */
     public function reload()
     {
@@ -38,6 +36,8 @@ class OmiseAccount extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @return string
      */
     private static function getUrl()

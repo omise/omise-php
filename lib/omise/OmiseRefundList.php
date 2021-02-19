@@ -20,7 +20,9 @@ class OmiseRefundList extends OmiseApiResource
     }
 
     /**
-     * @param  array $amount
+     * Creates a refund.
+     *
+     * @param  array $params
      *
      * @return OmiseRefund
      */
@@ -32,6 +34,8 @@ class OmiseRefundList extends OmiseApiResource
     }
 
     /**
+     * Retrieves a refund.
+     *
      * @param  string $id
      *
      * @return OmiseRefund
@@ -44,6 +48,8 @@ class OmiseRefundList extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $refundID
      *
      * @return string

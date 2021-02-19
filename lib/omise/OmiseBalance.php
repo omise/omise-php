@@ -5,7 +5,7 @@ class OmiseBalance extends OmiseApiResource
     const ENDPOINT = 'balance';
 
     /**
-     * Retrieves a current balance in the account.
+     * Retrieves the current balance on the account.
      *
      * @param  string $publickey
      * @param  string $secretkey
@@ -18,9 +18,7 @@ class OmiseBalance extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the current balance on the account.
      */
     public function reload()
     {
@@ -28,6 +26,8 @@ class OmiseBalance extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @return string
      */
     private static function getUrl()

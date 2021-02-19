@@ -19,7 +19,7 @@ class OmiseDispute extends OmiseApiResource
     }
 
     /**
-     * Search for disputes.
+     * Searches for disputes.
      *
      * @param  string $query
      * @param  string $publickey
@@ -33,9 +33,7 @@ class OmiseDispute extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the dispute.
      */
     public function reload()
     {
@@ -47,9 +45,9 @@ class OmiseDispute extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * Updates the dispute.
      *
-     * @see OmiseApiResource::g_update()
+     * @param  array  $params
      */
     public function update($params)
     {
@@ -57,9 +55,7 @@ class OmiseDispute extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_update()
+     * Accepts the dispute.
      */
     public function accept()
     {
@@ -67,7 +63,7 @@ class OmiseDispute extends OmiseApiResource
     }
 
     /**
-     * Generate request url.
+     * Generates a request URL.
      *
      * @param  string $id
      *

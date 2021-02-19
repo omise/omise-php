@@ -17,7 +17,7 @@ class OmiseApiResource extends OmiseObject
     private $OMISE_TIMEOUT = 60;
 
     /**
-     * Returns an instance of the class given in $clazz or raise an error.
+     * Returns an instance of the class given in $clazz or raises an error.
      *
      * @param  string $clazz
      * @param  string $publickey
@@ -45,7 +45,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @throws Exception|OmiseException
      *
-     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+     * @return OmiseAccount|OmiseBalance|OmiseCapabilities|OmiseChain|OmiseCharge|OmiseCustomer|OmiseDispute|OmiseEvent|OmiseForex|OmiseLink|OmiseOccurrence|OmiseReceipt|OmiseRecipient|OmiseSchedule|OmiseSource|OmiseToken|OmiseTransaction|OmiseTransfer
      */
     protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null)
     {
@@ -67,7 +67,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @throws Exception|OmiseException
      *
-     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+     * @return OmiseCharge|OmiseCustomer|OmiseLink|OmiseRecipient|OmiseSchedule|OmiseSource|OmiseToken|OmiseTransfer
      */
     protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null)
     {
@@ -98,8 +98,6 @@ class OmiseApiResource extends OmiseObject
      * @param  string $url
      *
      * @throws Exception|OmiseException
-     *
-     * @return OmiseApiResource
      */
     protected function g_process($url)
     {
@@ -113,8 +111,6 @@ class OmiseApiResource extends OmiseObject
      * @param  string $url
      *
      * @throws Exception|OmiseException
-     *
-     * @return OmiseApiResource
      */
     protected function g_destroy($url)
     {

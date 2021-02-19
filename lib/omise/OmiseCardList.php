@@ -20,7 +20,7 @@ class OmiseCardList extends OmiseApiResource
     }
   
     /**
-     * retrieve a card
+     * Retrieves a card.
      *
      * @param  string $id
      *
@@ -35,6 +35,8 @@ class OmiseCardList extends OmiseApiResource
   
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $cardID
      *
      * @return string

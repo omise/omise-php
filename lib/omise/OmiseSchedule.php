@@ -19,7 +19,7 @@ class OmiseSchedule extends OmiseApiResource
     }
 
     /**
-     * @return void
+     * Reloads the schedule.
      */
     public function reload()
     {
@@ -45,6 +45,7 @@ class OmiseSchedule extends OmiseApiResource
     }
 
     /**
+     * Lists occurences.
      * @param  array|string $options
      *
      * @return OmiseOccurrenceList|null
@@ -61,17 +62,17 @@ class OmiseSchedule extends OmiseApiResource
     }
 
     /**
-     * @return void
+     * Destroys the schedule.
      */
     public function destroy()
     {
-        parent::g_destroy(self::getUrl($this['id']));
+        parent::g_destroy($this->getUrl($this['id']));
     }
 
     /**
-     * @return bool
+     * Checks whether the schedule has been destroyed.
      *
-     * @see    OmiseApiResource::isDestroyed()
+     * @return bool
      */
     public function isDestroyed()
     {
@@ -79,6 +80,8 @@ class OmiseSchedule extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $id
      *
      * @return string

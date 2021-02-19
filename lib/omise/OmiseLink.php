@@ -19,7 +19,7 @@ class OmiseLink extends OmiseApiResource
     }
 
     /**
-     * Search for links.
+     * Searches for links.
      *
      * @param  string $query
      * @param  string $publickey
@@ -33,9 +33,7 @@ class OmiseLink extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the link.
      */
     public function reload()
     {
@@ -61,19 +59,17 @@ class OmiseLink extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * Destroys the link.
      */
     public function destroy()
     {
-        parent::g_destroy(self::getUrl($this['id']));
+        parent::g_destroy($this->getUrl($this['id']));
     }
 
     /**
-     * (non-PHPdoc)
+     * Checks whether the link has been destroyed.
      *
-     * @see OmiseApiResource::isDestroyed()
+     * @return bool
      */
     public function isDestroyed()
     {
@@ -81,6 +77,8 @@ class OmiseLink extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $id
      *
      * @return string

@@ -5,7 +5,7 @@ class OmiseRecipient extends OmiseApiResource
     const ENDPOINT = 'recipients';
 
     /**
-     * Retrieves recipients.
+     * Retrieves a recipient.
      *
      * @param  string $id
      * @param  string $publickey
@@ -19,7 +19,7 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
-     * Search for recipients.
+     * Searches for recipients.
      *
      * @param  string $query
      * @param  string $publickey
@@ -47,9 +47,9 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * Updates the recipient.
      *
-     * @see OmiseApiResource::g_update()
+     * @param  array  $params
      */
     public function update($params)
     {
@@ -57,19 +57,17 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * Destroys the recipient.
      */
     public function destroy()
     {
-        parent::g_destroy(self::getUrl($this['id']));
+        parent::g_destroy($this->getUrl($this['id']));
     }
 
     /**
-     * (non-PHPdoc)
+     * Checks whether the recipient has been destroyed.
      *
-     * @see OmiseApiResource::isDestroyed()
+     * @return bool
      */
     public function isDestroyed()
     {
@@ -77,9 +75,7 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the recipient.
      */
     public function reload()
     {
@@ -91,7 +87,7 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
-     * Gets a list of transfer schedules that belongs to a given recipient.
+     * Lists transfer schedules of the recipient.
      *
      * @param  array|string $options
      *
@@ -109,6 +105,8 @@ class OmiseRecipient extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $id
      *
      * @return string

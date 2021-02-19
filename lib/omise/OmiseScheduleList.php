@@ -3,9 +3,11 @@
 class OmiseScheduleList extends OmiseApiResource
 {
     /**
+     * Retrieves a schedule.
+     *
      * @param  string $id
      *
-     * @return OmiseOccurrence
+     * @return OmiseSchedule
      */
     public function retrieve($id)
     {

@@ -19,9 +19,7 @@ class OmiseReceipt extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads a receipt.
      */
     public function reload()
     {
@@ -33,7 +31,7 @@ class OmiseReceipt extends OmiseApiResource
     }
 
     /**
-     * Generate request url.
+     * Generates a request URL.
      *
      * @param  string $id
      *

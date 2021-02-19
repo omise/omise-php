@@ -33,6 +33,8 @@ class OmiseSource extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $id
      *
      * @return string
