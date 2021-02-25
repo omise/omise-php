@@ -40,6 +40,7 @@ class OmiseApiResource extends OmiseObject
      * Retrieves the resource.
      *
      * @param  string $clazz
+     * @param  string $url
      * @param  string $publickey
      * @param  string $secretkey
      *
@@ -51,6 +52,32 @@ class OmiseApiResource extends OmiseObject
     {
         $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
         $result   = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+        $resource->refresh($result);
+
+        return $resource;
+    }
+
+    /**
+     * Lists the resources.
+     *
+     * @param  string       $clazz
+     * @param  string       $url
+     * @param  array|string $options
+     * @param  string       $publickey
+     * @param  string       $secretkey
+     *
+     * @throws Exception|OmiseException
+     *
+     * @return OmiseOccurrenceList|OmiseScheduleList
+     */
+    protected static function g_list($clazz, $url, $options, $publickey = null, $secretkey = null)
+    {
+        if (is_array($options)) {
+            $options = '?' . http_build_query($options);
+        }
+
+        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+        $result   = $resource->execute($url . $options, self::REQUEST_GET, $resource->getResourceKey());
         $resource->refresh($result);
 
         return $resource;

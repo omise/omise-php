@@ -123,16 +123,6 @@ class ScheduleTest extends TestConfig
     /**
      * @test
      */
-    public function retrieve_null_occurrence()
-    {
-        $schedules = OmiseSchedule::retrieve();
-
-        $this->assertNull($schedules->occurrences());
-    }
-
-    /**
-     * @test
-     */
     public function destroy()
     {
         $schedule = OmiseSchedule::retrieve('schd_test_585t7iomh2dte3ejxh5');

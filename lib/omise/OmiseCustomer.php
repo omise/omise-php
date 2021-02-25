@@ -125,13 +125,7 @@ class OmiseCustomer extends OmiseApiResource
      */
     public function schedules($options = array())
     {
-        if ($this['object'] === 'customer') {
-            if (is_array($options)) {
-                $options = '?' . http_build_query($options);
-            }
-
-            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
-        }
+        return parent::g_list('OmiseScheduleList', self::getUrl($this['id'] . '/schedules'), $options, $this->_publickey, $this->_secretkey);
     }
 
     /**

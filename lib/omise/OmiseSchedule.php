@@ -45,20 +45,15 @@ class OmiseSchedule extends OmiseApiResource
     }
 
     /**
-     * Lists occurences.
+     * Lists occurrences of the schedule.
+     *
      * @param  array|string $options
      *
-     * @return OmiseOccurrenceList|null
+     * @return OmiseOccurrenceList
      */
     public function occurrences($options = array())
     {
-        if ($this['object'] === 'schedule') {
-            if (is_array($options)) {
-                $options = '?' . http_build_query($options);
-            }
-
-            return parent::g_retrieve('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options), $this->_publickey, $this->_secretkey);
-        }
+        return parent::g_list('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences'), $options, $this->_publickey, $this->_secretkey);
     }
 
     /**
