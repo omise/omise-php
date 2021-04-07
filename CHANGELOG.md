@@ -1,5 +1,20 @@
 # CHANGELOG
 
+### [v2.13.0 _(July 31, 2020)_](https://github.com/omise/omise-php/releases/tag/v2.12.0)
+
+- Change installment minimum to 200000 subunits (#132)
+- Add Receipt API (#126)
+- Add Chain API (#127)
+- Add expire method for Charge (#130)
+- Add accept method for Dispute (#125)
+- Add destroy method for Link (#124)
+- Add update method for Account (#123)
+- Add a `retrieve` method to OmiseSource (#121)
+
+### [v2.12.0 _(July 31, 2020)_](https://github.com/omise/omise-php/releases/tag/v2.12.0)
+
+- Removed certificate pinning (PR [#118](https://github.com/omise/omise-php/pull/118))
+
 ### [v2.11.2 _(May 8, 2019)_](https://github.com/omise/omise-php/releases/tag/v2.11.2)
 
 #### 🚀 Enhancements
