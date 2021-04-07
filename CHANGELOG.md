@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### [v2.13.0 _(July 31, 2020)_](https://github.com/omise/omise-php/releases/tag/v2.12.0)
+### [v2.13.0 _(April 7, 2021)_](https://github.com/omise/omise-php/releases/tag/v2.13.0)
 
 - Change installment minimum to 200000 subunits ([#132](https://github.com/omise/omise-php/pull/132))
 - Add Receipt API ([#126](https://github.com/omise/omise-php/pull/126))
