@@ -36,9 +36,7 @@ class OmiseToken extends OmiseVaultResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the token.
      */
     public function reload()
     {
@@ -46,12 +44,14 @@ class OmiseToken extends OmiseVaultResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $id
      *
      * @return string
      */
     private static function getUrl($id = '')
     {
-        return OMISE_VAULT_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_VAULT_URL . self::ENDPOINT . '/' . $id;
     }
 }

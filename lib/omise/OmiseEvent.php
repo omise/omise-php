@@ -19,9 +19,7 @@ class OmiseEvent extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the event.
      */
     public function reload()
     {
@@ -33,7 +31,7 @@ class OmiseEvent extends OmiseApiResource
     }
 
     /**
-     * Generate request url.
+     * Generates a request URL.
      *
      * @param  string $id
      *
@@ -41,6 +39,6 @@ class OmiseEvent extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

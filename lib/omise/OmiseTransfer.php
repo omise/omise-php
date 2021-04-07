@@ -19,7 +19,7 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
-     * Search for transfers.
+     * Searches for transfers.
      *
      * @param  string $query
      * @param  string $publickey
@@ -33,7 +33,7 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
-     * Schedule a transfer.
+     * Schedules a transfer.
      *
      * @param  string $params
      * @param  string $publickey
@@ -61,13 +61,11 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads a transfer.
      */
     public function reload()
     {
-        if ($this['object'] === 'transfers') {
+        if ($this['object'] === 'transfer') {
             parent::g_reload(self::getUrl($this['id']));
         } else {
             parent::g_reload(self::getUrl());
@@ -83,17 +81,17 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * Updates the transfer.
      *
-     * @see OmiseApiResource::g_update()
+     * @param  array  $params
      */
-    protected function update($params)
+    public function update($params)
     {
         parent::g_update(self::getUrl($this['id']), $params);
     }
 
     /**
-     * Gets a list of transfer schedules.
+     * Lists transfer schedules.
      *
      * @param  array|string $options
      * @param  string       $publickey
@@ -103,27 +101,21 @@ class OmiseTransfer extends OmiseApiResource
      */
     public static function schedules($options = array(), $publickey = null, $secretkey = null)
     {
-        if (is_array($options)) {
-            $options = '?' . http_build_query($options);
-        }
-
-        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
+        return parent::g_list('OmiseScheduleList', self::getUrl('schedules'), $options, $publickey, $secretkey);
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * Destroys the transfer.
      */
     public function destroy()
     {
-        parent::g_destroy(self::getUrl($this['id']));
+        parent::g_destroy($this->getUrl($this['id']));
     }
 
     /**
-     * (non-PHPdoc)
+     * Checks whether the transfer has been destroyed.
      *
-     * @see OmiseApiResource::isDestroyed()
+     * @return bool
      */
     public function isDestroyed()
     {
@@ -131,12 +123,14 @@ class OmiseTransfer extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $id
      *
      * @return string
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

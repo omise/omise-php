@@ -23,9 +23,7 @@ class OmiseCard extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the card.
      */
     public function reload()
     {
@@ -33,9 +31,9 @@ class OmiseCard extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * Updates the card.
      *
-     * @see OmiseApiResource::g_update()
+     * @param  array  $params
      */
     public function update($params)
     {
@@ -43,9 +41,7 @@ class OmiseCard extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * Destroys the card.
      */
     public function destroy()
     {
@@ -53,9 +49,9 @@ class OmiseCard extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * Checks whether the card has been destroyed.
      *
-     * @see OmiseApiResource::isDestroyed()
+     * @return bool
      */
     public function isDestroyed()
     {
@@ -63,12 +59,14 @@ class OmiseCard extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $cardID
      *
      * @return string
      */
     private function getUrl($cardID = '')
     {
-        return OMISE_API_URL.OmiseCustomer::ENDPOINT.'/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$cardID;
+        return OMISE_API_URL . OmiseCustomer::ENDPOINT . '/' . $this->_customerID . '/' . self::ENDPOINT . '/' . $cardID;
     }
 }

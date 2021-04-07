@@ -19,7 +19,7 @@ class OmiseCustomer extends OmiseApiResource
     }
 
     /**
-     * Search for customers.
+     * Searches for customers.
      *
      * @param  string $query
      * @param  string $publickey
@@ -47,9 +47,7 @@ class OmiseCustomer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the customer.
      */
     public function reload()
     {
@@ -61,9 +59,9 @@ class OmiseCustomer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
+     * Updates the customer.
      *
-     * @see OmiseApiResource::g_update()
+     * @param  array  $params
      */
     public function update($params)
     {
@@ -71,19 +69,17 @@ class OmiseCustomer extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_destroy()
+     * Destroys the customer.
      */
     public function destroy()
     {
-        parent::g_destroy(self::getUrl($this['id']));
+        parent::g_destroy($this->getUrl($this['id']));
     }
 
     /**
-     * (non-PHPdoc)
+     * Checks whether the customer has been destroyed.
      *
-     * @see OmiseApiResource::isDestroyed()
+     * @return bool
      */
     public function isDestroyed()
     {
@@ -91,9 +87,9 @@ class OmiseCustomer extends OmiseApiResource
     }
 
     /**
-     * Gets a list of all cards belongs to this customer.
+     * Lists cards of the customer.
      *
-     * @param  array $options
+     * @param  array|string $options
      *
      * @return OmiseCardList
      */
@@ -121,7 +117,7 @@ class OmiseCustomer extends OmiseApiResource
     }
 
     /**
-     * Gets a list of charge schedules that belongs to a given customer.
+     * Lists charge schedules of the customer.
      *
      * @param  array|string $options
      *
@@ -129,22 +125,18 @@ class OmiseCustomer extends OmiseApiResource
      */
     public function schedules($options = array())
     {
-        if ($this['object'] === 'customer') {
-            if (is_array($options)) {
-                $options = '?' . http_build_query($options);
-            }
-
-            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
-        }
+        return parent::g_list('OmiseScheduleList', self::getUrl($this['id'] . '/schedules'), $options, $this->_publickey, $this->_secretkey);
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $id
      *
      * @return string
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

@@ -19,7 +19,7 @@ class OmiseSchedule extends OmiseApiResource
     }
 
     /**
-     * @return void
+     * Reloads the schedule.
      */
     public function reload()
     {
@@ -45,33 +45,29 @@ class OmiseSchedule extends OmiseApiResource
     }
 
     /**
+     * Lists occurrences of the schedule.
+     *
      * @param  array|string $options
      *
-     * @return OmiseOccurrenceList|null
+     * @return OmiseOccurrenceList
      */
     public function occurrences($options = array())
     {
-        if ($this['object'] === 'schedule') {
-            if (is_array($options)) {
-                $options = '?' . http_build_query($options);
-            }
-
-            return parent::g_retrieve('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options), $this->_publickey, $this->_secretkey);
-        }
+        return parent::g_list('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences'), $options, $this->_publickey, $this->_secretkey);
     }
 
     /**
-     * @return void
+     * Destroys the schedule.
      */
     public function destroy()
     {
-        parent::g_destroy(self::getUrl($this['id']));
+        parent::g_destroy($this->getUrl($this['id']));
     }
 
     /**
-     * @return bool
+     * Checks whether the schedule has been destroyed.
      *
-     * @see    OmiseApiResource::isDestroyed()
+     * @return bool
      */
     public function isDestroyed()
     {
@@ -79,12 +75,14 @@ class OmiseSchedule extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $id
      *
      * @return string
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT . '/' . $id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

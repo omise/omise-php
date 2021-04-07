@@ -53,9 +53,7 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads capabilities.
      */
     public function reload()
     {
@@ -166,6 +164,8 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
+     * Generates a request URL.
+     *
      * @return string
      */
     private static function getUrl()

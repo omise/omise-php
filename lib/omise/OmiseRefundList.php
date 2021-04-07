@@ -20,7 +20,9 @@ class OmiseRefundList extends OmiseApiResource
     }
 
     /**
-     * @param  array $amount
+     * Creates a refund.
+     *
+     * @param  array $params
      *
      * @return OmiseRefund
      */
@@ -32,6 +34,8 @@ class OmiseRefundList extends OmiseApiResource
     }
 
     /**
+     * Retrieves a refund.
+     *
      * @param  string $id
      *
      * @return OmiseRefund
@@ -44,12 +48,14 @@ class OmiseRefundList extends OmiseApiResource
     }
 
     /**
-     * @param  string $id
+     * Generates a request URL.
+     *
+     * @param  string $refundID
      *
      * @return string
      */
-    private function getUrl($id = '')
+    private function getUrl($refundID = '')
     {
-        return OMISE_API_URL.'charges/'.$this->_chargeID.'/'.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . OmiseCharge::ENDPOINT . '/' . $this->_chargeID . '/' . self::ENDPOINT . '/' . $refundID;
     }
 }

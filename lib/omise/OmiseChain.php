@@ -19,13 +19,11 @@ class OmiseChain extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads a sub-merchant chain.
      */
     public function reload()
     {
-        if ($this['object'] === 'event') {
+        if ($this['object'] === 'chain') {
             parent::g_reload(self::getUrl($this['id']));
         } else {
             parent::g_reload(self::getUrl());
@@ -33,17 +31,15 @@ class OmiseChain extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_revoke()
+     * Revokes a sub-merchant chain.
      */
     public function revoke()
     {
-        parent::g_revoke(self::getUrl($this['id']) . '/revoke');
+        parent::g_process(self::getUrl($this['id']) . '/revoke');
     }
 
     /**
-     * Generate request url.
+     * Generates a request URL.
      *
      * @param  string $id
      *
@@ -51,6 +47,6 @@ class OmiseChain extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

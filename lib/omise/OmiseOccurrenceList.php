@@ -3,6 +3,8 @@
 class OmiseOccurrenceList extends OmiseApiResource
 {
     /**
+     * Retrieves an occurence.
+     *
      * @param  string $id
      *
      * @return OmiseOccurrence

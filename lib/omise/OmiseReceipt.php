@@ -19,13 +19,11 @@ class OmiseReceipt extends OmiseApiResource
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see OmiseApiResource::g_reload()
+     * Reloads the receipt.
      */
     public function reload()
     {
-        if ($this['object'] === 'event') {
+        if ($this['object'] === 'receipt') {
             parent::g_reload(self::getUrl($this['id']));
         } else {
             parent::g_reload(self::getUrl());
@@ -33,7 +31,7 @@ class OmiseReceipt extends OmiseApiResource
     }
 
     /**
-     * Generate request url.
+     * Generates a request URL.
      *
      * @param  string $id
      *
@@ -41,6 +39,6 @@ class OmiseReceipt extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

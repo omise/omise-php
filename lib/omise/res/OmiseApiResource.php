@@ -17,7 +17,7 @@ class OmiseApiResource extends OmiseObject
     private $OMISE_TIMEOUT = 60;
 
     /**
-     * Returns an instance of the class given in $clazz or raise an error.
+     * Returns an instance of the class given in $clazz or raises an error.
      *
      * @param  string $clazz
      * @param  string $publickey
@@ -40,17 +40,44 @@ class OmiseApiResource extends OmiseObject
      * Retrieves the resource.
      *
      * @param  string $clazz
+     * @param  string $url
      * @param  string $publickey
      * @param  string $secretkey
      *
      * @throws Exception|OmiseException
      *
-     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+     * @return OmiseAccount|OmiseBalance|OmiseCapabilities|OmiseChain|OmiseCharge|OmiseCustomer|OmiseDispute|OmiseEvent|OmiseForex|OmiseLink|OmiseOccurrence|OmiseReceipt|OmiseRecipient|OmiseSchedule|OmiseSource|OmiseToken|OmiseTransaction|OmiseTransfer
      */
     protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null)
     {
         $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
         $result   = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+        $resource->refresh($result);
+
+        return $resource;
+    }
+
+    /**
+     * Lists the resources.
+     *
+     * @param  string       $clazz
+     * @param  string       $url
+     * @param  array|string $options
+     * @param  string       $publickey
+     * @param  string       $secretkey
+     *
+     * @throws Exception|OmiseException
+     *
+     * @return OmiseOccurrenceList|OmiseScheduleList
+     */
+    protected static function g_list($clazz, $url, $options, $publickey = null, $secretkey = null)
+    {
+        if (is_array($options)) {
+            $options = '?' . http_build_query($options);
+        }
+
+        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+        $result   = $resource->execute($url . $options, self::REQUEST_GET, $resource->getResourceKey());
         $resource->refresh($result);
 
         return $resource;
@@ -67,7 +94,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @throws Exception|OmiseException
      *
-     * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
+     * @return OmiseCharge|OmiseCustomer|OmiseLink|OmiseRecipient|OmiseSchedule|OmiseSource|OmiseToken|OmiseTransfer
      */
     protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null)
     {
@@ -93,18 +120,16 @@ class OmiseApiResource extends OmiseObject
     }
 
     /**
-     * Set the resource to expire.
+     * Performs an action on the resource.
      *
      * @param  string $url
      *
      * @throws Exception|OmiseException
-     *
-     * @return OmiseApiResource
      */
-    protected function g_expire($url)
+    protected function g_process($url)
     {
         $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
-        $this->refresh($result, true);
+        $this->refresh($result);
     }
 
     /**
@@ -113,25 +138,10 @@ class OmiseApiResource extends OmiseObject
      * @param  string $url
      *
      * @throws Exception|OmiseException
-     *
-     * @return OmiseApiResource
      */
     protected function g_destroy($url)
     {
         $result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
-        $this->refresh($result, true);
-    }
-
-    /**
-     * Revokes the resource.
-     *
-     * @param  string $url
-     *
-     * @throws Exception|OmiseException
-     */
-    protected function g_revoke($url)
-    {
-        $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
         $this->refresh($result, true);
     }
 

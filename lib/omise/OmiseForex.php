@@ -5,7 +5,7 @@ class OmiseForex extends OmiseApiResource
     const ENDPOINT = 'forex';
 
     /**
-     * Retrieves a forex data.
+     * Retrieves the current foreign exchange rate.
      *
      * @param  string $currency
      * @param  string $publickey
@@ -19,14 +19,16 @@ class OmiseForex extends OmiseApiResource
     }
 
     /**
-     * @see OmiseApiResource::g_reload()
+     * Reloads the current foreign exchange rate.
      */
     public function reload()
     {
-        parent::g_reload(self::getUrl($this['from']));
+        parent::g_reload(self::getUrl($this['base']));
     }
 
     /**
+     * Generates a request URL.
+     *
      * @param  string $currency
      *
      * @return string
