@@ -102,4 +102,9 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
     {
         return count($this->_values);
     }
+
+    public function toArray()
+    {
+        return $this->_values;
+    }
 }
