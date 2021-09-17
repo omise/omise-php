@@ -115,7 +115,7 @@ class OmiseScheduler extends OmiseApiResource
     }
 
     /**
-     * @param  Date $date  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DD).
+     * @param  string $date  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DD).
      *
      * @return self
      */
@@ -125,7 +125,7 @@ class OmiseScheduler extends OmiseApiResource
     }
 
     /**
-     * @param  Date $date  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DD).
+     * @param  string $date  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DD).
      *
      * @return self
      */
