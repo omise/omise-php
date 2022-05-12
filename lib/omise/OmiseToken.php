@@ -52,6 +52,6 @@ class OmiseToken extends OmiseVaultResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_VAULT_URL.self::ENDPOINT.'/'.$id;
+        return $this->vaultUrl.self::ENDPOINT.'/'.$id;
     }
 }

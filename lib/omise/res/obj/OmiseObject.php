@@ -11,6 +11,12 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
     // Omise public key.
     protected $_publickey;
 
+    protected $version = '2.13.0';
+
+    protected $apiUrl = 'https://api.omise.co/';
+
+    protected $vaultUrl = 'https://vault.omise.co/';
+
     /**
      * Setup the Omise object. If no secret and public are passed the one defined
      * in config.php will be used.
@@ -30,11 +36,16 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
         $this->_publickey = $publickey !== null ? $publickey : OMISE_PUBLIC_KEY;
         $this->_secretkey = $secretkey !== null ? $secretkey : OMISE_SECRET_KEY;
 
-        $envApiUrl = trim(getenv('OMISE_API_URL'));
-        $envVaultUrl = trim(getenv('OMISE_VAULT_URL'));
-        define('OMISE_PHP_LIB_VERSION', '2.13.0');
-        define('OMISE_API_URL', (!$envApiUrl || '' === $envApiUrl) ? 'https://api.omise.co/' : $envApiUrl);
-        define('OMISE_VAULT_URL', (!$envVaultUrl || '' === $envVaultUrl) ? 'https://vault.omise.co/' : $envVaultUrl);
+        $envApiUrl = trim(getenv('$this->apiUrl'));
+        $envVaultUrl = trim(getenv('$this->vaultUrl'));
+
+        if (!$envApiUrl || '' === $envApiUrl) {
+            $this->apiUrl = $envApiUrl;
+        }
+
+        if (!$envVaultUrl || '' === $envVaultUrl) {
+            $this->vaultUrl = $envVaultUrl;
+        }
     }
 
     /**
