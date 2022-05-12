@@ -69,6 +69,6 @@ class OmiseCard extends OmiseApiResource
      */
     private function getUrl($cardID = '')
     {
-        return $this->apiUrl.OmiseCustomer::ENDPOINT.'/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$cardID;
+        return self::$apiUrl.OmiseCustomer::ENDPOINT.'/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$cardID;
     }
 }

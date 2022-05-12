@@ -170,7 +170,7 @@ class OmiseCapabilities extends OmiseApiResource
      */
     private static function getUrl()
     {
-        return $this->apiUrl . self::ENDPOINT;
+        return self::$apiUrl . self::ENDPOINT;
     }
 
     /**

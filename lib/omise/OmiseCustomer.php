@@ -145,6 +145,6 @@ class OmiseCustomer extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return $this->apiUrl.self::ENDPOINT.'/'.$id;
+        return self::$apiUrl.self::ENDPOINT.'/'.$id;
     }
 }

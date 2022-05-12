@@ -13,9 +13,9 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
 
     protected $version = '2.13.0';
 
-    protected $apiUrl = 'https://api.omise.co/';
+    protected static $apiUrl = 'https://api.omise.co/';
 
-    protected $vaultUrl = 'https://vault.omise.co/';
+    protected static $vaultUrl = 'https://vault.omise.co/';
 
     /**
      * Setup the Omise object. If no secret and public are passed the one defined
@@ -36,15 +36,15 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
         $this->_publickey = $publickey !== null ? $publickey : OMISE_PUBLIC_KEY;
         $this->_secretkey = $secretkey !== null ? $secretkey : OMISE_SECRET_KEY;
 
-        $envApiUrl = trim(getenv('$this->apiUrl'));
-        $envVaultUrl = trim(getenv('$this->vaultUrl'));
+        $envApiUrl = trim(getenv('OMISE_API_URL'));
+        $envVaultUrl = trim(getenv('OMISE_VAULT_URL'));
 
         if (!$envApiUrl || '' === $envApiUrl) {
-            $this->apiUrl = $envApiUrl;
+            self::$apiUrl = $envApiUrl;
         }
 
         if (!$envVaultUrl || '' === $envVaultUrl) {
-            $this->vaultUrl = $envVaultUrl;
+            self::$vaultUrl = $envVaultUrl;
         }
     }
 

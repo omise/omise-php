@@ -50,6 +50,6 @@ class OmiseRefundList extends OmiseApiResource
      */
     private function getUrl($id = '')
     {
-        return $this->apiUrl.'charges/'.$this->_chargeID.'/'.self::ENDPOINT.'/'.$id;
+        return self::$apiUrl.'charges/'.$this->_chargeID.'/'.self::ENDPOINT.'/'.$id;
     }
 }

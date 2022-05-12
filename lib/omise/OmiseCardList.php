@@ -5,7 +5,7 @@ class OmiseCardList extends OmiseApiResource
     const ENDPOINT = 'cards';
 
     private $_customerID;
-  
+
     /**
      * @param array  $cards
      * @param string $customerID
@@ -18,7 +18,7 @@ class OmiseCardList extends OmiseApiResource
         $this->_customerID = $customerID;
         $this->refresh($cards);
     }
-  
+
     /**
      * retrieve a card
      *
@@ -32,7 +32,7 @@ class OmiseCardList extends OmiseApiResource
 
         return new OmiseCard($result, $this->_customerID, $this->_publickey, $this->_secretkey);
     }
-  
+
 
     /**
      * @param  string $id
@@ -41,6 +41,6 @@ class OmiseCardList extends OmiseApiResource
      */
     private function getUrl($id = '')
     {
-        return $this->apiUrl.'customers/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$id;
+        return self::$apiUrl.'customers/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$id;
     }
 }

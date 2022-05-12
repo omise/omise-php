@@ -33,6 +33,6 @@ class OmiseForex extends OmiseApiResource
      */
     private static function getUrl($currency = '')
     {
-        return $this->apiUrl . self::ENDPOINT . '/' . $currency;
+        return self::$apiUrl . self::ENDPOINT . '/' . $currency;
     }
 }
