@@ -1,9 +1,5 @@
 <?php
 
-define('OMISE_PHP_LIB_VERSION', '2.13.0');
-define('OMISE_API_URL', 'https://api.omise.co/');
-define('OMISE_VAULT_URL', 'https://vault.omise.co/');
-
 class OmiseApiResource extends OmiseObject
 {
     // Request methods

@@ -20,19 +20,21 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
      */
     protected function __construct($publickey = null, $secretkey = null)
     {
-        if ($publickey !== null) {
-            $this->_publickey = $publickey;
-        } else {
-            $this->_publickey = OMISE_PUBLIC_KEY;
-        }
-
-        if ($secretkey !== null) {
-            $this->_secretkey = $secretkey;
-        } else {
-            $this->_secretkey = OMISE_SECRET_KEY;
-        }
+        $this->init();
 
         $this->_values = array();
+    }
+
+    private function init()
+    {
+        $this->_publickey = $publickey !== null ? $publickey : OMISE_PUBLIC_KEY;
+        $this->_secretkey = $secretkey !== null ? $secretkey : OMISE_SECRET_KEY;
+
+        $envApiUrl = trim(getenv('OMISE_API_URL'));
+        $envVaultUrl = trim(getenv('OMISE_VAULT_URL'));
+        define('OMISE_PHP_LIB_VERSION', '2.13.0');
+        define('OMISE_API_URL', (!$envApiUrl || '' === $envApiUrl) ? 'https://api.omise.co/' : $envApiUrl);
+        define('OMISE_VAULT_URL', (!$envVaultUrl || '' === $envVaultUrl) ? 'https://vault.omise.co/' : $envVaultUrl);
     }
 
     /**
