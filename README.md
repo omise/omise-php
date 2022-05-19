@@ -3,8 +3,6 @@
 
 `omise-php` is a library designed specifically to connect with Omise API written in PHP.
 
-Please pop onto our [community forum](https://forum.omise.co) or contact [support@omise.co](mailto:support@omise.co) if you have any question regarding this library and the functionality it provides.
-
 ## Requirements
 
 * PHP v5.4 and above.
