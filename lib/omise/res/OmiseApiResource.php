@@ -2,6 +2,7 @@
 
 define('OMISE_PHP_LIB_VERSION', '2.13.0');
 define('OMISE_API_URL', 'https://api.omise.co/');
+// define('OMISE_API_URL', 'https://api-core-1140.dev-omise.co');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
 class OmiseApiResource extends OmiseObject
@@ -207,22 +208,9 @@ class OmiseApiResource extends OmiseObject
      */
     private function _executeCurl($url, $requestMethod, $key, $params = null)
     {
-        $ch = curl_init($url);
-
-        curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
-
-        // Make a request or thrown an exception.
-        if (($result = curl_exec($ch)) === false) {
-            $error = curl_error($ch);
-            curl_close($ch);
-
-            throw new Exception($error);
-        }
-
-        // Close.
-        curl_close($ch);
-
-        return $result;
+        $client = new \GuzzleHttp\Client();
+        $result = $client->request($requestMethod, $url, $this->getOptions($key));
+        return $result->getBody();
     }
 
     /**
@@ -275,6 +263,29 @@ class OmiseApiResource extends OmiseObject
         }
 
         return $result;
+    }
+
+    public function getOptions($key)
+    {
+        $userAgent = "OmisePHP/".OMISE_PHP_LIB_VERSION." PHP/".phpversion();
+        $omiseApiVersion = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
+        $omiseVersionHeader = [];
+
+        // Config Omise API Version
+        if ($omiseApiVersion) {
+            $omiseVersionHeader = ['Omise-Version' => $omiseApiVersion];
+            $userAgent .= ' OmiseAPI/' . $omiseApiVersion;
+        }
+
+        return [
+            'auth' => [$key, ''],
+            'connect_timeout' => $this->OMISE_CONNECTTIMEOUT,
+            'timeout' => $this->OMISE_TIMEOUT,
+            'headers' => array_merge($omiseVersionHeader, [
+                'User-Agent' => $userAgent,
+                'Omise-Version' => $omiseApiVersion
+            ])
+        ];
     }
 
     /**
