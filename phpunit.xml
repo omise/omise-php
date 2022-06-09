@@ -27,4 +27,8 @@
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
+
+    <logging>
+        <log type="testdox-text" target="php://stdout"/>
+    </logging>
 </phpunit>

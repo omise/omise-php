@@ -2,6 +2,7 @@
 
 define('OMISE_PHP_LIB_VERSION', '2.13.0');
 define('OMISE_API_URL', 'https://api.omise.co/');
+// define('OMISE_API_URL', 'https://api-core-1140.dev-omise.co');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
 class OmiseApiResource extends OmiseObject
@@ -15,6 +16,11 @@ class OmiseApiResource extends OmiseObject
     // Timeout settings
     private $OMISE_CONNECTTIMEOUT = 30;
     private $OMISE_TIMEOUT = 60;
+
+    /**
+     * @var \GuzzleHttp\Client
+     */
+    private static $httpClient;
 
     /**
      * Returns an instance of the class given in $clazz or raise an error.
@@ -207,22 +213,12 @@ class OmiseApiResource extends OmiseObject
      */
     private function _executeCurl($url, $requestMethod, $key, $params = null)
     {
-        $ch = curl_init($url);
-
-        curl_setopt_array($ch, $this->genOptions($requestMethod, $key.':', $params));
-
-        // Make a request or thrown an exception.
-        if (($result = curl_exec($ch)) === false) {
-            $error = curl_error($ch);
-            curl_close($ch);
-
-            throw new Exception($error);
+        try {
+            $result = $this->httpClient()->request($requestMethod, $url, $this->getOptions($requestMethod, $key, $params));
+            return $result->getBody();
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            throw new Exception($e->getResponse()->getBody()->getContents());
         }
-
-        // Close.
-        curl_close($ch);
-
-        return $result;
     }
 
     /**
@@ -275,6 +271,64 @@ class OmiseApiResource extends OmiseObject
         }
 
         return $result;
+    }
+
+    public function getOptions($requestMethod, $key, $params = [])
+    {
+        $userAgent = "OmisePHP/".OMISE_PHP_LIB_VERSION." PHP/".phpversion();
+        $omiseApiVersion = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
+        $omiseVersionHeader = [];
+
+        // Config Omise API Version
+        if ($omiseApiVersion) {
+            $omiseVersionHeader = ['Omise-Version' => $omiseApiVersion];
+            $userAgent .= ' OmiseAPI/' . $omiseApiVersion;
+        }
+
+        $options = [
+            'connect_timeout' => $this->OMISE_CONNECTTIMEOUT,
+            'timeout' => $this->OMISE_TIMEOUT,
+            'allow_redirects' => ['referer' => true],
+            'headers' => array_merge($omiseVersionHeader, [
+                'User-Agent' => $userAgent,
+                'Omise-Version' => $omiseApiVersion,
+                'Authorization' => 'Basic ' . base64_encode($key)
+            ])
+        ];
+
+        if (is_array($params) && count($params) > 0) {
+            return array_merge($options, $this->getQueryBodyParameters($requestMethod, $params));
+        }
+
+        return $options;
+    }
+
+    /**
+     * Return either query parameters or request body parameters depending on the request method.
+     * The return value is finalized as per GuzzleHttp requirements.
+     *
+     * https://docs.guzzlephp.org/en/stable/request-options.html#form-params
+     * https://docs.guzzlephp.org/en/stable/request-options.html#query
+     *
+     * @param string $requestMethod
+     * @param array $params
+     *
+     * @return array
+     */
+    private function getQueryBodyParameters($requestMethod, $params)
+    {
+        $requestBody = [];
+
+        foreach($params as $key => $value) {
+            // Add to request body only if the value is valid i.e not null
+            if($value) {
+                $requestBody[$key] = $value;
+            }
+        }
+
+        return in_array($requestMethod, ['POST', 'PUT'])
+            ? [ 'form_params' => $requestBody ]
+            : [ 'query' => $requestBody ];
     }
 
     /**
@@ -355,5 +409,23 @@ class OmiseApiResource extends OmiseObject
     protected function getResourceKey()
     {
         return $this->_secretkey;
+    }
+
+    protected function httpClient()
+    {
+        if (!$this->httpClient) {
+            $this->httpClient = new \GuzzleHttp\Client();
+        }
+
+        return $this->httpClient;
+    }
+
+    /**
+     * @param GuzzleHttp\Client $httpClient
+     * @return GuzzleHttp\Client
+    */
+    public function setHttpClient($httpClient)
+    {
+        return $this->httpClient = $httpClient;
     }
 }

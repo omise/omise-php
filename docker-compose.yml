@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  php-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: omise-lib
+    container_name: omise-lib-app
+    tty: true
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - omise-lib
+
+  nginx:
+    image: nginx:alpine
+    container_name: omise-lib-nginx
+    tty: true
+    ports:
+      - "8081:80"
+    volumes:
+      - ./:/var/www
+      - ./../docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - omise-lib
+
+networks:
+  omise-lib:
+    driver: bridge
