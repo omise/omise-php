@@ -208,9 +208,13 @@ class OmiseApiResource extends OmiseObject
      */
     private function _executeCurl($url, $requestMethod, $key, $params = null)
     {
-        $client = new \GuzzleHttp\Client();
-        $result = $client->request($requestMethod, $url, $this->getOptions($key));
-        return $result->getBody();
+        try {
+            $client = new \GuzzleHttp\Client();
+            $result = $client->request($requestMethod, $url, $this->getOptions($requestMethod, $key, $params));
+            return $result->getBody();
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            throw new Exception($e->getResponse()->getBody()->getContents());
+        }
     }
 
     /**
@@ -265,7 +269,7 @@ class OmiseApiResource extends OmiseObject
         return $result;
     }
 
-    public function getOptions($key)
+    public function getOptions($requestMethod, $key, $params = [])
     {
         $userAgent = "OmisePHP/".OMISE_PHP_LIB_VERSION." PHP/".phpversion();
         $omiseApiVersion = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
@@ -277,15 +281,50 @@ class OmiseApiResource extends OmiseObject
             $userAgent .= ' OmiseAPI/' . $omiseApiVersion;
         }
 
-        return [
-            'auth' => [$key, ''],
+        $options = [
             'connect_timeout' => $this->OMISE_CONNECTTIMEOUT,
             'timeout' => $this->OMISE_TIMEOUT,
+            'allow_redirects' => ['referer' => true],
             'headers' => array_merge($omiseVersionHeader, [
                 'User-Agent' => $userAgent,
-                'Omise-Version' => $omiseApiVersion
+                'Omise-Version' => $omiseApiVersion,
+                'Authorization' => 'Basic ' . base64_encode($key)
             ])
         ];
+
+        if (is_array($params) && count($params) > 0) {
+            return array_merge($options, $this->getQueryBodyParameters($requestMethod, $params));
+        }
+
+        return $options;
+    }
+
+    /**
+     * Return either query parameters or request body parameters depending on the request method.
+     * The return value is finalized as per GuzzleHttp requirements.
+     *
+     * https://docs.guzzlephp.org/en/stable/request-options.html#form-params
+     * https://docs.guzzlephp.org/en/stable/request-options.html#query
+     *
+     * @param string $requestMethod
+     * @param array $params
+     *
+     * @return array
+     */
+    private function getQueryBodyParameters($requestMethod, $params)
+    {
+        $requestBody = [];
+
+        foreach($params as $key => $value) {
+            // Add to request body only if the value is valid i.e not null
+            if($value) {
+                $requestBody[$key] = $value;
+            }
+        }
+
+        return in_array($requestMethod, ['POST', 'PUT'])
+            ? [ 'form_params' => $requestBody ]
+            : [ 'query' => $requestBody ];
     }
 
     /**
