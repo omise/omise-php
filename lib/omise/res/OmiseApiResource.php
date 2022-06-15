@@ -18,6 +18,11 @@ class OmiseApiResource extends OmiseObject
     private $OMISE_TIMEOUT = 60;
 
     /**
+     * @var \GuzzleHttp\Client
+     */
+    private static $httpClient;
+
+    /**
      * Returns an instance of the class given in $clazz or raise an error.
      *
      * @param  string $clazz
@@ -209,8 +214,7 @@ class OmiseApiResource extends OmiseObject
     private function _executeCurl($url, $requestMethod, $key, $params = null)
     {
         try {
-            $client = new \GuzzleHttp\Client();
-            $result = $client->request($requestMethod, $url, $this->getOptions($requestMethod, $key, $params));
+            $result = $this->httpClient()->request($requestMethod, $url, $this->getOptions($requestMethod, $key, $params));
             return $result->getBody();
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             throw new Exception($e->getResponse()->getBody()->getContents());
@@ -405,5 +409,23 @@ class OmiseApiResource extends OmiseObject
     protected function getResourceKey()
     {
         return $this->_secretkey;
+    }
+
+    protected function httpClient()
+    {
+        if (!$this->httpClient) {
+            $this->httpClient = new \GuzzleHttp\Client();
+        }
+
+        return $this->httpClient;
+    }
+
+    /**
+     * @param GuzzleHttp\Client $httpClient
+     * @return GuzzleHttp\Client
+    */
+    public function setHttpClient($httpClient)
+    {
+        return $this->httpClient = $httpClient;
     }
 }
