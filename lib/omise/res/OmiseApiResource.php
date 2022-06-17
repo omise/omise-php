@@ -1,8 +1,7 @@
 <?php
 
-define('OMISE_PHP_LIB_VERSION', '2.13.0');
+define('OMISE_PHP_LIB_VERSION', '2.14.0-alpha');
 define('OMISE_API_URL', 'https://api.omise.co/');
-// define('OMISE_API_URL', 'https://api-core-1140.dev-omise.co');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
 class OmiseApiResource extends OmiseObject
@@ -20,7 +19,7 @@ class OmiseApiResource extends OmiseObject
     /**
      * @var \GuzzleHttp\Client
      */
-    private static $httpClient;
+    protected $httpClient;
 
     /**
      * Returns an instance of the class given in $clazz or raise an error.
@@ -217,7 +216,7 @@ class OmiseApiResource extends OmiseObject
             $result = $this->httpClient()->request($requestMethod, $url, $this->getOptions($requestMethod, $key, $params));
             return $result->getBody();
         } catch (\GuzzleHttp\Exception\ClientException $e) {
-            throw new Exception($e->getResponse()->getBody()->getContents());
+            return $e->getResponse()->getBody()->getContents();
         }
     }
 
