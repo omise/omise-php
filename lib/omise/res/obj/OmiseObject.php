@@ -18,6 +18,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
      * @param string $publickey
      * @param string $secretkey
      */
+    #[\ReturnTypeWillChange]
     protected function __construct($publickey = null, $secretkey = null)
     {
         if ($publickey !== null) {
@@ -41,6 +42,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
      * @param array   $values
      * @param boolean $clear
      */
+    #[\ReturnTypeWillChange]
     public function refresh($values, $clear = false)
     {
         if ($clear) {
@@ -51,53 +53,63 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
     }
 
     // Override methods of ArrayAccess
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         $this->_values[$key] = $value;
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetExists($key)
     {
         return isset($this->_values[$key]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($key)
     {
         unset($this->_values[$key]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         return isset($this->_values[$key]) ? $this->_values[$key] : null;
     }
 
     // Override methods of Iterator
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->_values);
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return current($this->_values);
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->_values);
     }
 
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->_values);
     }
 
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return ($this->current() !== false);
     }
 
     // Override methods of Countable
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->_values);

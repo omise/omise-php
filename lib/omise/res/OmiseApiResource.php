@@ -86,7 +86,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @throws Exception|OmiseException
      */
-    protected function g_update($url, $params = null)
+    protected static function g_update($url, $params = null)
     {
         $result = $this->execute($url, self::REQUEST_PATCH, $this->getResourceKey(), $params);
         $this->refresh($result);
@@ -101,7 +101,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @return OmiseApiResource
      */
-    protected function g_expire($url)
+    protected static function g_expire($url)
     {
         $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
         $this->refresh($result, true);
@@ -116,7 +116,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @return OmiseApiResource
      */
-    protected function g_destroy($url)
+    protected static function g_destroy($url)
     {
         $result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
         $this->refresh($result, true);
@@ -129,7 +129,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @throws Exception|OmiseException
      */
-    protected function g_revoke($url)
+    protected static function g_revoke($url)
     {
         $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
         $this->refresh($result, true);
@@ -142,7 +142,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @throws Exception|OmiseException
      */
-    protected function g_reload($url)
+    protected static function g_reload($url)
     {
         $result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
         $this->refresh($result);
@@ -159,7 +159,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @return array
      */
-    protected function execute($url, $requestMethod, $key, $params = null)
+    protected static function execute($url, $requestMethod, $key, $params = null)
     {
         // If this class is execute by phpunit > get test mode.
         if (preg_match('/phpunit/', $_SERVER['SCRIPT_NAME'])) {
@@ -191,7 +191,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @return boolean
      */
-    protected function isValidAPIResponse($array)
+    protected static function isValidAPIResponse($array)
     {
         return count($array) && isset($array['object']);
     }
@@ -342,7 +342,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @return bool|null
      */
-    protected function isDestroyed()
+    protected static function isDestroyed()
     {
         return $this['deleted'];
     }
@@ -352,7 +352,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @return string
      */
-    protected function getResourceKey()
+    protected static function getResourceKey()
     {
         return $this->_secretkey;
     }
