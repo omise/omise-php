@@ -161,8 +161,7 @@ class OmiseCharge extends OmiseApiResource
         if (is_array($options)) {
             $options = '?' . http_build_query($options);
         }
-
-        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
+        return OmiseScheduleList::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
     }
 
     /**

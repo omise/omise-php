@@ -57,7 +57,7 @@ class OmiseCard extends OmiseApiResource
      *
      * @see OmiseApiResource::isDestroyed()
      */
-    public function isDestroyed()
+    public static function isDestroyed()
     {
         return parent::isDestroyed();
     }

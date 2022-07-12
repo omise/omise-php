@@ -16,6 +16,8 @@ class OmiseApiResource extends OmiseObject
     private $OMISE_CONNECTTIMEOUT = 30;
     private $OMISE_TIMEOUT = 60;
 
+    protected static $instances  = [];
+
     /**
      * Returns an instance of the class given in $clazz or raise an error.
      *
@@ -27,13 +29,14 @@ class OmiseApiResource extends OmiseObject
      *
      * @return OmiseResource
      */
-    protected static function getInstance($clazz, $publickey = null, $secretkey = null)
+    protected static function getInstance($publickey = null, $secretkey = null)
     {
-        if (class_exists($clazz)) {
-            return new $clazz($publickey, $secretkey);
+        $resource = new static($publickey, $secretkey);
+        $className = get_class($resource);
+        if(!isset(self::$instances[$className])) {
+            static::$instances[$className] = $resource;
         }
-
-        throw new Exception('Undefined class.');
+        return static::$instances[$className];
     }
 
     /**
@@ -49,7 +52,7 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null)
     {
-        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+        $resource = self::getInstance($publickey, $secretkey);
         $result   = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
         $resource->refresh($result);
 
@@ -71,7 +74,7 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null)
     {
-        $resource = call_user_func(array($clazz, 'getInstance'), $clazz, $publickey, $secretkey);
+        $resource = self::getInstance($publickey, $secretkey);
         $result   = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
         $resource->refresh($result);
 
@@ -88,8 +91,9 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function g_update($url, $params = null)
     {
-        $result = $this->execute($url, self::REQUEST_PATCH, $this->getResourceKey(), $params);
-        $this->refresh($result);
+        $resource = self::getInstance();
+        $result = $resource->execute($url, self::REQUEST_PATCH, $resource->getResourceKey(), $params);
+        $resource->refresh($result);
     }
 
     /**
@@ -103,8 +107,9 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function g_expire($url)
     {
-        $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
-        $this->refresh($result, true);
+        $resource = self::getInstance();
+        $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey());
+        $resource->refresh($result, true);
     }
 
     /**
@@ -118,8 +123,9 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function g_destroy($url)
     {
-        $result = $this->execute($url, self::REQUEST_DELETE, $this->getResourceKey());
-        $this->refresh($result, true);
+        $resource = self::getInstance();
+        $result = $resource->execute($url, self::REQUEST_DELETE, $resource->getResourceKey());
+        $resource->refresh($result, true);
     }
 
     /**
@@ -131,8 +137,9 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function g_revoke($url)
     {
-        $result = $this->execute($url, self::REQUEST_POST, $this->getResourceKey());
-        $this->refresh($result, true);
+        $resource = self::getInstance();
+        $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey());
+        $resource->refresh($result, true);
     }
 
     /**
@@ -144,8 +151,9 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function g_reload($url)
     {
-        $result = $this->execute($url, self::REQUEST_GET, $this->getResourceKey());
-        $this->refresh($result);
+        $resource = self::getInstance();
+        $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+        $resource->refresh($result);
     }
 
     /**
@@ -159,14 +167,9 @@ class OmiseApiResource extends OmiseObject
      *
      * @return array
      */
-    protected static function execute($url, $requestMethod, $key, $params = null)
+    protected function execute($url, $requestMethod, $key, $params = null)
     {
-        // If this class is execute by phpunit > get test mode.
-        if (preg_match('/phpunit/', $_SERVER['SCRIPT_NAME'])) {
-            $result = $this->_executeTest($url, $requestMethod, $key, $params);
-        } else {
-            $result = $this->_executeCurl($url, $requestMethod, $key, $params);
-        }
+        $result = $this->_executeCurl($url, $requestMethod, $key, $params);
 
         // Decode the JSON response as an associative array.
         $array = json_decode($result, true);
@@ -344,7 +347,8 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function isDestroyed()
     {
-        return $this['deleted'];
+        $resource = self::getInstance();
+        return $resource['deleted'];
     }
 
     /**
@@ -354,6 +358,7 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function getResourceKey()
     {
-        return $this->_secretkey;
+        $resource = self::getInstance();
+        return $resource->_secretkey;
     }
 }

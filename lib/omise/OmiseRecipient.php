@@ -71,7 +71,7 @@ class OmiseRecipient extends OmiseApiResource
      *
      * @see OmiseApiResource::isDestroyed()
      */
-    public function isDestroyed()
+    public static function isDestroyed()
     {
         return parent::isDestroyed();
     }
@@ -103,8 +103,8 @@ class OmiseRecipient extends OmiseApiResource
             if (is_array($options)) {
                 $options = '?' . http_build_query($options);
             }
-
-            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
+            
+            return OmiseScheduleList::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
         }
     }
 

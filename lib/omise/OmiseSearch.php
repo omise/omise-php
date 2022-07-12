@@ -37,22 +37,10 @@ class OmiseSearch extends OmiseApiResource
      */
     public static function scope($scope, $publickey = null, $secretkey = null)
     {
-        return new OmiseSearch($scope, $publickey, $secretkey);
-    }
-
-    /**
-     * Create an instance of `OmiseSearch` with the given scope.
-     *
-     * This constructor is `protected` thus not intended to be used directly.
-     *
-     * @param string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
-     * @param string $publickey
-     * @param string $secretkey
-     */
-    protected function __construct($scope, $publickey, $secretkey)
-    {
-        parent::__construct($publickey, $secretkey);
-        $this->mergeAttributes('scope', $scope);
+       
+        $resouce = self::getInstance($publickey = null, $secretkey = null);
+        $resouce->mergeAttributes('scope', $scope);
+        return $resouce;
     }
 
     /**

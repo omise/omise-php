@@ -106,8 +106,7 @@ class OmiseTransfer extends OmiseApiResource
         if (is_array($options)) {
             $options = '?' . http_build_query($options);
         }
-
-        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
+        return OmiseScheduleList::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
     }
 
     /**
@@ -125,7 +124,7 @@ class OmiseTransfer extends OmiseApiResource
      *
      * @see OmiseApiResource::isDestroyed()
      */
-    public function isDestroyed()
+    public static function isDestroyed()
     {
         return parent::isDestroyed();
     }
