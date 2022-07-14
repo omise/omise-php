@@ -24,12 +24,18 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
         if ($publickey !== null) {
             $this->_publickey = $publickey;
         } else {
+            if (!defined('OMISE_PUBLIC_KEY')) {
+                define('OMISE_PUBLIC_KEY', 'pkey');
+            }
             $this->_publickey = OMISE_PUBLIC_KEY;
         }
 
         if ($secretkey !== null) {
             $this->_secretkey = $secretkey;
         } else {
+            if (!defined('OMISE_SECRET_KEY')) {
+                define('OMISE_SECRET_KEY', 'skey');
+            }
             $this->_secretkey = OMISE_SECRET_KEY;
         }
 
