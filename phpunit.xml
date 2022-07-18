@@ -1,22 +1,19 @@
 <phpunit
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd" 
+    bootstrap="vendor/autoload.php"
     backupGlobals="true"
     backupStaticAttributes="false"
-    cacheTokens="false"
-    colors="false"
+    colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
     convertWarningsToExceptions="true"
     forceCoversAnnotation="false"
-    mapTestClassNameToCoveredClassName="false"
-    printerClass="PHPUnit_TextUI_ResultPrinter"
     processIsolation="false"
-    stopOnError="false"
+    stopOnError="true"
     stopOnFailure="false"
     stopOnIncomplete="false"
     stopOnSkipped="false"
-    testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
     timeoutForSmallTests="1"
     timeoutForMediumTests="10"
     timeoutForLargeTests="60"
@@ -24,7 +21,29 @@
 
     <testsuites>
         <testsuite name="Test">
-            <directory suffix="Test.php">./tests</directory>
+            <file>./tests/InitTest.php</file>
+            <file>./tests/OmiseExceptionTest.php</file>
+            <file>./tests/ClassExistsTest.php</file>
+            <file>./tests/AccountTest.php</file>
+            <file>./tests/BalanceTest.php</file>
+            <file>./tests/CapabilitiesTest.php</file>
+            <file>./tests/ChargeTest.php</file>
+            <file>./tests/DisputeTest.php</file>
+            <file>./tests/EventTest.php</file> 
+            <file>./tests/ForexTest.php</file>
+            <file>./tests/LinkTest.php</file>
+            <file>./tests/OccurrenceTest.php</file>
+            <file>./tests/ReceiptTest.php</file>
+            <file>./tests/TransferTest.php</file>
+            <file>./tests/RecipientTest.php</file>
+            <file>./tests/RefundTest.php</file>
+            <file>./tests/SchedulerTest.php</file> 
+            <file>./tests/SearchTest.php</file> 
+            <file>./tests/SourceTest.php</file>
+            <file>./tests/TokenTest.php</file>
+            <file>./tests/TransactionTest.php</file> 
+            <file>./tests/CardTest.php</file>
+            <file>./tests/CustomerTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
