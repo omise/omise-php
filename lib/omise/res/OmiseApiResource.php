@@ -1,8 +1,8 @@
 <?php
 
 define('OMISE_PHP_LIB_VERSION', '2.13.0');
-define('OMISE_API_URL', 'https://api.omise.co/');
-define('OMISE_VAULT_URL', 'https://vault.omise.co/');
+@define('OMISE_API_URL', 'https://api.omise.co/');
+@define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
 class OmiseApiResource extends OmiseObject
 {
@@ -17,6 +17,10 @@ class OmiseApiResource extends OmiseObject
     private $OMISE_TIMEOUT = 60;
 
     protected static $instances  = [];
+
+    private static $classesToUsePublicKey = [
+        OmiseToken::class,
+    ];
 
     /**
      * Returns an instance of the class given in $clazz or raise an error.
@@ -359,6 +363,9 @@ class OmiseApiResource extends OmiseObject
     protected static function getResourceKey()
     {
         $resource = self::getInstance();
+        if(in_array(get_class($resource), self::$classesToUsePublicKey)) {
+            return $resource->_publickey;
+        }
         return $resource->_secretkey;
     }
 }
