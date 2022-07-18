@@ -1,8 +1,15 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class TransferTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class TransferTest extends TestCase
 {
+    public function setUp(): void
+    {
+        $receipts = OmiseTransfer::retrieve();
+        $this->transferId = $receipts['data'][0]['id'];
+    }
+
     /**
      * @test
      * OmiseTransfer should contain some method like below.
@@ -37,7 +44,7 @@ class TransferTest extends TestConfig
      */
     public function create()
     {
-        $transfer = OmiseTransfer::create(array('amount' => 100000));
+        $transfer = OmiseTransfer::create(['amount' => 100000]);
 
         $this->assertArrayHasKey('object', $transfer);
         $this->assertEquals('transfer', $transfer['object']);
@@ -49,7 +56,7 @@ class TransferTest extends TestConfig
      */
     public function retrieve()
     {
-        $transfer = OmiseTransfer::retrieve('trsf_test_4zmrjicrvw7j6uhv1l4');
+        $transfer = OmiseTransfer::retrieve($this->transferId);
 
         $this->assertArrayHasKey('object', $transfer);
         $this->assertEquals('transfer', $transfer['object']);
@@ -61,7 +68,7 @@ class TransferTest extends TestConfig
      */
     public function update()
     {
-        $transfer = OmiseTransfer::retrieve('trsf_test_4zmrjicrvw7j6uhv1l4');
+        $transfer = OmiseTransfer::retrieve($this->transferId);
 
         $transfer['amount'] = 5000;
         $transfer->save();
@@ -76,7 +83,7 @@ class TransferTest extends TestConfig
      */
     public function destroy()
     {
-        $transfer = OmiseTransfer::retrieve('trsf_test_4zmrjicrvw7j6uhv1l4');
+        $transfer = OmiseTransfer::retrieve($this->transferId);
         $transfer->destroy();
 
         $this->assertTrue($transfer->isDestroyed());
@@ -89,7 +96,7 @@ class TransferTest extends TestConfig
     public function search()
     {
         $result = OmiseTransfer::search('demo@omise.co')
-                                    ->filter(array('currency' => 'thb'));
+            ->filter(['currency' => 'thb']);
 
         $this->assertArrayHasKey('object', $result);
         $this->assertEquals('search', $result['object']);
@@ -103,28 +110,28 @@ class TransferTest extends TestConfig
     /**
      * @test
      */
-    public function retrieve_schedules()
+    public function create_scheduler()
     {
-        $schedules = OmiseTransfer::schedules();
-
-        $this->assertArrayHasKey('object', $schedules);
-        $this->assertEquals('list', $schedules['object']);
-        $this->assertEquals('schedule', $schedules['data'][0]['object']);
-        $this->assertArrayHasKey('transfer', $schedules['data'][0]);
+        $recipients = OmiseRecipient::retrieve();
+        $transfer = [
+            'recipient' => $recipients['data'][0]['id'],
+            'amount' => 100000
+        ];
+        $scheduler = OmiseTransfer::schedule($transfer);
+        $this->assertEquals($transfer, $scheduler['transfer']);
     }
 
     /**
      * @test
      */
-    public function create_scheduler()
+    public function retrieve_schedules()
     {
-        $transfer = array(
-            'recipient' => 'recp_test_508a9dytz793gxv9m77',
-            'amount'    => 100000
-        );
-
-        $scheduler = OmiseTransfer::schedule($transfer);
-
-        $this->assertEquals($transfer, $scheduler['transfer']);
+        $schedules = OmiseTransfer::schedules();
+        $this->assertArrayHasKey('object', $schedules);
+        $this->assertEquals('list', $schedules['object']);
+        if (isset($schedules['data'][0])) {
+            $this->assertEquals('schedule', $schedules['data'][0]['object']);
+            $this->assertArrayHasKey('transfer', $schedules['data'][0]);
+        }
     }
 }

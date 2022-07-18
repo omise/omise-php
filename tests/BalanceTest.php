@@ -1,7 +1,8 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class OmiseBalanceTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class OmiseBalanceTest extends TestCase
 {
     /**
      * @test
@@ -21,7 +22,6 @@ class OmiseBalanceTest extends TestConfig
     public function retrieve_omise_balance_object()
     {
         $balance = OmiseBalance::retrieve();
-
         $this->assertArrayHasKey('object', $balance);
         $this->assertEquals('balance', $balance['object']);
     }
@@ -34,7 +34,6 @@ class OmiseBalanceTest extends TestConfig
     {
         $balance = OmiseBalance::retrieve();
         $balance->reload();
-
         $this->assertArrayHasKey('object', $balance);
         $this->assertEquals('balance', $balance['object']);
     }

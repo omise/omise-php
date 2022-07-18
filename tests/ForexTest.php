@@ -1,7 +1,8 @@
 <?php
-require_once dirname(__FILE__) . '/TestConfig.php';
 
-class ForexTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class ForexTest extends TestCase
 {
     /**
      * @test
@@ -14,19 +15,18 @@ class ForexTest extends TestConfig
     }
 
     /**
-     * @test
+     * Forex do not work with staging api key
      */
     public function retrieve()
     {
         $forex = OmiseForex::retrieve('usd');
-
         $this->assertArrayHasKey('object', $forex);
         $this->assertEquals('forex', $forex['object']);
         $this->assertEquals('usd', $forex['from']);
     }
 
     /**
-     * @test
+     * Forex do not work with staging api key
      */
     public function reload()
     {

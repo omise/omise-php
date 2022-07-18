@@ -1,8 +1,18 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class ReceiptTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class ReceiptTest extends TestCase
 {
+    public $receiptId;
+
+    public function setUp(): void
+    {
+        $receipts = OmiseReceipt::retrieve();
+        if (isset($receipts['data'][0])) {
+            $this->receiptId = $receipts['data'][0]['id'];
+        }
+    }
     /**
      * @test
      * Assert that OmiseReceipt class contains the methods below.
@@ -21,9 +31,8 @@ class ReceiptTest extends TestConfig
     public function retrieve_receipt_list()
     {
         $receipts = OmiseReceipt::retrieve();
-
         $this->assertArrayHasKey('object', $receipts);
-        $this->assertEquals('list', $receipts['object']);
+        $this->assertEquals('receipt_list', $receipts['object']);
     }
 
     /**
@@ -32,10 +41,13 @@ class ReceiptTest extends TestConfig
      */
     public function retrieve_receipt_id()
     {
-        $receipt = OmiseReceipt::retrieve('rcpt_5ls0b8zb53qmw3mlvfz');
-
-        $this->assertArrayHasKey('object', $receipt);
-        $this->assertEquals('rcpt_5ls0b8zb53qmw3mlvfz', $receipt['id']);
+        if ($this->receiptId) {
+            $receipt = OmiseReceipt::retrieve($this->receiptId);
+            $this->assertArrayHasKey('object', $receipt);
+            $this->assertEquals($this->receiptId, $receipt['id']);
+        } else {
+            $this->assertTrue(true);
+        }
     }
 
     /**
@@ -46,9 +58,8 @@ class ReceiptTest extends TestConfig
     {
         $receipts = OmiseReceipt::retrieve();
         $receipts->reload();
-
         $this->assertArrayHasKey('object', $receipts);
-        $this->assertEquals('list', $receipts['object']);
+        $this->assertEquals('receipt_list', $receipts['object']);
     }
 
     /**
@@ -57,10 +68,13 @@ class ReceiptTest extends TestConfig
      */
     public function reload_receipt_id()
     {
-        $receipt = OmiseReceipt::retrieve('rcpt_5ls0b8zb53qmw3mlvfz');
-        $receipt->reload();
-
-        $this->assertArrayHasKey('object', $receipt);
-        $this->assertEquals('rcpt_5ls0b8zb53qmw3mlvfz', $receipt['id']);
+        if ($this->receiptId) {
+            $receipt = OmiseReceipt::retrieve($this->receiptId);
+            $receipt->reload();
+            $this->assertArrayHasKey('object', $receipt);
+            $this->assertEquals($this->receiptId, $receipt['id']);
+        } else {
+            $this->assertTrue(true);
+        }
     }
 }

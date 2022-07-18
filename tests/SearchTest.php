@@ -1,54 +1,53 @@
-<?php require_once dirname(__FILE__).'/TestConfig.php';
+<?php
 
-class SearchTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class SearchTest extends TestCase
 {
     /**
+     * @test
      * OmiseSearch class must be contain methods as below.
-     *
      */
-    public function testMethodExists()
+    public function method_exists()
     {
         $this->assertTrue(method_exists('OmiseSearch', 'scope'));
         $this->assertTrue(method_exists('OmiseSearch', 'getUrl'));
     }
 
     /**
+     * @test
      * Assert that a list of search object could be retrieved charge object by
      * specific scope.
-     *
      */
-    public function testRetrieveSearchResultBySpecificScope()
+    public function retrieve_search_result_by_specific_scope()
     {
         $search = OmiseSearch::scope('charge');
-
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
     }
 
     /**
+     * @test
      * Assert that a list of search object could be retrieved charge object by
      * specific scope.
-     *
      */
-    public function testRetrieveSearchResultWithOmiseKeys()
+    public function retrieve_search_result_with_omise_keys()
     {
         $search = OmiseSearch::scope('charge', OMISE_PUBLIC_KEY, OMISE_SECRET_KEY);
-
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
     }
 
     /**
+     * @test
      * Assert that a list of search object could be retrieved charge object by
      * specific scope and query.
-     *
      */
-    public function testRetrieveSearchObjectBySpecificScopeAndQuery()
+    public function retrieve_search_object_by_specific_scope_and_query()
     {
         $search = OmiseSearch::scope('charge')->query('demo');
-
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
@@ -56,52 +55,52 @@ class SearchTest extends TestConfig
     }
 
     /**
+     * @test
      * Assert that a list of search object could be retrieved charge object by
      * specific scope and query and filters some keys.
-     *
      */
-    public function testRetrieveSearchObjectBySpecificScopeAndQueryAndFilter()
+    public function retrieve_search_object_by_specific_scope_and_query_and_filter()
     {
         $search = OmiseSearch::scope('charge')
             ->query('demo')
-            ->filter(array('captured' => true));
+            ->filter(['captured' => true]);
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
         $this->assertEquals('demo', $search['query']);
-        $this->assertEquals(array('captured' => 'true'), $search['filters']);
+        $this->assertEquals(['captured' => 'true'], $search['filters']);
     }
 
     /**
+     * @test
      * Assert that a list of search object could be retrieved charge object by
      * specific scope and query and filters some keys and page number
-     *
      */
-    public function testRetrieveSearchObjectBySpecificScopeAndQueryAndFilterAndPage()
+    public function retrieve_search_object_by_specific_scope_and_query_and_filter_and_page()
     {
         $search = OmiseSearch::scope('charge')
             ->query('demo')
-            ->filter(array('captured' => true))
+            ->filter(['captured' => true])
             ->page(2);
 
         $this->assertArrayHasKey('object', $search);
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
         $this->assertEquals('demo', $search['query']);
-        $this->assertEquals(array('captured' => 'true'), $search['filters']);
+        $this->assertEquals(['captured' => 'true'], $search['filters']);
     }
 
     /**
+     * @test
      * Assert that a list of search object could be retrieved charge object by
      * specific scope and query and filters some keys and page number and order
-     *
      */
-    public function testRetrieveSearchObjectBySpecificScopeAndQueryAndFilterAndPageAndOrder()
+    public function retrieve_search_object_by_specific_scope_and_query_and_filter_and_page_and_order()
     {
         $search = OmiseSearch::scope('charge')
             ->query('demo')
-            ->filter(array('captured' => true))
+            ->filter(['captured' => true])
             ->page(2)
             ->order('reverse_chronological');
 
@@ -109,14 +108,15 @@ class SearchTest extends TestConfig
         $this->assertEquals('search', $search['object']);
         $this->assertEquals('charge', $search['scope']);
         $this->assertEquals('demo', $search['query']);
-        $this->assertEquals(array('captured' => 'true'), $search['filters']);
+        $this->assertEquals(['captured' => 'true'], $search['filters']);
     }
 
     /**
+     * @test
      * Assert that items of search object can be shown at a specific amount
      * given by 'per_page' number.
      */
-    public function testSetLimit()
+    public function set_limit()
     {
         $search = OmiseSearch::scope('charge')
             ->query('demo')

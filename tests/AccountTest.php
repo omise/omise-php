@@ -1,7 +1,8 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class OmiseAccountTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class OmiseAccountTest extends TestCase
 {
     /**
      * @test
@@ -22,7 +23,6 @@ class OmiseAccountTest extends TestConfig
     public function retrieve_omise_account_object()
     {
         $account = OmiseAccount::retrieve();
-
         $this->assertArrayHasKey('object', $account);
         $this->assertEquals('account', $account['object']);
     }
@@ -34,8 +34,7 @@ class OmiseAccountTest extends TestConfig
     public function update()
     {
         $account = OmiseAccount::retrieve();
-        $account->update(array('chain_return_uri' => 'https://www.omise.co'));
-
+        $account->update(['chain_return_uri' => 'https://www.omise.co']);
         $this->assertArrayHasKey('object', $account);
         $this->assertEquals('account', $account['object']);
         $this->assertEquals('https://www.omise.co', $account['chain_return_uri']);
@@ -49,7 +48,6 @@ class OmiseAccountTest extends TestConfig
     {
         $account = OmiseAccount::retrieve();
         $account->reload();
-
         $this->assertArrayHasKey('object', $account);
         $this->assertEquals('account', $account['object']);
     }

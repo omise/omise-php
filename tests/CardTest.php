@@ -1,7 +1,8 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class CardTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class CardTest extends TestCase
 {
     /**
      * @test
@@ -22,9 +23,8 @@ class CardTest extends TestConfig
      */
     public function retrieve_customer_card_list_object()
     {
-        $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
+        $customer = OmiseCustomer::retrieve(OMISE_CUSTOMER_ID);
         $cards = $customer->cards();
-
         $this->assertArrayHasKey('object', $cards);
         $this->assertEquals('list', $cards['object']);
     }
@@ -35,9 +35,8 @@ class CardTest extends TestConfig
      */
     public function retrieve_specific_customer_card_object()
     {
-        $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
-        $card = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
-
+        $customer = OmiseCustomer::retrieve(OMISE_CUSTOMER_ID);
+        $card = $customer->cards()->retrieve(OMISE_CARD_ID);
         $this->assertArrayHasKey('object', $card);
         $this->assertEquals('card', $card['object']);
     }
@@ -48,10 +47,9 @@ class CardTest extends TestConfig
      */
     public function reload()
     {
-        $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
-        $card = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
+        $customer = OmiseCustomer::retrieve(OMISE_CUSTOMER_ID);
+        $card = $customer->cards()->retrieve(OMISE_CARD_ID);
         $card->reload();
-
         $this->assertArrayHasKey('object', $card);
         $this->assertEquals('card', $card['object']);
     }
@@ -62,13 +60,14 @@ class CardTest extends TestConfig
      */
     public function update()
     {
-        $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
-        $card = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
-        $card->update(array('expiration_month'  => 11,
-                            'expiration_year'   => 2017,
-                            'name'              => 'Somchai Praset',
-                            'postal_code'       => '10310'));
-
+        $customer = OmiseCustomer::retrieve(OMISE_CUSTOMER_ID);
+        $card = $customer->cards()->retrieve(OMISE_CARD_ID);
+        $card->update([
+            'expiration_month' => 11,
+            'expiration_year' => date('Y', strtotime('+2 years')),
+            'name' => 'Somchai Praset',
+            'postal_code' => '10310'
+        ]);
         $this->assertArrayHasKey('object', $card);
         $this->assertEquals('card', $card['object']);
     }
@@ -79,10 +78,9 @@ class CardTest extends TestConfig
      */
     public function destroy()
     {
-        $customer = OmiseCustomer::retrieve('cust_test_4zmrjg2hct06ybwobqc');
-        $card = $customer->cards()->retrieve('card_test_4zmrjfzf0spz3mh63cs');
+        $customer = OmiseCustomer::retrieve(OMISE_CUSTOMER_ID);
+        $card = $customer->cards()->retrieve(OMISE_CARD_ID);
         $card->destroy();
-
         $this->assertArrayHasKey('object', $card);
         $this->assertEquals('card', $card['object']);
         $this->assertTrue($card->isDestroyed());

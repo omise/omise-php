@@ -1,7 +1,8 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class SchedulerTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class SchedulerTest extends TestCase
 {
     /**
      * @test
@@ -25,14 +26,12 @@ class SchedulerTest extends TestConfig
      */
     public function create_a_charge_scheduler()
     {
-        $charge = array(
-            'customer'    => 'cust_test_5234fzk37pi2mz0cen3',
-            'amount'      => 99900,
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900,
             'description' => 'Membership Fee'
-        );
-
+        ];
         $scheduler = new OmiseScheduler('charge', $charge);
-
         $this->assertEquals($charge, $scheduler['charge']);
     }
 
@@ -41,13 +40,12 @@ class SchedulerTest extends TestConfig
      */
     public function create_a_transfer_scheduler()
     {
-        $transfer = array(
-            'recipient' => 'recp_test_508a9dytz793gxv9m77',
-            'amount'    => 100000
-        );
-
+        $recipients = OmiseRecipient::retrieve();
+        $transfer = [
+            'recipient' => $recipients['data'][0]['id'],
+            'amount' => 100000
+        ];
         $scheduler = new OmiseScheduler('transfer', $transfer);
-
         $this->assertEquals($transfer, $scheduler['transfer']);
     }
 
@@ -56,17 +54,15 @@ class SchedulerTest extends TestConfig
      */
     public function set_scheduler_to_perform_every_15_days()
     {
-        $charge = array(
-            'customer'    => 'cust_test_5234fzk37pi2mz0cen3',
-            'amount'      => 99900,
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900,
             'description' => 'Membership Fee'
-        );
-
+        ];
         $scheduler = new OmiseScheduler('charge', $charge);
         $scheduler
             ->every(15)
             ->days();
-
         $this->assertEquals($charge, $scheduler['charge']);
         $this->assertEquals(15, $scheduler['every']);
         $this->assertEquals('day', $scheduler['period']);
@@ -77,21 +73,19 @@ class SchedulerTest extends TestConfig
      */
     public function set_scheduler_to_perform_every_2_weeks_on_monday()
     {
-        $charge = array(
-            'customer'    => 'cust_test_5234fzk37pi2mz0cen3',
-            'amount'      => 99900,
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900,
             'description' => 'Membership Fee'
-        );
-
+        ];
         $scheduler = new OmiseScheduler('charge', $charge);
         $scheduler
             ->every(2)
             ->weeks('Monday');
-
         $this->assertEquals($charge, $scheduler['charge']);
         $this->assertEquals(2, $scheduler['every']);
         $this->assertEquals('week', $scheduler['period']);
-        $this->assertEquals(array('weekdays' => array('Monday')), $scheduler['on']);
+        $this->assertEquals(['weekdays' => ['Monday']], $scheduler['on']);
     }
 
     /**
@@ -99,21 +93,19 @@ class SchedulerTest extends TestConfig
      */
     public function set_scheduler_to_perform_every_1_month_on_first_and_fifteenth()
     {
-        $charge = array(
-            'customer'    => 'cust_test_5234fzk37pi2mz0cen3',
-            'amount'      => 99900,
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900,
             'description' => 'Membership Fee'
-        );
-
+        ];
         $scheduler = new OmiseScheduler('charge', $charge);
         $scheduler
             ->every(1)
-            ->month(array(1, 15));
-
+            ->month([1, 15]);
         $this->assertEquals($charge, $scheduler['charge']);
         $this->assertEquals(1, $scheduler['every']);
         $this->assertEquals('month', $scheduler['period']);
-        $this->assertEquals(array('days_of_month' => array(1, 15)), $scheduler['on']);
+        $this->assertEquals(['days_of_month' => [1, 15]], $scheduler['on']);
     }
 
     /**
@@ -121,21 +113,20 @@ class SchedulerTest extends TestConfig
      */
     public function set_scheduler_to_perform_every_3_months_on_twentyeighth()
     {
-        $charge = array(
-            'customer'    => 'cust_test_5234fzk37pi2mz0cen3',
-            'amount'      => 99900,
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900,
             'description' => 'Membership Fee'
-        );
+        ];
 
         $scheduler = new OmiseScheduler('charge', $charge);
         $scheduler
             ->every(3)
             ->month(28);
-
         $this->assertEquals($charge, $scheduler['charge']);
         $this->assertEquals(3, $scheduler['every']);
         $this->assertEquals('month', $scheduler['period']);
-        $this->assertEquals(array('days_of_month' => array(28)), $scheduler['on']);
+        $this->assertEquals(['days_of_month' => [28]], $scheduler['on']);
     }
 
     /**
@@ -143,23 +134,22 @@ class SchedulerTest extends TestConfig
      */
     public function set_scheduler_to_perform_every_1_month_on_last_friday_and_specify_end_date()
     {
-        $charge = array(
-            'customer'    => 'cust_test_5234fzk37pi2mz0cen3',
-            'amount'      => 99900,
+        $endDate = date('Y-m-d', strtotime('+2 months'));
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900,
             'description' => 'Membership Fee'
-        );
-
+        ];
         $scheduler = new OmiseScheduler('charge', $charge);
         $scheduler
             ->every(1)
             ->month('last_friday')
-            ->endDate('2020-01-01');
-
+            ->endDate($endDate);
         $this->assertEquals($charge, $scheduler['charge']);
         $this->assertEquals(1, $scheduler['every']);
         $this->assertEquals('month', $scheduler['period']);
-        $this->assertEquals(array('weekday_of_month' => 'last_friday'), $scheduler['on']);
-        $this->assertEquals('2020-01-01', $scheduler['end_date']);
+        $this->assertEquals(['weekday_of_month' => 'last_friday'], $scheduler['on']);
+        $this->assertEquals($endDate, $scheduler['end_date']);
     }
 
     /**
@@ -167,24 +157,26 @@ class SchedulerTest extends TestConfig
      */
     public function set_scheduler_to_perform_at_specific_date()
     {
-        $charge = array(
-            'customer'    => 'cust_test_5234fzk37pi2mz0cen3',
-            'amount'      => 99900,
+        $endDate = date('Y-m-d', strtotime('+2 months'));
+        $startDate = date('Y-m-d');
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900,
             'description' => 'Membership Fee'
-        );
+        ];
 
         $scheduler = new OmiseScheduler('charge', $charge);
         $scheduler
             ->every(1)
             ->month('last_friday')
-            ->endDate('2020-01-01')
-            ->startDate('2019-01-01');
+            ->endDate($endDate)
+            ->startDate($startDate);
 
         $this->assertEquals($charge, $scheduler['charge']);
         $this->assertEquals(1, $scheduler['every']);
         $this->assertEquals('month', $scheduler['period']);
-        $this->assertEquals(array('weekday_of_month' => 'last_friday'), $scheduler['on']);
-        $this->assertEquals('2020-01-01', $scheduler['end_date']);
-        $this->assertEquals('2019-01-01', $scheduler['start_date']);
+        $this->assertEquals(['weekday_of_month' => 'last_friday'], $scheduler['on']);
+        $this->assertEquals($endDate, $scheduler['end_date']);
+        $this->assertEquals($startDate, $scheduler['start_date']);
     }
 }

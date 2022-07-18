@@ -1,7 +1,8 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class LinkTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class LinkTest extends TestCase
 {
     /**
      * @test
@@ -14,6 +15,34 @@ class LinkTest extends TestConfig
         $this->assertTrue(method_exists('OmiseLink', 'destroy'));
         $this->assertTrue(method_exists('OmiseLink', 'isDestroyed'));
         $this->assertTrue(method_exists('OmiseLink', 'getUrl'));
+    }
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $link = OmiseLink::create([
+            'amount' => 100000,
+            'currency' => 'THB',
+            'title' => 'Order-384',
+            'description' => 'New Product'
+        ]);
+        $this->linkId = $link['id'];
+    }
+
+    /**
+     * @test
+     * Assert that a link is successfully created with the given parameters set.
+     */
+    public function create()
+    {
+        $link = OmiseLink::create([
+            'amount' => 100000,
+            'title' => 'Order-384',
+            'description' => 'New Product',
+            'currency' => 'THB',
+        ]);
+        $this->assertArrayHasKey('object', $link);
+        $this->assertEquals('link', $link['object']);
     }
 
     /**
@@ -30,25 +59,11 @@ class LinkTest extends TestConfig
 
     /**
      * @test
-     * Assert that a link is successfully created with the given parameters set.
-     */
-    public function create()
-    {
-        $link = OmiseLink::create(array('amount'      => 100000,
-                                        'title'       => 'Order-384',
-                                        'description' => 'New Product'));
-
-        $this->assertArrayHasKey('object', $link);
-        $this->assertEquals('link', $link['object']);
-    }
-
-    /**
-     * @test
      * Assert that a link object is returned after a successful retrieve.
      */
     public function retrieve_specific_link_object()
     {
-        $link = OmiseLink::retrieve('link_test_56bsanpa365jnlbc7rt');
+        $link = OmiseLink::retrieve($this->linkId);
 
         $this->assertArrayHasKey('object', $link);
         $this->assertEquals('link', $link['object']);
@@ -60,7 +75,7 @@ class LinkTest extends TestConfig
      */
     public function destroy()
     {
-        $link = OmiseLink::retrieve('link_test_56bsanpa365jnlbc7rt');
+        $link = OmiseLink::retrieve($this->linkId);
         $link->destroy();
 
         $this->assertTrue($link->isDestroyed());
@@ -73,8 +88,8 @@ class LinkTest extends TestConfig
     public function search()
     {
         $result = OmiseLink::search('demo')
-                                ->filter(array('used' => true))
-                                ->order('reverse_chronological');
+            ->filter(['used' => true])
+            ->order('reverse_chronological');
 
         $this->assertArrayHasKey('object', $result);
         $this->assertEquals('search', $result['object']);

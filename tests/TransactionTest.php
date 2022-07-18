@@ -1,7 +1,8 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class TransactionTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class TransactionTest extends TestCase
 {
     /**
      * @test
@@ -32,8 +33,8 @@ class TransactionTest extends TestConfig
      */
     public function retrieve_with_specific_transaction()
     {
-        $transaction = OmiseTransaction::retrieve('trxn_test_4zmrjhlflnz6id6q0bo');
-
+        $transactions = OmiseTransaction::retrieve();
+        $transaction = OmiseTransaction::retrieve($transactions['data'][0]['id']);
         $this->assertArrayHasKey('object', $transaction);
         $this->assertEquals('transaction', $transaction['object']);
     }
@@ -45,8 +46,8 @@ class TransactionTest extends TestConfig
      */
     public function validate_omise_transaction_object_retrieved_structure()
     {
-        $transaction = OmiseTransaction::retrieve('trxn_test_4zmrjhlflnz6id6q0bo');
-
+        $transactions = OmiseTransaction::retrieve();
+        $transaction = OmiseTransaction::retrieve($transactions['data'][0]['id']);
         $this->assertArrayHasKey('object', $transaction);
         $this->assertArrayHasKey('id', $transaction);
         $this->assertArrayHasKey('type', $transaction);

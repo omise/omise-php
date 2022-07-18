@@ -1,8 +1,19 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class OmiseDisputeTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class OmiseDisputeTest extends TestCase
 {
+    use ChargeTrait;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $charge = $this->createCharge(true);
+        $this->chargeId = $charge['id'];
+        $dispute = OmiseDispute::create($charge, ['message' => '2 time charge']);
+        $this->disputeId = $dispute['id'];
+    }
     /**
      * @test
      * OmiseDispute class must be contain some method below.
@@ -27,7 +38,9 @@ class OmiseDisputeTest extends TestConfig
 
         $this->assertArrayHasKey('object', $dispute);
         $this->assertEquals('list', $dispute['object']);
-        $this->assertEquals('dispute', $dispute['data'][0]['object']);
+        if (isset($dispute['data'][0])) {
+            $this->assertEquals('dispute', $dispute['data'][0]['object']);
+        }
     }
 
     /**
@@ -36,7 +49,7 @@ class OmiseDisputeTest extends TestConfig
      */
     public function retrieve_omise_dispute_object_with_key()
     {
-        $dispute = OmiseDispute::retrieve('dspt_test_4zgf15h89w8t775kcm8');
+        $dispute = OmiseDispute::retrieve($this->disputeId);
 
         $this->assertArrayHasKey('object', $dispute);
         $this->assertEquals('dispute', $dispute['object']);
@@ -51,8 +64,10 @@ class OmiseDisputeTest extends TestConfig
         $dispute = OmiseDispute::retrieve('open');
 
         $this->assertArrayHasKey('object', $dispute);
-        $this->assertEquals('dispute', $dispute['data'][0]['object']);
-        $this->assertEquals('open', $dispute['data'][0]['status']);
+        if (isset($dispute['data'][0])) {
+            $this->assertEquals('dispute', $dispute['data'][0]['object']);
+            $this->assertEquals('open', $dispute['data'][0]['status']);
+        }
     }
 
     /**
@@ -64,8 +79,10 @@ class OmiseDisputeTest extends TestConfig
         $dispute = OmiseDispute::retrieve('pending');
 
         $this->assertArrayHasKey('object', $dispute);
-        $this->assertEquals('dispute', $dispute['data'][0]['object']);
-        $this->assertEquals('pending', $dispute['data'][0]['status']);
+        if (isset($dispute['data'][0])) {
+            $this->assertEquals('dispute', $dispute['data'][0]['object']);
+            $this->assertEquals('pending', $dispute['data'][0]['status']);
+        }
     }
 
     /**
@@ -77,8 +94,10 @@ class OmiseDisputeTest extends TestConfig
         $dispute = OmiseDispute::retrieve('closed');
 
         $this->assertArrayHasKey('object', $dispute);
-        $this->assertEquals('dispute', $dispute['data'][0]['object']);
-        $this->assertEquals('closed', $dispute['data'][0]['status']);
+        if (isset($dispute['data'][0])) {
+            $this->assertEquals('dispute', $dispute['data'][0]['object']);
+            $this->assertTrue(in_array($dispute['data'][0]['status'], ['closed', 'lost']));
+        }
     }
 
     /**
@@ -87,10 +106,10 @@ class OmiseDisputeTest extends TestConfig
      */
     public function update()
     {
-        $dispute = OmiseDispute::retrieve('dspt_test_4zgf15h89w8t775kcm8');
-        $dispute->update(array(
-        'message' => 'New Message...'
-        ));
+        $dispute = OmiseDispute::retrieve($this->disputeId);
+        $dispute->update([
+            'message' => 'New Message...'
+        ]);
 
         $this->assertArrayHasKey('object', $dispute);
         $this->assertEquals('dispute', $dispute['object']);
@@ -102,7 +121,7 @@ class OmiseDisputeTest extends TestConfig
      */
     public function accept()
     {
-        $dispute = OmiseDispute::retrieve('dspt_test_4zgf15h89w8t775kcm8');
+        $dispute = OmiseDispute::retrieve($this->disputeId);
         $dispute->accept();
 
         $this->assertArrayHasKey('object', $dispute);
@@ -117,7 +136,7 @@ class OmiseDisputeTest extends TestConfig
     public function search()
     {
         $result = OmiseDispute::search('demo')
-        ->filter(array('card_last_digits' => '5454'));
+            ->filter(['card_last_digits' => '5454']);
 
         $this->assertArrayHasKey('object', $result);
         $this->assertEquals('search', $result['object']);

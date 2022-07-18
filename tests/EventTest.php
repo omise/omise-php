@@ -1,8 +1,16 @@
 <?php
-require_once dirname(__FILE__).'/TestConfig.php';
 
-class EventTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class EventTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        $event = OmiseEvent::retrieve();
+        $this->eventId = $event['data'][0]['id'];
+    }
+
     /**
      * @test
      * OmiseEvent class must be contain methods as below.
@@ -21,7 +29,6 @@ class EventTest extends TestConfig
     public function retrieve_event_list_object()
     {
         $event = OmiseEvent::retrieve();
-
         $this->assertArrayHasKey('object', $event);
         $this->assertEquals('list', $event['object']);
     }
@@ -32,11 +39,11 @@ class EventTest extends TestConfig
      */
     public function retrieve_event_object_by_event_id()
     {
-        $event = OmiseEvent::retrieve('evnt_test_531zv1nto0a5pimuiza');
+        $event = OmiseEvent::retrieve($this->eventId);
 
         $this->assertArrayHasKey('object', $event);
         $this->assertEquals('event', $event['object']);
-        $this->assertEquals('evnt_test_531zv1nto0a5pimuiza', $event['id']);
+        $this->assertEquals($this->eventId, $event['id']);
     }
 
     /**
@@ -47,7 +54,6 @@ class EventTest extends TestConfig
     {
         $event = OmiseEvent::retrieve();
         $event->reload();
-
         $this->assertArrayHasKey('object', $event);
         $this->assertEquals('list', $event['object']);
     }
@@ -58,11 +64,11 @@ class EventTest extends TestConfig
      */
     public function reload_event_object_given_by_event_id()
     {
-        $event = OmiseEvent::retrieve('evnt_test_531zv1nto0a5pimuiza');
+        $event = OmiseEvent::retrieve($this->eventId);
         $event->reload();
 
         $this->assertArrayHasKey('object', $event);
         $this->assertEquals('event', $event['object']);
-        $this->assertEquals('evnt_test_531zv1nto0a5pimuiza', $event['id']);
+        $this->assertEquals($this->eventId, $event['id']);
     }
 }

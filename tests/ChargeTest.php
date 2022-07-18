@@ -1,7 +1,11 @@
-<?php require_once dirname(__FILE__).'/TestConfig.php';
+<?php
 
-class ChargeTest extends TestConfig
+use PHPUnit\Framework\TestCase;
+
+class ChargeTest extends TestCase
 {
+    use ChargeTrait;
+
     /**
      * @test
      * OmiseCharge class must be contain some method below.
@@ -37,12 +41,7 @@ class ChargeTest extends TestConfig
      */
     public function create()
     {
-        $charge = OmiseCharge::create(array('amount'      => 100000,
-                                            'currency'    => 'thb',
-                                            'description' => 'Order-384',
-                                            'ip'          => '127.0.0.1',
-                                            'card'        => 'tokn_test_4zmrjhuk2rndz24a6x0'));
-
+        $charge = $this->createCharge();
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
     }
@@ -53,8 +52,8 @@ class ChargeTest extends TestConfig
      */
     public function retrieve_specific_charge_object()
     {
-        $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
-
+        $charge = $this->createCharge();
+        $charge = OmiseCharge::retrieve($charge['id']);
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
     }
@@ -65,8 +64,8 @@ class ChargeTest extends TestConfig
      */
     public function update()
     {
-        $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
-        $charge->update(array('description' => 'Another description'));
+        $charge = $this->createCharge();
+        $charge->update(['description' => 'Another description']);
 
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
@@ -81,21 +80,20 @@ class ChargeTest extends TestConfig
      */
     public function capture()
     {
-        $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
+        $charge = $this->createCharge(false);
         $charge->capture();
-
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
-        $this->assertTrue($charge['captured']);
+        $this->assertNull($charge['failure_code']);
     }
 
     /**
-     * @test
-     */
+    * @test
+    */
     public function refund()
     {
-        $charge = OmiseCharge::retrieve('chrg_test_4zmrjgxdh4ycj2qncoj');
-        $refund = $charge->refund(array('amount' => 10000));
+        $charge = $this->createCharge(true);
+        $refund = $charge->refund(['amount' => 10000]);
 
         $this->assertArrayHasKey('object', $refund);
         $this->assertEquals('refund', $refund['object']);
@@ -108,26 +106,11 @@ class ChargeTest extends TestConfig
      */
     public function reverse()
     {
-        $charge = OmiseCharge::retrieve('chrg_test_53z5zoeovi39e1erbj0');
+        $charge = $this->createCharge();
         $charge->reverse();
-
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
         $this->assertTrue($charge['reversed']);
-    }
-
-    /**
-     * @test
-     * Assert that an expired flag is set after charge is successfully set to expire.
-     */
-    public function expire()
-    {
-        $charge = OmiseCharge::retrieve('chrg_test_53z5zoeovi39e1erbj0');
-        $charge->expire();
-
-        $this->assertArrayHasKey('object', $charge);
-        $this->assertEquals('charge', $charge['object']);
-        $this->assertTrue($charge['expired']);
     }
 
     /**
@@ -137,10 +120,9 @@ class ChargeTest extends TestConfig
     public function search()
     {
         $result = OmiseCharge::search('order')
-                                ->filter(array('captured' => true))
-                                ->page(2)
-                                ->order('reverse_chronological');
-
+            ->filter(['captured' => true])
+            ->page(2)
+            ->order('reverse_chronological');
         $this->assertTrue($result->isDirty());
         $this->assertArrayHasKey('object', $result);
         $this->assertEquals('search', $result['object']);
@@ -169,28 +151,40 @@ class ChargeTest extends TestConfig
     /**
      * @test
      */
-    public function retrieve_schedules()
+    public function create_scheduler()
     {
-        $schedules = OmiseCharge::schedules();
+        $charge = [
+            'customer' => 'cust_test_5optq6yszmg81i3tzle',
+            'amount' => 99900
+        ];
+        $scheduler = OmiseCharge::schedule($charge);
+        $this->assertEquals($charge, $scheduler['charge']);
+    }
 
-        $this->assertArrayHasKey('object', $schedules);
-        $this->assertEquals('list', $schedules['object']);
-        $this->assertEquals('schedule', $schedules['data'][0]['object']);
-        $this->assertArrayHasKey('charge', $schedules['data'][0]);
+    /**
+    * @test
+    * Assert that an expired flag is set after charge is successfully set to expire.
+    */
+    public function expire()
+    {
+        $charge = $this->createChargeWithSource();
+        $charge->expire();
+        $this->assertArrayHasKey('object', $charge);
+        $this->assertEquals('charge', $charge['object']);
+        $this->assertTrue($charge['expired']);
     }
 
     /**
      * @test
      */
-    public function create_scheduler()
+    public function retrieve_schedules()
     {
-        $charge = array(
-            'customer' => 'cust_test_58e7azwu6owk31ok81y',
-            'amount'   => 99900
-        );
-
-        $scheduler = OmiseCharge::schedule($charge);
-
-        $this->assertEquals($charge, $scheduler['charge']);
+        $schedules = OmiseCharge::schedules();
+        $this->assertArrayHasKey('object', $schedules);
+        $this->assertEquals('list', $schedules['object']);
+        if (isset($schedules['data'][0])) {
+            $this->assertEquals('schedule', $schedules['data'][0]['object']);
+            $this->assertArrayHasKey('charge', $schedules['data'][0]);
+        }
     }
 }
