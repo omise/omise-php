@@ -38,4 +38,4 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Run test suite
-      run: composer run-script test
+      run: PUBLIC_KEY=::add-mask::${{ secrets.OMISE_PUBLIC_KEY }} SECRET_KEY=::add-mask::${{ secrets.OMISE_SECRET_KEY }} ./vendor/bin/phpunit --testdox

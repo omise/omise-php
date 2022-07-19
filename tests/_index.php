@@ -3,8 +3,6 @@
 // Omise keys.
 define('OMISE_PUBLIC_KEY', getenv('PUBLIC_KEY'));
 define('OMISE_SECRET_KEY', getenv('SECRET_KEY'));
-define('OMISE_API_URL', 'https://api.staging-omise.co/');
-define('OMISE_VAULT_URL', 'https://vault.staging-omise.co/');
 define('OMISE_API_VERSION', '2017-11-02');
 
 include __DIR__ . '/traits/ChargeTrait.php';
