@@ -83,9 +83,8 @@ class TransferTest extends TestCase
      */
     public function destroy()
     {
-        $transfer = OmiseTransfer::retrieve($this->transferId);
+        $transfer = OmiseTransfer::create(['amount' => 100000]);
         $transfer->destroy();
-
         $this->assertTrue($transfer->isDestroyed());
     }
 
