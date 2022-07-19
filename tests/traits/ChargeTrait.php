@@ -1,5 +1,10 @@
 <?php
 
+namespace Traits;
+
+use OmiseCharge;
+use OmiseSource;
+
 trait ChargeTrait
 {
     public function createCharge($capture = false)

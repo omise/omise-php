@@ -1,9 +1,10 @@
 <?php
 
+/** @phpstan-consistent-constructor */
 class OmiseObject implements ArrayAccess, Iterator, Countable
 {
     // Store the attributes of the object.
-    protected $_values = array();
+    protected $_values = [];
 
     // Omise secret key.
     protected $_secretkey;
@@ -18,7 +19,6 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
      * @param string $publickey
      * @param string $secretkey
      */
-    #[\ReturnTypeWillChange]
     protected function __construct($publickey = null, $secretkey = null)
     {
         if ($publickey !== null) {
@@ -39,7 +39,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
             $this->_secretkey = OMISE_SECRET_KEY;
         }
 
-        $this->_values = array();
+        $this->_values = [];
     }
 
     /**
@@ -52,7 +52,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
     public function refresh($values, $clear = false)
     {
         if ($clear) {
-            $this->_values = array();
+            $this->_values = [];
         }
 
         $this->_values = array_merge($this->_values ?? [], $values ?? []);

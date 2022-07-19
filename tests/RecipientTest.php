@@ -4,6 +4,8 @@ use PHPUnit\Framework\TestCase;
 
 class OmiseRecipientTest extends TestCase
 {
+    public $recipientId;
+
     public function setUp(): void
     {
         $recipients = OmiseRecipient::retrieve();

@@ -4,6 +4,8 @@ use PHPUnit\Framework\TestCase;
 
 class EventTest extends TestCase
 {
+    public $eventId;
+
     public function setUp(): void
     {
         parent::setUp();

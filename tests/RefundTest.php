@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Traits\ChargeTrait;
 
 class RefundTest extends TestCase
 {

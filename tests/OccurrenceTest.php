@@ -4,6 +4,8 @@ use PHPUnit\Framework\TestCase;
 
 class OccurrenceTest extends TestCase
 {
+    public $scheduleId;
+
     public function setUp(): void
     {
         $scheduler = OmiseCharge::schedule([

@@ -2,7 +2,7 @@
 
 class OmiseLink extends OmiseApiResource
 {
-    const ENDPOINT = 'links';
+    public const ENDPOINT = 'links';
 
     /**
      * Retrieves a link.

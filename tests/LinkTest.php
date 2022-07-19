@@ -4,6 +4,8 @@ use PHPUnit\Framework\TestCase;
 
 class LinkTest extends TestCase
 {
+    public $linkId;
+
     /**
      * @test
      * OmiseLink class must be contain some method below.

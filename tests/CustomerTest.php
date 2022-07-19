@@ -69,7 +69,6 @@ class CustomerTest extends TestCase
             'email' => 'john.smith@example.com',
             'description' => 'Another description'
         ]);
-        $this->customer = $customer;
         $this->assertArrayHasKey('object', $customer);
         $this->assertEquals('customer', $customer['object']);
     }

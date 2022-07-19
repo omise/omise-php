@@ -1,10 +1,15 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Traits\ChargeTrait;
 
 class OmiseDisputeTest extends TestCase
 {
     use ChargeTrait;
+
+    public $chargeId;
+
+    public $disputeId;
 
     public function setUp(): void
     {

@@ -2,13 +2,13 @@
 
 class OmiseCapabilities extends OmiseApiResource
 {
-    const ENDPOINT = 'capability';
-    const INSTALLMENT_MINIMUM = 200000;
+    public const ENDPOINT = 'capability';
+    public const INSTALLMENT_MINIMUM = 200000;
 
     /**
      * @var array  of the filterable keys.
      */
-    static $filters = [
+    public static $filters = [
         'backend' => ['currency', 'type', 'chargeAmount']
     ];
 
@@ -74,7 +74,7 @@ class OmiseCapabilities extends OmiseApiResource
     {
         $backends = array_map(
             function ($backend) {
-                $new = (object)(array_merge(reset($backend), ['_id'=>array_keys($backend)[0]]));
+                $new = (object)(array_merge(reset($backend), ['_id' => array_keys($backend)[0]]));
                 return $new;
             },
             $this['payment_backends']

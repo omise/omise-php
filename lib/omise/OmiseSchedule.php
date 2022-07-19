@@ -2,7 +2,7 @@
 
 class OmiseSchedule extends OmiseApiResource
 {
-    const ENDPOINT = 'schedules';
+    public const ENDPOINT = 'schedules';
 
     /**
      * Retrieves a schedule.
@@ -49,7 +49,7 @@ class OmiseSchedule extends OmiseApiResource
      *
      * @return OmiseOccurrenceList|null
      */
-    public function occurrences($options = array())
+    public function occurrences($options = [])
     {
         if ($this['object'] === 'schedule') {
             if (is_array($options)) {

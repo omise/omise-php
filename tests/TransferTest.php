@@ -4,6 +4,8 @@ use PHPUnit\Framework\TestCase;
 
 class TransferTest extends TestCase
 {
+    public $transferId;
+
     public function setUp(): void
     {
         $receipts = OmiseTransfer::retrieve();
