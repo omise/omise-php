@@ -127,7 +127,7 @@ To run an automated test suite, make sure you already have a [PHPUnit](https://p
 Then run the PHPUnit:
 
 ```ssh
-phpunit omise-php/tests
+PUBLIC_KEY=pkey*** SECRET_KEY=skey*** ./vendor/bin/phpunit --testdox
 ```
 
 ## Contributing
