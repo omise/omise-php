@@ -9,9 +9,6 @@ class OmiseExceptionTest extends TestCase
      * ----- Test OmiseException::getInstance() -----
      * This assert should throw an Exception depend on what error code be.
      * And Exception message should be the same thing with error message that pass into 'message' parameter.
-     *
-     * @expectedException         OmiseAuthenticationFailureException
-     * @expectedExceptionMessage  authentication failed
      */
     public function authentication_failure_exception()
     {
@@ -28,8 +25,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseBadRequestException
-     * @expectedExceptionMessage  offsite is not valid
      */
     public function omise_bad_request_exception()
     {
@@ -46,8 +41,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseNotFoundException
-     * @expectedExceptionMessage  customer cust_test_000000000000 was not found
      */
     public function not_found_exception()
     {
@@ -64,8 +57,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseUsedTokenException
-     * @expectedExceptionMessage  token was already used
      */
     public function used_token_exception()
     {
@@ -82,8 +73,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseInvalidCardException
-     * @expectedExceptionMessage  number is invalid and brand not supported (unknown)
      */
     public function invalid_card_exception()
     {
@@ -100,8 +89,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseInvalidCardTokenException
-     * @expectedExceptionMessage  invalid card token
      */
     public function invalid_card_token_exception()
     {
@@ -118,8 +105,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseInvalidLinkException
-     * @expectedExceptionMessage  amount must be less than or equal to 1000000.0
      */
     public function invalid_link_exception()
     {
@@ -136,8 +121,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseMissingCardException
-     * @expectedExceptionMessage  request contains no card parameters
      */
     public function missing_card_exception()
     {
@@ -154,8 +137,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseInvalidChargeException
-     * @expectedExceptionMessage  currency is currently not supported and amount is not a number
      */
     public function invalid_charge_exception()
     {
@@ -172,8 +153,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseFailedCaptureException
-     * @expectedExceptionMessage  Charge is not authorized
      */
     public function failed_capture_exception()
     {
@@ -190,8 +169,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseFailedRefundException
-     * @expectedExceptionMessage  amount is not a number
      */
     public function failed_refund_exception()
     {
@@ -208,8 +185,6 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
-     * @expectedException         OmiseUndefinedException
-     * @expectedExceptionMessage  Strange case, don't know why?
      */
     public function undefined_exception()
     {

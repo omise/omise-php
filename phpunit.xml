@@ -46,4 +46,14 @@
             <file>./tests/CustomerTest.php</file>
         </testsuite>
     </testsuites>
+    <coverage>
+        <include>
+            <directory suffix=".php">./*</directory>
+        </include>
+        <exclude>
+            <file>./lib/Omise.php</file>
+            <directory>tests</directory>
+            <directory>vendor</directory>
+        </exclude>
+    </coverage>
 </phpunit>

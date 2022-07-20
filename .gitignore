@@ -1,8 +1,11 @@
-vendor/
-composer.lock
-composer.phar
-fixtures
 .phpunit.result.cache
 .php-cs-fixer.cache
-test.php
 .vscode
+.DS_Store
+.env
+test.php
+composer.lock
+composer.phar
+vendor
+fixtures
+reports

@@ -127,8 +127,10 @@ To run an automated test suite, make sure you already have a [PHPUnit](https://p
 Then run the PHPUnit:
 
 ```ssh
-PUBLIC_KEY=pkey*** SECRET_KEY=skey*** ./vendor/bin/phpunit --testdox
+cp .env.example .env
+make test
 ```
+- To generate code coverage test report run `make coverage`
 
 ## Contributing
 
