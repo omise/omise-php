@@ -6,7 +6,7 @@ use Traits\ChargeTrait;
 class ChargeTest extends TestCase
 {
     /**
-     * use charge trait to create a charge using 
+     * use charge trait to create a charge using
      * default customer id and card id.
      */
     use ChargeTrait;

@@ -6,7 +6,7 @@ use OmiseCharge;
 use OmiseSource;
 
 /**
- * ChargeTrait to reuse in 
+ * ChargeTrait to reuse in
  * - ChargeTest
  * - Dispute Test
  * - Refund Test

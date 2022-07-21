@@ -2,8 +2,8 @@
 
 /**
  * This file is included in PHP unit test and this will run before triggering unit test.
- * The goal of this file is 
- * 1. to set secret key and public key in one place 
+ * The goal of this file is
+ * 1. to set secret key and public key in one place
  * 2. to create customer and card and set in global keyword OMISE_CUSTOMER_ID & OMISE_CARD_ID
  * so that we can reuse in other test cases.
  */

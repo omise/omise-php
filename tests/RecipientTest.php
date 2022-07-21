@@ -111,7 +111,7 @@ class OmiseRecipientTest extends TestCase
         $schedules = $recipient->schedules();
         $this->assertArrayHasKey('object', $schedules);
         $this->assertEquals('list', $schedules['object']);
-        if(isset($schedules['data'][0])) {
+        if (isset($schedules['data'][0])) {
             $this->assertEquals('schedule', $schedules['data'][0]['object']);
             $this->assertArrayHasKey('transfer', $schedules['data'][0]);
             $this->assertEquals($this->recipientId, $schedules['data'][0]['transfer']['recipient']);

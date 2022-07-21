@@ -162,7 +162,7 @@ class SchedulerTest extends TestCase
 
     /**
      * @test
-     * Assert that creating scheduler for charge with 
+     * Assert that creating scheduler for charge with
      * every 1 month on last friday with specific date return successfully
      */
     public function set_scheduler_to_perform_at_specific_date()
