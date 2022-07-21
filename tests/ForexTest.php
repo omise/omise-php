@@ -6,6 +6,7 @@ class ForexTest extends TestCase
 {
     /**
      * @test
+     * OmiseForex class must be contain methods as below.
      */
     public function existing_methods()
     {
@@ -15,6 +16,7 @@ class ForexTest extends TestCase
     }
 
     /**
+     * @test
      * Forex do not work with staging api key
      */
     public function retrieve()
@@ -26,6 +28,7 @@ class ForexTest extends TestCase
     }
 
     /**
+     * @test
      * Forex do not work with staging api key
      */
     public function reload()

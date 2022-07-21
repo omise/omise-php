@@ -5,6 +5,12 @@ namespace Traits;
 use OmiseCharge;
 use OmiseSource;
 
+/**
+ * ChargeTrait to reuse in 
+ * - ChargeTest
+ * - Dispute Test
+ * - Refund Test
+ */
 trait ChargeTrait
 {
     public function createCharge($capture = false)

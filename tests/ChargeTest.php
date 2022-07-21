@@ -5,6 +5,10 @@ use Traits\ChargeTrait;
 
 class ChargeTest extends TestCase
 {
+    /**
+     * use charge trait to create a charge using 
+     * default customer id and card id.
+     */
     use ChargeTrait;
 
     /**
@@ -90,6 +94,7 @@ class ChargeTest extends TestCase
 
     /**
     * @test
+    * Assert that a refund flag is set after charge is successfully refund.
     */
     public function refund()
     {
@@ -151,11 +156,12 @@ class ChargeTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseCharge can create schedule using customer id.
      */
     public function create_scheduler()
     {
         $charge = [
-            'customer' => 'cust_test_5optq6yszmg81i3tzle',
+            'customer' => OMISE_CUSTOMER_ID,
             'amount' => 99900
         ];
         $scheduler = OmiseCharge::schedule($charge);
@@ -177,6 +183,7 @@ class ChargeTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseCharge can retrieve schedules.
      */
     public function retrieve_schedules()
     {

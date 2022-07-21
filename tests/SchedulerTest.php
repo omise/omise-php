@@ -6,6 +6,7 @@ class SchedulerTest extends TestCase
 {
     /**
      * @test
+     * OmiseScheduler class must be contain some method below.
      */
     public function existing_methods()
     {
@@ -23,6 +24,7 @@ class SchedulerTest extends TestCase
 
     /**
      * @test
+     * Assert that creating scheduler for charge return successfully
      */
     public function create_a_charge_scheduler()
     {
@@ -37,6 +39,7 @@ class SchedulerTest extends TestCase
 
     /**
      * @test
+     *  Assert that creating scheduler for transfer return successfully
      */
     public function create_a_transfer_scheduler()
     {
@@ -51,6 +54,7 @@ class SchedulerTest extends TestCase
 
     /**
      * @test
+     * Assert that creating scheduler for charge with every 15 days return successfully
      */
     public function set_scheduler_to_perform_every_15_days()
     {
@@ -70,6 +74,7 @@ class SchedulerTest extends TestCase
 
     /**
      * @test
+     * Assert that creating scheduler for charge with every 2 weeks on monday return successfully
      */
     public function set_scheduler_to_perform_every_2_weeks_on_monday()
     {
@@ -90,6 +95,7 @@ class SchedulerTest extends TestCase
 
     /**
      * @test
+     * Assert that creating scheduler for charge with every 1 month on first and fifteenth return successfully
      */
     public function set_scheduler_to_perform_every_1_month_on_first_and_fifteenth()
     {
@@ -110,6 +116,7 @@ class SchedulerTest extends TestCase
 
     /**
      * @test
+     * Assert that creating scheduler for charge with every 3 months on 28th return successfully
      */
     public function set_scheduler_to_perform_every_3_months_on_twentyeighth()
     {
@@ -131,6 +138,7 @@ class SchedulerTest extends TestCase
 
     /**
      * @test
+     * Assert that creating scheduler for charge with every 1 month on last friday return successfully
      */
     public function set_scheduler_to_perform_every_1_month_on_last_friday_and_specify_end_date()
     {
@@ -154,6 +162,8 @@ class SchedulerTest extends TestCase
 
     /**
      * @test
+     * Assert that creating scheduler for charge with 
+     * every 1 month on last friday with specific date return successfully
      */
     public function set_scheduler_to_perform_at_specific_date()
     {

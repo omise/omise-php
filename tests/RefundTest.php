@@ -33,6 +33,7 @@ class RefundTest extends TestCase
 
     /**
      * @test
+     * Assert that a refund can be retrieve after created successfully.
      */
     public function retrieve_specific_charge_refund_object()
     {

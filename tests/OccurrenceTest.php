@@ -25,6 +25,7 @@ class OccurrenceTest extends TestCase
 
     /**
      * @test
+     * OmiseOccurrence class must be contain some method below.
      */
     public function existing_methods()
     {
@@ -34,6 +35,7 @@ class OccurrenceTest extends TestCase
 
     /**
      * @test
+     * Assert that a list of occurrence object could be successfully retrieved.
      */
     public function retrieve_by_a_given_id()
     {
@@ -45,6 +47,7 @@ class OccurrenceTest extends TestCase
 
     /**
      * @test
+     * Assert that an occurrence object is returned after a successful reload.
      */
     public function reload()
     {

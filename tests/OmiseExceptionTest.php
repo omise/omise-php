@@ -25,6 +25,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseBadRequestException is throw in bad request
      */
     public function omise_bad_request_exception()
     {
@@ -41,6 +42,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseNotFoundException is throw on not_found response code
      */
     public function not_found_exception()
     {
@@ -57,6 +59,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseUsedTokenException is throw on used_token response code
      */
     public function used_token_exception()
     {
@@ -73,6 +76,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseInvalidCardException is throw on invalid_card response code
      */
     public function invalid_card_exception()
     {
@@ -89,6 +93,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseInvalidCardTokenException is throw on invalid_card_token response code
      */
     public function invalid_card_token_exception()
     {
@@ -105,6 +110,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseInvalidLinkException is throw on invalid_link response code
      */
     public function invalid_link_exception()
     {
@@ -121,6 +127,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseMissingCardException is throw on missing_card response code
      */
     public function missing_card_exception()
     {
@@ -137,6 +144,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseInvalidChargeException is throw on invalid_charge response code
      */
     public function invalid_charge_exception()
     {
@@ -153,6 +161,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseFailedCaptureException is throw on failed_capture response code
      */
     public function failed_capture_exception()
     {
@@ -169,6 +178,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseFailedRefundException is throw on failed_refund response code
      */
     public function failed_refund_exception()
     {
@@ -185,6 +195,7 @@ class OmiseExceptionTest extends TestCase
 
     /**
      * @test
+     * Assert that OmiseUndefinedException is throw on something_strange response code
      */
     public function undefined_exception()
     {

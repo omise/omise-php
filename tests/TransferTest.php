@@ -110,6 +110,7 @@ class TransferTest extends TestCase
 
     /**
      * @test
+     * Assert that creating scheduler for transfer return successfully
      */
     public function create_scheduler()
     {
@@ -124,6 +125,7 @@ class TransferTest extends TestCase
 
     /**
      * @test
+     * Assert that retrieving scheduler for transfer return successfully
      */
     public function retrieve_schedules()
     {

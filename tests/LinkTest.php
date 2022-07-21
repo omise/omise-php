@@ -6,6 +6,18 @@ class LinkTest extends TestCase
 {
     public $linkId;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        $link = OmiseLink::create([
+            'amount' => 100000,
+            'currency' => 'THB',
+            'title' => 'Order-384',
+            'description' => 'New Product'
+        ]);
+        $this->linkId = $link['id'];
+    }
+
     /**
      * @test
      * OmiseLink class must be contain some method below.
@@ -17,18 +29,6 @@ class LinkTest extends TestCase
         $this->assertTrue(method_exists('OmiseLink', 'destroy'));
         $this->assertTrue(method_exists('OmiseLink', 'isDestroyed'));
         $this->assertTrue(method_exists('OmiseLink', 'getUrl'));
-    }
-
-    public function setUp(): void
-    {
-        parent::setUp();
-        $link = OmiseLink::create([
-            'amount' => 100000,
-            'currency' => 'THB',
-            'title' => 'Order-384',
-            'description' => 'New Product'
-        ]);
-        $this->linkId = $link['id'];
     }
 
     /**

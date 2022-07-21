@@ -6,6 +6,7 @@ class CapabilitiesTest extends TestCase
 {
     /**
      * @var OmiseCapabilities
+     * setup OmiseCapabilities object in capabilities variable.
      */
     protected $capabilities;
 
@@ -45,6 +46,7 @@ class CapabilitiesTest extends TestCase
 
     /**
      * @test
+     * Assert that a capabilities getBackends method is returned an array after a successful response.
      */
     public function retrieve_backend_list()
     {
@@ -54,6 +56,8 @@ class CapabilitiesTest extends TestCase
 
     /**
      * @test
+     * Assert that a capabilities getBackends method filter with card 
+     * is returned type 'card' and _id 'credit_card' after a successful response.
      */
     public function retrieve_card_backend()
     {
@@ -66,6 +70,8 @@ class CapabilitiesTest extends TestCase
 
     /**
      * @test
+     * Assert that a capabilities getBackends method filter with installment 
+     * is returned type 'installment' after a successful response.
      */
     public function retrieve_installment_backend_list()
     {
@@ -79,6 +85,8 @@ class CapabilitiesTest extends TestCase
 
     /**
      * @test
+     * Assert that a capabilities getBackends method filter with googlepay(which does not exist)
+     * must return empty value after a successful response.
      */
     public function retrieve_backend_that_doesnot_exist()
     {
@@ -90,6 +98,8 @@ class CapabilitiesTest extends TestCase
 
     /**
      * @test
+     * Assert that a capabilities getBackends method filter with currency(JPY) 
+     * is returned type 'card' and array response after a successful response.
      */
     public function filter_by_currency()
     {
@@ -102,6 +112,8 @@ class CapabilitiesTest extends TestCase
 
     /**
      * @test
+     * Assert that test mix filter with installment and thb
+     * return correct array response.
      */
     public function mix_filter()
     {
