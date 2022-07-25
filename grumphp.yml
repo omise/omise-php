@@ -1,0 +1,19 @@
+grumphp:
+  hooks_dir: ./git-hooks
+  process_timeout: 180
+  fixer:
+    enabled: true
+    fix_by_default: false
+  tasks:
+    phpstan:
+      force_patterns: []
+      ignore_patterns: []
+      triggered_by: ["php"]
+      memory_limit: "-1"
+      use_grumphp_paths: true
+    phpcsfixer2:
+      config: .php-cs-fixer.php
+      config_contains_finder: true
+      verbose: true
+      diff: false
+      triggered_by: ["php"]

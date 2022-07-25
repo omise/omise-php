@@ -2,10 +2,10 @@
 
 class OmiseCardList extends OmiseApiResource
 {
-    const ENDPOINT = 'cards';
+    public const ENDPOINT = 'cards';
 
     private $_customerID;
-  
+
     /**
      * @param array  $cards
      * @param string $customerID
@@ -18,7 +18,7 @@ class OmiseCardList extends OmiseApiResource
         $this->_customerID = $customerID;
         $this->refresh($cards);
     }
-  
+
     /**
      * retrieve a card
      *
@@ -32,7 +32,6 @@ class OmiseCardList extends OmiseApiResource
 
         return new OmiseCard($result, $this->_customerID, $this->_publickey, $this->_secretkey);
     }
-  
 
     /**
      * @param  string $id

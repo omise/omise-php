@@ -5,10 +5,10 @@
 
 ## Requirements
 
-* PHP v5.4 and above.
+* PHP v7.4 and above.
 * Built-in [libcurl](http://php.net/manual/en/book.curl.php) support.
 
-> Note that, due to the PHP [END OF LIFE](http://php.net/supported-versions.php) cycle, we encourage you to run Omise-PHP library on a PHP version 5.6 or higher as there is no longer security support for any below 5.6 and that could cause you any security vulnerable issues in the future.
+> Note that, due to the PHP [END OF LIFE](http://php.net/supported-versions.php) cycle, we encourage you to run Omise-PHP library on a PHP version 7.4 or higher as there is no longer security support for any below 7.4 and that could cause you any security vulnerable issues in the future.
 
 ## Installation
 
@@ -127,8 +127,10 @@ To run an automated test suite, make sure you already have a [PHPUnit](https://p
 Then run the PHPUnit:
 
 ```ssh
-phpunit omise-php/tests
+cp .env.example .env
+make test
 ```
+- To generate code coverage test report run `make coverage`
 
 ## Contributing
 

@@ -2,7 +2,7 @@
 
 class OmiseOccurrence extends OmiseApiResource
 {
-    const ENDPOINT = 'occurrences';
+    public const ENDPOINT = 'occurrences';
 
     /**
      * Retrieves an occurence object.

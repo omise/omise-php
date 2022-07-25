@@ -2,7 +2,7 @@
 
 class OmiseCharge extends OmiseApiResource
 {
-    const ENDPOINT = 'charges';
+    public const ENDPOINT = 'charges';
 
     /**
      * Retrieves a charge.
@@ -136,7 +136,7 @@ class OmiseCharge extends OmiseApiResource
      *
      * @return OmiseRefundList
      */
-    public function refunds($options = array())
+    public function refunds($options = [])
     {
         if (is_array($options) && ! empty($options)) {
             $refunds = parent::execute(self::getUrl($this['id']) . '/refunds?' . http_build_query($options), parent::REQUEST_GET, parent::getResourceKey());
@@ -156,13 +156,12 @@ class OmiseCharge extends OmiseApiResource
      *
      * @return OmiseScheduleList
      */
-    public static function schedules($options = array(), $publickey = null, $secretkey = null)
+    public static function schedules($options = [], $publickey = null, $secretkey = null)
     {
         if (is_array($options)) {
             $options = '?' . http_build_query($options);
         }
-
-        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
+        return OmiseScheduleList::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
     }
 
     /**

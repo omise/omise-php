@@ -2,7 +2,7 @@
 
 class OmiseCustomer extends OmiseApiResource
 {
-    const ENDPOINT = 'customers';
+    public const ENDPOINT = 'customers';
 
     /**
      * Retrieves a customer.
@@ -85,7 +85,7 @@ class OmiseCustomer extends OmiseApiResource
      *
      * @see OmiseApiResource::isDestroyed()
      */
-    public function isDestroyed()
+    public static function isDestroyed()
     {
         return parent::isDestroyed();
     }
@@ -95,9 +95,9 @@ class OmiseCustomer extends OmiseApiResource
      *
      * @param  array $options
      *
-     * @return OmiseCardList
+     * @return OmiseCardList|null
      */
-    public function cards($options = array())
+    public function cards($options = [])
     {
         if (is_array($options) && ! empty($options)) {
             $cards = parent::execute(self::getUrl($this['id']) . '/cards?' . http_build_query($options), parent::REQUEST_GET, parent::getResourceKey());
@@ -107,7 +107,7 @@ class OmiseCustomer extends OmiseApiResource
 
         return new OmiseCardList($cards, $this['id'], $this->_publickey, $this->_secretkey);
     }
-  
+
     /**
      * cards() alias
      *
@@ -115,7 +115,7 @@ class OmiseCustomer extends OmiseApiResource
      *
      * @return     OmiseCardList
      */
-    public function getCards($options = array())
+    public function getCards($options = [])
     {
         return $this->cards($options);
     }
@@ -125,16 +125,15 @@ class OmiseCustomer extends OmiseApiResource
      *
      * @param  array|string $options
      *
-     * @return OmiseScheduleList
+     * @return OmiseScheduleList|null
      */
-    public function schedules($options = array())
+    public function schedules($options = [])
     {
         if ($this['object'] === 'customer') {
             if (is_array($options)) {
                 $options = '?' . http_build_query($options);
             }
-
-            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
+            return OmiseScheduleList::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
         }
     }
 

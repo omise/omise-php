@@ -21,10 +21,10 @@
  */
 class OmiseSearch extends OmiseApiResource
 {
-    const ENDPOINT = 'search';
+    public const ENDPOINT = 'search';
 
     private $dirty = true;
-    private $attributes = array();
+    private $attributes = [];
 
     /**
      * Create an instance of `OmiseSearch` with the given scope.
@@ -37,22 +37,9 @@ class OmiseSearch extends OmiseApiResource
      */
     public static function scope($scope, $publickey = null, $secretkey = null)
     {
-        return new OmiseSearch($scope, $publickey, $secretkey);
-    }
-
-    /**
-     * Create an instance of `OmiseSearch` with the given scope.
-     *
-     * This constructor is `protected` thus not intended to be used directly.
-     *
-     * @param string $scope  See supported scope at [Search API](https://www.omise.co/search-api) page.
-     * @param string $publickey
-     * @param string $secretkey
-     */
-    protected function __construct($scope, $publickey, $secretkey)
-    {
-        parent::__construct($publickey, $secretkey);
-        $this->mergeAttributes('scope', $scope);
+        $resouce = self::getInstance($publickey = null, $secretkey = null);
+        $resouce->mergeAttributes('scope', $scope);
+        return $resouce;
     }
 
     /**
@@ -74,7 +61,7 @@ class OmiseSearch extends OmiseApiResource
      *
      * @return OmiseSearch  This instance.
      */
-    public function filter(array $filters = array())
+    public function filter(array $filters = [])
     {
         foreach ($filters as $k => $v) {
             if (is_bool($v)) {
@@ -196,10 +183,11 @@ class OmiseSearch extends OmiseApiResource
      *
      * @see OmiseObject::offsetSet()
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         $this->reloadIfDirty();
-        return parent::offsetSet($key, $value);
+        parent::offsetSet($key, $value);
     }
 
     /*
@@ -207,6 +195,7 @@ class OmiseSearch extends OmiseApiResource
      *
      * @see OmiseObject::offsetExists()
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($key)
     {
         $this->reloadIfDirty();
@@ -218,10 +207,11 @@ class OmiseSearch extends OmiseApiResource
      *
      * @see OmiseObject::offsetUnset()
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($key)
     {
         $this->reloadIfDirty();
-        return parent::offsetUnset($key);
+        parent::offsetUnset($key);
     }
 
     /*
@@ -229,6 +219,7 @@ class OmiseSearch extends OmiseApiResource
      *
      * @see OmiseObject::offsetGet()
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         $this->reloadIfDirty();

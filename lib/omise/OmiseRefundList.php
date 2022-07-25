@@ -2,7 +2,7 @@
 
 class OmiseRefundList extends OmiseApiResource
 {
-    const ENDPOINT = 'refunds';
+    public const ENDPOINT = 'refunds';
 
     private $_chargeID;
 

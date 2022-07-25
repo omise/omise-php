@@ -1,9 +1,10 @@
 <?php
 
+/** @phpstan-consistent-constructor */
 class OmiseObject implements ArrayAccess, Iterator, Countable
 {
     // Store the attributes of the object.
-    protected $_values = array();
+    protected $_values = [];
 
     // Omise secret key.
     protected $_secretkey;
@@ -23,16 +24,22 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
         if ($publickey !== null) {
             $this->_publickey = $publickey;
         } else {
+            if (!defined('OMISE_PUBLIC_KEY')) {
+                define('OMISE_PUBLIC_KEY', 'pkey');
+            }
             $this->_publickey = OMISE_PUBLIC_KEY;
         }
 
         if ($secretkey !== null) {
             $this->_secretkey = $secretkey;
         } else {
+            if (!defined('OMISE_SECRET_KEY')) {
+                define('OMISE_SECRET_KEY', 'skey');
+            }
             $this->_secretkey = OMISE_SECRET_KEY;
         }
 
-        $this->_values = array();
+        $this->_values = [];
     }
 
     /**
@@ -41,65 +48,82 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
      * @param array   $values
      * @param boolean $clear
      */
+    #[\ReturnTypeWillChange]
     public function refresh($values, $clear = false)
     {
         if ($clear) {
-            $this->_values = array();
+            $this->_values = [];
         }
 
-        $this->_values = array_merge($this->_values, $values);
+        $this->_values = array_merge($this->_values ?? [], $values ?? []);
     }
 
     // Override methods of ArrayAccess
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         $this->_values[$key] = $value;
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetExists($key)
     {
         return isset($this->_values[$key]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($key)
     {
         unset($this->_values[$key]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         return isset($this->_values[$key]) ? $this->_values[$key] : null;
     }
 
     // Override methods of Iterator
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->_values);
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return current($this->_values);
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->_values);
     }
 
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->_values);
     }
 
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return ($this->current() !== false);
     }
 
     // Override methods of Countable
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->_values);
+    }
+
+    #[\ReturnTypeWillChange]
+    public function toArray()
+    {
+        return $this->_values;
     }
 }

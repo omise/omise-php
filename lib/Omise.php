@@ -1,4 +1,5 @@
 <?php
+
 // Cores and utilities.
 require_once dirname(__FILE__).'/omise/res/obj/OmiseObject.php';
 require_once dirname(__FILE__).'/omise/res/OmiseApiResource.php';

@@ -2,7 +2,7 @@
 
 class OmiseForex extends OmiseApiResource
 {
-    const ENDPOINT = 'forex';
+    public const ENDPOINT = 'forex';
 
     /**
      * Retrieves a forex data.

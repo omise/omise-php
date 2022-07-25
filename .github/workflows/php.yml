@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['5.6', '7.1', '7.2', '7.3', '7.4']
+        php-versions: ['7.4', '8.0', '8.1']
     steps:
     - uses: actions/checkout@v2
 
@@ -34,8 +34,10 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
+      
+    - name: Run GrumPHP
+      run: composer check
 
-    - name: Run test suite
-      run: composer run-script test
+    # - name: Run test suite
+    #   run: PUBLIC_KEY=::add-mask::${{ secrets.OMISE_PUBLIC_KEY }} SECRET_KEY=::add-mask::${{ secrets.OMISE_SECRET_KEY }} ./vendor/bin/phpunit --testdox
