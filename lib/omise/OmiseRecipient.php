@@ -2,7 +2,7 @@
 
 class OmiseRecipient extends OmiseApiResource
 {
-    public const ENDPOINT = 'recipients';
+    const ENDPOINT = 'recipients';
 
     /**
      * Retrieves recipients.
@@ -71,7 +71,7 @@ class OmiseRecipient extends OmiseApiResource
      *
      * @see OmiseApiResource::isDestroyed()
      */
-    public static function isDestroyed()
+    public function isDestroyed()
     {
         return parent::isDestroyed();
     }
@@ -95,16 +95,16 @@ class OmiseRecipient extends OmiseApiResource
      *
      * @param  array|string $options
      *
-     * @return OmiseScheduleList|null
+     * @return OmiseScheduleList
      */
-    public function schedules($options = [])
+    public function schedules($options = array())
     {
         if ($this['object'] === 'recipient') {
             if (is_array($options)) {
                 $options = '?' . http_build_query($options);
             }
 
-            return OmiseScheduleList::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
+            return parent::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
         }
     }
 

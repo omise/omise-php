@@ -2,7 +2,7 @@
 
 class OmiseCard extends OmiseApiResource
 {
-    public const ENDPOINT = 'cards';
+    const ENDPOINT = 'cards';
 
     private $_customerID;
 
@@ -57,7 +57,7 @@ class OmiseCard extends OmiseApiResource
      *
      * @see OmiseApiResource::isDestroyed()
      */
-    public static function isDestroyed()
+    public function isDestroyed()
     {
         return parent::isDestroyed();
     }

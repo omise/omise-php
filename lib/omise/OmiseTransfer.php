@@ -2,7 +2,7 @@
 
 class OmiseTransfer extends OmiseApiResource
 {
-    public const ENDPOINT = 'transfers';
+    const ENDPOINT = 'transfers';
 
     /**
      * Retrieves a transfer.
@@ -79,7 +79,7 @@ class OmiseTransfer extends OmiseApiResource
      */
     public function save()
     {
-        $this->update(['amount' => $this['amount']]);
+        $this->update(array('amount' => $this['amount']));
     }
 
     /**
@@ -101,12 +101,13 @@ class OmiseTransfer extends OmiseApiResource
      *
      * @return OmiseScheduleList
      */
-    public static function schedules($options = [], $publickey = null, $secretkey = null)
+    public static function schedules($options = array(), $publickey = null, $secretkey = null)
     {
         if (is_array($options)) {
             $options = '?' . http_build_query($options);
         }
-        return OmiseScheduleList::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
+
+        return parent::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
     }
 
     /**
@@ -124,7 +125,7 @@ class OmiseTransfer extends OmiseApiResource
      *
      * @see OmiseApiResource::isDestroyed()
      */
-    public static function isDestroyed()
+    public function isDestroyed()
     {
         return parent::isDestroyed();
     }

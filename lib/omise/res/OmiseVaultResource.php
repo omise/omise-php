@@ -7,8 +7,8 @@ class OmiseVaultResource extends OmiseApiResource
      *
      * @return string
      */
-    protected static function getResourceKey()
+    protected function getResourceKey()
     {
-        return parent::getResourceKey();
+        return $this->_publickey;
     }
 }

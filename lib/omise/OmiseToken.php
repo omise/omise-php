@@ -4,7 +4,7 @@ require_once dirname(__FILE__).'/res/OmiseVaultResource.php';
 
 class OmiseToken extends OmiseVaultResource
 {
-    public const ENDPOINT = 'tokens';
+    const ENDPOINT = 'tokens';
 
     /**
      * Retrieves a token.

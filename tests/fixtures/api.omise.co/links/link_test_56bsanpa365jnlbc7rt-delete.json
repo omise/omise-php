@@ -1,0 +1,28 @@
+{
+  "object": "link",
+  "id": "link_test_56bsanpa365jnlbc7rt",
+  "livemode": false,
+  "location": "/links/link_test_56bsanpa365jnlbc7rt",
+  "amount": 1200000,
+  "currency": "thb",
+  "used": false,
+  "multiple": true,
+  "title": "Omise Bicycle",
+  "description": "Cool & Nice Bicycle",
+  "charges": {
+    "object": "list",
+    "from": "1970-01-01T00:00:00+00:00",
+    "to": "2016-12-14T16:35:40+00:00",
+    "offset": 0,
+    "limit": 20,
+    "total": 0,
+    "order": null,
+    "location": "/links/link_test_56bsanpa365jnlbc7rt/charges",
+    "data": [
+
+    ]
+  },
+  "payment_uri": "https://link.omise.co/B86D8AB5",
+  "created": "2016-12-14T16:01:21Z",
+  "deleted": true
+}

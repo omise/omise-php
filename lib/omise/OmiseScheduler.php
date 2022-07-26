@@ -2,7 +2,7 @@
 
 class OmiseScheduler extends OmiseApiResource
 {
-    private $attributes = [];
+    private $attributes = array();
 
     /**
      * Create an instance of `OmiseScheduler` with the given type.
@@ -12,7 +12,7 @@ class OmiseScheduler extends OmiseApiResource
      * @param string $publickey
      * @param string $secretkey
      */
-    public function __construct($type, $attributes = [], $publickey = null, $secretkey = null)
+    public function __construct($type, $attributes = array(), $publickey = null, $secretkey = null)
     {
         parent::__construct($publickey, $secretkey);
 
@@ -57,7 +57,7 @@ class OmiseScheduler extends OmiseApiResource
     public function weeks($on)
     {
         return $this->mergeAttributes('period', 'week')
-            ->mergeAttributes('on', ['weekdays' => is_string($on) ? [$on] : $on]);
+                    ->mergeAttributes('on', array('weekdays' => is_string($on) ? array($on) : $on));
     }
 
     /**
@@ -85,16 +85,19 @@ class OmiseScheduler extends OmiseApiResource
 
         switch (strtolower(gettype($on))) {
             case 'string':
-                return $this->mergeAttributes('on', ['weekday_of_month' => $on]);
+                return $this->mergeAttributes('on', array('weekday_of_month' => $on));
                 break;
+
             case 'array':
-                return $this->mergeAttributes('on', ['days_of_month' => $on]);
+                return $this->mergeAttributes('on', array('days_of_month' => $on));
                 break;
+
             case 'integer':
-                return $this->mergeAttributes('on', ['days_of_month' => [$on]]);
+                return $this->mergeAttributes('on', array('days_of_month' => array($on)));
                 break;
+
             default:
-                throw new OmiseBadRequestException('The first argument must be an Array or a String, not ' . gettype($on), 1);
+                throw new OmiseBadRequestException("The first argument must be an Array or a String, not " . gettype($on), 1);
                 break;
         }
     }
@@ -163,7 +166,6 @@ class OmiseScheduler extends OmiseApiResource
      *
      * @see OmiseObject::offsetExists()
      */
-    #[\ReturnTypeWillChange]
     public function offsetExists($key)
     {
         if (isset($this->attributes[$key])) {
@@ -178,7 +180,6 @@ class OmiseScheduler extends OmiseApiResource
      *
      * @see OmiseObject::offsetGet()
      */
-    #[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         if (isset($this->attributes[$key])) {

@@ -1,11 +1,3 @@
-.phpunit.result.cache
-.php-cs-fixer.cache
-.vscode
-.DS_Store
-.env
-test.php
+vendor/
 composer.lock
 composer.phar
-vendor
-fixtures
-reports

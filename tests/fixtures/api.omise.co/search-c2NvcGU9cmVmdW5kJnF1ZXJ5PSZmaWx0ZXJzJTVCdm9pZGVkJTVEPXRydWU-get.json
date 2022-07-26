@@ -1,0 +1,27 @@
+{
+  "object": "search",
+  "order": "chronological",
+  "scope": "refund",
+  "query": "",
+  "filters": {
+    "voided": "true"
+  },
+  "page": 1,
+  "per_page": 30,
+  "location": "/search",
+  "total_pages": 1,
+  "total": 1,
+  "data": [
+    {
+      "object": "refund",
+      "id": "rfnd_test_57gqeohjzrmanxl0vl4",
+      "location": "/charges/chrg_test_57gqaf72g7nxpo1mk9m/refunds/rfnd_test_57gqeohjzrmanxl0vl4",
+      "amount": 100000,
+      "currency": "thb",
+      "voided": true,
+      "charge": "chrg_test_57gqaf72g7nxpo1mk9m",
+      "transaction": "trxn_test_57gqeohtv0qox7gqj0w",
+      "created": "2017-03-29T08:34:41Z"
+    }
+  ]
+}

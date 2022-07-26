@@ -2,7 +2,7 @@
 
 class OmiseEvent extends OmiseApiResource
 {
-    public const ENDPOINT = 'events';
+    const ENDPOINT = 'events';
 
     /**
      * Retrieves an event.

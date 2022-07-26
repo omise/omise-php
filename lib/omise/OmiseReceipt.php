@@ -2,7 +2,7 @@
 
 class OmiseReceipt extends OmiseApiResource
 {
-    public const ENDPOINT = 'receipts';
+    const ENDPOINT = 'receipts';
 
     /**
      * Retrieves a receipt.

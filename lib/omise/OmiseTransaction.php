@@ -2,7 +2,7 @@
 
 class OmiseTransaction extends OmiseApiResource
 {
-    public const ENDPOINT = 'transactions';
+    const ENDPOINT = 'transactions';
 
     /**
      * Retrieves a transaction.
@@ -26,7 +26,7 @@ class OmiseTransaction extends OmiseApiResource
     public function reload()
     {
         if ($this['object'] === 'transaction') {
-            parent::g_reload(self::getUrl($this['id']));
+            parent::reload(self::getUrl($this['id']));
         } else {
             parent::g_reload(self::getUrl());
         }

@@ -2,7 +2,7 @@
 
 class OmiseSchedule extends OmiseApiResource
 {
-    public const ENDPOINT = 'schedules';
+    const ENDPOINT = 'schedules';
 
     /**
      * Retrieves a schedule.
@@ -49,14 +49,14 @@ class OmiseSchedule extends OmiseApiResource
      *
      * @return OmiseOccurrenceList|null
      */
-    public function occurrences($options = [])
+    public function occurrences($options = array())
     {
         if ($this['object'] === 'schedule') {
             if (is_array($options)) {
                 $options = '?' . http_build_query($options);
             }
 
-            return OmiseOccurrenceList::g_retrieve('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options), $this->_publickey, $this->_secretkey);
+            return parent::g_retrieve('OmiseOccurrenceList', self::getUrl($this['id'] . '/occurrences' . $options), $this->_publickey, $this->_secretkey);
         }
     }
 
@@ -73,7 +73,7 @@ class OmiseSchedule extends OmiseApiResource
      *
      * @see    OmiseApiResource::isDestroyed()
      */
-    public static function isDestroyed()
+    public function isDestroyed()
     {
         return parent::isDestroyed();
     }

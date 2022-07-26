@@ -2,7 +2,7 @@
 
 class OmiseLink extends OmiseApiResource
 {
-    public const ENDPOINT = 'links';
+    const ENDPOINT = 'links';
 
     /**
      * Retrieves a link.
@@ -75,7 +75,7 @@ class OmiseLink extends OmiseApiResource
      *
      * @see OmiseApiResource::isDestroyed()
      */
-    public static function isDestroyed()
+    public function isDestroyed()
     {
         return parent::isDestroyed();
     }

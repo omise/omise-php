@@ -2,7 +2,7 @@
 
 class OmiseSource extends OmiseApiResource
 {
-    public const ENDPOINT = 'sources';
+    const ENDPOINT = 'sources';
 
     /**
      * Retrieves a source.
@@ -17,7 +17,7 @@ class OmiseSource extends OmiseApiResource
     {
         return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
     }
-
+    
     /**
      * Creates a new source.
      *
