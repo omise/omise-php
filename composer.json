@@ -22,8 +22,7 @@
   ],
   "support": {
     "email": "support@omise.co",
-    "issues": "https://github.com/omise/omise-php/issues",
-    "forum": "https://forum.omise.co"
+    "issues": "https://github.com/omise/omise-php/issues"
   },
   "require": {
     "php": ">=7.4",
