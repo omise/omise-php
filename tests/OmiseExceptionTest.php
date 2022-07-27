@@ -1,9 +1,16 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Traits\ChargeTrait;
 
 class OmiseExceptionTest extends TestCase
 {
+    /**
+     * use charge trait to create a charge using
+     * default customer id and card id.
+     */
+    use ChargeTrait;
+
     /**
      * @test
      * ----- Test OmiseException::getInstance() -----
@@ -208,5 +215,22 @@ class OmiseExceptionTest extends TestCase
             'message' => 'Strange case, don\'t know why?'
         ];
         throw OmiseException::getInstance($mock);
+    }
+
+    /**
+     * @test
+     * Assert that OmiseFailedCaptureException is throw on actual api call for fail capture
+     */
+    public function test_actual_api_exception()
+    {
+        $this->expectException(OmiseFailedCaptureException::class);
+        $this->expectExceptionMessage('charge was already captured');
+        // create charge with capture set to true
+        $charge = $this->createCharge(true);
+        // recapture to get api error response
+        $charge->capture();
+        $this->assertArrayHasKey('object', $charge);
+        $this->assertEquals('charge', $charge['object']);
+        $this->assertNull($charge['failure_code']);
     }
 }
