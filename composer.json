@@ -26,7 +26,7 @@
     "forum": "https://forum.omise.co"
   },
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=7.4",
     "guzzlehttp/guzzle": "^7.4"
   },
   "require-dev": {
