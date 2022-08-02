@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### [v2.15.0 _(August 2, 2022)_](https://github.com/omise/omise-php/releases/tag/v2.15.0)
+
+- Replace Curl with Guzzle Client ([#141](https://github.com/omise/omise-php/pull/141))
+- Add Support php version 8.1 ([#140](https://github.com/omise/omise-php/pull/140))
+
 ### [v2.13.0 _(April 7, 2021)_](https://github.com/omise/omise-php/releases/tag/v2.13.0)
 
 - Change installment minimum to 200000 subunits ([#132](https://github.com/omise/omise-php/pull/132))
