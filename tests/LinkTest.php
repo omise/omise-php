@@ -6,9 +6,8 @@ class LinkTest extends TestCase
 {
     public $linkId;
 
-    public function setUp(): void
+    public function init()
     {
-        parent::setUp();
         $link = OmiseLink::create([
             'amount' => 100000,
             'currency' => 'THB',
@@ -37,6 +36,7 @@ class LinkTest extends TestCase
      */
     public function create()
     {
+        $this->init();
         $link = OmiseLink::create([
             'amount' => 100000,
             'title' => 'Order-384',
@@ -53,8 +53,8 @@ class LinkTest extends TestCase
      */
     public function retrieve_link_list_object()
     {
+        $this->init();
         $link = OmiseLink::retrieve();
-
         $this->assertArrayHasKey('object', $link);
         $this->assertEquals('list', $link['object']);
     }
@@ -65,8 +65,8 @@ class LinkTest extends TestCase
      */
     public function retrieve_specific_link_object()
     {
+        $this->init();
         $link = OmiseLink::retrieve($this->linkId);
-
         $this->assertArrayHasKey('object', $link);
         $this->assertEquals('link', $link['object']);
     }
@@ -77,9 +77,9 @@ class LinkTest extends TestCase
      */
     public function destroy()
     {
+        $this->init();
         $link = OmiseLink::retrieve($this->linkId);
         $link->destroy();
-
         $this->assertTrue($link->isDestroyed());
     }
 
@@ -89,6 +89,7 @@ class LinkTest extends TestCase
      */
     public function search()
     {
+        $this->init();
         $result = OmiseLink::search('demo')
             ->filter(['used' => true])
             ->order('reverse_chronological');

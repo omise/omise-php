@@ -2,7 +2,7 @@
 
 class OmiseCharge extends OmiseApiResource
 {
-    public const ENDPOINT = 'charges';
+    const ENDPOINT = 'charges';
 
     /**
      * Retrieves a charge.

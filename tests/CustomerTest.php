@@ -6,9 +6,8 @@ class CustomerTest extends TestCase
 {
     public $customerId;
 
-    public function setUp(): void
+    public function init()
     {
-        parent::setUp();
         $customer = OmiseCustomer::create([
             'email' => 'john.doe@example.com',
             'description' => 'John Doe (id: 30)'
@@ -41,8 +40,8 @@ class CustomerTest extends TestCase
      */
     public function retrieve_customer_list_object()
     {
+        $this->init();
         $customer = OmiseCustomer::retrieve();
-
         $this->assertArrayHasKey('object', $customer);
         $this->assertEquals('list', $customer['object']);
     }
@@ -53,6 +52,7 @@ class CustomerTest extends TestCase
      */
     public function retrieve_specific_customer_object()
     {
+        $this->init();
         $customer = OmiseCustomer::retrieve($this->customerId);
         $this->assertArrayHasKey('object', $customer);
         $this->assertEquals('customer', $customer['object']);
@@ -64,6 +64,7 @@ class CustomerTest extends TestCase
      */
     public function update()
     {
+        $this->init();
         $customer = OmiseCustomer::retrieve($this->customerId);
         $customer->update([
             'email' => 'john.smith@example.com',
@@ -79,6 +80,7 @@ class CustomerTest extends TestCase
      */
     public function search()
     {
+        $this->init();
         $result = OmiseCustomer::search('john')
             ->filter(['created' => '2017-01-01..'.date('Y-m-d')]);
 
@@ -97,6 +99,7 @@ class CustomerTest extends TestCase
      */
     public function retrieve_schedules()
     {
+        $this->init();
         $customer = OmiseCustomer::retrieve($this->customerId);
         $schedules = $customer->schedules();
 
@@ -115,6 +118,7 @@ class CustomerTest extends TestCase
      */
     public function destroy()
     {
+        $this->init();
         $customer = OmiseCustomer::retrieve($this->customerId);
         $customer->destroy();
         $this->assertTrue($customer->isDestroyed());

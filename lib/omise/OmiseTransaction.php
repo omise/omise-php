@@ -2,7 +2,7 @@
 
 class OmiseTransaction extends OmiseApiResource
 {
-    public const ENDPOINT = 'transactions';
+    const ENDPOINT = 'transactions';
 
     /**
      * Retrieves a transaction.

@@ -54,8 +54,10 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
         if ($clear) {
             $this->_values = [];
         }
-
-        $this->_values = array_merge($this->_values ?? [], $values ?? []);
+        if(empty($values)) {
+            $values = [];
+        }
+        $this->_values = array_merge($this->_values, $values);
     }
 
     // Override methods of ArrayAccess

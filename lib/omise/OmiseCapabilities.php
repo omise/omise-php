@@ -2,8 +2,8 @@
 
 class OmiseCapabilities extends OmiseApiResource
 {
-    public const ENDPOINT = 'capability';
-    public const INSTALLMENT_MINIMUM = 200000;
+    const ENDPOINT = 'capability';
+    const INSTALLMENT_MINIMUM = 200000;
 
     /**
      * @var array  of the filterable keys.

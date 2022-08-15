@@ -5,17 +5,6 @@ use PHPUnit\Framework\TestCase;
 class CapabilitiesTest extends TestCase
 {
     /**
-     * @var OmiseCapabilities
-     * setup OmiseCapabilities object in capabilities variable.
-     */
-    protected $capabilities;
-
-    protected function setUp(): void
-    {
-        $this->capabilities = OmiseCapabilities::retrieve();
-    }
-
-    /**
      * @test
      * OmiseCapabilities class must be contain some method below.
      */
@@ -31,6 +20,7 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_omise_capabilities_object()
     {
+        $this->capabilities = OmiseCapabilities::retrieve();
         $this->assertEquals('capability', $this->capabilities['object']);
     }
 
@@ -40,6 +30,7 @@ class CapabilitiesTest extends TestCase
      */
     public function reload()
     {
+        $this->capabilities = OmiseCapabilities::retrieve();
         $this->capabilities->reload();
         $this->assertEquals('capability', $this->capabilities['object']);
     }
@@ -50,6 +41,7 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_backend_list()
     {
+        $this->capabilities = OmiseCapabilities::retrieve();
         $backends = $this->capabilities->getBackends();
         $this->assertEquals('array', gettype($backends));
     }
@@ -61,6 +53,7 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_card_backend()
     {
+        $this->capabilities = OmiseCapabilities::retrieve();
         $cardBackend = $this->capabilities->getBackends(
             $this->capabilities->makeBackendFilterType('card')
         );
@@ -75,6 +68,7 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_installment_backend_list()
     {
+        $this->capabilities = OmiseCapabilities::retrieve();
         $installmentBackends = $this->capabilities->getBackends(
             $this->capabilities->makeBackendFilterType('installment')
         );
@@ -90,6 +84,7 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_backend_that_doesnot_exist()
     {
+        $this->capabilities = OmiseCapabilities::retrieve();
         $alipayBackends = $this->capabilities->getBackends(
             $this->capabilities->makeBackendFilterType('googlepay')
         );
@@ -103,6 +98,7 @@ class CapabilitiesTest extends TestCase
      */
     public function filter_by_currency()
     {
+        $this->capabilities = OmiseCapabilities::retrieve();
         $backends = $this->capabilities->getBackends(
             $this->capabilities->makeBackendFilterCurrency('jpy')
         );
@@ -117,6 +113,7 @@ class CapabilitiesTest extends TestCase
      */
     public function mix_filter()
     {
+        $this->capabilities = OmiseCapabilities::retrieve();
         $backends = $this->capabilities->getBackends(
             $this->capabilities->makeBackendFilterType('installment'),
             $this->capabilities->makeBackendFilterCurrency('thb')

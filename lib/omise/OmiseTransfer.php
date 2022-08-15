@@ -2,7 +2,7 @@
 
 class OmiseTransfer extends OmiseApiResource
 {
-    public const ENDPOINT = 'transfers';
+    const ENDPOINT = 'transfers';
 
     /**
      * Retrieves a transfer.

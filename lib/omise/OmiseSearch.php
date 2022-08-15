@@ -21,7 +21,7 @@
  */
 class OmiseSearch extends OmiseApiResource
 {
-    public const ENDPOINT = 'search';
+    const ENDPOINT = 'search';
 
     private $dirty = true;
     private $attributes = [];

@@ -2,7 +2,7 @@
 
 class OmiseChain extends OmiseApiResource
 {
-    public const ENDPOINT = 'chains';
+    const ENDPOINT = 'chains';
 
     /**
      * Retrieves a sub-merchant chain.

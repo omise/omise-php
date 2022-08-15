@@ -2,7 +2,7 @@
 
 class OmiseDispute extends OmiseApiResource
 {
-    public const ENDPOINT = 'disputes';
+    const ENDPOINT = 'disputes';
 
     /**
      * Creates a new dispute.

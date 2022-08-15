@@ -6,9 +6,8 @@ class EventTest extends TestCase
 {
     public $eventId;
 
-    public function setUp(): void
+    public function init()
     {
-        parent::setUp();
         $event = OmiseEvent::retrieve();
         $this->eventId = $event['data'][0]['id'];
     }
@@ -30,6 +29,7 @@ class EventTest extends TestCase
      */
     public function retrieve_event_list_object()
     {
+        $this->init();
         $event = OmiseEvent::retrieve();
         $this->assertArrayHasKey('object', $event);
         $this->assertEquals('list', $event['object']);
@@ -41,8 +41,8 @@ class EventTest extends TestCase
      */
     public function retrieve_event_object_by_event_id()
     {
+        $this->init();
         $event = OmiseEvent::retrieve($this->eventId);
-
         $this->assertArrayHasKey('object', $event);
         $this->assertEquals('event', $event['object']);
         $this->assertEquals($this->eventId, $event['id']);
@@ -54,6 +54,7 @@ class EventTest extends TestCase
      */
     public function reload_event_object()
     {
+        $this->init();
         $event = OmiseEvent::retrieve();
         $event->reload();
         $this->assertArrayHasKey('object', $event);
@@ -66,9 +67,9 @@ class EventTest extends TestCase
      */
     public function reload_event_object_given_by_event_id()
     {
+        $this->init();
         $event = OmiseEvent::retrieve($this->eventId);
         $event->reload();
-
         $this->assertArrayHasKey('object', $event);
         $this->assertEquals('event', $event['object']);
         $this->assertEquals($this->eventId, $event['id']);

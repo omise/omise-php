@@ -2,7 +2,7 @@
 
 class OmiseSource extends OmiseApiResource
 {
-    public const ENDPOINT = 'sources';
+    const ENDPOINT = 'sources';
 
     /**
      * Retrieves a source.

@@ -2,7 +2,7 @@
 
 class OmiseSchedule extends OmiseApiResource
 {
-    public const ENDPOINT = 'schedules';
+    const ENDPOINT = 'schedules';
 
     /**
      * Retrieves a schedule.

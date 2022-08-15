@@ -6,7 +6,7 @@ class ReceiptTest extends TestCase
 {
     public $receiptId;
 
-    public function setUp(): void
+    public function init()
     {
         $receipts = OmiseReceipt::retrieve();
         if (isset($receipts['data'][0])) {
@@ -30,6 +30,7 @@ class ReceiptTest extends TestCase
      */
     public function retrieve_receipt_list()
     {
+        $this->init();
         $receipts = OmiseReceipt::retrieve();
         $this->assertArrayHasKey('object', $receipts);
         $this->assertEquals('receipt_list', $receipts['object']);
@@ -41,6 +42,7 @@ class ReceiptTest extends TestCase
      */
     public function retrieve_receipt_id()
     {
+        $this->init();
         if ($this->receiptId) {
             $receipt = OmiseReceipt::retrieve($this->receiptId);
             $this->assertArrayHasKey('object', $receipt);
@@ -56,6 +58,7 @@ class ReceiptTest extends TestCase
      */
     public function reload_receipt_list()
     {
+        $this->init();
         $receipts = OmiseReceipt::retrieve();
         $receipts->reload();
         $this->assertArrayHasKey('object', $receipts);
@@ -68,6 +71,7 @@ class ReceiptTest extends TestCase
      */
     public function reload_receipt_id()
     {
+        $this->init();
         if ($this->receiptId) {
             $receipt = OmiseReceipt::retrieve($this->receiptId);
             $receipt->reload();

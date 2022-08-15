@@ -6,7 +6,7 @@ class OmiseRecipientTest extends TestCase
 {
     public $recipientId;
 
-    public function setUp(): void
+    public function init()
     {
         $recipients = OmiseRecipient::retrieve();
         $this->recipientId = $recipients['data'][0]['id'];
@@ -28,6 +28,7 @@ class OmiseRecipientTest extends TestCase
      */
     public function retrieve_omise_recipient_object()
     {
+        $this->init();
         $recipient = OmiseRecipient::retrieve();
         $this->assertArrayHasKey('object', $recipient);
         $this->assertEquals('list', $recipient['object']);
@@ -40,6 +41,7 @@ class OmiseRecipientTest extends TestCase
      */
     public function retrieve_omise_recipient_object_with_key()
     {
+        $this->init();
         $recipient = OmiseRecipient::retrieve($this->recipientId);
         $this->assertArrayHasKey('object', $recipient);
         $this->assertEquals('recipient', $recipient['object']);
@@ -51,6 +53,7 @@ class OmiseRecipientTest extends TestCase
      */
     public function update()
     {
+        $this->init();
         $recipient = OmiseRecipient::retrieve($this->recipientId);
         $recipient->update([
             'name' => 'Nuttanon Tra',
@@ -67,6 +70,7 @@ class OmiseRecipientTest extends TestCase
     */
     public function create_and_delete()
     {
+        $this->init();
         $recipient = OmiseRecipient::create([
             'name' => 'Nuttanon T',
             'description' => 'Nuttanon T\'s account',
@@ -91,6 +95,7 @@ class OmiseRecipientTest extends TestCase
      */
     public function search()
     {
+        $this->init();
         $result = OmiseRecipient::search('demo')
             ->filter(['active' => true]);
         $this->assertArrayHasKey('object', $result);
@@ -107,6 +112,7 @@ class OmiseRecipientTest extends TestCase
      */
     public function retrieve_schedules()
     {
+        $this->init();
         $recipient = OmiseRecipient::retrieve($this->recipientId);
         $schedules = $recipient->schedules();
         $this->assertArrayHasKey('object', $schedules);

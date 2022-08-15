@@ -2,7 +2,7 @@
 
 class OmiseCustomer extends OmiseApiResource
 {
-    public const ENDPOINT = 'customers';
+    const ENDPOINT = 'customers';
 
     /**
      * Retrieves a customer.

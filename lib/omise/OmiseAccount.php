@@ -2,7 +2,7 @@
 
 class OmiseAccount extends OmiseApiResource
 {
-    public const ENDPOINT = 'account';
+    const ENDPOINT = 'account';
 
     /**
      * Retrieves an account.

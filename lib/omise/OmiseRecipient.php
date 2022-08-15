@@ -2,7 +2,7 @@
 
 class OmiseRecipient extends OmiseApiResource
 {
-    public const ENDPOINT = 'recipients';
+    const ENDPOINT = 'recipients';
 
     /**
      * Retrieves recipients.

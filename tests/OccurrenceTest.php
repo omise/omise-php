@@ -6,7 +6,7 @@ class OccurrenceTest extends TestCase
 {
     public $scheduleId;
 
-    public function setUp(): void
+    public function init()
     {
         $scheduler = OmiseCharge::schedule([
             'customer' => OMISE_CUSTOMER_ID,
@@ -39,6 +39,7 @@ class OccurrenceTest extends TestCase
      */
     public function retrieve_by_a_given_id()
     {
+        $this->init();
         $occurrence = OmiseOccurrence::retrieve($this->scheduleId);
         $this->assertArrayHasKey('object', $occurrence);
         $this->assertEquals('occurrence', $occurrence['object']);
@@ -51,6 +52,7 @@ class OccurrenceTest extends TestCase
      */
     public function reload()
     {
+        $this->init();
         $occurrence = OmiseOccurrence::retrieve($this->scheduleId);
         $occurrence->reload();
         $this->assertArrayHasKey('object', $occurrence);

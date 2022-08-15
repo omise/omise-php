@@ -7,10 +7,10 @@ define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 class OmiseApiResource extends OmiseObject
 {
     // Request methods
-    public const REQUEST_GET = 'GET';
-    public const REQUEST_POST = 'POST';
-    public const REQUEST_DELETE = 'DELETE';
-    public const REQUEST_PATCH = 'PATCH';
+    const REQUEST_GET = 'GET';
+    const REQUEST_POST = 'POST';
+    const REQUEST_DELETE = 'DELETE';
+    const REQUEST_PATCH = 'PATCH';
 
     // Timeout settings
     private $OMISE_CONNECTTIMEOUT = 30;

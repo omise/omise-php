@@ -2,7 +2,7 @@
 
 class OmiseCard extends OmiseApiResource
 {
-    public const ENDPOINT = 'cards';
+    const ENDPOINT = 'cards';
 
     private $_customerID;
 

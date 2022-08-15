@@ -2,7 +2,7 @@
 
 class OmiseBalance extends OmiseApiResource
 {
-    public const ENDPOINT = 'balance';
+    const ENDPOINT = 'balance';
 
     /**
      * Retrieves a current balance in the account.

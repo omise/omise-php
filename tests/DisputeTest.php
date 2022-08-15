@@ -11,9 +11,8 @@ class OmiseDisputeTest extends TestCase
 
     public $disputeId;
 
-    public function setUp(): void
+    public function init()
     {
-        parent::setUp();
         $charge = $this->createCharge(true);
         $this->chargeId = $charge['id'];
         $dispute = OmiseDispute::create($charge, ['message' => '2 time charge']);
@@ -38,6 +37,7 @@ class OmiseDisputeTest extends TestCase
      */
     public function retrieve_omise_dispute_object()
     {
+        $this->init();
         $dispute = OmiseDispute::retrieve();
         $dispute->reload();
 
@@ -54,8 +54,8 @@ class OmiseDisputeTest extends TestCase
      */
     public function retrieve_omise_dispute_object_with_key()
     {
+        $this->init();
         $dispute = OmiseDispute::retrieve($this->disputeId);
-
         $this->assertArrayHasKey('object', $dispute);
         $this->assertEquals('dispute', $dispute['object']);
     }
@@ -66,8 +66,8 @@ class OmiseDisputeTest extends TestCase
      */
     public function retrieve_omise_dispute_object_that_open()
     {
+        $this->init();
         $dispute = OmiseDispute::retrieve('open');
-
         $this->assertArrayHasKey('object', $dispute);
         if (isset($dispute['data'][0])) {
             $this->assertEquals('dispute', $dispute['data'][0]['object']);
@@ -81,8 +81,8 @@ class OmiseDisputeTest extends TestCase
      */
     public function retrieve_omise_dispute_object_that_pending()
     {
+        $this->init();
         $dispute = OmiseDispute::retrieve('pending');
-
         $this->assertArrayHasKey('object', $dispute);
         if (isset($dispute['data'][0])) {
             $this->assertEquals('dispute', $dispute['data'][0]['object']);
@@ -96,8 +96,8 @@ class OmiseDisputeTest extends TestCase
      */
     public function retrieve_omise_dispute_object_that_closed()
     {
+        $this->init();
         $dispute = OmiseDispute::retrieve('closed');
-
         $this->assertArrayHasKey('object', $dispute);
         if (isset($dispute['data'][0])) {
             $this->assertEquals('dispute', $dispute['data'][0]['object']);
@@ -111,11 +111,11 @@ class OmiseDisputeTest extends TestCase
      */
     public function update()
     {
+        $this->init();
         $dispute = OmiseDispute::retrieve($this->disputeId);
         $dispute->update([
             'message' => 'New Message...'
         ]);
-
         $this->assertArrayHasKey('object', $dispute);
         $this->assertEquals('dispute', $dispute['object']);
     }
@@ -126,9 +126,9 @@ class OmiseDisputeTest extends TestCase
      */
     public function accept()
     {
+        $this->init();
         $dispute = OmiseDispute::retrieve($this->disputeId);
         $dispute->accept();
-
         $this->assertArrayHasKey('object', $dispute);
         $this->assertEquals('dispute', $dispute['object']);
         $this->assertEquals('lost', $dispute['status']);
@@ -140,12 +140,11 @@ class OmiseDisputeTest extends TestCase
      */
     public function search()
     {
+        $this->init();
         $result = OmiseDispute::search('demo')
             ->filter(['card_last_digits' => '5454']);
-
         $this->assertArrayHasKey('object', $result);
         $this->assertEquals('search', $result['object']);
-
         foreach ($result['data'] as $item) {
             $this->assertArrayHasKey('object', $item);
             $this->assertEquals('dispute', $item['object']);
