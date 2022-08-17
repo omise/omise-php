@@ -44,7 +44,8 @@
   "scripts": {
     "test": "./vendor/bin/phpunit --testdox",
     "fix": "vendor/bin/php-cs-fixer fix -vvv --diff --dry-run --allow-risky=yes --using-cache=no",
-    "analyse": "vendor/bin/phpstan analyse lib tests"
+    "analyse": "vendor/bin/phpstan analyse lib tests",
+    "phpstan": "vendor/bin/phpstan analyse lib tests"
   },
   "config": {
     "allow-plugins": {

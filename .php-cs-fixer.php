@@ -8,8 +8,6 @@ $finder = Symfony\Component\Finder\Finder::create()
 $config = new PhpCsFixer\Config();
 return $config->setRules([
     '@PSR12' => true,
-    '@PHP56Migration:risky' => true,
-    '@PHPUnit57Migration:risky' => true,
     'strict_param' => false,
     'no_unused_imports' => true,
     'indentation_type' => true,
