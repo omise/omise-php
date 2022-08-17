@@ -86,15 +86,22 @@ class OmiseScheduler extends OmiseApiResource
         switch (strtolower(gettype($on))) {
             case 'string':
                 return $this->mergeAttributes('on', ['weekday_of_month' => $on]);
+
                 break;
+
             case 'array':
                 return $this->mergeAttributes('on', ['days_of_month' => $on]);
+
                 break;
+
             case 'integer':
                 return $this->mergeAttributes('on', ['days_of_month' => [$on]]);
+
                 break;
+
             default:
                 throw new OmiseBadRequestException('The first argument must be an Array or a String, not ' . gettype($on), 1);
+
                 break;
         }
     }

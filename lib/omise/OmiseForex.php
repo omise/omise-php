@@ -2,7 +2,7 @@
 
 class OmiseForex extends OmiseApiResource
 {
-    public const ENDPOINT = 'forex';
+    const ENDPOINT = 'forex';
 
     /**
      * Retrieves a forex data.
@@ -15,7 +15,7 @@ class OmiseForex extends OmiseApiResource
      */
     public static function retrieve($currency = '', $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($currency), $publickey, $secretkey);
+        return parent::g_retrieve(__CLASS__, self::getUrl($currency), $publickey, $secretkey);
     }
 
     /**

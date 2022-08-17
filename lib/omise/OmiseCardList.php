@@ -2,7 +2,7 @@
 
 class OmiseCardList extends OmiseApiResource
 {
-    public const ENDPOINT = 'cards';
+    const ENDPOINT = 'cards';
 
     private $_customerID;
 
@@ -40,6 +40,6 @@ class OmiseCardList extends OmiseApiResource
      */
     private function getUrl($id = '')
     {
-        return OMISE_API_URL.'customers/'.$this->_customerID.'/'.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . 'customers/' . $this->_customerID . '/' . self::ENDPOINT . '/' . $id;
     }
 }

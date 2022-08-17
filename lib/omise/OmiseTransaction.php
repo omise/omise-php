@@ -2,7 +2,7 @@
 
 class OmiseTransaction extends OmiseApiResource
 {
-    public const ENDPOINT = 'transactions';
+    const ENDPOINT = 'transactions';
 
     /**
      * Retrieves a transaction.
@@ -15,7 +15,7 @@ class OmiseTransaction extends OmiseApiResource
      */
     public static function retrieve($id = '', $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(__CLASS__, self::getUrl($id), $publickey, $secretkey);
     }
 
     /**
@@ -39,6 +39,6 @@ class OmiseTransaction extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

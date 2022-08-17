@@ -1,6 +1,6 @@
 <?php
 
-namespace Traits;
+namespace Omise\Traits;
 
 use OmiseCharge;
 use OmiseSource;
@@ -30,10 +30,12 @@ trait ChargeTrait
     {
         $source = OmiseSource::create([
             'amount' => 100000,
-            'currency' => 'thb',
+            'currency' => 'THB',
+            'platform_type' => 'IOS',
             'type' => 'barcode_alipay',
-            'barcode' => rand(100000000, 99999999),
+            'barcode' => rand(100000000, 99999999)
         ]);
+
         return OmiseCharge::create([
             'amount' => 100000,
             'currency' => 'thb',

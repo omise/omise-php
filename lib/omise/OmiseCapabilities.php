@@ -2,8 +2,8 @@
 
 class OmiseCapabilities extends OmiseApiResource
 {
-    public const ENDPOINT = 'capability';
-    public const INSTALLMENT_MINIMUM = 200000;
+    const ENDPOINT = 'capability';
+    const INSTALLMENT_MINIMUM = 200000;
 
     /**
      * @var array  of the filterable keys.
@@ -12,7 +12,7 @@ class OmiseCapabilities extends OmiseApiResource
         'backend' => ['currency', 'type', 'chargeAmount']
     ];
 
-    protected function __construct($publickey = null, $secretkey = null)
+    public function __construct($publickey = null, $secretkey = null)
     {
         parent::__construct($publickey, $secretkey);
         $this->setupFilterShortcuts();
@@ -49,7 +49,7 @@ class OmiseCapabilities extends OmiseApiResource
      */
     public static function retrieve($publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl(), $publickey, $secretkey);
+        return parent::g_retrieve(__CLASS__, self::getUrl(), $publickey, $secretkey);
     }
 
     /**
@@ -75,6 +75,7 @@ class OmiseCapabilities extends OmiseApiResource
         $backends = array_map(
             function ($backend) {
                 $new = (object)(array_merge(reset($backend), ['_id' => array_keys($backend)[0]]));
+
                 return $new;
             },
             $this['payment_backends']
@@ -107,7 +108,7 @@ class OmiseCapabilities extends OmiseApiResource
     public function makeBackendFilterType($type)
     {
         return function ($backend) use ($type) {
-            return $backend->type == $type;
+            return $backend->type === $type;
         };
     }
 
@@ -122,14 +123,16 @@ class OmiseCapabilities extends OmiseApiResource
     {
         $defMin = $this['limits']['charge_amount']['min'];
         $defMax = $this['limits']['charge_amount']['max'];
+
         return function ($backend) use ($amount, $defMin, $defMax) {
             // temporary hack for now to correct min value for installments to fixed minimum (different to normal charge minimum)
-            if ($backend->type == 'installment') {
+            if ($backend->type === 'installment') {
                 $min = self::INSTALLMENT_MINIMUM;
             } else {
                 $min = empty($backend->amount['min']) ? $defMin : $backend->amount['min'];
             }
             $max = empty($backend->amount['max']) ? $defMax : $backend->amount['max'];
+
             return $amount >= $min && $amount <= $max;
         };
     }
@@ -149,6 +152,7 @@ class OmiseCapabilities extends OmiseApiResource
                     return false;
                 }
             }
+
             return true;
         };
     }
@@ -162,7 +166,7 @@ class OmiseCapabilities extends OmiseApiResource
      */
     private static function argsToVariadic($argArray)
     {
-        return count($argArray) == 1 && is_array($argArray[0]) ? $argArray[0] : $argArray;
+        return count($argArray) === 1 && is_array($argArray[0]) ? $argArray[0] : $argArray;
     }
 
     /**

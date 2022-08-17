@@ -6,9 +6,11 @@ class CustomerTest extends TestCase
 {
     public $customerId;
 
-    public function setUp(): void
+    /**
+     * @before
+     */
+    public function setupSharedResources()
     {
-        parent::setUp();
         $customer = OmiseCustomer::create([
             'email' => 'john.doe@example.com',
             'description' => 'John Doe (id: 30)'
@@ -80,7 +82,7 @@ class CustomerTest extends TestCase
     public function search()
     {
         $result = OmiseCustomer::search('john')
-            ->filter(['created' => '2017-01-01..'.date('Y-m-d')]);
+            ->filter(['created' => '2017-01-01..' . date('Y-m-d')]);
 
         $this->assertArrayHasKey('object', $result);
         $this->assertEquals('search', $result['object']);

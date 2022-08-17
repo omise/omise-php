@@ -2,7 +2,7 @@
 
 class OmiseChain extends OmiseApiResource
 {
-    public const ENDPOINT = 'chains';
+    const ENDPOINT = 'chains';
 
     /**
      * Retrieves a sub-merchant chain.
@@ -15,7 +15,7 @@ class OmiseChain extends OmiseApiResource
      */
     public static function retrieve($id = '', $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(__CLASS__, self::getUrl($id), $publickey, $secretkey);
     }
 
     /**
@@ -51,6 +51,6 @@ class OmiseChain extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

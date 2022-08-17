@@ -2,7 +2,7 @@
 
 class OmiseTransfer extends OmiseApiResource
 {
-    public const ENDPOINT = 'transfers';
+    const ENDPOINT = 'transfers';
 
     /**
      * Retrieves a transfer.
@@ -15,7 +15,7 @@ class OmiseTransfer extends OmiseApiResource
      */
     public static function retrieve($id = '', $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(__CLASS__, self::getUrl($id), $publickey, $secretkey);
     }
 
     /**
@@ -57,7 +57,7 @@ class OmiseTransfer extends OmiseApiResource
      */
     public static function create($params, $publickey = null, $secretkey = null)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(__CLASS__, self::getUrl(), $params, $publickey, $secretkey);
     }
 
     /**
@@ -106,6 +106,7 @@ class OmiseTransfer extends OmiseApiResource
         if (is_array($options)) {
             $options = '?' . http_build_query($options);
         }
+
         return OmiseScheduleList::g_retrieve('OmiseScheduleList', self::getUrl('schedules' . $options), $publickey, $secretkey);
     }
 
@@ -136,6 +137,6 @@ class OmiseTransfer extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

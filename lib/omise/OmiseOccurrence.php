@@ -2,7 +2,7 @@
 
 class OmiseOccurrence extends OmiseApiResource
 {
-    public const ENDPOINT = 'occurrences';
+    const ENDPOINT = 'occurrences';
 
     /**
      * Retrieves an occurence object.
@@ -15,7 +15,7 @@ class OmiseOccurrence extends OmiseApiResource
      */
     public static function retrieve($id, $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(__CLASS__, self::getUrl($id), $publickey, $secretkey);
     }
 
     public function reload()
@@ -30,6 +30,6 @@ class OmiseOccurrence extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT . '/' . $id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

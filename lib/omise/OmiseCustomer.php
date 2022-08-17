@@ -2,7 +2,7 @@
 
 class OmiseCustomer extends OmiseApiResource
 {
-    public const ENDPOINT = 'customers';
+    const ENDPOINT = 'customers';
 
     /**
      * Retrieves a customer.
@@ -15,7 +15,7 @@ class OmiseCustomer extends OmiseApiResource
      */
     public static function retrieve($id = '', $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(__CLASS__, self::getUrl($id), $publickey, $secretkey);
     }
 
     /**
@@ -43,7 +43,7 @@ class OmiseCustomer extends OmiseApiResource
      */
     public static function create($params, $publickey = null, $secretkey = null)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(__CLASS__, self::getUrl(), $params, $publickey, $secretkey);
     }
 
     /**
@@ -133,6 +133,7 @@ class OmiseCustomer extends OmiseApiResource
             if (is_array($options)) {
                 $options = '?' . http_build_query($options);
             }
+
             return OmiseScheduleList::g_retrieve('OmiseScheduleList', self::getUrl($this['id'] . '/schedules' . $options), $this->_publickey, $this->_secretkey);
         }
     }
@@ -144,6 +145,6 @@ class OmiseCustomer extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

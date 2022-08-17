@@ -2,7 +2,7 @@
 
 class OmiseRefundList extends OmiseApiResource
 {
-    public const ENDPOINT = 'refunds';
+    const ENDPOINT = 'refunds';
 
     private $_chargeID;
 
@@ -50,6 +50,6 @@ class OmiseRefundList extends OmiseApiResource
      */
     private function getUrl($id = '')
     {
-        return OMISE_API_URL.'charges/'.$this->_chargeID.'/'.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . 'charges/' . $this->_chargeID . '/' . self::ENDPOINT . '/' . $id;
     }
 }

@@ -1,21 +1,16 @@
 <?php
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-
-define('OMISE_PHP_LIB_VERSION', '2.15.0');
+define('OMISE_PHP_LIB_VERSION', '2.15.1');
 define('OMISE_API_URL', 'https://api.omise.co/');
 define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 
 class OmiseApiResource extends OmiseObject
 {
-    private $httpClient;
-
     // Request methods
-    public const REQUEST_GET = 'GET';
-    public const REQUEST_POST = 'POST';
-    public const REQUEST_DELETE = 'DELETE';
-    public const REQUEST_PATCH = 'PATCH';
+    const REQUEST_GET = 'GET';
+    const REQUEST_POST = 'POST';
+    const REQUEST_DELETE = 'DELETE';
+    const REQUEST_PATCH = 'PATCH';
 
     // Timeout settings
     private $OMISE_CONNECTTIMEOUT = 30;
@@ -25,12 +20,13 @@ class OmiseApiResource extends OmiseObject
 
     private static $classesToUsePublicKey = [
         OmiseToken::class,
+        OmiseSource::class
     ];
 
     /**
-     * Returns an instance of the class given in $clazz or raise an error.
+     * Returns an instance of the class given in $class or raise an error.
      *
-     * @param  string $clazz
+     * @param  string $class
      * @param  string $publickey
      * @param  string $secretkey
      *
@@ -42,16 +38,18 @@ class OmiseApiResource extends OmiseObject
     {
         $resource = new static($publickey, $secretkey);
         $className = get_class($resource);
+
         if (!isset(self::$instances[$className])) {
             static::$instances[$className] = $resource;
         }
+
         return static::$instances[$className];
     }
 
     /**
      * Retrieves the resource.
      *
-     * @param  string $clazz
+     * @param  string $class
      * @param  string $publickey
      * @param  string $secretkey
      *
@@ -59,8 +57,9 @@ class OmiseApiResource extends OmiseObject
      *
      * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    protected static function g_retrieve($clazz, $url, $publickey = null, $secretkey = null)
+    protected static function g_retrieve($class, $url, $publickey = null, $secretkey = null)
     {
+        /** @phpstan-ignore-next-line */
         $resource = self::getInstance($publickey, $secretkey);
         $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
         $resource->refresh($result);
@@ -71,7 +70,7 @@ class OmiseApiResource extends OmiseObject
     /**
      * Creates the resource with given parameters in an associative array.
      *
-     * @param  string $clazz
+     * @param  string $class
      * @param  string $url
      * @param  array  $params
      * @param  string $publickey
@@ -81,7 +80,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    protected static function g_create($clazz, $url, $params, $publickey = null, $secretkey = null)
+    protected static function g_create($class, $url, $params, $publickey = null, $secretkey = null)
     {
         $resource = self::getInstance($publickey, $secretkey);
         $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
@@ -184,6 +183,10 @@ class OmiseApiResource extends OmiseObject
             throw new Exception('Unknown error. (Bad Response)');
         }
 
+        if (!empty($array['object']) && $array['object'] === 'error') {
+            throw OmiseException::getInstance($array);
+        }
+
         return $array;
     }
 
@@ -200,18 +203,6 @@ class OmiseApiResource extends OmiseObject
     }
 
     /**
-     * get http guzzle client
-     * @return Client
-     */
-    protected function httpClient()
-    {
-        if (!$this->httpClient) {
-            $this->httpClient = new Client();
-        }
-        return $this->httpClient;
-    }
-
-    /**
      * @param  string $url
      * @param  string $requestMethod
      * @param  array  $params
@@ -222,16 +213,22 @@ class OmiseApiResource extends OmiseObject
      */
     private function _executeCurl($url, $requestMethod, $key, $params = null)
     {
-        try {
-            $options = $this->getOptions($requestMethod, $key, $params);
-            $result = $this->httpClient()->request($requestMethod, $url, $options);
-            return $result->getBody();
-        } catch (ClientException $e) {
-            $array = json_decode($e->getResponse()->getBody()->getContents(), true);
-            throw OmiseException::getInstance($array);
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+        $ch = curl_init($url);
+
+        curl_setopt_array($ch, $this->genOptions($requestMethod, $key . ':', $params));
+
+        // Make a request or thrown an exception.
+        if (($result = curl_exec($ch)) === false) {
+            $error = curl_error($ch);
+            curl_close($ch);
+
+            throw new Exception($error);
         }
+
+        // Close.
+        curl_close($ch);
+
+        return $result;
     }
 
     /**
@@ -242,52 +239,56 @@ class OmiseApiResource extends OmiseObject
      *
      * @return array
      */
-    public function getOptions($requestMethod, $key, $params = [])
+    private function genOptions($requestMethod, $userpwd, $params)
     {
-        $userAgent = 'OmisePHP/'.OMISE_PHP_LIB_VERSION.' PHP/'.phpversion();
-        $omiseApiVersion = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
-        $omiseVersionHeader = [];
-
-        // Config Omise API Version
-        if ($omiseApiVersion) {
-            $omiseVersionHeader = ['Omise-Version' => $omiseApiVersion];
-            $userAgent .= ' OmiseAPI/' . $omiseApiVersion;
-        }
+        $user_agent = 'OmisePHP/' . OMISE_PHP_LIB_VERSION . ' PHP/' . PHP_VERSION;
+        $omise_api_version = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
 
         $options = [
-            'connect_timeout' => $this->OMISE_CONNECTTIMEOUT,
-            'timeout' => $this->OMISE_TIMEOUT,
-            'allow_redirects' => ['referer' => true],
-            'headers' => array_merge($omiseVersionHeader, [
-                'User-Agent' => $userAgent,
-                'Omise-Version' => $omiseApiVersion,
-                'Authorization' => 'Basic ' . base64_encode($key)
-            ]),
+            // Set the HTTP version to 1.1.
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            // Set the request method.
+            CURLOPT_CUSTOMREQUEST => $requestMethod,
+            // Make php-curl returns the data as string.
+            CURLOPT_RETURNTRANSFER => true,
+            // Do not include the header in the output.
+            CURLOPT_HEADER => false,
+            // Track the header request string and set the referer on redirect.
+            CURLINFO_HEADER_OUT => true,
+            CURLOPT_AUTOREFERER => true,
+            // Make HTTP error code above 400 an error.
+            // CURLOPT_FAILONERROR => true,
+            // Time before the request is aborted.
+            CURLOPT_TIMEOUT => $this->OMISE_TIMEOUT,
+            // Time before the request is aborted when attempting to connect.
+            CURLOPT_CONNECTTIMEOUT => $this->OMISE_CONNECTTIMEOUT,
+            // Authentication.
+            CURLOPT_USERPWD => $userpwd
         ];
-        if (is_array($params) && count($params) > 0) {
-            return array_merge($options, $this->getQueryBodyParameters($params));
-        }
-        return $options;
-    }
 
-    /**
-     * remove empty value from params
-     * @param  array $params
-     * @return array
-     */
-    private function getQueryBodyParameters($params)
-    {
-        $requestBody = [];
-        foreach ($params as $key => $value) {
-            if (gettype($value) == 'boolean') {
-                $requestBody[$key] = $value;
-            } else {
-                if ($value) {
-                    $requestBody[$key] = $value;
-                }
-            }
+        // Config Omise API Version
+        if ($omise_api_version) {
+            $options += [CURLOPT_HTTPHEADER => ['Omise-Version: ' . $omise_api_version]];
+
+            $user_agent .= ' OmiseAPI/' . $omise_api_version;
         }
-        return ['json' => $requestBody];
+
+        // Config UserAgent
+        if (defined('OMISE_USER_AGENT_SUFFIX')) {
+            $options += [CURLOPT_USERAGENT => $user_agent . ' ' . OMISE_USER_AGENT_SUFFIX];
+        } else {
+            $options += [CURLOPT_USERAGENT => $user_agent];
+        }
+
+        // Also merge POST parameters with the option.
+        if (is_array($params) && count($params) > 0) {
+            $http_query = http_build_query($params);
+            $http_query = preg_replace('/%5B[0-9]+%5D/simU', '%5B%5D', $http_query);
+
+            $options += [CURLOPT_POSTFIELDS => $http_query];
+        }
+
+        return $options;
     }
 
     /**
@@ -298,6 +299,7 @@ class OmiseApiResource extends OmiseObject
     protected static function isDestroyed()
     {
         $resource = self::getInstance();
+
         return $resource['deleted'];
     }
 
@@ -312,6 +314,7 @@ class OmiseApiResource extends OmiseObject
         if (in_array(get_class($resource), self::$classesToUsePublicKey)) {
             return $resource->_publickey;
         }
+
         return $resource->_secretkey;
     }
 }

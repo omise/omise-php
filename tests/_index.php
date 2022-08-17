@@ -26,6 +26,7 @@ include __DIR__ . '/traits/ChargeTrait.php';
 function dd($value)
 {
     print_r($value);
+
     die();
 }
 

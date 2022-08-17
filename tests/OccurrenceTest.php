@@ -6,7 +6,10 @@ class OccurrenceTest extends TestCase
 {
     public $scheduleId;
 
-    public function setUp(): void
+    /**
+     * @before
+     */
+    public function setupSharedResources()
     {
         $scheduler = OmiseCharge::schedule([
             'customer' => OMISE_CUSTOMER_ID,
