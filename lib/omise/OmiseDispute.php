@@ -17,7 +17,7 @@ class OmiseDispute extends OmiseApiResource
     {
         $url = OMISE_API_URL . 'charges/' . $charge['id'] . '/' . self::ENDPOINT;
 
-        return parent::g_create(__CLASS__, $url, $params, $publickey, $secretkey);
+        return parent::g_create($url, $params, $publickey, $secretkey);
     }
 
     /**
@@ -31,7 +31,7 @@ class OmiseDispute extends OmiseApiResource
      */
     public static function retrieve($id = '', $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(__CLASS__, self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(self::getUrl($id), $publickey, $secretkey);
     }
 
     /**

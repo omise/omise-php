@@ -36,7 +36,7 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function getInstance($publickey = null, $secretkey = null)
     {
-        $resource = new static($publickey, $secretkey);
+        $resource = new static($publickey, $secretkey); // @phpstan-ignore-line
         $className = get_class($resource);
 
         if (!isset(self::$instances[$className])) {
@@ -49,7 +49,6 @@ class OmiseApiResource extends OmiseObject
     /**
      * Retrieves the resource.
      *
-     * @param  string $class
      * @param  string $publickey
      * @param  string $secretkey
      *
@@ -57,9 +56,8 @@ class OmiseApiResource extends OmiseObject
      *
      * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    protected static function g_retrieve($class, $url, $publickey = null, $secretkey = null)
+    protected static function g_retrieve($url, $publickey = null, $secretkey = null)
     {
-        /** @phpstan-ignore-next-line */
         $resource = self::getInstance($publickey, $secretkey);
         $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
         $resource->refresh($result);
@@ -70,7 +68,6 @@ class OmiseApiResource extends OmiseObject
     /**
      * Creates the resource with given parameters in an associative array.
      *
-     * @param  string $class
      * @param  string $url
      * @param  array  $params
      * @param  string $publickey
@@ -80,7 +77,7 @@ class OmiseApiResource extends OmiseObject
      *
      * @return OmiseAccount|OmiseBalance|OmiseCharge|OmiseCustomer|OmiseToken|OmiseTransaction|OmiseTransfer
      */
-    protected static function g_create($class, $url, $params, $publickey = null, $secretkey = null)
+    protected static function g_create($url, $params, $publickey = null, $secretkey = null)
     {
         $resource = self::getInstance($publickey, $secretkey);
         $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);

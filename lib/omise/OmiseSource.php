@@ -15,7 +15,7 @@ class OmiseSource extends OmiseApiResource
      */
     public static function retrieve($id, $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(__CLASS__, self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(self::getUrl($id), $publickey, $secretkey);
     }
 
     /**
@@ -29,7 +29,7 @@ class OmiseSource extends OmiseApiResource
      */
     public static function create($params, $publickey = null, $secretkey = null)
     {
-        return parent::g_create(__CLASS__, self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(self::getUrl(), $params, $publickey, $secretkey);
     }
 
     /**

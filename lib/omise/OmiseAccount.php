@@ -14,7 +14,7 @@ class OmiseAccount extends OmiseApiResource
      */
     public static function retrieve($publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(__CLASS__, self::getUrl(), $publickey, $secretkey);
+        return parent::g_retrieve(self::getUrl(), $publickey, $secretkey);
     }
 
     /**
