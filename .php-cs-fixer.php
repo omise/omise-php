@@ -33,7 +33,10 @@ return $config->setRules([
     'blank_line_before_statement' => ['statements' => ['break', 'case', 'continue', 'declare', 'default', 'exit', 'goto', 'return', 'switch', 'throw', 'try']],
 
     // This is just prettier / easier to read.
-    'concat_space' => ['spacing' => 'one'], 
+    'concat_space' => ['spacing' => 'one'],
+
+    // Visibility annotations are not supported by php5.6
+    'visibility_required' => false,
 ])
 ->setIndent(str_pad('', 4))
 ->setLineEnding("\n")
