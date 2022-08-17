@@ -280,7 +280,7 @@ class OmiseApiResource extends OmiseObject
         // Also merge POST parameters with the option.
         if (is_array($params) && count($params) > 0) {
             $http_query = http_build_query($params);
-            $http_query = preg_replace('/%5B[0-9]+%5D/simU', '%5B%5D', $http_query);
+            $http_query = preg_replace('/%5B\d+%5D/simU', '%5B%5D', $http_query);
 
             $options += [CURLOPT_POSTFIELDS => $http_query];
         }
