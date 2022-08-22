@@ -1,0 +1,70 @@
+name: PHP Coding Standard Check
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: PHP-CS-Fixer
+        uses: docker://oskarstark/php-cs-fixer-ga:3.4.0
+        with:
+          args: --format=txt --diff --dry-run --using-cache=no --verbose .
+
+  phpstan:
+    name: PHPStan
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "7.1"
+          - "7.2"
+          - "7.3"
+          - "7.4"
+          - "8.0"
+          - "8.1"
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          # Conventionally you would hash "composer.lock", but we don't commit
+          # that, so we hash on "composer.json" instead.
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+
+      # We run php-cs-fixer in a separate job, but the version we use is not compatible
+      # with all the versions of PHP that we want to execute PHPStan upon
+      - name: Trim dependency
+        run: composer remove --dev friendsofphp/php-cs-fixer
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run phpstan
+        run: composer phpstan

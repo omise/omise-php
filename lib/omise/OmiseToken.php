@@ -1,10 +1,10 @@
 <?php
 
-require_once dirname(__FILE__).'/res/OmiseVaultResource.php';
+require_once __DIR__ . '/res/OmiseVaultResource.php';
 
 class OmiseToken extends OmiseVaultResource
 {
-    public const ENDPOINT = 'tokens';
+    const ENDPOINT = 'tokens';
 
     /**
      * Retrieves a token.
@@ -17,7 +17,7 @@ class OmiseToken extends OmiseVaultResource
      */
     public static function retrieve($id, $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(self::getUrl($id), $publickey, $secretkey);
     }
 
     /**
@@ -32,7 +32,7 @@ class OmiseToken extends OmiseVaultResource
      */
     public static function create($params, $publickey = null, $secretkey = null)
     {
-        return parent::g_create(get_class(), self::getUrl(), $params, $publickey, $secretkey);
+        return parent::g_create(self::getUrl(), $params, $publickey, $secretkey);
     }
 
     /**
@@ -52,6 +52,6 @@ class OmiseToken extends OmiseVaultResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_VAULT_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_VAULT_URL . self::ENDPOINT . '/' . $id;
     }
 }

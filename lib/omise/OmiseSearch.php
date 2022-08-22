@@ -21,7 +21,7 @@
  */
 class OmiseSearch extends OmiseApiResource
 {
-    public const ENDPOINT = 'search';
+    const ENDPOINT = 'search';
 
     private $dirty = true;
     private $attributes = [];
@@ -39,6 +39,7 @@ class OmiseSearch extends OmiseApiResource
     {
         $resouce = self::getInstance($publickey = null, $secretkey = null);
         $resouce->mergeAttributes('scope', $scope);
+
         return $resouce;
     }
 
@@ -68,6 +69,7 @@ class OmiseSearch extends OmiseApiResource
                 $filters[$k] = $v ? 'true' : 'false';
             }
         }
+
         return $this->mergeAttributes('filters', $filters);
     }
 
@@ -173,12 +175,13 @@ class OmiseSearch extends OmiseApiResource
     private function getUrl()
     {
         $querystring = http_build_query($this->attributes);
-        return OMISE_API_URL.self::ENDPOINT.'/?'.$querystring;
+
+        return OMISE_API_URL . self::ENDPOINT . '/?' . $querystring;
     }
 
     // Override methods of ArrayAccess
 
-    /*
+    /**
      * (non-PHPdoc)
      *
      * @see OmiseObject::offsetSet()
@@ -190,7 +193,7 @@ class OmiseSearch extends OmiseApiResource
         parent::offsetSet($key, $value);
     }
 
-    /*
+    /**
      * (non-PHPdoc)
      *
      * @see OmiseObject::offsetExists()
@@ -199,10 +202,11 @@ class OmiseSearch extends OmiseApiResource
     public function offsetExists($key)
     {
         $this->reloadIfDirty();
+
         return parent::offsetExists($key);
     }
 
-    /*
+    /**
      * (non-PHPdoc)
      *
      * @see OmiseObject::offsetUnset()
@@ -214,7 +218,7 @@ class OmiseSearch extends OmiseApiResource
         parent::offsetUnset($key);
     }
 
-    /*
+    /**
      * (non-PHPdoc)
      *
      * @see OmiseObject::offsetGet()
@@ -223,6 +227,7 @@ class OmiseSearch extends OmiseApiResource
     public function offsetGet($key)
     {
         $this->reloadIfDirty();
+
         return parent::offsetGet($key);
     }
 }

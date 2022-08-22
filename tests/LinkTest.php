@@ -6,9 +6,11 @@ class LinkTest extends TestCase
 {
     public $linkId;
 
-    public function setUp(): void
+    /**
+     * @before
+     */
+    public function setupSharedResources()
     {
-        parent::setUp();
         $link = OmiseLink::create([
             'amount' => 100000,
             'currency' => 'THB',

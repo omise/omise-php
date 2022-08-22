@@ -2,7 +2,7 @@
 
 class OmiseEvent extends OmiseApiResource
 {
-    public const ENDPOINT = 'events';
+    const ENDPOINT = 'events';
 
     /**
      * Retrieves an event.
@@ -15,7 +15,7 @@ class OmiseEvent extends OmiseApiResource
      */
     public static function retrieve($id = '', $publickey = null, $secretkey = null)
     {
-        return parent::g_retrieve(get_class(), self::getUrl($id), $publickey, $secretkey);
+        return parent::g_retrieve(self::getUrl($id), $publickey, $secretkey);
     }
 
     /**
@@ -41,6 +41,6 @@ class OmiseEvent extends OmiseApiResource
      */
     private static function getUrl($id = '')
     {
-        return OMISE_API_URL.self::ENDPOINT.'/'.$id;
+        return OMISE_API_URL . self::ENDPOINT . '/' . $id;
     }
 }

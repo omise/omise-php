@@ -8,4 +8,3 @@ coverage:
 test: 
 	PUBLIC_KEY=${PUBLIC_KEY} SECRET_KEY=${SECRET_KEY} \
 	./vendor/bin/phpunit --testdox
-	

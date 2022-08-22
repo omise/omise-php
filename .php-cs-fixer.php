@@ -18,19 +18,25 @@ return $config->setRules([
     'array_syntax' => ['syntax' => 'short'],
     'binary_operator_spaces' => [
         'operators' => [
-          '=>' => 'single_space',
-          '='  => 'single_space',
-          '+=' => 'single_space',
-          '-=' => 'single_space',
-          '>'  => 'single_space',
-          '<'  => 'single_space',
-          '<=' => 'single_space',
-          '>=' => 'single_space',
-          '||' => 'single_space',
-          '&&' => 'single_space',
+            '=>' => 'single_space',
+            '='  => 'single_space',
+            '+=' => 'single_space',
+            '-=' => 'single_space',
+            '>'  => 'single_space',
+            '<'  => 'single_space',
+            '<=' => 'single_space',
+            '>=' => 'single_space',
+            '||' => 'single_space',
+            '&&' => 'single_space',
         ],
     ],
-    'no_extra_blank_lines' => ['tokens' => ['attribute', 'break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'return', 'square_brace_block', 'switch', 'throw', 'use']],
+    'blank_line_before_statement' => ['statements' => ['break', 'case', 'continue', 'declare', 'default', 'exit', 'goto', 'return', 'switch', 'throw', 'try']],
+
+    // This is just prettier / easier to read.
+    'concat_space' => ['spacing' => 'one'],
+
+    // Visibility annotations are not supported by php5.6
+    'visibility_required' => false,
 ])
 ->setIndent(str_pad('', 4))
 ->setLineEnding("\n")

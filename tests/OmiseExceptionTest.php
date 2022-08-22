@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Traits\ChargeTrait;
+use Omise\Traits\ChargeTrait;
 
 class OmiseExceptionTest extends TestCase
 {
@@ -27,6 +27,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'authentication_failure',
             'message' => 'authentication failed'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -44,6 +45,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'bad_request',
             'message' => 'offsite is not valid'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -61,6 +63,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'not_found',
             'message' => 'customer cust_test_000000000000 was not found'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -78,6 +81,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'used_token',
             'message' => 'token was already used'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -95,6 +99,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'invalid_card',
             'message' => 'number is invalid and brand not supported (unknown)'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -112,6 +117,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'invalid_card_token',
             'message' => 'invalid card token'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -129,6 +135,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'invalid_link',
             'message' => 'amount must be less than or equal to 1000000.0'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -146,6 +153,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'missing_card',
             'message' => 'request contains no card parameters'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -163,6 +171,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'invalid_charge',
             'message' => 'currency is currently not supported and amount is not a number'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -180,6 +189,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'failed_capture',
             'message' => 'Charge is not authorized'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -197,6 +207,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'failed_refund',
             'message' => 'amount is not a number'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 
@@ -214,6 +225,7 @@ class OmiseExceptionTest extends TestCase
             'code' => 'something_strange',
             'message' => 'Strange case, don\'t know why?'
         ];
+
         throw OmiseException::getInstance($mock);
     }
 

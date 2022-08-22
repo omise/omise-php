@@ -6,7 +6,10 @@ class TransferTest extends TestCase
 {
     public $transferId;
 
-    public function setUp(): void
+    /**
+     * @before
+     */
+    public function setupSharedResources()
     {
         $receipts = OmiseTransfer::retrieve();
         $this->transferId = $receipts['data'][0]['id'];

@@ -6,9 +6,11 @@ class EventTest extends TestCase
 {
     public $eventId;
 
-    public function setUp(): void
+    /**
+     * @before
+     */
+    public function setupSharedResources()
     {
-        parent::setUp();
         $event = OmiseEvent::retrieve();
         $this->eventId = $event['data'][0]['id'];
     }

@@ -6,7 +6,10 @@ class ReceiptTest extends TestCase
 {
     public $receiptId;
 
-    public function setUp(): void
+    /**
+     * @before
+     */
+    public function setupSharedResources()
     {
         $receipts = OmiseReceipt::retrieve();
         if (isset($receipts['data'][0])) {

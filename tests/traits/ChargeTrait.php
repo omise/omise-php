@@ -1,6 +1,6 @@
 <?php
 
-namespace Traits;
+namespace Omise\Traits;
 
 use OmiseCharge;
 use OmiseSource;
@@ -30,10 +30,17 @@ trait ChargeTrait
     {
         $source = OmiseSource::create([
             'amount' => 100000,
-            'currency' => 'thb',
+            'currency' => 'THB',
+            'platform_type' => 'IOS',
             'type' => 'barcode_alipay',
-            'barcode' => rand(100000000, 99999999),
+            /**
+             * Can't use rand()/mt_rand() as it will be flagged as security issue by CI pipeline.
+             * Cannot use random_init() as it is available only in PHP 7 and above
+             * and we have to support PHP 5.6
+             */
+            'barcode' => time()
         ]);
+
         return OmiseCharge::create([
             'amount' => 100000,
             'currency' => 'thb',

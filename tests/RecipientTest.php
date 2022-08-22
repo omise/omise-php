@@ -6,7 +6,10 @@ class OmiseRecipientTest extends TestCase
 {
     public $recipientId;
 
-    public function setUp(): void
+    /**
+     * @before
+     */
+    public function setupSharedResources()
     {
         $recipients = OmiseRecipient::retrieve();
         $this->recipientId = $recipients['data'][0]['id'];

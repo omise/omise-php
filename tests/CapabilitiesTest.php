@@ -10,7 +10,10 @@ class CapabilitiesTest extends TestCase
      */
     protected $capabilities;
 
-    protected function setUp(): void
+    /**
+     * @before
+     */
+    public function setupSharedResources()
     {
         $this->capabilities = OmiseCapabilities::retrieve();
     }

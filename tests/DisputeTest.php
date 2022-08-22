@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Traits\ChargeTrait;
+use Omise\Traits\ChargeTrait;
 
 class OmiseDisputeTest extends TestCase
 {
@@ -11,14 +11,18 @@ class OmiseDisputeTest extends TestCase
 
     public $disputeId;
 
-    public function setUp(): void
+    /**
+     * @before
+     */
+    public function setupSharedResources()
     {
-        parent::setUp();
         $charge = $this->createCharge(true);
+
         $this->chargeId = $charge['id'];
         $dispute = OmiseDispute::create($charge, ['message' => '2 time charge']);
         $this->disputeId = $dispute['id'];
     }
+
     /**
      * @test
      * OmiseDispute class must be contain some method below.

@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Traits\ChargeTrait;
+use Omise\Traits\ChargeTrait;
 
 class ChargeTest extends TestCase
 {
@@ -47,6 +47,7 @@ class ChargeTest extends TestCase
     public function create()
     {
         $charge = $this->createCharge();
+
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
     }
