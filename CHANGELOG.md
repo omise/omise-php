@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### [v2.16.0 _(August 25, 2022)_](https://github.com/omise/omise-php/releases/tag/v2.16.0)
+- Made compatible with PHP 5.6 to 8.1 ([#141](https://github.com/omise/omise-php/pull/144))
+
 ### [v2.15.0 _(August 2, 2022)_](https://github.com/omise/omise-php/releases/tag/v2.15.0)
 
 - Replace Curl with Guzzle Client ([#141](https://github.com/omise/omise-php/pull/141))
