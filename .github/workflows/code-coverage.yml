@@ -2,7 +2,7 @@ name: Code Coverage
  
 on:
   push:
-    branches: [ master ]
+    branches: [ feature/ENGA3-357-code-coverage ]
   pull_request:
   
 jobs:
