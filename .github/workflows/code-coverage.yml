@@ -1,0 +1,43 @@
+name: Code Coverage
+
+on:
+  push:
+    branches: ["ENGA3-357-code-coverage"]
+  pull_request:
+    branches: ["ENGA3-357-code-coverage"]
+
+jobs:
+  coverage:
+    name: Code Coverage
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP with Xdebug
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          coverage: xdebug
+
+      - name: Create Folder and File for Vendor Path
+        run: mkdir -p app/etc && cd app/etc && touch vendor_path.php
+
+      - name: Install dependencies with composer
+        run: composer update --no-ansi --no-interaction --no-progress
+
+      - name: Generate Code Coverage
+        run: TEST_TYPE=unit vendor/bin/phpunit --coverage-clover=coverage.xml
+
+      - name: Fix Code Coverage Paths
+        run: sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' coverage.xml
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
