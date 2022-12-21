@@ -1,0 +1,357 @@
+{
+  "object": "capability",
+  "location": "/capability",
+  "banks": [
+    "bbl",
+    "kbank",
+    "rbs",
+    "ktb",
+    "jpm",
+    "mufg",
+    "ttb",
+    "scb",
+    "citi",
+    "smbc",
+    "sc",
+    "cimb",
+    "uob",
+    "bay",
+    "mega",
+    "boa",
+    "cacib",
+    "gsb",
+    "hsbc",
+    "db",
+    "ghb",
+    "baac",
+    "mb",
+    "bnp",
+    "ibank",
+    "tisco",
+    "kk",
+    "icbc",
+    "tcrb",
+    "lhb"
+  ],
+  "limits": {
+    "charge_amount": {
+      "max": 100000000,
+      "min": 100
+    },
+    "transfer_amount": {
+      "max": 1000000000,
+      "min": 3000
+    }
+  },
+  "payment_backends": [
+    {
+      "credit_card": {
+        "type": "card",
+        "currencies": [
+          "thb",
+          "jpy",
+          "usd",
+          "eur",
+          "gbp",
+          "sgd",
+          "aud",
+          "chf",
+          "cny",
+          "dkk",
+          "hkd",
+          "myr"
+        ],
+        "brands": [
+          "Discover",
+          "JCB",
+          "MasterCard",
+          "Visa"
+        ]
+      }
+    },
+    {
+      "atome": {
+        "type": "atome",
+        "currencies": [
+          "thb",
+          "jpy",
+          "sgd",
+          "myr"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "atome_qr": {
+        "type": "atome_qr",
+        "currencies": [
+          "thb",
+          "jpy",
+          "sgd",
+          "myr"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "barcode_wechat": {
+        "type": "offline",
+        "currencies": [
+          "thb",
+          "cny"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "bill_payment_tesco_lotus": {
+        "type": "offline",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "grabpay": {
+        "type": "grabpay",
+        "currencies": [
+          "thb",
+          "myr",
+          "sgd"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "installment_citi": {
+        "type": "installment",
+        "currencies": [
+          "thb"
+        ],
+        "allowed_installment_terms": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "installment_scb": {
+        "type": "installment",
+        "currencies": [
+          "thb"
+        ],
+        "allowed_installment_terms": [
+          3,
+          4,
+          6,
+          9,
+          10
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "installment_ttb": {
+        "type": "installment",
+        "currencies": [
+          "thb"
+        ],
+        "allowed_installment_terms": [
+          3,
+          4,
+          6,
+          10,
+          12
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "installment_uob": {
+        "type": "installment",
+        "currencies": [
+          "thb"
+        ],
+        "allowed_installment_terms": [
+          4,
+          6
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "mobile_banking_bay": {
+        "type": "mobile_banking_bay",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "mobile_banking_bbl": {
+        "type": "mobile_banking_bbl",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "mobile_banking_kbank": {
+        "type": "mobile_banking_kbank",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "mobile_banking_scb": {
+        "type": "mobile_banking_scb",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "points_citi": {
+        "type": "points_citi",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "promptpay": {
+        "type": "promptpay",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "qr_code_upi": {
+        "type": "qr_code_upi",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "rabbit_linepay": {
+        "type": "rabbit_linepay",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "shopeepay": {
+        "type": "shopeepay",
+        "currencies": [
+          "sgd",
+          "myr",
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "shopeepay_jumpapp": {
+        "type": "shopeepay_jumpapp",
+        "currencies": [
+          "sgd",
+          "myr",
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    },
+    {
+      "truemoney": {
+        "type": "truemoney",
+        "currencies": [
+          "thb"
+        ],
+        "amount": {
+          "min": 100,
+          "max": 100000000
+        }
+      }
+    }
+  ],
+  "tokenization_methods": [
+
+  ],
+  "zero_interest_installments": false
+}

@@ -1,0 +1,34 @@
+{
+  "object": "search",
+  "export": null,
+  "data": [
+    {
+      "object": "refund",
+      "id": "rfnd_5tyt7x52w900sddj3go",
+      "livemode": true,
+      "funding_amount": 89900,
+      "funding_currency": "thb",
+      "voided": true,
+      "currency": "thb",
+      "amount": 89900,
+      "metadata": {
+        "reason": ""
+      },
+      "charge": "chrg_5tyt77e94x2l1wghuc4",
+      "transaction": "trxn_5tyt7x5iqinu7oqf1he",
+      "location": "/charges/chrg_5tyt77e94x2l1wghuc4/refunds/rfnd_5tyt7x52w900sddj3go",
+      "created": "2022-11-29T11:14:45Z"
+    }
+  ],
+  "page": 1,
+  "per_page": 30,
+  "total": 1,
+  "total_pages": 1,
+  "filters": {
+    "voided": "true"
+  },
+  "location": "/search",
+  "order": "reverse_chronological",
+  "query": "",
+  "scope": "refund"
+}

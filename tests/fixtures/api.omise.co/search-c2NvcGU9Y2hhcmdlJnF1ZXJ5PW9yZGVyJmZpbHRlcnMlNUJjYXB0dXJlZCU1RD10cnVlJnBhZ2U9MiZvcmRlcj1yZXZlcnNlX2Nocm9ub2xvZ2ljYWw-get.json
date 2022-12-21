@@ -1,0 +1,18 @@
+{
+  "object": "search",
+  "export": null,
+  "data": [
+
+  ],
+  "page": 2,
+  "per_page": 30,
+  "total": 12,
+  "total_pages": 1,
+  "filters": {
+    "captured": "true"
+  },
+  "location": "/search",
+  "order": "reverse_chronological",
+  "query": "order",
+  "scope": "charge"
+}

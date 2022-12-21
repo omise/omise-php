@@ -8,5 +8,5 @@ test.php
 composer.lock
 composer.phar
 vendor
-fixtures
 reports
+coverage.xml

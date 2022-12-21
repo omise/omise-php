@@ -1,0 +1,13 @@
+{
+  "object": "list",
+  "data": [
+
+  ],
+  "limit": 20,
+  "offset": 0,
+  "total": 0,
+  "location": "/disputes",
+  "order": "chronological",
+  "from": "1970-01-01T00:00:00Z",
+  "to": "2022-12-21T17:24:00Z"
+}

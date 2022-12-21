@@ -1,0 +1,32 @@
+{
+  "object": "transfer",
+  "id": "trsf_test_no1t4tnemucod0e51mo",
+  "livemode": false,
+  "location": "/transfers/trsf_test_no1t4tnemucod0e51mo",
+  "fail_fast": false,
+  "paid": false,
+  "sent": false,
+  "sendable": true,
+  "currency": "thb",
+  "amount": 47448,
+  "fee": 3000,
+  "metadata": {},
+  "recipient": "recp_test_no1t4tnemucod0e51mo",
+  "transaction": null,
+  "schedule": null,
+  "bank_account": {
+    "object": "bank_account",
+    "account_type": null,
+    "bank_code": null,
+    "branch_code": null,
+    "brand": "test",
+    "created": "2019-12-31T12:59:59Z",
+    "last_digits": "6789",
+    "name": "DEFAULT BANK ACCOUNT"
+  },
+  "failure_code": null,
+  "failure_message": null,
+  "created": "2019-12-31T12:59:59Z",
+  "paid_at": null,
+  "sent_at": null
+}

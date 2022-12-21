@@ -1,0 +1,25 @@
+{
+  "object": "customer",
+  "livemode": true,
+  "id": "cust_5u7ih1vxdquv619qand",
+  "location": "/customers/cust_5u7ih1vxdquv619qand",
+  "metadata": {
+  },
+  "cards": {
+    "object": "list",
+    "data": [
+
+    ],
+    "limit": 20,
+    "offset": 0,
+    "total": 0,
+    "location": "/customers/cust_5u7ih1vxdquv619qand/cards",
+    "order": "chronological",
+    "from": "1970-01-01T00:00:00Z",
+    "to": "2022-12-21T17:33:08Z"
+  },
+  "default_card": null,
+  "description": "Another description",
+  "email": "john.smith@example.com",
+  "created": "2022-12-21T17:10:20Z"
+}
