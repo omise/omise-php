@@ -2,9 +2,9 @@ name: Code Coverage
 
 on:
   push:
-    branches: ["ENGA3-357-code-coverage"]
+    branches: ["master"]
   pull_request:
-    branches: ["ENGA3-357-code-coverage"]
+    branches: ["master"]
 
 jobs:
   coverage:
