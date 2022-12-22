@@ -203,7 +203,7 @@ class OmiseApiResource extends OmiseObject
         return $array && count($array) && isset($array['object']);
     }
 
-     /**
+    /**
      * @param  string $url
      * @param  string $requestMethod
      * @param  array  $params
@@ -221,22 +221,22 @@ class OmiseApiResource extends OmiseObject
         // Convert query string into filename friendly format.
         if (!empty($parsed['query'])) {
             $query = base64_encode($parsed['query']);
-            $query = str_replace(array('+', '/', '='), array('-', '_', ''), $query);
-            $request_url = $request_url.'-'.$query;
+            $query = str_replace(['+', '/', '='], ['-', '_', ''], $query);
+            $request_url = $request_url . '-' . $query;
         }
 
         // Finally.
-        $request_url = dirname(__FILE__).'/../../../tests/fixtures/'.$request_url.'-'.strtolower($requestMethod).'.json';
+        $request_url = dirname(__FILE__) . '/../../../tests/fixtures/' . $request_url . '-' . strtolower($requestMethod) . '.json';
 
         // Make a request from Curl if json file was not exists.
-        if (! file_exists($request_url)) {
+        if (!file_exists($request_url)) {
             // Get a directory that's file should contain.
             $request_dir = explode('/', $request_url);
             unset($request_dir[count($request_dir) - 1]);
             $request_dir = implode('/', $request_dir);
 
             // Create directory if it not exists.
-            if (! file_exists($request_dir)) {
+            if (!file_exists($request_dir)) {
                 mkdir($request_dir, 0777, true);
             }
 
