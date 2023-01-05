@@ -9,4 +9,5 @@ integration-test:
 	PUBLIC_KEY=${PUBLIC_KEY} SECRET_KEY=${SECRET_KEY} \
 	./vendor/bin/phpunit --testdox
 
-unit-test: TEST_TYPE=unit ./vendor/bin/phpunit --testdox
+unit-test: 
+	TEST_TYPE=unit ./vendor/bin/phpunit --testdox
