@@ -1,0 +1,11 @@
+{
+  "object": "transaction",
+  "currency": "thb",
+  "amount": 1028,
+  "id": "trxn_5sxjmojh383vgmni3v4",
+  "source": "chrg_5sxjmnwxi4gk5z5sl9n",
+  "location": "/transactions/trxn_5sxjmojh383vgmni3v4",
+  "type": "credit",
+  "created": "2022-08-26T04:34:04Z",
+  "transferable": "2022-09-02T16:59:59Z"
+}

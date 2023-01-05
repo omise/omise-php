@@ -1,0 +1,35 @@
+{
+  "object": "source",
+  "id": "src_5u7ijz4yrkes0s4pcnk",
+  "livemode": true,
+  "location": "/sources/src_5u7ijz4yrkes0s4pcnk",
+  "amount": 100000,
+  "bank": null,
+  "barcode": "1671643118",
+  "created": "2022-12-21T17:18:38Z",
+  "currency": "thb",
+  "email": null,
+  "flow": "offline",
+  "installment_terms": null,
+  "name": null,
+  "mobile_number": null,
+  "phone_number": null,
+  "platform_type": "IOS",
+  "scannable_code": null,
+  "billing": null,
+  "shipping": null,
+  "items": [
+
+  ],
+  "references": null,
+  "store_id": null,
+  "store_name": null,
+  "terminal_id": null,
+  "type": "barcode_alipay",
+  "absorption_type": null,
+  "charge_status": "unknown",
+  "receipt_amount": null,
+  "discounts": [
+
+  ]
+}

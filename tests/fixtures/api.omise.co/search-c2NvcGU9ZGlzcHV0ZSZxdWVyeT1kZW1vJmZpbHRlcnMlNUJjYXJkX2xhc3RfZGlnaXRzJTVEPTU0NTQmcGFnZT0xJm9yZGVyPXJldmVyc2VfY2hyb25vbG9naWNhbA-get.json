@@ -1,0 +1,18 @@
+{
+  "object": "search",
+  "export": null,
+  "data": [
+
+  ],
+  "page": 1,
+  "per_page": 30,
+  "total": 0,
+  "total_pages": 0,
+  "filters": {
+    "card_last_digits": "5454"
+  },
+  "location": "/search",
+  "order": "reverse_chronological",
+  "query": "demo",
+  "scope": "dispute"
+}

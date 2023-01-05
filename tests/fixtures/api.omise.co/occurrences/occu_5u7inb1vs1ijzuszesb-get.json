@@ -1,0 +1,14 @@
+{
+  "object": "occurrence",
+  "id": "occu_5u7inb1vs1ijzuszesb",
+  "livemode": true,
+  "location": "/occurrences/occu_5u7inb1vs1ijzuszesb",
+  "result": "chrg_5u7inb3449w4dxc0smk",
+  "schedule": "schd_5u7inb1uptmdx3h1ufk",
+  "message": null,
+  "status": "failed",
+  "created": "2022-12-21T17:28:06Z",
+  "processed_at": "2022-12-21T17:28:07Z",
+  "retry_date": null,
+  "schedule_date": "2022-12-21"
+}

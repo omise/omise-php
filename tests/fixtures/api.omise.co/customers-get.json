@@ -1,0 +1,307 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "object": "customer",
+      "livemode": true,
+      "id": "cust_5toki2sdgawto17lqb4",
+      "location": "/customers/cust_5toki2sdgawto17lqb4",
+      "metadata": {
+      },
+      "cards": {
+        "object": "list",
+        "data": [
+          {
+            "object": "card",
+            "id": "card_5toki2jq870oj185mig",
+            "livemode": true,
+            "security_code_check": true,
+            "expiration_month": 11,
+            "expiration_year": 2024,
+            "bank": "",
+            "brand": "Visa",
+            "city": null,
+            "country": "",
+            "financing": "",
+            "fingerprint": "HvNb2ovSCEn7LYPixIU2i/JVvgQBTLCOv7MBHnKiFzA=",
+            "first_digits": null,
+            "last_digits": "4242",
+            "location": "/customers/cust_5toki2sdgawto17lqb4/cards/card_5toki2jq870oj185mig",
+            "name": "AJ",
+            "phone_number": null,
+            "postal_code": null,
+            "state": null,
+            "street1": null,
+            "street2": null,
+            "tokenization_method": null,
+            "created": "2022-11-03T06:46:59Z"
+          }
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 1,
+        "location": "/customers/cust_5toki2sdgawto17lqb4/cards",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2022-12-21T17:33:07Z"
+      },
+      "default_card": "card_5toki2jq870oj185mig",
+      "description": "WooCommerce customer 1",
+      "email": null,
+      "created": "2022-11-03T06:47:00Z"
+    },
+    {
+      "object": "customer",
+      "livemode": true,
+      "id": "cust_5tq5ewt1gwwedhfw4v8",
+      "location": "/customers/cust_5tq5ewt1gwwedhfw4v8",
+      "metadata": {
+      },
+      "cards": {
+        "object": "list",
+        "data": [
+          {
+            "object": "card",
+            "id": "card_5tq5ewb8ntlzazvrxup",
+            "livemode": true,
+            "security_code_check": true,
+            "expiration_month": 11,
+            "expiration_year": 2023,
+            "bank": "",
+            "brand": "Visa",
+            "city": null,
+            "country": "",
+            "financing": "",
+            "fingerprint": "HvNb2ovSCEn7LYPixIU2i/JVvgQBTLCOv7MBHnKiFzA=",
+            "first_digits": null,
+            "last_digits": "4242",
+            "location": "/customers/cust_5tq5ewt1gwwedhfw4v8/cards/card_5tq5ewb8ntlzazvrxup",
+            "name": "AJ",
+            "phone_number": null,
+            "postal_code": null,
+            "state": null,
+            "street1": null,
+            "street2": null,
+            "tokenization_method": null,
+            "created": "2022-11-07T07:47:12Z"
+          }
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 1,
+        "location": "/customers/cust_5tq5ewt1gwwedhfw4v8/cards",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2022-12-21T17:33:07Z"
+      },
+      "default_card": "card_5tq5ewb8ntlzazvrxup",
+      "description": "WooCommerce customer 1",
+      "email": null,
+      "created": "2022-11-07T07:47:14Z"
+    },
+    {
+      "object": "customer",
+      "livemode": true,
+      "id": "cust_5u7aluy68jnet11zzs4",
+      "location": "/customers/cust_5u7aluy68jnet11zzs4",
+      "metadata": {
+      },
+      "cards": {
+        "object": "list",
+        "data": [
+
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 0,
+        "location": "/customers/cust_5u7aluy68jnet11zzs4/cards",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2022-12-21T17:33:07Z"
+      },
+      "default_card": null,
+      "description": "Zin Kyaw Kyaw",
+      "email": "zin@opn.ooo",
+      "created": "2022-12-21T03:45:51Z"
+    },
+    {
+      "object": "customer",
+      "livemode": true,
+      "id": "cust_5u7igop850j3wwbyo6u",
+      "location": "/customers/cust_5u7igop850j3wwbyo6u",
+      "metadata": {
+      },
+      "cards": {
+        "object": "list",
+        "data": [
+          {
+            "object": "card",
+            "id": "card_5u7igoiwfa068of4sgc",
+            "livemode": true,
+            "security_code_check": true,
+            "expiration_month": 11,
+            "expiration_year": 2024,
+            "bank": "",
+            "brand": "Visa",
+            "city": "Bangkok",
+            "country": "",
+            "financing": "",
+            "fingerprint": "HvNb2ovSCEn7LYPixIU2i/JVvgQBTLCOv7MBHnKiFzA=",
+            "first_digits": null,
+            "last_digits": "4242",
+            "location": "/customers/cust_5u7igop850j3wwbyo6u/cards/card_5u7igoiwfa068of4sgc",
+            "name": "Zin Kyaw Kyaw",
+            "phone_number": null,
+            "postal_code": "10320",
+            "state": null,
+            "street1": null,
+            "street2": null,
+            "tokenization_method": null,
+            "created": "2022-12-21T17:09:17Z"
+          }
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 1,
+        "location": "/customers/cust_5u7igop850j3wwbyo6u/cards",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2022-12-21T17:33:07Z"
+      },
+      "default_card": "card_5u7igoiwfa068of4sgc",
+      "description": "Zin Kyaw Kyaw",
+      "email": "zinkyawkyaw@example.com",
+      "created": "2022-12-21T17:09:18Z"
+    },
+    {
+      "object": "customer",
+      "livemode": true,
+      "id": "cust_5u7igtfjovpfmafqrd4",
+      "location": "/customers/cust_5u7igtfjovpfmafqrd4",
+      "metadata": {
+      },
+      "cards": {
+        "object": "list",
+        "data": [
+          {
+            "object": "card",
+            "id": "card_5u7igtbfbxw3tqv4qtl",
+            "livemode": true,
+            "security_code_check": true,
+            "expiration_month": 11,
+            "expiration_year": 2024,
+            "bank": "",
+            "brand": "Visa",
+            "city": "Bangkok",
+            "country": "",
+            "financing": "",
+            "fingerprint": "HvNb2ovSCEn7LYPixIU2i/JVvgQBTLCOv7MBHnKiFzA=",
+            "first_digits": null,
+            "last_digits": "4242",
+            "location": "/customers/cust_5u7igtfjovpfmafqrd4/cards/card_5u7igtbfbxw3tqv4qtl",
+            "name": "Zin Kyaw Kyaw",
+            "phone_number": null,
+            "postal_code": "10320",
+            "state": null,
+            "street1": null,
+            "street2": null,
+            "tokenization_method": null,
+            "created": "2022-12-21T17:09:40Z"
+          }
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 1,
+        "location": "/customers/cust_5u7igtfjovpfmafqrd4/cards",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2022-12-21T17:33:07Z"
+      },
+      "default_card": "card_5u7igtbfbxw3tqv4qtl",
+      "description": "Zin Kyaw Kyaw",
+      "email": "zinkyawkyaw@example.com",
+      "created": "2022-12-21T17:09:40Z"
+    },
+    {
+      "object": "customer",
+      "livemode": true,
+      "id": "cust_5u7ih1vxdquv619qand",
+      "location": "/customers/cust_5u7ih1vxdquv619qand",
+      "metadata": {
+      },
+      "cards": {
+        "object": "list",
+        "data": [
+
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 0,
+        "location": "/customers/cust_5u7ih1vxdquv619qand/cards",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2022-12-21T17:33:07Z"
+      },
+      "default_card": null,
+      "description": "Zin Kyaw Kyaw",
+      "email": "zinkyawkyaw@example.com",
+      "created": "2022-12-21T17:10:20Z"
+    },
+    {
+      "object": "customer",
+      "livemode": true,
+      "id": "cust_5u7ijfd5iejaqt9iue7",
+      "location": "/customers/cust_5u7ijfd5iejaqt9iue7",
+      "metadata": {
+      },
+      "cards": {
+        "object": "list",
+        "data": [
+          {
+            "object": "card",
+            "id": "card_5u7ijf054smi04xuay6",
+            "livemode": true,
+            "security_code_check": true,
+            "expiration_month": 11,
+            "expiration_year": 2024,
+            "bank": "",
+            "brand": "Visa",
+            "city": null,
+            "country": "",
+            "financing": "",
+            "fingerprint": "HvNb2ovSCEn7LYPixIU2i/JVvgQBTLCOv7MBHnKiFzA=",
+            "first_digits": null,
+            "last_digits": "4242",
+            "location": "/customers/cust_5u7ijfd5iejaqt9iue7/cards/card_5u7ijf054smi04xuay6",
+            "name": "AJ",
+            "phone_number": null,
+            "postal_code": null,
+            "state": null,
+            "street1": null,
+            "street2": null,
+            "tokenization_method": null,
+            "created": "2022-12-21T17:17:03Z"
+          }
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 1,
+        "location": "/customers/cust_5u7ijfd5iejaqt9iue7/cards",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2022-12-21T17:33:07Z"
+      },
+      "default_card": "card_5u7ijf054smi04xuay6",
+      "description": "WooCommerce customer 1",
+      "email": null,
+      "created": "2022-12-21T17:17:05Z"
+    }
+  ],
+  "limit": 20,
+  "offset": 0,
+  "total": 7,
+  "location": "/customers",
+  "order": "chronological",
+  "from": "1970-01-01T00:00:00Z",
+  "to": "2022-12-21T17:33:07Z"
+}

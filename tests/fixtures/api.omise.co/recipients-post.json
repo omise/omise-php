@@ -1,0 +1,31 @@
+{
+  "object": "recipient",
+  "id": "recp_5u7iovryl7o86gnsf9j",
+  "livemode": true,
+  "bank_account": {
+    "object": "bank_account",
+    "account_type": null,
+    "bank_code": null,
+    "branch_code": null,
+    "brand": "scb",
+    "created": "2022-12-21T17:32:35Z",
+    "last_digits": "7890",
+    "name": "Nuttanon T"
+  },
+  "schedule": null,
+  "active": false,
+  "default": false,
+  "verified": false,
+  "description": "Nuttanon T's account",
+  "email": "nam@omise.co",
+  "failure_code": null,
+  "location": "/recipients/recp_5u7iovryl7o86gnsf9j",
+  "metadata": {
+  },
+  "name": "Nuttanon T",
+  "tax_id": "",
+  "type": "individual",
+  "created": "2022-12-21T17:32:35Z",
+  "verified_at": null,
+  "activated_at": null
+}

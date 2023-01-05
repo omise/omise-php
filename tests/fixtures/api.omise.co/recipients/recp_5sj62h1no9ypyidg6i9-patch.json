@@ -1,0 +1,31 @@
+{
+  "object": "recipient",
+  "id": "recp_5sj62h1no9ypyidg6i9",
+  "livemode": true,
+  "bank_account": {
+    "object": "bank_account",
+    "account_type": null,
+    "bank_code": null,
+    "branch_code": null,
+    "brand": "bbl",
+    "created": "2022-07-20T10:24:30Z",
+    "last_digits": "6789",
+    "name": "Zin Kyaw Kyaw"
+  },
+  "schedule": null,
+  "active": true,
+  "default": true,
+  "verified": false,
+  "description": "Another description",
+  "email": "nam@omise.co",
+  "failure_code": null,
+  "location": "/recipients/recp_5sj62h1no9ypyidg6i9",
+  "metadata": {
+  },
+  "name": "Nuttanon Tra",
+  "tax_id": "1234567890",
+  "type": "corporation",
+  "created": "2022-07-20T10:24:30Z",
+  "verified_at": null,
+  "activated_at": "2022-07-20T10:24:29Z"
+}

@@ -1,0 +1,33 @@
+{
+  "object": "transfer",
+  "id": "trsf_5u7ioqci34jfgdbai44",
+  "livemode": true,
+  "location": "/transfers/trsf_5u7ioqci34jfgdbai44",
+  "fail_fast": false,
+  "paid": false,
+  "sent": false,
+  "sendable": false,
+  "currency": "thb",
+  "amount": 100000,
+  "fee": 3000,
+  "metadata": {
+  },
+  "recipient": "recp_5sj62h1no9ypyidg6i9",
+  "transaction": null,
+  "schedule": null,
+  "bank_account": {
+    "object": "bank_account",
+    "account_type": null,
+    "bank_code": null,
+    "branch_code": null,
+    "brand": "bbl",
+    "created": "2022-07-20T10:24:30Z",
+    "last_digits": "6789",
+    "name": "Zin Kyaw Kyaw"
+  },
+  "failure_code": null,
+  "failure_message": null,
+  "created": "2022-12-21T17:32:09Z",
+  "paid_at": null,
+  "sent_at": null
+}

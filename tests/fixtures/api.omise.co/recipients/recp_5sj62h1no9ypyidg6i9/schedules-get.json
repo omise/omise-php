@@ -1,0 +1,13 @@
+{
+  "object": "list",
+  "data": [
+
+  ],
+  "limit": 20,
+  "offset": 0,
+  "total": 0,
+  "location": "/recipients/recp_5sj62h1no9ypyidg6i9/schedules",
+  "order": "chronological",
+  "from": "1970-01-01T00:00:00Z",
+  "to": "2022-12-21T17:32:37Z"
+}

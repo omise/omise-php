@@ -1,0 +1,52 @@
+{
+  "object": "account",
+  "id": "acct_5seedd7q6gra8cpdcop",
+  "livemode": true,
+  "location": "/account",
+  "country": "TH",
+  "currency": "thb",
+  "email": "zin@opn.ooo",
+  "created": "2022-07-20T10:24:30Z",
+  "supported_currencies": [
+    "thb",
+    "jpy",
+    "usd",
+    "eur",
+    "gbp",
+    "sgd",
+    "aud",
+    "chf",
+    "cny",
+    "dkk",
+    "hkd",
+    "myr"
+  ],
+  "api_version": "2019-05-29",
+  "auto_activate_recipients": false,
+  "chain_enabled": false,
+  "zero_interest_installments": false,
+  "chaining_allowed": false,
+  "chain_return_uri": "https://www.omise.co",
+  "webhook_uri": "https://shopifypayments.ngrok.io/api/internal/webhooks",
+  "metadata_export_keys": {
+    "charge": [
+
+    ],
+    "transfer": [
+
+    ],
+    "refund": [
+
+    ],
+    "dispute": [
+
+    ]
+  },
+  "last_updated_api_version": "2022-07-08",
+  "is_payout_enabled": false,
+  "transfer_config": {
+    "min_transfer_amount": "30.00",
+    "max_transfer_amount": null,
+    "is_payout_enabled": false
+  }
+}

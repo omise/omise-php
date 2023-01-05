@@ -42,7 +42,8 @@
     }
   },
   "scripts": {
-    "test": "./vendor/bin/phpunit --testdox",
+    "test:unit": "TEST_TYPE=unit ./vendor/bin/phpunit --testdox",
+    "test:coverage": "XDEBUG_MODE=coverage TEST_TYPE=unit ./vendor/bin/phpunit --coverage-clover=coverage.xml",
     "fix": "vendor/bin/php-cs-fixer fix -vvv --diff --dry-run --allow-risky=yes --using-cache=no",
     "analyse": "vendor/bin/phpstan analyse lib tests",
     "phpstan": "vendor/bin/phpstan analyse lib tests"
