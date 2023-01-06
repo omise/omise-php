@@ -82,7 +82,7 @@ class CustomerTest extends TestCase
     public function search()
     {
         $result = OmiseCustomer::search('john')
-            ->filter(['created' => '2017-01-01..' . date('Y-m-d')]);
+            ->filter(['created' => '2017-01-01..2022-12-21']);
 
         $this->assertArrayHasKey('object', $result);
         $this->assertEquals('search', $result['object']);
