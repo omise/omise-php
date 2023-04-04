@@ -37,7 +37,7 @@ class OmiseSearch extends OmiseApiResource
      */
     public static function scope($scope, $publickey = null, $secretkey = null)
     {
-        $resouce = self::getInstance($publickey = null, $secretkey = null);
+        $resouce = self::getInstance($publickey, $secretkey);
         $resouce->mergeAttributes('scope', $scope);
 
         return $resouce;
