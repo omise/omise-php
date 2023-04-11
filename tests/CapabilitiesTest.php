@@ -134,7 +134,7 @@ class CapabilitiesTest extends TestCase
     {
         $backend = $this->capabilities->getBackends(
             $this->capabilities->makeBackendFilterType('installment'),
-            $this->capabilities->makeBackendFilterChargeAmount(20000)
+            $this->capabilities->makeBackendFilterChargeAmount(200000)
         );
         $this->assertEquals('array', gettype($backend));
         $this->assertEmpty($backend);
@@ -147,7 +147,7 @@ class CapabilitiesTest extends TestCase
     {
         $backend = $this->capabilities->getBackends(
             $this->capabilities->makeBackendFilterType('installment'),
-            $this->capabilities->makeBackendFilterChargeAmount(80000)
+            $this->capabilities->makeBackendFilterChargeAmount(800000)
         );
 
         $this->assertEquals('array', gettype($backend));
