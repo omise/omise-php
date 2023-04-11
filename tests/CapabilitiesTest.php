@@ -126,4 +126,35 @@ class CapabilitiesTest extends TestCase
         );
         $this->assertEquals('array', gettype($backends));
     }
+
+    /**
+     * @test
+     */
+    public function filter_by_charge_amount_200000_should_not_include_installment()
+    {
+        $backend = $this->capabilities->getBackends(
+            $this->capabilities->makeBackendFilterType('installment'),
+            $this->capabilities->makeBackendFilterChargeAmount(20000)
+        );
+        $this->assertEquals('array', gettype($backend));
+        $this->assertEmpty($backend);
+    }
+
+    /**
+     * @test
+     */
+    public function filter_by_charge_amount_800000_should_include_installment()
+    {
+        $backend = $this->capabilities->getBackends(
+            $this->capabilities->makeBackendFilterType('installment'),
+            $this->capabilities->makeBackendFilterChargeAmount(80000)
+        );
+
+        $this->assertEquals('array', gettype($backend));
+        $this->assertNotEmpty($backend);
+
+        // re-indexing array to make sure it's index starts with 0
+        $backend = array_values($backend);
+        $this->assertEquals('installment', $backend[0]->type);
+    }
 }
