@@ -41,6 +41,9 @@
     "transfer_amount": {
       "max": 1000000000,
       "min": 3000
+    },
+    "installment_amount": {
+      "min": 600000
     }
   },
   "payment_backends": [
