@@ -124,7 +124,6 @@ class OmiseCapabilities extends OmiseApiResource
         $defMax = $this['limits']['charge_amount']['max'];
 
         return function ($backend) use ($amount, $defMin, $defMax) {
-            // temporary hack for now to correct min value for installments to fixed minimum (different to normal charge minimum)
             if ($backend->type === 'installment') {
                 $min = $this['limits']['installment_amount']['min'];
             } else {
