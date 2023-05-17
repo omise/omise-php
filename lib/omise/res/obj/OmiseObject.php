@@ -121,7 +121,7 @@ class OmiseObject implements ArrayAccess, Iterator, Countable
     #[\ReturnTypeWillChange]
     public function count()
     {
-        return count($this->_values);
+        return count($this->_values['data']);
     }
 
     #[\ReturnTypeWillChange]
