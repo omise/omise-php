@@ -1,6 +1,5 @@
 # Omise PHP Client
 
-
 `omise-php` is a library designed specifically to connect with Omise API written in PHP.
 
 ## Requirements
@@ -49,7 +48,7 @@ Then, follows the instruction below to install **Omise-PHP** to the project.
 
 1. Extract the library to your project.
 
-2. Then, include the following line into your PHP file, 
+2. Then, include the following line into your PHP file,
     ```php
     require_once 'path-to-library/omise-php/lib/Omise.php';
     ```
@@ -79,7 +78,7 @@ _Reference: [https://www.omise.co/api-authentication](https://www.omise.co/api-a
 
 ### • API version
 
-In case you want to enforce API version the application use, you can specify it by defining the `OMISE_API_VERSION`.  
+In case you want to enforce API version the application use, you can specify it by defining the `OMISE_API_VERSION`.
 The version specified by this settings will override the version setting in your account. This is useful if you have multiple environments with different API versions (e.g. development on the latest but production on the older version).
 
 ```php
@@ -115,8 +114,8 @@ echo $account['email']; // your email will be printed on a screen.
 
 And that's it! You have just made a request to Omise API, easy huh?
 
-Now you are free from our instruction :D  
-Feel free to integrate Omise Payment Gateway service anyway you like to make it fit with your business flow.  
+Now you are free from our instruction :D
+Feel free to integrate Omise Payment Gateway service anyway you like to make it fit with your business flow.
 Also, stop by [documents](https://www.omise.co/docs) or [example code](https://github.com/omise/examples/tree/master/php) sometime to get more informations if you need any helps.
 
 Have fun!
