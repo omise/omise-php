@@ -42,6 +42,18 @@ class ChargeTest extends TestCase
 
     /**
      * @test
+     * Assert that a list of charge objects could be successfully retrieved and counted.
+     */
+    public function retrieve_charge_list_object_count()
+    {
+        $charge = OmiseCharge::retrieve();
+
+        $this->assertArrayHasKey('object', $charge);
+        $this->assertEquals(20, count($charge));
+    }
+
+    /**
+     * @test
      * Assert that a charge is successfully created with the given parameters set.
      */
     public function create()
