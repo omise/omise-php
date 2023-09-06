@@ -94,6 +94,21 @@ class ChargeTest extends TestCase
     }
 
     /**
+     * @test
+     * Assert that a pre authorized charge is partially captured based on set capture amount.
+     */
+    public function partialCapture()
+    {
+        $charge = $this->createChargePreAuth();
+        $charge->capture($charge['amount']/2);
+        $this->assertArrayHasKey('object', $charge);
+        $this->assertEquals('charge', $charge['object']);
+        $this->assertNull($charge['failure_code']);
+        $this->assertEquals($charge['authorization_type'], 'pre_auth');
+        $this->assertEquals($charge['amount']/2, $charge['captured_amount']);
+    }
+
+    /**
     * @test
     * Assert that a refund flag is set after charge is successfully refund.
     */

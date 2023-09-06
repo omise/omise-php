@@ -3,6 +3,8 @@
     "id": "chrg_5u7ih22sujh4lnw7q1t",
     "location": "/charges/chrg_5u7ih22sujh4lnw7q1t",
     "amount": 100000,
+    "authorization_type": "pre_auth",
+    "captured_amount": 50000,
     "funding_amount": 100000,
     "refunded": 0,
     "transaction_fees": {
