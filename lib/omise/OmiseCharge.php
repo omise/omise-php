@@ -97,11 +97,16 @@ class OmiseCharge extends OmiseApiResource
     /**
      * Captures a charge.
      *
+     * @param int|null $captureAmount  optional capture amount.
      * @return OmiseCharge
      */
-    public function capture()
+    public function capture(?int $captureAmount = null)
     {
-        $result = parent::execute(self::getUrl($this['id']) . '/capture', parent::REQUEST_POST, parent::getResourceKey());
+        $params = [];
+        if ($captureAmount !== null) {
+            $params['capture_amount'] = $captureAmount;
+        }
+        $result = parent::execute(self::getUrl($this['id']) . '/capture', parent::REQUEST_POST,parent::getResourceKey(), $params);
         $this->refresh($result);
 
         return $this;
