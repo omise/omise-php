@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### [v2.17.0 _(Sept 06, 2023)_](https://github.com/omise/omise-php/releases/tag/v2.17.0)
+
+- Added support for partial capture ([#157](https://github.com/omise/omise-php/pull/157))
+
 ### [v2.16.1 _(April 20, 2023)_](https://github.com/omise/omise-php/releases/tag/v2.16.1)
 - Removed the predefined installment minimum value ([#151](https://github.com/omise/omise-php/pull/151))
 - Bug fixed on `OmiseSearch::scope` public key and secret key override as null ([#149](https://github.com/omise/omise-php/pull/149))

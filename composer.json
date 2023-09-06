@@ -2,7 +2,7 @@
   "name": "omise/omise-php",
   "description": "A PHP library designed specifically to connect with Omise API.",
   "type": "library",
-  "version": "v2.16.1",
+  "version": "v2.17.0",
   "keywords": [
     "alipay payment",
     "credit card payment",
