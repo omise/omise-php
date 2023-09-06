@@ -97,7 +97,7 @@ class OmiseCharge extends OmiseApiResource
     /**
      * Captures a charge.
      *
-     * @param int|null $captureAmount  optional capture amount.
+     * @param  array  $params
      * @return OmiseCharge
      */
     public function capture($params = null)
