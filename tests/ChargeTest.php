@@ -100,12 +100,12 @@ class ChargeTest extends TestCase
     public function partialCapture()
     {
         $charge = $this->createChargePreAuth();
-        $charge->capture($charge['amount']/2);
+        $charge->capture(['capture_amount' => $charge['amount'] / 2]);
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);
         $this->assertNull($charge['failure_code']);
         $this->assertEquals($charge['authorization_type'], 'pre_auth');
-        $this->assertEquals($charge['amount']/2, $charge['captured_amount']);
+        $this->assertEquals($charge['amount'] / 2, $charge['captured_amount']);
     }
 
     /**
