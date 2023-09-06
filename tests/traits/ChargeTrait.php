@@ -26,6 +26,20 @@ trait ChargeTrait
         ]);
     }
 
+    public function createChargePreAuth()
+    {
+        return OmiseCharge::create([
+            'amount' => 100000,
+            'currency' => 'thb',
+            'description' => 'Order-123',
+            'ip' => '127.0.0.1',
+            'customer' => OMISE_CUSTOMER_ID,
+            'card' => OMISE_CARD_ID,
+            'capture' => false,
+            'authorization_type' => 'pre_auth'
+        ]);
+    }
+
     public function createChargeWithSource()
     {
         $source = OmiseSource::create([
