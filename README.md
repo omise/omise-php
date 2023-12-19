@@ -141,7 +141,6 @@ The following subjects are instructions for contributors who consider to submit 
 ### Submit the changes
 
 You're all welcome to submit a pull request.
-Please consider the [pull request template](https://github.com/omise/.github/blob/main/pull_request_template.md) and fill the form when you submit a new pull request.
 
 Learn more about submitting pull request here: [https://help.github.com/articles/about-pull-requests](https://help.github.com/articles/about-pull-requests)
 
