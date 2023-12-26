@@ -66,6 +66,8 @@ _Using Composer is recommended as you can easily keep the library up-to-date._
 
 Before you make the first request to the Opn Payments API, you will need to configure your **public key** and **secret key** (these can be found on the [Opn Payments Dashboard](https://dashboard.omise.co). Log in, then go to **Keys** from the sidebar menu).
 
+![configuring omise-php, public and secret keys](https://user-images.githubusercontent.com/2154669/54261954-9eed9e00-459f-11e9-96b1-747061640fab.png)
+
 Place the following code next to the line where Omise-PHP library is loaded.
 
 ```php
@@ -73,7 +75,6 @@ define('OMISE_PUBLIC_KEY', 'pkey_test_***');
 define('OMISE_SECRET_KEY', 'skey_test_***');
 ```
 
-![configuring omise-php, public and secret keys](https://user-images.githubusercontent.com/2154669/54261954-9eed9e00-459f-11e9-96b1-747061640fab.png)
 
 _Reference: [API Authentication](https://docs.opn.ooo/api-authentication)._
 
@@ -88,7 +89,7 @@ The version specified by this settings will override the version setting in your
 define('OMISE_API_VERSION', '2017-11-02');
 ```
 
-_API version can be found on the [Opn Payments Dashboard](https://dashboard.omise.co). Log in, then go to **API versions** from the top-right menu._
+API version can be found on the [Opn Payments Dashboard](https://dashboard.omise.co). Log in, then go to **API versions** from the top-right menu.
 
 ![configuring omise-php, API version](https://cloud.githubusercontent.com/assets/2154669/24141410/ef0faf46-0e55-11e7-8e25-26e2a6fc403b.png)
 
