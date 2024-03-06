@@ -1,13 +1,18 @@
-# Omise PHP Client
+# Omise PHP Library
 
 `omise-php` is a PHP library designed specifically to connect with the Opn Payments API.
+
+## Security Warning
+
+**Please do NOT use Omise PHP library versions less than 2.12.0, as they are outdated and have security vulnerabilities.**
+
 
 ## Requirements
 
 * PHP v7.4 and higher.
 * Built-in [libcurl](http://php.net/manual/en/book.curl.php) support.
 
-> Note: Due to the PHP [END OF LIFE](http://php.net/supported-versions.php) cycle, we encourage you to run the Omise-PHP library on PHP version 7.4 or higher as there is no longer security support for any version lower than 7.4. Lack of support could cause security vulnerabilities.
+> Note: Due to the PHP [END OF LIFE](http://php.net/supported-versions.php) cycle, we encourage you to run the Omise-PHP library on PHP version 7.4 or higher as there is no longer security support for any PHP version lower than 7.4. Lack of support could cause security vulnerabilities.
 
 ## Installation
 
