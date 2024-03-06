@@ -1,10 +1,10 @@
-# Omise PHP Client
+# Omise PHP Library
 
 `omise-php` is a PHP library designed specifically to connect with the Opn Payments API.
 
 ## Security Warning
 
-**Please do NOT use Omise PHP client versions less than 2.12.0, as they are outdated and have security vulnerabilities.**
+**Please do NOT use Omise PHP library versions less than 2.12.0, as they are outdated and have security vulnerabilities.**
 
 
 ## Requirements
