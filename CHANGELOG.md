@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### [v2.18.0 _(Jul 09, 2024)_](https://github.com/omise/omise-php/releases/tag/v2.18.0)
+
+- Fix the latest version link in README. ([#157](https://github.com/omise/omise-php/pull/167))
+- Add #[AllowDynamicProperties] to not emit deprecation notice. ([#157](https://github.com/omise/omise-php/pull/168))
+
 ### [v2.17.0 _(Sept 06, 2023)_](https://github.com/omise/omise-php/releases/tag/v2.17.0)
 
 - Added support for partial capture ([#157](https://github.com/omise/omise-php/pull/157))
