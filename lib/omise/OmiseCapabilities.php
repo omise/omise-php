@@ -174,14 +174,4 @@ class OmiseCapabilities extends OmiseApiResource
     {
         return OMISE_API_URL . self::ENDPOINT;
     }
-
-    /**
-     * Returns the public key.
-     *
-     * @return string
-     */
-    protected static function getResourceKey()
-    {
-        return parent::getResourceKey();
-    }
 }
