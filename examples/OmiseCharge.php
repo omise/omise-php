@@ -30,8 +30,11 @@ $chargeCreated = OmiseCharge::create([
 ]);
 
 $chargeFetched = OmiseCharge::retrieve($chargeCreated->toArray()['id']);
+echo print_r($chargeFetched, true);
+$chargeFetched->capture(['capture_amount' => 100000 / 2]);
 $chargeRefund = $chargeFetched->refunds()->create(['amount' => 100000]);
 
 echo sprintf("New Charge ID (TH): %s", $chargeCreated->toArray()['id']) . "\n";
 echo sprintf("Fetched Charge ID (TH): %s", $chargeFetched->toArray()['id']) . "\n";
+echo print_r($chargeFetched, true);
 echo sprintf("Refund ID (TH): %s", $chargeRefund->toArray()['id']) . "\n\n";

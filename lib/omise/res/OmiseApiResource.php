@@ -37,7 +37,7 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function getInstance($publickey = null, $secretkey = null)
     {
-        return $resource = new static($publickey, $secretkey); // @phpstan-ignore-line
+        $resource = new static($publickey, $secretkey); // @phpstan-ignore-line
         $className = get_class($resource);
         if (!isset(self::$instances[$className])) {
             static::$instances[$className] = $resource;
