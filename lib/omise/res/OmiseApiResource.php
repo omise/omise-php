@@ -41,6 +41,7 @@ class OmiseApiResource extends OmiseObject
         $className = get_class($resource);
         if (!isset(self::$instances[$className])) {
             static::$instances[$className] = $resource;
+
             return static::$instances[$className];
         }
 

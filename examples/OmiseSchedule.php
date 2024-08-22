@@ -1,7 +1,7 @@
 
 <?php
 require_once 'vendor/autoload.php';
-require_once "lib/Omise.php";
+require_once 'lib/Omise.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
@@ -32,11 +32,11 @@ $createResultTH = OmiseSchedule::create([
     'charge[description]' => 'Testing schedule',
 ], $pkeyTH, $skeyTH);
 
-echo sprintf("Created schedule ID (TH): %s", $createResultTH->toArray()['id']) . "\n";
+echo sprintf('Created schedule ID (TH): %s', $createResultTH->toArray()['id']) . '\n';
 
 $resultTH = OmiseSchedule::retrieve($createResultTH->toArray()['id'], $pkeyTH, $skeyTH);
 
-echo sprintf("Fetched schedule ID (TH): %s", $resultTH->toArray()['id']) . "\n\n";
+echo sprintf('Fetched schedule ID (TH): %s', $resultTH->toArray()['id']) . '\n\n';
 
 // Create schedule under MY PSP
 $createResultMY = OmiseSchedule::create([
@@ -49,11 +49,11 @@ $createResultMY = OmiseSchedule::create([
     'charge[description]' => 'Testing schedule',
 ], $pkeyMY, $skeyMY);
 
-echo sprintf("Created schedule ID (MY): %s", $createResultMY->toArray()['id']) . "\n";
+echo sprintf('Created schedule ID (MY): %s', $createResultMY->toArray()['id']) . '\n';
 
 $resultMY = OmiseSchedule::retrieve($createResultMY->toArray()['id'], $pkeyMY, $skeyMY);
 
-echo sprintf("Fetched schedule ID (MY): %s", $resultMY->toArray()['id']) . "\n\n";
+echo sprintf('Fetched schedule ID (MY): %s', $resultMY->toArray()['id']) . '\n\n';
 
 // Create schedule under SG PSP
 $createResultSG = OmiseSchedule::create([
@@ -66,8 +66,8 @@ $createResultSG = OmiseSchedule::create([
     'charge[description]' => 'Testing schedule',
 ]);
 
-echo sprintf("Created schedule ID (SG): %s", $createResultSG->toArray()['id']) . "\n";
+echo sprintf('Created schedule ID (SG): %s', $createResultSG->toArray()['id']) . '\n';
 
 $resultSG = OmiseSchedule::retrieve($createResultSG->toArray()['id']);
 
-echo sprintf("Fetched schedule ID (SG): %s", $resultSG->toArray()['id']) . "\n\n";
+echo sprintf('Fetched schedule ID (SG): %s', $resultSG->toArray()['id']) . '\n\n';

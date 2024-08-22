@@ -1,7 +1,7 @@
 
 <?php
-require_once '../vendor/autoload.php';
-require_once "../lib/Omise.php";
+require_once 'vendor/autoload.php';
+require_once 'lib/Omise.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
@@ -26,15 +26,19 @@ $chargeCreated = OmiseCharge::create([
     'amount' => 100000,
     'currency' => 'thb',
     'return_uri' => 'http://www.example.com',
-    "card" => $token->toArray()['id']
+    'card' => $token->toArray()['id']
 ]);
 
 $chargeFetched = OmiseCharge::retrieve($chargeCreated->toArray()['id']);
 echo print_r($chargeFetched, true);
+
+// Capture the amount
 $chargeFetched->capture(['capture_amount' => 100000 / 2]);
+
+// Refund the amount
 $chargeRefund = $chargeFetched->refunds()->create(['amount' => 100000]);
 
-echo sprintf("New Charge ID (TH): %s", $chargeCreated->toArray()['id']) . "\n";
-echo sprintf("Fetched Charge ID (TH): %s", $chargeFetched->toArray()['id']) . "\n";
+echo sprintf('New Charge ID (TH): %s', $chargeCreated->toArray()['id']) . '\n';
+echo sprintf('Fetched Charge ID (TH): %s', $chargeFetched->toArray()['id']) . '\n';
 echo print_r($chargeFetched, true);
-echo sprintf("Refund ID (TH): %s", $chargeRefund->toArray()['id']) . "\n\n";
+echo sprintf('Refund ID (TH): %s', $chargeRefund->toArray()['id']) . '\n\n';
