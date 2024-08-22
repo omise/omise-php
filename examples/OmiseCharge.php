@@ -26,7 +26,8 @@ $chargeCreated = OmiseCharge::create([
     'amount' => 100000,
     'currency' => 'thb',
     'return_uri' => 'http://www.example.com',
-    'card' => $token->toArray()['id']
+    'card' => $token->toArray()['id'],
+    'capture' => false
 ]);
 
 $chargeFetched = OmiseCharge::retrieve($chargeCreated->toArray()['id']);
