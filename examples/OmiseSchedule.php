@@ -11,15 +11,15 @@ define('OMISE_PUBLIC_KEY', $_ENV['PUBLIC_KEY_SG']);
 define('OMISE_SECRET_KEY', $_ENV['SECRET_KEY_SG']);
 
 // test customer key
-$customerSG = 'cust_test_60owl03ul8bzdk0h5ph';
+$customerSG = 'cust_xxxx';
 
 $pkeyTH = $_ENV['PUBLIC_KEY_TH'];
 $skeyTH = $_ENV['SECRET_KEY_TH'];
-$customerTH = 'cust_test_60ilwqkl9khiex66p4s';
+$customerTH = 'cust_xxxx';
 
 $pkeyMY = $_ENV['PUBLIC_KEY_MY'];
 $skeyMY = $_ENV['SECRET_KEY_MY'];
-$customerMY = 'cust_5u4m6n6tlhduy9savs8';
+$customerMY = 'cust_xxxx';
 
 // Create schedule under TH PSP
 $createResultTH = OmiseSchedule::create([
