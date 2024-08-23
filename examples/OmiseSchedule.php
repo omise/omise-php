@@ -32,11 +32,9 @@ $createResultTH = OmiseSchedule::create([
     'charge[description]' => 'Testing schedule',
 ], $pkeyTH, $skeyTH);
 
-echo sprintf('Created schedule ID (TH): %s', $createResultTH->toArray()['id']) . '\n';
+$chargeScheduleIdTH = $createResultTH->toArray()['id'];
 
-$resultTH = OmiseSchedule::retrieve($createResultTH->toArray()['id'], $pkeyTH, $skeyTH);
-
-echo sprintf('Fetched schedule ID (TH): %s', $resultTH->toArray()['id']) . '\n\n';
+echo sprintf('Created schedule ID (TH): %s', $chargeScheduleIdTH) . "\n";
 
 // Create schedule under MY PSP
 $createResultMY = OmiseSchedule::create([
@@ -49,11 +47,9 @@ $createResultMY = OmiseSchedule::create([
     'charge[description]' => 'Testing schedule',
 ], $pkeyMY, $skeyMY);
 
-echo sprintf('Created schedule ID (MY): %s', $createResultMY->toArray()['id']) . '\n';
+$chargeScheduleIdMY = $createResultMY->toArray()['id'];
 
-$resultMY = OmiseSchedule::retrieve($createResultMY->toArray()['id'], $pkeyMY, $skeyMY);
-
-echo sprintf('Fetched schedule ID (MY): %s', $resultMY->toArray()['id']) . '\n\n';
+echo sprintf('Created schedule ID (MY): %s', $createResultMY->toArray()['id']) . "\n\n";
 
 // Create schedule under SG PSP
 $createResultSG = OmiseSchedule::create([
@@ -66,8 +62,21 @@ $createResultSG = OmiseSchedule::create([
     'charge[description]' => 'Testing schedule',
 ]);
 
-echo sprintf('Created schedule ID (SG): %s', $createResultSG->toArray()['id']) . '\n';
+$chargeScheduleIdSG = $createResultSG->toArray()['id'];
 
-$resultSG = OmiseSchedule::retrieve($createResultSG->toArray()['id']);
+echo sprintf('Created schedule ID (SG): %s', $createResultSG->toArray()['id']) . "\n";
 
-echo sprintf('Fetched schedule ID (SG): %s', $resultSG->toArray()['id']) . '\n\n';
+
+// Fetching charge scedules
+
+$resultTH = OmiseSchedule::retrieve($chargeScheduleIdTH, $pkeyTH, $skeyTH);
+
+echo sprintf('Fetched schedule ID (TH): %s', $resultTH->toArray()['id']) . "\n\n";
+
+$resultMY = OmiseSchedule::retrieve($chargeScheduleIdMY, $pkeyMY, $skeyMY);
+
+echo sprintf('Fetched schedule ID (MY): %s', $resultMY->toArray()['id']) . "\n\n";
+
+$resultSG = OmiseSchedule::retrieve($chargeScheduleIdSG);
+
+echo sprintf('Fetched schedule ID (SG): %s', $resultSG->toArray()['id']) . "\n\n";
