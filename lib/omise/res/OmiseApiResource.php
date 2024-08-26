@@ -37,14 +37,20 @@ class OmiseApiResource extends OmiseObject
      */
     protected static function getInstance($publickey = null, $secretkey = null)
     {
-        $resource = new static($publickey, $secretkey); // @phpstan-ignore-line
+        $resource = new static($publickey, $secretkey);
         $className = get_class($resource);
-
         if (!isset(self::$instances[$className])) {
             static::$instances[$className] = $resource;
+
+            return static::$instances[$className];
         }
 
-        return static::$instances[$className];
+        $resource = static::$instances[$className];
+
+        $resource->setPublicKey($publickey);
+        $resource->setSecretKey($secretkey);
+
+        return $resource;
     }
 
     /**
@@ -60,7 +66,7 @@ class OmiseApiResource extends OmiseObject
     protected static function g_retrieve($url, $publickey = null, $secretkey = null)
     {
         $resource = self::getInstance($publickey, $secretkey);
-        $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+        $result = $resource->execute($url, self::REQUEST_GET, self::getResourceKey($resource));
         $resource->refresh($result);
 
         return $resource;
@@ -81,7 +87,7 @@ class OmiseApiResource extends OmiseObject
     protected static function g_create($url, $params, $publickey = null, $secretkey = null)
     {
         $resource = self::getInstance($publickey, $secretkey);
-        $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey(), $params);
+        $result = $resource->execute($url, self::REQUEST_POST, self::getResourceKey($resource), $params);
         $resource->refresh($result);
 
         return $resource;
@@ -98,7 +104,7 @@ class OmiseApiResource extends OmiseObject
     protected static function g_update($url, $params = null)
     {
         $resource = self::getInstance();
-        $result = $resource->execute($url, self::REQUEST_PATCH, $resource->getResourceKey(), $params);
+        $result = $resource->execute($url, self::REQUEST_PATCH, self::getResourceKey($resource), $params);
         $resource->refresh($result);
     }
 
@@ -112,7 +118,7 @@ class OmiseApiResource extends OmiseObject
     protected static function g_expire($url)
     {
         $resource = self::getInstance();
-        $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey());
+        $result = $resource->execute($url, self::REQUEST_POST, self::getResourceKey($resource));
         $resource->refresh($result, true);
     }
 
@@ -126,7 +132,7 @@ class OmiseApiResource extends OmiseObject
     protected static function g_destroy($url)
     {
         $resource = self::getInstance();
-        $result = $resource->execute($url, self::REQUEST_DELETE, $resource->getResourceKey());
+        $result = $resource->execute($url, self::REQUEST_DELETE, self::getResourceKey($resource));
         $resource->refresh($result, true);
     }
 
@@ -140,7 +146,7 @@ class OmiseApiResource extends OmiseObject
     protected static function g_revoke($url)
     {
         $resource = self::getInstance();
-        $result = $resource->execute($url, self::REQUEST_POST, $resource->getResourceKey());
+        $result = $resource->execute($url, self::REQUEST_POST, self::getResourceKey($resource));
         $resource->refresh($result, true);
     }
 
@@ -154,7 +160,7 @@ class OmiseApiResource extends OmiseObject
     protected static function g_reload($url)
     {
         $resource = self::getInstance();
-        $result = $resource->execute($url, self::REQUEST_GET, $resource->getResourceKey());
+        $result = $resource->execute($url, self::REQUEST_GET, self::getResourceKey($resource));
         $resource->refresh($result);
     }
 
@@ -362,9 +368,12 @@ class OmiseApiResource extends OmiseObject
      *
      * @return string
      */
-    protected static function getResourceKey()
+    protected static function getResourceKey($resource = null)
     {
-        $resource = self::getInstance();
+        if (!$resource) {
+            $resource = self::getInstance();
+        }
+
         if (in_array(get_class($resource), self::$classesToUsePublicKey)) {
             return $resource->_publickey;
         }

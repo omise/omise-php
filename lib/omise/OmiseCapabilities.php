@@ -79,6 +79,7 @@ class OmiseCapabilities extends OmiseApiResource
             },
             $this['payment_backends']
         );
+
         // return backends (filtered if requested)
         return ($filters = func_get_args()) ? array_filter($backends, self::combineFilters(self::argsToVariadic($filters))) : $backends;
     }
@@ -173,15 +174,5 @@ class OmiseCapabilities extends OmiseApiResource
     private static function getUrl()
     {
         return OMISE_API_URL . self::ENDPOINT;
-    }
-
-    /**
-     * Returns the public key.
-     *
-     * @return string
-     */
-    protected static function getResourceKey()
-    {
-        return parent::getResourceKey();
     }
 }

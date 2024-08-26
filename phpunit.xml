@@ -54,6 +54,7 @@
             <file>./lib/Omise.php</file>
             <directory>tests</directory>
             <directory>vendor</directory>
+            <directory>examples</directory>
         </exclude>
     </coverage>
 </phpunit>
