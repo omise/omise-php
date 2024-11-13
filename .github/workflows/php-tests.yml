@@ -33,6 +33,11 @@ jobs:
       - name: Set up environment
         run: cp .env.example .env
 
-      # Step 5: Run tests
-      - name: Run tests
+      # Step 5: Run unit tests
+      - name: Run unit tests
         run: make unit-test
+
+      # Step 6: Run integration tests
+      - name: Run integration tests
+        run: make integration-test
+        
