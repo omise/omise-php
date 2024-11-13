@@ -29,6 +29,10 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
 
-      # Step 4: Run PHP tests
+      # Step 4: Copy environment configuration
+      - name: Set up environment
+        run: cp .env.example .env
+
+      # Step 5: Run tests with `make test`
       - name: Run tests
-        run: vendor/bin/phpunit --coverage-text
+        run: make test
