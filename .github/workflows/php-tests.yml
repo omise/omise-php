@@ -33,6 +33,6 @@ jobs:
       - name: Set up environment
         run: cp .env.example .env
 
-      # Step 5: Run tests with `make test`
+      # Step 5: Run tests
       - name: Run tests
-        run: make test
+        run: make unit-test
