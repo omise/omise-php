@@ -1,0 +1,39 @@
+name: PHP Test Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: [7.4, 8.0, 8.1, 8.2]  # PHP versions 7.4 and above
+      fail-fast: false  # Continue testing all versions even if one fails
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up PHP with the specified version
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, intl, xml  # Add other necessary PHP extensions
+          coverage: xdebug  # Enable Xdebug if you need code coverage
+
+      # Step 3: Install dependencies with Composer
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      # Step 4: Run PHP tests
+      - name: Run tests
+        run: vendor/bin/phpunit --coverage-text
