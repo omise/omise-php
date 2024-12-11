@@ -1,10 +1,10 @@
 <?php
 
 define('OMISE_PHP_LIB_VERSION', '2.18.0');
-// define('OMISE_API_URL', 'https://api.omise.co/');
-// define('OMISE_VAULT_URL', 'https://vault.omise.co/');
 define('OMISE_API_URL', getenv('API_URL') ?: 'https://api.omise.co/');
 define('OMISE_VAULT_URL', getenv('VUALT_URL') ?: 'https://vault.omise.co/');
+echo API_URL;
+echo VUALT_URL;
 
 #[\AllowDynamicProperties]
 class OmiseApiResource extends OmiseObject
