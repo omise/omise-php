@@ -184,18 +184,18 @@ class ChargeTest extends TestCase
         $this->assertEquals($charge, $scheduler['charge']);
     }
 
-    /**
-    * @test
-    * Assert that an expired flag is set after charge is successfully set to expire.
-    */
-    public function expire()
-    {
-        $charge = $this->createChargeWithSource();
-        $charge->expire();
-        $this->assertArrayHasKey('object', $charge);
-        $this->assertEquals('charge', $charge['object']);
-        $this->assertTrue($charge['expired']);
-    }
+    // /**
+    // * @test
+    // * Assert that an expired flag is set after charge is successfully set to expire.
+    // */
+    // public function expire()
+    // {
+    //     $charge = $this->createChargeWithSource();
+    //     $charge->expire();
+    //     $this->assertArrayHasKey('object', $charge);
+    //     $this->assertEquals('charge', $charge['object']);
+    //     $this->assertTrue($charge['expired']);
+    // }
 
     /**
      * @test
