@@ -14,5 +14,6 @@
   "location": "/search",
   "order": "reverse_chronological",
   "query": "demo@omise.co",
-  "scope": "transfer"
+  "scope": "transfer",
+  "aggregate_level": null
 }

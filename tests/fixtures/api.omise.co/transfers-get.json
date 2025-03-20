@@ -3,42 +3,53 @@
   "data": [
     {
       "object": "transfer",
-      "id": "trsf_test_no1t4tnemucod0e51mo",
+      "id": "trsf_test_6344mzlz6y6nbeiaoxv",
       "livemode": false,
-      "location": "/transfers/trsf_test_no1t4tnemucod0e51mo",
+      "location": "/transfers/trsf_test_6344mzlz6y6nbeiaoxv",
+      "deleted": false,
       "fail_fast": false,
       "paid": false,
       "sent": false,
       "sendable": true,
-      "currency": "thb",
-      "amount": 47448,
-      "fee": 3000,
-      "metadata": {},
-      "recipient": "recp_test_no1t4tnemucod0e51mo",
-      "transaction": null,
-      "schedule": null,
+      "currency": "THB",
+      "amount": 100000,
+      "fee": 2804,
+      "metadata": {
+      },
+      "recipient": "recp_test_62e6vi6h2cnhukcqr13",
       "bank_account": {
         "object": "bank_account",
-        "account_type": null,
-        "bank_code": null,
-        "branch_code": null,
-        "brand": "test",
-        "created": "2019-12-31T12:59:59Z",
+        "livemode": false,
         "last_digits": "6789",
-        "name": "DEFAULT BANK ACCOUNT"
+        "account_number": "123456789",
+        "name": "DEFAULT BANK ACCOUNT",
+        "type": null,
+        "created_at": "2025-01-13T02:42:11Z",
+        "brand": "Test Bank",
+        "bank_code": "test",
+        "branch_code": null
       },
       "failure_code": null,
       "failure_message": null,
-      "created": "2019-12-31T12:59:59Z",
       "paid_at": null,
-      "sent_at": null
+      "sent_at": null,
+      "balance_hold_at": null,
+      "created_at": "2025-03-20T10:15:35Z",
+      "transactions": [
+
+      ],
+      "schedule": null,
+      "fee_vat": 196,
+      "net": 97000,
+      "total_fee": 3000,
+      "split_transfer_group_id": null
     }
   ],
   "limit": 20,
   "offset": 0,
-  "total": 0,
+  "total": 1,
   "location": "/transfers",
   "order": "chronological",
   "from": "1970-01-01T00:00:00Z",
-  "to": "2022-12-21T17:28:08Z"
+  "to": "2025-03-20T10:18:24Z"
 }

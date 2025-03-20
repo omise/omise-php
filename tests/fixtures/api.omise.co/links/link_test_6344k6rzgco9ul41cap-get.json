@@ -1,0 +1,30 @@
+{
+  "object": "link",
+  "id": "link_test_6344k6rzgco9ul41cap",
+  "livemode": false,
+  "location": "/links/link_test_6344k6rzgco9ul41cap",
+  "deleted": false,
+  "multiple": false,
+  "used": false,
+  "currency": "THB",
+  "amount": 100000,
+  "charges": {
+    "object": "list",
+    "data": [
+
+    ],
+    "limit": 20,
+    "offset": 0,
+    "total": 0,
+    "location": "/links/link_test_6344k6rzgco9ul41cap/charges",
+    "order": "chronological",
+    "from": "1970-01-01T00:00:00Z",
+    "to": "2025-03-20T10:07:39Z"
+  },
+  "description": "New Product",
+  "title": "Order-384",
+  "payment_uri": "https://link.staging-omise.co/6344K6RZGCO9UL41CAP",
+  "created_at": "2025-03-20T10:07:38Z",
+  "used_at": null,
+  "deleted_at": null
+}

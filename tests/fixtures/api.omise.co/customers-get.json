@@ -45,7 +45,7 @@
         "location": "/customers/cust_test_6340bo3bu0gbiet5l5d/cards",
         "order": "chronological",
         "from": "1970-01-01T00:00:00Z",
-        "to": "2025-03-20T08:48:26Z"
+        "to": "2025-03-20T10:32:31Z"
       },
       "default_card": "card_test_6340bnde5ft7m2mnbyc",
       "linked_accounts": {
@@ -59,7 +59,7 @@
         "location": "/customers/cust_test_6340bo3bu0gbiet5l5d/linked_accounts",
         "order": "chronological",
         "from": "1970-01-01T00:00:00Z",
-        "to": "2025-03-20T08:48:26Z"
+        "to": "2025-03-20T10:32:31Z"
       },
       "description": "Zin Kyaw Kyaw",
       "email": "zinkyawkyaw@example.com",
@@ -67,9 +67,73 @@
     },
     {
       "object": "customer",
-      "id": "cust_test_6340jxf3pb0hnbgwxqi",
+      "id": "cust_test_6343z7bfppzbpwx8typ",
       "livemode": false,
-      "location": "/customers/cust_test_6340jxf3pb0hnbgwxqi",
+      "location": "/customers/cust_test_6343z7bfppzbpwx8typ",
+      "deleted": false,
+      "metadata": {
+      },
+      "cards": {
+        "object": "list",
+        "data": [
+          {
+            "object": "card",
+            "id": "card_test_6343z77qwe0p4r27u7m",
+            "livemode": false,
+            "location": "/customers/cust_test_6343z7bfppzbpwx8typ/cards/card_test_6343z77qwe0p4r27u7m",
+            "deleted": false,
+            "street1": null,
+            "street2": null,
+            "city": "Bangkok",
+            "state": null,
+            "phone_number": null,
+            "postal_code": "10320",
+            "country": "",
+            "financing": "",
+            "bank": "",
+            "brand": "Visa",
+            "fingerprint": "6Dg5ncsSseId+2Pkar1y8MNjk+1MPEYQaBAWxr64McE=",
+            "first_digits": null,
+            "last_digits": "4242",
+            "name": "Zin Kyaw Kyaw",
+            "expiration_month": 11,
+            "expiration_year": 2027,
+            "security_code_check": true,
+            "tokenization_method": null,
+            "created_at": "2025-03-20T09:08:01Z"
+          }
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 1,
+        "location": "/customers/cust_test_6343z7bfppzbpwx8typ/cards",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2025-03-20T10:32:31Z"
+      },
+      "default_card": "card_test_6343z77qwe0p4r27u7m",
+      "linked_accounts": {
+        "object": "list",
+        "data": [
+
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 0,
+        "location": "/customers/cust_test_6343z7bfppzbpwx8typ/linked_accounts",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2025-03-20T10:32:31Z"
+      },
+      "description": "Zin Kyaw Kyaw",
+      "email": "zinkyawkyaw@example.com",
+      "created_at": "2025-03-20T09:08:01Z"
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_63440m5rxrwz1lcwno0",
+      "livemode": false,
+      "location": "/customers/cust_test_63440m5rxrwz1lcwno0",
       "deleted": false,
       "metadata": {
       },
@@ -81,10 +145,10 @@
         "limit": 20,
         "offset": 0,
         "total": 0,
-        "location": "/customers/cust_test_6340jxf3pb0hnbgwxqi/cards",
+        "location": "/customers/cust_test_63440m5rxrwz1lcwno0/cards",
         "order": "chronological",
         "from": "1970-01-01T00:00:00Z",
-        "to": "2025-03-20T08:48:26Z"
+        "to": "2025-03-20T10:32:31Z"
       },
       "default_card": null,
       "linked_accounts": {
@@ -95,21 +159,85 @@
         "limit": 20,
         "offset": 0,
         "total": 0,
-        "location": "/customers/cust_test_6340jxf3pb0hnbgwxqi/linked_accounts",
+        "location": "/customers/cust_test_63440m5rxrwz1lcwno0/linked_accounts",
         "order": "chronological",
         "from": "1970-01-01T00:00:00Z",
-        "to": "2025-03-20T08:48:26Z"
+        "to": "2025-03-20T10:32:31Z"
       },
       "description": "Zin Kyaw Kyaw",
       "email": "zinkyawkyaw@example.com",
-      "created_at": "2025-03-20T03:17:49Z"
+      "created_at": "2025-03-20T09:12:02Z"
+    },
+    {
+      "object": "customer",
+      "id": "cust_test_6344ggijyc18jdtft1i",
+      "livemode": false,
+      "location": "/customers/cust_test_6344ggijyc18jdtft1i",
+      "deleted": false,
+      "metadata": {
+      },
+      "cards": {
+        "object": "list",
+        "data": [
+          {
+            "object": "card",
+            "id": "card_test_6344ggflp8giiby3ty2",
+            "livemode": false,
+            "location": "/customers/cust_test_6344ggijyc18jdtft1i/cards/card_test_6344ggflp8giiby3ty2",
+            "deleted": false,
+            "street1": null,
+            "street2": null,
+            "city": "Bangkok",
+            "state": null,
+            "phone_number": null,
+            "postal_code": "10320",
+            "country": "",
+            "financing": "",
+            "bank": "",
+            "brand": "Visa",
+            "fingerprint": "6Dg5ncsSseId+2Pkar1y8MNjk+1MPEYQaBAWxr64McE=",
+            "first_digits": null,
+            "last_digits": "4242",
+            "name": "Zin Kyaw Kyaw",
+            "expiration_month": 11,
+            "expiration_year": 2027,
+            "security_code_check": true,
+            "tokenization_method": null,
+            "created_at": "2025-03-20T09:57:02Z"
+          }
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 1,
+        "location": "/customers/cust_test_6344ggijyc18jdtft1i/cards",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2025-03-20T10:32:31Z"
+      },
+      "default_card": "card_test_6344ggflp8giiby3ty2",
+      "linked_accounts": {
+        "object": "list",
+        "data": [
+
+        ],
+        "limit": 20,
+        "offset": 0,
+        "total": 0,
+        "location": "/customers/cust_test_6344ggijyc18jdtft1i/linked_accounts",
+        "order": "chronological",
+        "from": "1970-01-01T00:00:00Z",
+        "to": "2025-03-20T10:32:31Z"
+      },
+      "description": "Zin Kyaw Kyaw",
+      "email": "zinkyawkyaw@example.com",
+      "created_at": "2025-03-20T09:57:02Z"
     }
   ],
   "limit": 20,
   "offset": 0,
-  "total": 2,
+  "total": 4,
   "location": "/customers",
   "order": "chronological",
   "from": "1970-01-01T00:00:00Z",
-  "to": "2025-03-20T08:48:26Z"
+  "to": "2025-03-20T10:32:31Z"
 }

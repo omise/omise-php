@@ -1,0 +1,13 @@
+{
+  "object": "transaction",
+  "id": "trxn_test_62f1itsgwfln0dwo9md",
+  "livemode": false,
+  "currency": "THB",
+  "amount": 29789,
+  "location": "/transactions/trxn_test_62f1itsgwfln0dwo9md",
+  "direction": "credit",
+  "key": "charge.captured.net",
+  "origin": "chrg_test_62f161x7rdkm4u7pibg",
+  "transferable_at": "2025-01-15T06:56:27Z",
+  "created_at": "2025-01-15T06:56:27Z"
+}
