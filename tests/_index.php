@@ -16,7 +16,7 @@ $secretKey = str_replace('::add-mask::', '', getenv('SECRET_KEY'));
 
 define('OMISE_PUBLIC_KEY', $publicKey);
 define('OMISE_SECRET_KEY', $secretKey);
-define('OMISE_API_VERSION', '2017-11-02');
+define('OMISE_API_VERSION', '2019-05-29');
 
 include __DIR__ . '/traits/ChargeTrait.php';
 

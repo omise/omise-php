@@ -91,7 +91,7 @@ To enforce the API version that the application must use, define `OMISE_API_VERS
 The version specified by this settings will override the version setting in your account. This is useful if you have multiple environments with different API versions (e.g. development on the latest but production on the older version).
 
 ```php
-define('OMISE_API_VERSION', '2017-11-02');
+define('OMISE_API_VERSION', '2019-05-29');
 ```
 
 API version can be found on the [Opn Payments Dashboard](https://dashboard.omise.co). Log in, then go to **API versions** from the top-right menu.
@@ -110,7 +110,7 @@ require_once dirname(__FILE__).'/vendor/autoload.php';
 
 define('OMISE_PUBLIC_KEY', 'pkey_test_***');
 define('OMISE_SECRET_KEY', 'skey_test_***');
-define('OMISE_API_VERSION', '2017-11-02');
+define('OMISE_API_VERSION', '2019-05-29');
 ```
 
 Now, let's add the the code to retrieve your account information:
