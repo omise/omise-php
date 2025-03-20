@@ -8,7 +8,7 @@ class OmiseCapabilities extends OmiseApiResource
      * @var array  of the filterable keys.
      */
     public static $filters = [
-        'backend' => ['currency', 'type', 'chargeAmount']
+        'backend' => ['currency', 'exactName', 'name', 'chargeAmount']
     ];
 
     public function __construct($publickey = null, $secretkey = null)
@@ -72,15 +72,10 @@ class OmiseCapabilities extends OmiseApiResource
     public function getBackends()
     {
         $backends = array_map(
-            function ($backend) {
-                $new = (object)(array_merge(reset($backend), ['_id' => array_keys($backend)[0]]));
-
-                return $new;
-            },
-            $this['payment_backends']
+            function ($backend) { return (object) $backend; },
+            $this['payment_methods']
         );
 
-        // return backends (filtered if requested)
         return ($filters = func_get_args()) ? array_filter($backends, self::combineFilters(self::argsToVariadic($filters))) : $backends;
     }
 
@@ -99,16 +94,30 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
-     * Makes a filter function to check type of backend.
+     * Makes a filter function to check exact name of backend.
      *
      * @param  string $type
      *
      * @return function
      */
-    public function makeBackendFilterType($type)
+    public function makeBackendFilterExactName($name)
     {
-        return function ($backend) use ($type) {
-            return $backend->type === $type;
+        return function ($backend) use ($name) {
+            return $backend->name === $name;
+        };
+    }
+
+    /**
+     * Makes a filter function to check name of backend.
+     *
+     * @param  string $type
+     *
+     * @return function
+     */
+    public function makeBackendFilterName($name)
+    {
+        return function ($backend) use ($name) {
+            return strpos($backend->name, $name) !== false;
         };
     }
 
@@ -121,18 +130,16 @@ class OmiseCapabilities extends OmiseApiResource
      */
     public function makeBackendFilterChargeAmount($amount)
     {
-        $defMin = $this['limits']['charge_amount']['min'];
-        $defMax = $this['limits']['charge_amount']['max'];
+        $chargeLimit = $this['limits']['charge_amount'];
+        $installmentMin = $this['limits']['installment_amount']['min'];
+        $installmentMax = isset($this['limits']['installment_amount']['max']) ? $this['limits']['installment_amount']['max'] : PHP_INT_MAX;
 
-        return function ($backend) use ($amount, $defMin, $defMax) {
-            if ($backend->type === 'installment') {
-                $min = $this['limits']['installment_amount']['min'];
+        return function ($backend) use ($amount, $chargeLimit, $installmentMin, $installmentMax) {
+            if (self::isInstallmentBackend($backend)) {
+                return $amount >= $installmentMin && $amount <= $installmentMax;
             } else {
-                $min = empty($backend->amount['min']) ? $defMin : $backend->amount['min'];
+                return $amount >= $chargeLimit['min'] && $amount <= $chargeLimit['max'];
             }
-            $max = empty($backend->amount['max']) ? $defMax : $backend->amount['max'];
-
-            return $amount >= $min && $amount <= $max;
         };
     }
 
@@ -174,5 +181,16 @@ class OmiseCapabilities extends OmiseApiResource
     private static function getUrl()
     {
         return OMISE_API_URL . self::ENDPOINT;
+    }
+
+    /**
+     * Check if the backend is the installment backend
+     * @return boolean
+     */
+    private static function isInstallmentBackend($backend)
+    {
+        $installmentPrefix = 'installment';
+
+        return strncmp($backend->name, $installmentPrefix, strlen($installmentPrefix)) === 0;
     }
 }

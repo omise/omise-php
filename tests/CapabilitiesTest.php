@@ -54,35 +54,40 @@ class CapabilitiesTest extends TestCase
     public function retrieve_backend_list()
     {
         $backends = $this->capabilities->getBackends();
-        $this->assertEquals('array', gettype($backends));
+
+        $this->assertIsArray($backends);
+        $this->assertIsObject($backends[0]);
     }
 
     /**
      * @test
      * Assert that a capabilities getBackends method filter with card
-     * is returned type 'card' and _id 'credit_card' after a successful response.
+     * is returned backend named 'card' after a successful response.
      */
     public function retrieve_card_backend()
     {
-        $cardBackend = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterType('card')
+        $cardBackends = $this->capabilities->getBackends(
+            $this->capabilities->makeBackendFilterExactName('card')
         );
-        $this->assertEquals('card', $cardBackend[0]->type);
-        $this->assertEquals('credit_card', $cardBackend[0]->_id);
+
+        $this->assertCount(1, $cardBackends);
+        $this->assertEquals('card', $cardBackends[0]->name);
+        $this->assertIsArray($cardBackends[0]->currencies);
+        $this->assertIsArray($cardBackends[0]->card_brands);
     }
 
     /**
      * @test
      * Assert that a capabilities getBackends method filter with installment
-     * is returned type 'installment' after a successful response.
+     * is returned backend named 'installment' after a successful response.
      */
     public function retrieve_installment_backend_list()
     {
         $installmentBackends = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterType('installment')
+            $this->capabilities->makeBackendFilterName('installment')
         );
         foreach ($installmentBackends as $backend) {
-            $this->assertEquals('installment', $backend->type);
+            $this->assertStringContainsString('installment', $backend->name);
         }
     }
 
@@ -94,7 +99,7 @@ class CapabilitiesTest extends TestCase
     public function retrieve_backend_that_doesnot_exist()
     {
         $alipayBackends = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterType('googlepay')
+            $this->capabilities->makeBackendFilterName('googlepay')
         );
         $this->assertEmpty($alipayBackends);
     }
@@ -110,7 +115,7 @@ class CapabilitiesTest extends TestCase
             $this->capabilities->makeBackendFilterCurrency('jpy')
         );
         $this->assertEquals('array', gettype($backends));
-        $this->assertEquals('card', $backends[0]->type);
+        $this->assertEquals('card', $backends[0]->name);
     }
 
     /**
@@ -121,20 +126,21 @@ class CapabilitiesTest extends TestCase
     public function mix_filter()
     {
         $backends = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterType('installment'),
+            $this->capabilities->makeBackendFilterName('installment'),
             $this->capabilities->makeBackendFilterCurrency('thb')
         );
         $this->assertEquals('array', gettype($backends));
+        file_put_contents('debug.txt', print_r($backends, true));
     }
 
     /**
      * @test
      */
-    public function filter_by_charge_amount_200000_should_not_include_installment()
+    public function filter_by_charge_amount_100000_should_not_include_installment()
     {
         $backend = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterType('installment'),
-            $this->capabilities->makeBackendFilterChargeAmount(200000)
+            $this->capabilities->makeBackendFilterName('installment'),
+            $this->capabilities->makeBackendFilterChargeAmount(100000)
         );
         $this->assertEquals('array', gettype($backend));
         $this->assertEmpty($backend);
@@ -146,7 +152,7 @@ class CapabilitiesTest extends TestCase
     public function filter_by_charge_amount_800000_should_include_installment()
     {
         $backend = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterType('installment'),
+            $this->capabilities->makeBackendFilterName('installment'),
             $this->capabilities->makeBackendFilterChargeAmount(800000)
         );
 
@@ -155,6 +161,22 @@ class CapabilitiesTest extends TestCase
 
         // re-indexing array to make sure it's index starts with 0
         $backend = array_values($backend);
-        $this->assertEquals('installment', $backend[0]->type);
+        $this->assertStringStartsWith('installment', $backend[0]->name);
+    }
+
+    /**
+     * @test
+     * Assert the filter shortcuts are available
+     */
+    public function filter_backend_shortcuts_available()
+    {
+        $backend = $this->capabilities->getBackends(
+            $this->capabilities->backendFilter['currency']('THB'),
+            $this->capabilities->backendFilter['exactName']('card'),
+            $this->capabilities->backendFilter['name']('installment'),
+            $this->capabilities->backendFilter['chargeAmount'](200000),
+        );
+
+        $this->assertEquals('array', gettype($backend));
     }
 }
