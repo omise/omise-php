@@ -128,7 +128,7 @@ class ChargeTest extends TestCase
      */
     public function reverse()
     {
-        $charge = $this->createCharge();
+        $charge = $this->createCharge(false);
         $charge->reverse();
         $this->assertArrayHasKey('object', $charge);
         $this->assertEquals('charge', $charge['object']);

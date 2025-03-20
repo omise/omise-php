@@ -50,9 +50,11 @@ class TransactionTest extends TestCase
         $transaction = OmiseTransaction::retrieve($transactions['data'][0]['id']);
         $this->assertArrayHasKey('object', $transaction);
         $this->assertArrayHasKey('id', $transaction);
-        $this->assertArrayHasKey('type', $transaction);
         $this->assertArrayHasKey('amount', $transaction);
         $this->assertArrayHasKey('currency', $transaction);
-        $this->assertArrayHasKey('created', $transaction);
+        $this->assertArrayHasKey('direction', $transaction);
+        $this->assertArrayHasKey('key', $transaction);
+        $this->assertArrayHasKey('origin', $transaction);
+        $this->assertArrayHasKey('created_at', $transaction);
     }
 }
