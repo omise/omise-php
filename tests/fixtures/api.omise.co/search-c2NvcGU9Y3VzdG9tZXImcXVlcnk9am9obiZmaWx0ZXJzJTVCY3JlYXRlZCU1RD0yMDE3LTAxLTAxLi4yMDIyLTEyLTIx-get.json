@@ -4,8 +4,8 @@
   "data": [
 
   ],
-  "page": 2,
-  "per_page": 2,
+  "page": 1,
+  "per_page": 30,
   "total": 0,
   "total_pages": 0,
   "filters": {
@@ -14,5 +14,6 @@
   "location": "/search",
   "order": "reverse_chronological",
   "query": "john",
-  "scope": "customer"
+  "scope": "customer",
+  "aggregate_level": null
 }
