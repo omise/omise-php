@@ -2,17 +2,24 @@
 
 `omise-php` is a PHP library designed specifically to connect with the Opn Payments API.
 
-## Security Warning
-
-**Please do NOT use Omise PHP library versions less than 2.12.0, as they are outdated and have security vulnerabilities.**
-
-
 ## Requirements
 
 * PHP v7.4 and higher.
 * Built-in [libcurl](http://php.net/manual/en/book.curl.php) support.
 
 > Note: Due to the PHP [END OF LIFE](http://php.net/supported-versions.php) cycle, we encourage you to run the Omise-PHP library on PHP version 7.4 or higher as there is no longer security support for any PHP version lower than 7.4. Lack of support could cause security vulnerabilities.
+
+# Versioning and Compatibility
+
+> **Security Warning**: Please do NOT use Omise PHP library versions less than 2.12.0, as they are outdated and have security vulnerabilities.
+
+|Library Version|Support|Supported Omise API Version|PHP Version(s)|Notes|
+|-----|-----|-----|-----|-----|
+|1.x|End of Life (EOL)|N/A|N/A||
+|2.x|Maintenance Mode|2017-11-02|PHP >= 5.3||
+|3.x|Active|2019-05-29|PHP >= 7.4||
+
+<sup><b>\*Maintenance mode includes only bug fixes and security updates.</b></sup>
 
 ## Installation
 
@@ -24,7 +31,7 @@ You can install the library via [Composer](https://getcomposer.org/). If you don
 * [Composer installation instruction for Mac OS X and Linux](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 
 1. After Composer is installed, you can declare Omise-PHP as a project dependency by creating a `composer.json` file at the root of your project directory, with the following content:
-   
+
     ```json
     {
       "require": {
@@ -39,7 +46,7 @@ You can install the library via [Composer](https://getcomposer.org/). If you don
     ```
 
 3. Once you run the `composer install` command, the Composer will generate a `vendor` folder in the same directory as `composer.json`.
-   
+
    Add the following line to the PHP script to load the library:
 
     ```php
@@ -56,7 +63,7 @@ Then, follow the instructions to install **Omise-PHP** to the project.
 1. Extract the library to your project.
 
 2. Include the following line in your PHP file:
-   
+
     ```php
     require_once 'path-to-library/omise-php/lib/Omise.php';
     ```
@@ -87,7 +94,7 @@ _Reference: [API Authentication](https://docs.opn.ooo/api-authentication)._
 
 ### • API version
 
-To enforce the API version that the application must use, define `OMISE_API_VERSION`.  
+To enforce the API version that the application must use, define `OMISE_API_VERSION`.
 The version specified by this settings will override the version setting in your account. This is useful if you have multiple environments with different API versions (e.g. development on the latest but production on the older version).
 
 ```php
@@ -123,7 +130,7 @@ echo $account['email']; // your email will be printed on a screen.
 
 And that's it! You have just made a request to the Opn Payments API, easy huh?
 
-Feel free to integrate the Opn Payment Gateway service as you desire to make it fit with your business flow.  
+Feel free to integrate the Opn Payment Gateway service as you desire to make it fit with your business flow.
 Also, read the [documents](https://docs.opn.ooo/) and view the [example code](https://github.com/omise/examples/tree/master/php) to get more information if you need help.
 
 Have fun!
