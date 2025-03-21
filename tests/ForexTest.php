@@ -21,7 +21,7 @@ class ForexTest extends TestCase
      */
     public function retrieve()
     {
-        $forex = OmiseForex::retrieve('usd');
+        $forex = OmiseForex::retrieve('USD');
         $this->assertArrayHasKey('object', $forex);
         $this->assertEquals('forex', $forex['object']);
         $this->assertEquals('USD', $forex['base']);
@@ -33,7 +33,7 @@ class ForexTest extends TestCase
      */
     public function reload()
     {
-        $forex = OmiseForex::retrieve('usd');
+        $forex = OmiseForex::retrieve('USD');
         $forex->reload();
 
         $this->assertArrayHasKey('object', $forex);
