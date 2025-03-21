@@ -1,5 +1,5 @@
-
 <?php
+
 require_once 'vendor/autoload.php';
 require_once 'lib/Omise.php';
 
@@ -16,7 +16,7 @@ $skey = $_ENV['EXAMPLE_SECRET_KEY'];
 $customer = $_ENV['EXAMPLE_CUSTOMER_ID'];
 
 // Create schedule
-// OMISE_PUBLIC_KEY and OMISE_SECRET_KEY can be omitted
+// OMISE_PUBLIC_KEY and OMISE_SECRET_KEY can be omitted if constants are defined
 $createResult = OmiseSchedule::create([
     'every' => 15,
     'period' => 'day',
@@ -30,5 +30,5 @@ $createResult = OmiseSchedule::create([
 $chargeScheduleId = $createResult['id'];
 echo sprintf('Created schedule ID: %s', $chargeScheduleId) . "\n";
 
-$resultTH = OmiseSchedule::retrieve($chargeScheduleId, OMISE_PUBLIC_KEY, OMISE_SECRET_KEY);
-echo sprintf('Fetched schedule ID: %s', $resultTH->toArray()['id']) . "\n\n";
+$result = OmiseSchedule::retrieve($chargeScheduleId, OMISE_PUBLIC_KEY, OMISE_SECRET_KEY);
+echo sprintf('Fetched schedule ID: %s', $result['id']) . "\n\n";

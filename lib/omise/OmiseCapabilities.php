@@ -8,7 +8,7 @@ class OmiseCapabilities extends OmiseApiResource
      * @var array  of the filterable keys.
      */
     public static $filters = [
-        'backend' => ['currency', 'exactName', 'name', 'chargeAmount']
+        'paymentMethod' => ['currency', 'exactName', 'name', 'chargeAmount']
     ];
 
     public function __construct($publickey = null, $secretkey = null)
@@ -19,18 +19,18 @@ class OmiseCapabilities extends OmiseApiResource
 
     /**
      * Sets up 'shortcuts' to filters so they may be used thus:
-     *    $capabilities->backendFilter['currency']('THB')
+     *    $capabilities->filterPaymentMethod['currency']('THB')
      * As well as the original:
-     *    $capabilities->makeBackendFilterCurrency('THB')
+     *    $capabilities->filterPaymentMethodCurrency('THB')
      */
     protected function setupFilterShortcuts()
     {
         foreach (self::$filters as $filterSubject => $availableFilters) {
-            $filterArrayName = $filterSubject . 'Filter';
+            $filterArrayName = 'filter' . ucfirst($filterSubject);
             $this->$filterArrayName = [];
             $tempArr = &$this->$filterArrayName;
             foreach ($availableFilters as $type) {
-                $funcName = 'make' . ucfirst($filterSubject) . 'Filter' . $type;
+                $funcName = 'filter' . ucfirst($filterSubject) . ucfirst($type);
                 $tempArr[$type] = function () use ($funcName) {
                     return call_user_func_array([$this, $funcName], func_get_args());
                 };
@@ -62,79 +62,79 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
-     * Retrieves array of payment backends. Optionally pass in as many filter functions as you want
+     * Retrieves array of payment methods. Optionally pass in as many filter functions as you want
      * (muliple arguments, or a single array)
      *
      * @param [func1,fun2,...] OR func1, func2,...
      *
      * @return array
      */
-    public function getBackends()
+    public function getPaymentMethods()
     {
-        $backends = array_map(function ($backend) {
-            return (object) $backend;
+        $methods = array_map(function ($method) {
+            return (object) $method;
         }, $this['payment_methods']);
 
-        return ($filters = func_get_args()) ? array_filter($backends, self::combineFilters(self::argsToVariadic($filters))) : $backends;
+        return ($filters = func_get_args()) ? array_filter($methods, self::combineFilters(self::argsToVariadic($filters))) : $methods;
     }
 
     /**
-     * Makes a filter function to check supported currency for backend.
+     * Makes a filter function to check supported currency of payment method.
      *
      * @param  string $currency
      *
      * @return function
      */
-    public function makeBackendFilterCurrency($currency)
+    public function filterPaymentMethodCurrency($currency)
     {
-        return function ($backend) use ($currency) {
-            return in_array(strtolower($currency), array_map('strtolower', $backend->currencies));
+        return function ($method) use ($currency) {
+            return in_array(strtolower($currency), array_map('strtolower', $method->currencies));
         };
     }
 
     /**
-     * Makes a filter function to check exact name of backend.
+     * Makes a filter function to check exact name of payment method.
      *
      * @param  string $type
      *
      * @return function
      */
-    public function makeBackendFilterExactName($name)
+    public function filterPaymentMethodExactName($name)
     {
-        return function ($backend) use ($name) {
-            return $backend->name === $name;
+        return function ($method) use ($name) {
+            return $method->name === $name;
         };
     }
 
     /**
-     * Makes a filter function to check name of backend.
+     * Makes a filter function to check name of payment method.
      *
      * @param  string $type
      *
      * @return function
      */
-    public function makeBackendFilterName($name)
+    public function filterPaymentMethodName($name)
     {
-        return function ($backend) use ($name) {
-            return strpos($backend->name, $name) !== false;
+        return function ($method) use ($name) {
+            return strpos($method->name, $name) !== false;
         };
     }
 
     /**
-     * Makes a filter function to check if backends can handle given amount.
+     * Makes a filter function to check if payment method can handle given amount.
      *
      * @param  int $amount
      *
      * @return function
      */
-    public function makeBackendFilterChargeAmount($amount)
+    public function filterPaymentMethodChargeAmount($amount)
     {
         $chargeLimit = $this['limits']['charge_amount'];
         $installmentMin = $this['limits']['installment_amount']['min'];
         $installmentMax = isset($this['limits']['installment_amount']['max']) ? $this['limits']['installment_amount']['max'] : PHP_INT_MAX;
 
-        return function ($backend) use ($amount, $chargeLimit, $installmentMin, $installmentMax) {
-            if (self::isInstallmentBackend($backend)) {
+        return function ($method) use ($amount, $chargeLimit, $installmentMin, $installmentMax) {
+            if (self::isInstallmentPaymentMethod($method)) {
                 return $amount >= $installmentMin && $amount <= $installmentMax;
             } else {
                 return $amount >= $chargeLimit['min'] && $amount <= $chargeLimit['max'];
@@ -183,13 +183,13 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
-     * Check if the backend is the installment backend
+     * Check if the payment method is the installment
      * @return boolean
      */
-    private static function isInstallmentBackend($backend)
+    private static function isInstallmentPaymentMethod($paymentMethod)
     {
         $installmentPrefix = 'installment';
 
-        return strncmp($backend->name, $installmentPrefix, strlen($installmentPrefix)) === 0;
+        return strncmp($paymentMethod->name, $installmentPrefix, strlen($installmentPrefix)) === 0;
     }
 }

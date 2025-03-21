@@ -49,73 +49,73 @@ class CapabilitiesTest extends TestCase
 
     /**
      * @test
-     * Assert that a capabilities getBackends method is returned an array after a successful response.
+     * Assert that a capabilities getPaymentMethods method is returned an array after a successful response.
      */
-    public function retrieve_backend_list()
+    public function retrieve_payment_method_list()
     {
-        $backends = $this->capabilities->getBackends();
+        $paymentMethod = $this->capabilities->getPaymentMethods();
 
-        $this->assertIsArray($backends);
-        $this->assertIsObject($backends[0]);
+        $this->assertIsArray($paymentMethod);
+        $this->assertIsObject($paymentMethod[0]);
     }
 
     /**
      * @test
-     * Assert that a capabilities getBackends method filter with card
-     * is returned backend named 'card' after a successful response.
+     * Assert that a capabilities getPaymentMethods method filter with card
+     * is returned payment method named 'card' after a successful response.
      */
-    public function retrieve_card_backend()
+    public function retrieve_card_payment_method()
     {
-        $cardBackends = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterExactName('card')
+        $cardPaymentMethods = $this->capabilities->getPaymentMethods(
+            $this->capabilities->filterPaymentMethodExactName('card')
         );
 
-        $this->assertCount(1, $cardBackends);
-        $this->assertEquals('card', $cardBackends[0]->name);
-        $this->assertIsArray($cardBackends[0]->currencies);
-        $this->assertIsArray($cardBackends[0]->card_brands);
+        $this->assertCount(1, $cardPaymentMethods);
+        $this->assertEquals('card', $cardPaymentMethods[0]->name);
+        $this->assertIsArray($cardPaymentMethods[0]->currencies);
+        $this->assertIsArray($cardPaymentMethods[0]->card_brands);
     }
 
     /**
      * @test
-     * Assert that a capabilities getBackends method filter with installment
-     * is returned backend named 'installment' after a successful response.
+     * Assert that a capabilities getPaymentMethods method filter with installment
+     * is returned payment method named 'installment' after a successful response.
      */
-    public function retrieve_installment_backend_list()
+    public function retrieve_installment_payment_method_list()
     {
-        $installmentBackends = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterName('installment')
+        $installmentPaymentMethods = $this->capabilities->getPaymentMethods(
+            $this->capabilities->filterPaymentMethodName('installment')
         );
-        foreach ($installmentBackends as $backend) {
-            $this->assertStringContainsString('installment', $backend->name);
+        foreach ($installmentPaymentMethods as $method) {
+            $this->assertStringContainsString('installment', $method->name);
         }
     }
 
     /**
      * @test
-     * Assert that a capabilities getBackends method filter with googlepay(which does not exist)
+     * Assert that a capabilities getPaymentMethods method filter with googlepay(which does not exist)
      * must return empty value after a successful response.
      */
-    public function retrieve_backend_that_doesnot_exist()
+    public function retrieve_payment_method_that_doesnot_exist()
     {
-        $alipayBackends = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterName('googlepay')
+        $alipayPaymentMethods = $this->capabilities->getPaymentMethods(
+            $this->capabilities->filterPaymentMethodName('googlepay')
         );
-        $this->assertEmpty($alipayBackends);
+        $this->assertEmpty($alipayPaymentMethods);
     }
 
     /**
      * @test
-     * Assert that a capabilities getBackends method filter with currency(JPY)
+     * Assert that a capabilities getPaymentMethods method filter with currency(JPY)
      * is returned type 'card' and array response after a successful response.
      */
     public function filter_by_currency()
     {
-        $backends = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterCurrency('jpy')
+        $paymentMethods = $this->capabilities->getPaymentMethods(
+            $this->capabilities->filterPaymentMethodCurrency('jpy')
         );
-        $this->assertEquals('array', gettype($backends));
-        $this->assertEquals('card', $backends[0]->name);
+        $this->assertEquals('array', gettype($paymentMethods));
+        $this->assertEquals('card', $paymentMethods[0]->name);
     }
 
     /**
@@ -125,12 +125,12 @@ class CapabilitiesTest extends TestCase
      */
     public function mix_filter()
     {
-        $backends = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterName('installment'),
-            $this->capabilities->makeBackendFilterCurrency('thb')
+        $paymentMethods = $this->capabilities->getPaymentMethods(
+            $this->capabilities->filterPaymentMethodName('installment'),
+            $this->capabilities->filterPaymentMethodCurrency('thb')
         );
-        $this->assertEquals('array', gettype($backends));
-        file_put_contents('debug.txt', print_r($backends, true));
+        $this->assertEquals('array', gettype($paymentMethods));
+        file_put_contents('debug.txt', print_r($paymentMethods, true));
     }
 
     /**
@@ -138,12 +138,12 @@ class CapabilitiesTest extends TestCase
      */
     public function filter_by_charge_amount_100000_should_not_include_installment()
     {
-        $backend = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterName('installment'),
-            $this->capabilities->makeBackendFilterChargeAmount(100000)
+        $paymentMethods = $this->capabilities->getPaymentMethods(
+            $this->capabilities->filterPaymentMethodName('installment'),
+            $this->capabilities->filterPaymentMethodChargeAmount(100000)
         );
-        $this->assertEquals('array', gettype($backend));
-        $this->assertEmpty($backend);
+        $this->assertEquals('array', gettype($paymentMethods));
+        $this->assertEmpty($paymentMethods);
     }
 
     /**
@@ -151,32 +151,32 @@ class CapabilitiesTest extends TestCase
      */
     public function filter_by_charge_amount_800000_should_include_installment()
     {
-        $backend = $this->capabilities->getBackends(
-            $this->capabilities->makeBackendFilterName('installment'),
-            $this->capabilities->makeBackendFilterChargeAmount(800000)
+        $paymentMethods = $this->capabilities->getPaymentMethods(
+            $this->capabilities->filterPaymentMethodName('installment'),
+            $this->capabilities->filterPaymentMethodChargeAmount(800000)
         );
 
-        $this->assertEquals('array', gettype($backend));
-        $this->assertNotEmpty($backend);
+        $this->assertEquals('array', gettype($paymentMethods));
+        $this->assertNotEmpty($paymentMethods);
 
         // re-indexing array to make sure it's index starts with 0
-        $backend = array_values($backend);
-        $this->assertStringStartsWith('installment', $backend[0]->name);
+        $paymentMethods = array_values($paymentMethods);
+        $this->assertStringStartsWith('installment', $paymentMethods[0]->name);
     }
 
     /**
      * @test
      * Assert the filter shortcuts are available
      */
-    public function filter_backend_shortcuts_available()
+    public function filter_payment_method_shortcuts_available()
     {
-        $backend = $this->capabilities->getBackends(
-            $this->capabilities->backendFilter['currency']('THB'),
-            $this->capabilities->backendFilter['exactName']('card'),
-            $this->capabilities->backendFilter['name']('installment'),
-            $this->capabilities->backendFilter['chargeAmount'](200000),
+        $paymentMethods = $this->capabilities->getPaymentMethods(
+            $this->capabilities->filterPaymentMethod['currency']('THB'),
+            $this->capabilities->filterPaymentMethod['exactName']('card'),
+            $this->capabilities->filterPaymentMethod['name']('installment'),
+            $this->capabilities->filterPaymentMethod['chargeAmount'](200000),
         );
 
-        $this->assertEquals('array', gettype($backend));
+        $this->assertEquals('array', gettype($paymentMethods));
     }
 }
