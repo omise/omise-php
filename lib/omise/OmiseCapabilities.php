@@ -71,10 +71,9 @@ class OmiseCapabilities extends OmiseApiResource
      */
     public function getBackends()
     {
-        $backends = array_map(
-            function ($backend) { return (object) $backend; },
-            $this['payment_methods']
-        );
+        $backends = array_map(function ($backend) {
+            return (object) $backend;
+        }, $this['payment_methods']);
 
         return ($filters = func_get_args()) ? array_filter($backends, self::combineFilters(self::argsToVariadic($filters))) : $backends;
     }
