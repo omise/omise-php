@@ -106,7 +106,7 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
-     * Assert that a capability getPaymentMethods method filter with currency(JPY)
+     * Assert that a capability getPaymentMethods method filter with currency (JPY)
      * is returned type 'card' and array response after a successful response.
      */
     public function filter_by_currency()
@@ -120,8 +120,8 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
-     * Assert that test mix filter with installment and thb
-     * return correct array response.
+     * Assert that test mix filter with installment and THB
+     * returns correct array response.
      */
     public function mix_filter()
     {
@@ -134,6 +134,7 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
+     * Assert that test mix filter with installment and amount less than minimum limit returns empty array.
      */
     public function filter_by_charge_amount_100000_should_not_include_installment()
     {
@@ -147,6 +148,7 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
+     * Assert that test mix filter with installment and amount within limit returns correct array response.
      */
     public function filter_by_charge_amount_800000_should_include_installment()
     {
