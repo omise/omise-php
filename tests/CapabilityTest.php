@@ -130,7 +130,6 @@ class CapabilityTest extends TestCase
             $this->capability->filterPaymentMethodCurrency('thb')
         );
         $this->assertEquals('array', gettype($paymentMethods));
-        file_put_contents('debug.txt', print_r($paymentMethods, true));
     }
 
     /**
