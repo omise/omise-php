@@ -2,30 +2,30 @@
 
 use PHPUnit\Framework\TestCase;
 
-class CapabilitiesTest extends TestCase
+class CapabilityTest extends TestCase
 {
     /**
-     * @var OmiseCapabilities
-     * setup OmiseCapabilities object in capabilities variable.
+     * @var OmiseCapability
+     * setup OmiseCapability object in capability variable.
      */
-    protected $capabilities;
+    protected $capability;
 
     /**
      * @before
      */
     public function setupSharedResources()
     {
-        $this->capabilities = OmiseCapabilities::retrieve();
+        $this->capability = OmiseCapability::retrieve();
     }
 
     /**
      * @test
-     * OmiseCapabilities class must be contain some method below.
+     * OmiseCapability class must be contain some method below.
      */
     public function method_exists()
     {
-        $this->assertTrue(method_exists('OmiseCapabilities', 'retrieve'));
-        $this->assertTrue(method_exists('OmiseCapabilities', 'reload'));
+        $this->assertTrue(method_exists('OmiseCapability', 'retrieve'));
+        $this->assertTrue(method_exists('OmiseCapability', 'reload'));
     }
 
     /**
@@ -34,7 +34,7 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_omise_capabilities_object()
     {
-        $this->assertEquals('capability', $this->capabilities['object']);
+        $this->assertEquals('capability', $this->capability['object']);
     }
 
     /**
@@ -43,8 +43,8 @@ class CapabilitiesTest extends TestCase
      */
     public function reload()
     {
-        $this->capabilities->reload();
-        $this->assertEquals('capability', $this->capabilities['object']);
+        $this->capability->reload();
+        $this->assertEquals('capability', $this->capability['object']);
     }
 
     /**
@@ -53,7 +53,7 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_payment_method_list()
     {
-        $paymentMethod = $this->capabilities->getPaymentMethods();
+        $paymentMethod = $this->capability->getPaymentMethods();
 
         $this->assertIsArray($paymentMethod);
         $this->assertIsObject($paymentMethod[0]);
@@ -66,8 +66,8 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_card_payment_method()
     {
-        $cardPaymentMethods = $this->capabilities->getPaymentMethods(
-            $this->capabilities->filterPaymentMethodExactName('card')
+        $cardPaymentMethods = $this->capability->getPaymentMethods(
+            $this->capability->filterPaymentMethodExactName('card')
         );
 
         $this->assertCount(1, $cardPaymentMethods);
@@ -83,8 +83,8 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_installment_payment_method_list()
     {
-        $installmentPaymentMethods = $this->capabilities->getPaymentMethods(
-            $this->capabilities->filterPaymentMethodName('installment')
+        $installmentPaymentMethods = $this->capability->getPaymentMethods(
+            $this->capability->filterPaymentMethodName('installment')
         );
         foreach ($installmentPaymentMethods as $method) {
             $this->assertStringContainsString('installment', $method->name);
@@ -98,8 +98,8 @@ class CapabilitiesTest extends TestCase
      */
     public function retrieve_payment_method_that_doesnot_exist()
     {
-        $alipayPaymentMethods = $this->capabilities->getPaymentMethods(
-            $this->capabilities->filterPaymentMethodName('googlepay')
+        $alipayPaymentMethods = $this->capability->getPaymentMethods(
+            $this->capability->filterPaymentMethodName('googlepay')
         );
         $this->assertEmpty($alipayPaymentMethods);
     }
@@ -111,8 +111,8 @@ class CapabilitiesTest extends TestCase
      */
     public function filter_by_currency()
     {
-        $paymentMethods = $this->capabilities->getPaymentMethods(
-            $this->capabilities->filterPaymentMethodCurrency('jpy')
+        $paymentMethods = $this->capability->getPaymentMethods(
+            $this->capability->filterPaymentMethodCurrency('jpy')
         );
         $this->assertEquals('array', gettype($paymentMethods));
         $this->assertEquals('card', $paymentMethods[0]->name);
@@ -125,9 +125,9 @@ class CapabilitiesTest extends TestCase
      */
     public function mix_filter()
     {
-        $paymentMethods = $this->capabilities->getPaymentMethods(
-            $this->capabilities->filterPaymentMethodName('installment'),
-            $this->capabilities->filterPaymentMethodCurrency('thb')
+        $paymentMethods = $this->capability->getPaymentMethods(
+            $this->capability->filterPaymentMethodName('installment'),
+            $this->capability->filterPaymentMethodCurrency('thb')
         );
         $this->assertEquals('array', gettype($paymentMethods));
         file_put_contents('debug.txt', print_r($paymentMethods, true));
@@ -138,9 +138,9 @@ class CapabilitiesTest extends TestCase
      */
     public function filter_by_charge_amount_100000_should_not_include_installment()
     {
-        $paymentMethods = $this->capabilities->getPaymentMethods(
-            $this->capabilities->filterPaymentMethodName('installment'),
-            $this->capabilities->filterPaymentMethodChargeAmount(100000)
+        $paymentMethods = $this->capability->getPaymentMethods(
+            $this->capability->filterPaymentMethodName('installment'),
+            $this->capability->filterPaymentMethodChargeAmount(100000)
         );
         $this->assertEquals('array', gettype($paymentMethods));
         $this->assertEmpty($paymentMethods);
@@ -151,9 +151,9 @@ class CapabilitiesTest extends TestCase
      */
     public function filter_by_charge_amount_800000_should_include_installment()
     {
-        $paymentMethods = $this->capabilities->getPaymentMethods(
-            $this->capabilities->filterPaymentMethodName('installment'),
-            $this->capabilities->filterPaymentMethodChargeAmount(800000)
+        $paymentMethods = $this->capability->getPaymentMethods(
+            $this->capability->filterPaymentMethodName('installment'),
+            $this->capability->filterPaymentMethodChargeAmount(800000)
         );
 
         $this->assertEquals('array', gettype($paymentMethods));
@@ -170,11 +170,11 @@ class CapabilitiesTest extends TestCase
      */
     public function filter_payment_method_shortcuts_available()
     {
-        $paymentMethods = $this->capabilities->getPaymentMethods(
-            $this->capabilities->filterPaymentMethod['currency']('THB'),
-            $this->capabilities->filterPaymentMethod['exactName']('card'),
-            $this->capabilities->filterPaymentMethod['name']('installment'),
-            $this->capabilities->filterPaymentMethod['chargeAmount'](200000),
+        $paymentMethods = $this->capability->getPaymentMethods(
+            $this->capability->filterPaymentMethod['currency']('THB'),
+            $this->capability->filterPaymentMethod['exactName']('card'),
+            $this->capability->filterPaymentMethod['name']('installment'),
+            $this->capability->filterPaymentMethod['chargeAmount'](200000),
         );
 
         $this->assertEquals('array', gettype($paymentMethods));

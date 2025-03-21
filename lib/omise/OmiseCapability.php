@@ -1,6 +1,6 @@
 <?php
 
-class OmiseCapabilities extends OmiseApiResource
+class OmiseCapability extends OmiseApiResource
 {
     const ENDPOINT = 'capability';
 
@@ -19,9 +19,9 @@ class OmiseCapabilities extends OmiseApiResource
 
     /**
      * Sets up 'shortcuts' to filters so they may be used thus:
-     *    $capabilities->filterPaymentMethod['currency']('THB')
+     *    $capability->filterPaymentMethod['currency']('THB')
      * As well as the original:
-     *    $capabilities->filterPaymentMethodCurrency('THB')
+     *    $capability->filterPaymentMethodCurrency('THB')
      */
     protected function setupFilterShortcuts()
     {
@@ -39,12 +39,12 @@ class OmiseCapabilities extends OmiseApiResource
     }
 
     /**
-     * Retrieves capabilities.
+     * Retrieves capability.
      *
      * @param  string $publickey
      * @param  string $secretkey
      *
-     * @return OmiseCapabilities
+     * @return OmiseCapability
      */
     public static function retrieve($publickey = null, $secretkey = null)
     {
