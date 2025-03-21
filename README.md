@@ -13,11 +13,11 @@
 
 > **Security Warning**: Please do NOT use Omise PHP library versions less than 2.12.0, as they are outdated and have security vulnerabilities.
 
-|Library Version|Support|Supported Omise API Version|PHP Version(s)|Notes|
-|-----|-----|-----|-----|-----|
-|1.x|End of Life (EOL)|N/A|N/A||
-|2.x|Maintenance Mode|2017-11-02|PHP >= 5.3||
-|3.x|Active|2019-05-29|PHP >= 7.4||
+| Library Version | Support           | Supported Omise API Version | PHP Version(s) | Notes |
+| --------------- | ----------------- | --------------------------- | -------------- | ----- |
+| 1.x             | End of Life (EOL) | N/A                         | N/A            |       |
+| 2.x             | Maintenance Mode  | 2017-11-02                  | PHP >= 5.3     |       |
+| 3.x             | Active            | 2019-05-29                  | PHP >= 7.4     |       |
 
 <sup><b>\*Maintenance mode includes only bug fixes and security updates.</b></sup>
 
