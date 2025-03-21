@@ -10,7 +10,7 @@ $dotenv->load();
 define('OMISE_PUBLIC_KEY', $_ENV['EXAMPLE_PUBLIC_KEY']);
 define('OMISE_SECRET_KEY', $_ENV['EXAMPLE_SECRET_KEY']);
 
-// Retrieve current account capabilities
+// Retrieve current account capability
 $capability = OmiseCapability::retrieve();
 echo sprintf('Country: %s', $capability['country']) . "\n";
 echo sprintf('IsZeroInterestInstallments: %s', $capability['zero_interest_installments'] ? 'Yes' : 'No') . "\n\n";

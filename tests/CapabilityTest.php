@@ -30,16 +30,16 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
-     * Assert that a capabilities object is returned after a successful retrieve.
+     * Assert that a capability object is returned after a successful retrieve.
      */
-    public function retrieve_omise_capabilities_object()
+    public function retrieve_omise_capability_object()
     {
         $this->assertEquals('capability', $this->capability['object']);
     }
 
     /**
      * @test
-     * Assert that a capabilities object is returned after a successful reload.
+     * Assert that a capability object is returned after a successful reload.
      */
     public function reload()
     {
@@ -49,7 +49,7 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
-     * Assert that a capabilities getPaymentMethods method is returned an array after a successful response.
+     * Assert that a capability getPaymentMethods method is returned an array after a successful response.
      */
     public function retrieve_payment_method_list()
     {
@@ -61,7 +61,7 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
-     * Assert that a capabilities getPaymentMethods method filter with card
+     * Assert that a capability getPaymentMethods method filter with card
      * is returned payment method named 'card' after a successful response.
      */
     public function retrieve_card_payment_method()
@@ -78,7 +78,7 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
-     * Assert that a capabilities getPaymentMethods method filter with installment
+     * Assert that a capability getPaymentMethods method filter with installment
      * is returned payment method named 'installment' after a successful response.
      */
     public function retrieve_installment_payment_method_list()
@@ -93,7 +93,7 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
-     * Assert that a capabilities getPaymentMethods method filter with googlepay(which does not exist)
+     * Assert that a capability getPaymentMethods method filter with googlepay(which does not exist)
      * must return empty value after a successful response.
      */
     public function retrieve_payment_method_that_doesnot_exist()
@@ -106,7 +106,7 @@ class CapabilityTest extends TestCase
 
     /**
      * @test
-     * Assert that a capabilities getPaymentMethods method filter with currency(JPY)
+     * Assert that a capability getPaymentMethods method filter with currency(JPY)
      * is returned type 'card' and array response after a successful response.
      */
     public function filter_by_currency()
