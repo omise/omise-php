@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class OmiseAccountTest extends TestCase
+class AccountTest extends TestCase
 {
     /**
      * @test

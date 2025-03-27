@@ -45,5 +45,7 @@ class ClassExistsTest extends TestCase
         $this->assertTrue(class_exists('OmiseVaultResource'));
         $this->assertTrue(class_exists('OmiseObject'));
         $this->assertTrue(class_exists('OmiseException'));
+        $this->assertTrue(class_exists('OmiseHttpExecutor'));
+        $this->assertTrue(interface_exists('OmiseHttpExecutorInterface'));
     }
 }
