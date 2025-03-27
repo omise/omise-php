@@ -1,6 +1,6 @@
 <phpunit
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
     bootstrap="vendor/autoload.php"
     backupGlobals="true"
     backupStaticAttributes="false"
@@ -29,7 +29,7 @@
             <file>./tests/CapabilityTest.php</file>
             <file>./tests/ChargeTest.php</file>
             <file>./tests/DisputeTest.php</file>
-            <file>./tests/EventTest.php</file> 
+            <file>./tests/EventTest.php</file>
             <file>./tests/ForexTest.php</file>
             <file>./tests/LinkTest.php</file>
             <file>./tests/OccurrenceTest.php</file>
@@ -37,11 +37,11 @@
             <file>./tests/TransferTest.php</file>
             <file>./tests/RecipientTest.php</file>
             <file>./tests/RefundTest.php</file>
-            <file>./tests/SchedulerTest.php</file> 
-            <file>./tests/SearchTest.php</file> 
+            <file>./tests/SchedulerTest.php</file>
+            <file>./tests/SearchTest.php</file>
             <file>./tests/SourceTest.php</file>
             <file>./tests/TokenTest.php</file>
-            <file>./tests/TransactionTest.php</file> 
+            <file>./tests/TransactionTest.php</file>
             <file>./tests/CardTest.php</file>
             <file>./tests/CustomerTest.php</file>
         </testsuite>

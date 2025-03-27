@@ -19,6 +19,9 @@ define('OMISE_SECRET_KEY', $secretKey);
 define('OMISE_API_VERSION', '2019-05-29');
 
 include __DIR__ . '/traits/ChargeTrait.php';
+include __DIR__ . '/helpers/HttpTestExecutor.php';
+
+define('OMISE_HTTP_TEST_EXECUTOR', new HttpTestExecutor());
 
 /**
  * this function is created to debug easily
