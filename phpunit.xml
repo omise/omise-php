@@ -24,6 +24,7 @@
             <file>./tests/unit/InitTest.php</file>
             <file>./tests/unit/ClassExistsTest.php</file>
             <!-- Resource classes -->
+            <file>./tests/unit/http/OmiseHttpExecutorTest.php</file>
             <file>./tests/unit/exception/OmiseExceptionTest.php</file>
             <!-- API classes -->
             <file>./tests/unit/AccountTest.php</file>
