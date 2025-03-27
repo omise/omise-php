@@ -1,0 +1,48 @@
+{
+  "object": "dispute",
+  "id": "dspt_test_6344fcf1z4svpiz2chc",
+  "livemode": false,
+  "location": "/disputes/dspt_test_6344fcf1z4svpiz2chc",
+  "currency": "THB",
+  "amount": 100000,
+  "funding_amount": 100000,
+  "funding_currency": "THB",
+  "metadata": {
+  },
+  "charge": "chrg_test_6344fc3dqaonb91fqa9",
+  "documents": {
+    "object": "list",
+    "data": [
+
+    ],
+    "limit": 20,
+    "offset": 0,
+    "total": 0,
+    "location": "/disputes/dspt_test_6344fcf1z4svpiz2chc/documents",
+    "order": "chronological",
+    "from": "1970-01-01T00:00:00Z",
+    "to": "2025-03-20T09:53:53Z"
+  },
+  "transactions": [
+    {
+      "object": "transaction",
+      "id": "trxn_test_6344fcf92vetm4oar11",
+      "livemode": false,
+      "currency": "THB",
+      "amount": 100000,
+      "location": "/transactions/trxn_test_6344fcf92vetm4oar11",
+      "direction": "debit",
+      "key": "dispute.started.debit",
+      "origin": "dspt_test_6344fcf1z4svpiz2chc",
+      "transferable_at": "2025-03-20T09:53:52Z",
+      "created_at": "2025-03-20T09:53:52Z"
+    }
+  ],
+  "admin_message": null,
+  "message": "Merchant accepts the dispute",
+  "reason_code": "goods_or_services_not_provided",
+  "reason_message": "Merchandise/Services Not Received",
+  "status": "lost",
+  "closed_at": "2025-03-20T09:53:53Z",
+  "created_at": "2025-03-20T09:53:52Z"
+}

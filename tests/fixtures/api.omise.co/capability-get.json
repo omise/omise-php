@@ -2,6 +2,7 @@
   "object": "capability",
   "location": "/capability",
   "banks": [
+    "test",
     "bbl",
     "kbank",
     "rbs",
@@ -35,326 +36,730 @@
   ],
   "limits": {
     "charge_amount": {
-      "max": 100000000,
-      "min": 100
+      "max": 500000000000,
+      "min": 2000
     },
     "transfer_amount": {
-      "max": 1000000000,
+      "max": 100000000000,
       "min": 3000
     },
     "installment_amount": {
-      "min": 600000
+      "min": 200000
     }
   },
-  "payment_backends": [
+  "payment_methods": [
     {
-      "credit_card": {
-        "type": "card",
-        "currencies": [
-          "thb",
-          "jpy",
-          "usd",
-          "eur",
-          "gbp",
-          "sgd",
-          "aud",
-          "chf",
-          "cny",
-          "dkk",
-          "hkd",
-          "myr"
-        ],
-        "brands": [
-          "Discover",
-          "JCB",
-          "MasterCard",
-          "Visa"
-        ]
-      }
+      "object": "payment_method",
+      "name": "card",
+      "currencies": [
+        "THB",
+        "JPY",
+        "USD",
+        "EUR",
+        "GBP",
+        "SGD",
+        "AUD",
+        "CHF",
+        "CNY",
+        "DKK",
+        "HKD",
+        "MYR"
+      ],
+      "card_brands": [
+        "JCB",
+        "Visa",
+        "MasterCard",
+        "American Express",
+        "UnionPay"
+      ],
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "atome": {
-        "type": "atome",
-        "currencies": [
-          "thb",
-          "jpy",
-          "sgd",
-          "myr"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "internet_banking_bay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "atome_qr": {
-        "type": "atome_qr",
-        "currencies": [
-          "thb",
-          "jpy",
-          "sgd",
-          "myr"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "internet_banking_bbl",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "barcode_wechat": {
-        "type": "offline",
-        "currencies": [
-          "thb",
-          "cny"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "alipay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "bill_payment_tesco_lotus": {
-        "type": "offline",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "bill_payment_tesco_lotus",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "grabpay": {
-        "type": "grabpay",
-        "currencies": [
-          "thb",
-          "myr",
-          "sgd"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "barcode_alipay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "installment_citi": {
-        "type": "installment",
-        "currencies": [
-          "thb"
-        ],
-        "allowed_installment_terms": [
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "alipay_cn",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "installment_scb": {
-        "type": "installment",
-        "currencies": [
-          "thb"
-        ],
-        "allowed_installment_terms": [
-          3,
-          4,
-          6,
-          9,
-          10
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "alipay_hk",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "installment_ttb": {
-        "type": "installment",
-        "currencies": [
-          "thb"
-        ],
-        "allowed_installment_terms": [
-          3,
-          4,
-          6,
-          10,
-          12
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "alipayplus_mpm",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "installment_uob": {
-        "type": "installment",
-        "currencies": [
-          "thb"
-        ],
-        "allowed_installment_terms": [
-          4,
-          6
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "alipayplus_upm",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "mobile_banking_bay": {
-        "type": "mobile_banking_bay",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "atome",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "mobile_banking_bbl": {
-        "type": "mobile_banking_bbl",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "atome_qr",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "mobile_banking_kbank": {
-        "type": "mobile_banking_kbank",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "dana",
+      "currencies": [
+        "SGD"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "mobile_banking_scb": {
-        "type": "mobile_banking_scb",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "direct_debit_bay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "points_citi": {
-        "type": "points_citi",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "direct_debit_kbank",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "promptpay": {
-        "type": "promptpay",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "direct_debit_ktb",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "qr_code_upi": {
-        "type": "qr_code_upi",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "direct_debit_scb",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "rabbit_linepay": {
-        "type": "rabbit_linepay",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "gcash",
+      "currencies": [
+        "SGD",
+        "MYR"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "shopeepay": {
-        "type": "shopeepay",
-        "currencies": [
-          "sgd",
-          "myr",
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "grabpay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "shopeepay_jumpapp": {
-        "type": "shopeepay_jumpapp",
-        "currencies": [
-          "sgd",
-          "myr",
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "installment_wlb_bay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        6,
+        9,
+        10
+      ],
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     },
     {
-      "truemoney": {
-        "type": "truemoney",
-        "currencies": [
-          "thb"
-        ],
-        "amount": {
-          "min": 100,
-          "max": 100000000
-        }
-      }
+      "object": "payment_method",
+      "name": "installment_wlb_bbl",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        4,
+        6,
+        8,
+        10
+      ],
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_wlb_first_choice",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        6,
+        9,
+        10,
+        12,
+        18,
+        24,
+        36
+      ],
+      "loan_installment_terms": [
+        3,
+        4,
+        6,
+        9,
+        10,
+        12,
+        18,
+        24
+      ],
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_wlb_kbank",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        6,
+        10
+      ],
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_wlb_ktc",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_wlb_scb",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        6,
+        9,
+        10
+      ],
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_wlb_ttb",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        6,
+        10
+      ],
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "installment_wlb_uob",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": [
+        3,
+        4,
+        6,
+        10
+      ],
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "kakaopay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "mobile_banking_bay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "mobile_banking_bbl",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "mobile_banking_kbank",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "mobile_banking_ktb",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "mobile_banking_scb",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "promptpay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "qr_code_upi",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "rabbit_linepay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "shopeepay_jumpapp",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "shopeepay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "touch_n_go",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "truemoney",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "truemoney_jumpapp",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "truemoney_qr",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "wechat_pay",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "wechat_pay_mpm",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
+    },
+    {
+      "object": "payment_method",
+      "name": "wechat_pay_upm",
+      "currencies": [
+        "THB"
+      ],
+      "card_brands": null,
+      "installment_terms": null,
+      "loan_installment_terms": null,
+      "banks": [
+
+      ],
+      "provider": null
     }
   ],
+  "country": "TH",
   "tokenization_methods": [
-
+    "googlepay",
+    "applepay"
   ],
   "zero_interest_installments": false
 }

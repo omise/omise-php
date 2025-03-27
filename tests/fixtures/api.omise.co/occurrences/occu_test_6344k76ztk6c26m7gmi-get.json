@@ -1,0 +1,17 @@
+{
+  "object": "occurrence",
+  "livemode": false,
+  "location": "/occurrences/occu_test_6344k76ztk6c26m7gmi",
+  "id": "occu_test_6344k76ztk6c26m7gmi",
+  "result": "chrg_test_6344k78vzhmto06r79z",
+  "schedule": "schd_test_6344k76yz8azr26gjkb",
+  "message": null,
+  "status": "successful",
+  "processed_at": "2025-03-20T10:07:41Z",
+  "created_at": "2025-03-20T10:07:40Z",
+  "scheduled_on": "2025-03-20",
+  "retry_on": null,
+  "execute_time": null,
+  "split_metadata": null,
+  "transfer_amount": 0
+}

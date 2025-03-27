@@ -1,0 +1,34 @@
+{
+  "object": "recipient",
+  "id": "recp_test_62e6vi6h2cnhukcqr13",
+  "livemode": false,
+  "location": "/recipients/recp_test_62e6vi6h2cnhukcqr13",
+  "deleted": false,
+  "bank_account": {
+    "object": "bank_account",
+    "livemode": false,
+    "last_digits": "6789",
+    "account_number": "123456789",
+    "name": "DEFAULT BANK ACCOUNT",
+    "type": null,
+    "created_at": "2025-01-13T02:42:11Z",
+    "brand": "Test Bank",
+    "bank_code": "test",
+    "branch_code": null
+  },
+  "active": true,
+  "default": true,
+  "verified": true,
+  "description": "Another description",
+  "email": "nam@omise.co",
+  "failure_code": null,
+  "name": "Nuttanon Tra",
+  "tax_id": "",
+  "type": "individual",
+  "created_at": "2025-01-13T02:42:11Z",
+  "schedule": null,
+  "metadata": {
+  },
+  "verified_at": "2025-01-13T02:42:11Z",
+  "activated_at": "2025-01-13T02:42:11Z"
+}

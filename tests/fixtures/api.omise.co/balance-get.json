@@ -1,9 +1,11 @@
 {
   "object": "balance",
-  "livemode": true,
-  "currency": "thb",
-  "reserve_amount": 0,
-  "available": 2317932,
-  "total": 2473652,
-  "location": "/balance"
+  "livemode": false,
+  "location": "/balance",
+  "currency": "THB",
+  "total": 1644800,
+  "transferable": 1644800,
+  "reserve": 0,
+  "on_hold": 0,
+  "created_at": "2025-01-13T02:42:11Z"
 }

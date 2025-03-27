@@ -11,7 +11,7 @@ class ClassExistsTest extends TestCase
     {
         $this->assertTrue(class_exists('OmiseAccount'));
         $this->assertTrue(class_exists('OmiseBalance'));
-        $this->assertTrue(class_exists('OmiseCapabilities'));
+        $this->assertTrue(class_exists('OmiseCapability'));
         $this->assertTrue(class_exists('OmiseCard'));
         $this->assertTrue(class_exists('OmiseCardList'));
         $this->assertTrue(class_exists('OmiseChain'));

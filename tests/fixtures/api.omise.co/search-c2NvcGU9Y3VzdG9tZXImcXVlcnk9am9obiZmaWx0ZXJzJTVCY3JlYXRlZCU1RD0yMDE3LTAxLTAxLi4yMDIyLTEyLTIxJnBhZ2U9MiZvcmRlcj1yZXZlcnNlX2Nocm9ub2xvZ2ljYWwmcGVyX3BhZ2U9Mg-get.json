@@ -14,5 +14,6 @@
   "location": "/search",
   "order": "reverse_chronological",
   "query": "john",
-  "scope": "customer"
+  "scope": "customer",
+  "aggregate_level": null
 }

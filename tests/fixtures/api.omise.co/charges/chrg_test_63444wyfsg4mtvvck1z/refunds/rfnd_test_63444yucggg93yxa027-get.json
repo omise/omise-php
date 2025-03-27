@@ -1,0 +1,21 @@
+{
+  "object": "refund",
+  "id": "rfnd_test_63444yucggg93yxa027",
+  "location": "/charges/chrg_test_63444wyfsg4mtvvck1z/refunds/rfnd_test_63444yucggg93yxa027",
+  "livemode": false,
+  "voided": false,
+  "currency": "THB",
+  "amount": 10000,
+  "metadata": {
+  },
+  "charge": "chrg_test_63444wyfsg4mtvvck1z",
+  "capture": null,
+  "terminal": null,
+  "transaction": "trxn_test_63444yul95anyjnsr02",
+  "status": "closed",
+  "funding_amount": 10000,
+  "funding_currency": "THB",
+  "created_at": "2025-03-20T09:24:24Z",
+  "acquirer_reference_number": null,
+  "approval_code": null
+}
