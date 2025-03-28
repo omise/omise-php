@@ -1,0 +1,9 @@
+{
+  "redefinable-internals": [
+    "curl_close",
+    "curl_error",
+    "curl_exec",
+    "curl_init",
+    "curl_setopt_array"
+  ]
+}

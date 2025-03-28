@@ -13,11 +13,8 @@ class OmiseApiResource extends OmiseObject
     const REQUEST_DELETE = 'DELETE';
     const REQUEST_PATCH = 'PATCH';
 
-    // Timeout settings
-    private $OMISE_CONNECTTIMEOUT = 30;
-    private $OMISE_TIMEOUT = 60;
-
     protected static $instances = [];
+    protected static $httpExecutor = null;
 
     private static $classesToUsePublicKey = [
         OmiseToken::class,
@@ -41,6 +38,12 @@ class OmiseApiResource extends OmiseObject
         $className = get_class($resource);
         if (!isset(self::$instances[$className])) {
             static::$instances[$className] = $resource;
+
+            if (preg_match('/phpunit/', $_SERVER['SCRIPT_NAME']) && getenv('TEST_TYPE') == 'unit') {
+                static::$httpExecutor = OMISE_HTTP_TEST_EXECUTOR;
+            } else {
+                static::$httpExecutor = new OmiseHttpExecutor();
+            }
 
             return static::$instances[$className];
         }
@@ -177,11 +180,7 @@ class OmiseApiResource extends OmiseObject
      */
     protected function execute($url, $requestMethod, $key, $params = null)
     {
-        if (preg_match('/phpunit/', $_SERVER['SCRIPT_NAME']) && getenv('TEST_TYPE') == 'unit') {
-            $result = $this->_executeTest($url, $requestMethod, $key, $params);
-        } else {
-            $result = $this->_executeCurl($url, $requestMethod, $key, $params);
-        }
+        $result = self::$httpExecutor->execute($url, $requestMethod, $key, $params);
 
         // Decode the JSON response as an associative array.
         $array = json_decode($result, true);
@@ -208,147 +207,6 @@ class OmiseApiResource extends OmiseObject
     protected static function isValidAPIResponse($array)
     {
         return $array && count($array) && isset($array['object']);
-    }
-
-    /**
-     * @param  string $url
-     * @param  string $requestMethod
-     * @param  array  $params
-     *
-     * @throws OmiseException
-     *
-     * @return string
-     */
-    private function _executeTest($url, $requestMethod, $key, $params = null)
-    {
-        // Extract only hostname and URL path without trailing slash.
-        $parsed = parse_url($url);
-        $request_url = $parsed['host'] . rtrim($parsed['path'], '/');
-
-        // Convert query string into filename friendly format.
-        if (!empty($parsed['query'])) {
-            $query = base64_encode($parsed['query']);
-            $query = str_replace(['+', '/', '='], ['-', '_', ''], $query);
-            $request_url = $request_url . '-' . $query;
-        }
-
-        // Finally.
-        $request_url = dirname(__FILE__) . '/../../../tests/fixtures/' . $request_url . '-' . strtolower($requestMethod) . '.json';
-
-        // Make a request from Curl if json file was not exists.
-        if (!file_exists($request_url)) {
-            // Get a directory that's file should contain.
-            $request_dir = explode('/', $request_url);
-            unset($request_dir[count($request_dir) - 1]);
-            $request_dir = implode('/', $request_dir);
-
-            // Create directory if it not exists.
-            if (!file_exists($request_dir)) {
-                mkdir($request_dir, 0777, true);
-            }
-
-            $result = $this->_executeCurl($url, $requestMethod, $key, $params);
-
-            $f = fopen($request_url, 'w');
-            if ($f) {
-                fwrite($f, $result);
-
-                fclose($f);
-            }
-        } else { // Or get response from json file.
-            $result = file_get_contents($request_url);
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param  string $url
-     * @param  string $requestMethod
-     * @param  array  $params
-     *
-     * @throws OmiseException
-     *
-     * @return string
-     */
-    private function _executeCurl($url, $requestMethod, $key, $params = null)
-    {
-        $ch = curl_init($url);
-
-        curl_setopt_array($ch, $this->genOptions($requestMethod, $key . ':', $params));
-
-        // Make a request or thrown an exception.
-        if (($result = curl_exec($ch)) === false) {
-            $error = curl_error($ch);
-            curl_close($ch);
-
-            throw new Exception($error);
-        }
-
-        // Close.
-        curl_close($ch);
-
-        return $result;
-    }
-
-    /**
-     * Creates an option for php-curl from the given request method and parameters in an associative array.
-     *
-     * @param  string $requestMethod
-     * @param  array  $params
-     *
-     * @return array
-     */
-    private function genOptions($requestMethod, $userpwd, $params)
-    {
-        $user_agent = 'OmisePHP/' . OMISE_PHP_LIB_VERSION . ' PHP/' . PHP_VERSION;
-        $omise_api_version = defined('OMISE_API_VERSION') ? OMISE_API_VERSION : null;
-
-        $options = [
-            // Set the HTTP version to 1.1.
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            // Set the request method.
-            CURLOPT_CUSTOMREQUEST => $requestMethod,
-            // Make php-curl returns the data as string.
-            CURLOPT_RETURNTRANSFER => true,
-            // Do not include the header in the output.
-            CURLOPT_HEADER => false,
-            // Track the header request string and set the referer on redirect.
-            CURLINFO_HEADER_OUT => true,
-            CURLOPT_AUTOREFERER => true,
-            // Make HTTP error code above 400 an error.
-            // CURLOPT_FAILONERROR => true,
-            // Time before the request is aborted.
-            CURLOPT_TIMEOUT => $this->OMISE_TIMEOUT,
-            // Time before the request is aborted when attempting to connect.
-            CURLOPT_CONNECTTIMEOUT => $this->OMISE_CONNECTTIMEOUT,
-            // Authentication.
-            CURLOPT_USERPWD => $userpwd
-        ];
-
-        // Config Omise API Version
-        if ($omise_api_version) {
-            $options += [CURLOPT_HTTPHEADER => ['Omise-Version: ' . $omise_api_version]];
-
-            $user_agent .= ' OmiseAPI/' . $omise_api_version;
-        }
-
-        // Config UserAgent
-        if (defined('OMISE_USER_AGENT_SUFFIX')) {
-            $options += [CURLOPT_USERAGENT => $user_agent . ' ' . OMISE_USER_AGENT_SUFFIX];
-        } else {
-            $options += [CURLOPT_USERAGENT => $user_agent];
-        }
-
-        // Also merge POST parameters with the option.
-        if (is_array($params) && count($params) > 0) {
-            $http_query = http_build_query($params);
-            $http_query = preg_replace('/%5B\d+%5D/simU', '%5B%5D', $http_query);
-
-            $options += [CURLOPT_POSTFIELDS => $http_query];
-        }
-
-        return $options;
     }
 
     /**

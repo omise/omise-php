@@ -9,4 +9,4 @@ composer.lock
 composer.phar
 vendor
 reports
-coverage.xml
+coverage

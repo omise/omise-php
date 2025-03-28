@@ -32,7 +32,8 @@
     "phpunit/phpunit": "^8.5 || ^9.5",
     "friendsofphp/php-cs-fixer": "^2.19.3 || ^3.9.5",
     "phpstan/phpstan": "1.11.0",
-    "vlucas/phpdotenv": "5.5.0"
+    "vlucas/phpdotenv": "5.5.0",
+    "brain/monkey": "2.6.2"
   },
   "autoload": {
     "classmap": ["lib/omise/"]
@@ -44,7 +45,8 @@
   },
   "scripts": {
     "test:unit": "TEST_TYPE=unit ./vendor/bin/phpunit --testdox",
-    "test:coverage": "XDEBUG_MODE=coverage TEST_TYPE=unit ./vendor/bin/phpunit --coverage-clover=coverage.xml",
+    "test:coverage:html": "XDEBUG_MODE=coverage TEST_TYPE=unit ./vendor/bin/phpunit --coverage-html=coverage",
+    "test:coverage:xml": "XDEBUG_MODE=coverage TEST_TYPE=unit ./vendor/bin/phpunit --coverage-clover=coverage/coverage.xml",
     "fix": "vendor/bin/php-cs-fixer fix -vvv --diff --dry-run --allow-risky=yes --using-cache=no",
     "analyse": "vendor/bin/phpstan analyse lib tests",
     "phpstan": "vendor/bin/phpstan analyse lib tests"
