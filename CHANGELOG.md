@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### [v3.0.0 _(Apr 08, 2025)_](https://github.com/omise/omise-php/releases/tag/v3.0.0)
+
+- Resolve issue of keys passed to method not being used [#172]((https://github.com/omise/omise-php/pull/172))
+- [MIT-3253] Support API `2019-05-29` [#177]((https://github.com/omise/omise-php/pull/177))
+- [MIT-3253] Create Http interface for executing API request [#178]((https://github.com/omise/omise-php/pull/178))
+
 ### [v2.18.0 _(Jul 09, 2024)_](https://github.com/omise/omise-php/releases/tag/v2.18.0)
 
 - Fix the latest version link in README. ([#157](https://github.com/omise/omise-php/pull/167))
@@ -13,7 +19,7 @@
 - Removed the predefined installment minimum value ([#151](https://github.com/omise/omise-php/pull/151))
 - Bug fixed on `OmiseSearch::scope` public key and secret key override as null ([#149](https://github.com/omise/omise-php/pull/149))
 - Sonarcloud integration for code coverage ([#148](https://github.com/omise/omise-php/pull/148))
-  
+
 ### [v2.16.0 _(August 25, 2022)_](https://github.com/omise/omise-php/releases/tag/v2.16.0)
 - Made compatible with PHP 5.6 to 8.1 ([#141](https://github.com/omise/omise-php/pull/144))
 
