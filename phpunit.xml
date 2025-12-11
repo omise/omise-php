@@ -56,8 +56,6 @@
     </testsuites>
     <coverage>
         <include>
-            <!-- Force code coverage on lib: Explicitly include lib/omise directory for coverage -->
-            <directory suffix=".php">./lib/omise</directory>
             <directory suffix=".php">./*</directory>
         </include>
         <exclude>
