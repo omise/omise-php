@@ -25,7 +25,7 @@ jobs:
         run: composer update --no-ansi --no-interaction --no-progress
 
       - name: Generate Code Coverage
-        run: TEST_TYPE=unit vendor/bin/phpunit --coverage-clover=coverage.xml
+        run: XDEBUG_MODE=coverage TEST_TYPE=unit vendor/bin/phpunit --coverage-clover=coverage.xml
 
       - name: Fix Code Coverage Paths
         run: sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' coverage.xml
