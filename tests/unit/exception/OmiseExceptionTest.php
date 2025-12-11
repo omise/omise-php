@@ -237,9 +237,9 @@ class OmiseExceptionTest extends TestCase
     {
         $error = ['code' => 'test_error', 'message' => 'Test error message'];
         $exception = new OmiseException('Test message', $error);
-        
+
         $this->assertEquals($error, $exception->getOmiseError());
-        
+
         $newError = ['code' => 'new_error', 'message' => 'New error message'];
         $exception->setOmiseError($newError);
         $this->assertEquals($newError, $exception->getOmiseError());
