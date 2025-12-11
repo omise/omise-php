@@ -105,6 +105,7 @@ class ChainTest extends TestCase
             $chains = OmiseChain::retrieve();
             if (isset($chains['data'][0])) {
                 $chain = OmiseChain::retrieve($chains['data'][0]['id']);
+
                 try {
                     $chain->revoke();
                     $this->assertTrue(true);

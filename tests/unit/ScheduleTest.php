@@ -85,7 +85,7 @@ class ScheduleTest extends TestCase
                 ->startDate(date('Y-m-d'))
                 ->endDate(date('Y-m-d', strtotime('+1 month')))
                 ->toArray();
-            
+
             $schedule = OmiseSchedule::create($params);
             $this->assertArrayHasKey('object', $schedule);
             $this->assertEquals('schedule', $schedule['object']);
@@ -147,7 +147,7 @@ class ScheduleTest extends TestCase
             try {
                 $schedule = OmiseSchedule::retrieve($this->scheduleId);
                 $occurrences = $schedule->occurrences();
-                
+
                 if ($occurrences) {
                     $this->assertArrayHasKey('object', $occurrences);
                     $this->assertEquals('list', $occurrences['object']);
@@ -173,7 +173,7 @@ class ScheduleTest extends TestCase
             try {
                 $schedule = OmiseSchedule::retrieve($this->scheduleId);
                 $occurrences = $schedule->occurrences(['limit' => 10]);
-                
+
                 if ($occurrences) {
                     $this->assertArrayHasKey('object', $occurrences);
                 } else {
@@ -215,7 +215,7 @@ class ScheduleTest extends TestCase
             try {
                 $schedule = OmiseSchedule::retrieve($this->scheduleId);
                 $occurrences = $schedule->occurrences('?limit=10');
-                
+
                 if ($occurrences) {
                     $this->assertArrayHasKey('object', $occurrences);
                 } else {
