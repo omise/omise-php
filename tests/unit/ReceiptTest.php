@@ -80,4 +80,32 @@ class ReceiptTest extends TestCase
             $this->assertTrue(true);
         }
     }
+
+    /**
+     * @test
+     * Assert that a receipt can be reloaded when object is 'event'.
+     */
+    public function reload_when_object_is_event()
+    {
+        if ($this->receiptId) {
+            $receipt = OmiseReceipt::retrieve($this->receiptId);
+            $receipt['object'] = 'event';
+            $receipt->reload();
+            $this->assertArrayHasKey('object', $receipt);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    /**
+     * @test
+     * Assert that a receipt list can be reloaded when object is not 'event'.
+     */
+    public function reload_when_object_is_not_event()
+    {
+        $receipts = OmiseReceipt::retrieve();
+        $receipts->reload();
+        $this->assertArrayHasKey('object', $receipts);
+        $this->assertEquals('receipt_list', $receipts['object']);
+    }
 }

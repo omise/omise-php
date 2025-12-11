@@ -121,4 +121,42 @@ class CustomerTest extends TestCase
         $customer->destroy();
         $this->assertTrue($customer->isDestroyed());
     }
+
+    /**
+     * @test
+     * Assert that a customer can be reloaded when object is not 'customer'.
+     */
+    public function reload_when_object_is_not_customer()
+    {
+        $customers = OmiseCustomer::retrieve();
+        $customers->reload();
+        $this->assertArrayHasKey('object', $customers);
+        $this->assertEquals('list', $customers['object']);
+    }
+
+    /**
+     * @test
+     * Assert that cards can be retrieved with options.
+     */
+    public function cards_with_options()
+    {
+        $customer = OmiseCustomer::retrieve($this->customerId);
+        $cards = $customer->cards(['limit' => 10]);
+        
+        $this->assertInstanceOf('OmiseCardList', $cards);
+    }
+
+    /**
+     * @test
+     * Assert that getCards is an alias for cards.
+     */
+    public function get_cards_alias()
+    {
+        $customer = OmiseCustomer::retrieve($this->customerId);
+        $cards1 = $customer->cards();
+        $cards2 = $customer->getCards();
+        
+        $this->assertInstanceOf('OmiseCardList', $cards1);
+        $this->assertInstanceOf('OmiseCardList', $cards2);
+    }
 }

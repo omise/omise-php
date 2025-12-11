@@ -228,4 +228,84 @@ class OmiseExceptionTest extends TestCase
 
         throw OmiseException::getInstance($mock);
     }
+
+    /**
+     * @test
+     * Assert that setOmiseError and getOmiseError work correctly.
+     */
+    public function set_and_get_omise_error()
+    {
+        $error = ['code' => 'test_error', 'message' => 'Test error message'];
+        $exception = new OmiseException('Test message', $error);
+        
+        $this->assertEquals($error, $exception->getOmiseError());
+        
+        $newError = ['code' => 'new_error', 'message' => 'New error message'];
+        $exception->setOmiseError($newError);
+        $this->assertEquals($newError, $exception->getOmiseError());
+    }
+
+    /**
+     * @test
+     * Assert that getOmiseError returns null when no error is set.
+     */
+    public function get_omise_error_returns_null_when_no_error()
+    {
+        $exception = new OmiseException('Test message');
+        $this->assertNull($exception->getOmiseError());
+    }
+
+    /**
+     * @test
+     * Assert that OmiseFailedFraudCheckException is throw on failed_fraud_check response code
+     */
+    public function failed_fraud_check_exception()
+    {
+        $this->expectException(OmiseFailedFraudCheckException::class);
+        $this->expectExceptionMessage('Fraud check failed');
+        $mock = [
+            'object' => 'error',
+            'location' => 'https://docs.omise.co/api/errors#failed-fraud-check',
+            'code' => 'failed_fraud_check',
+            'message' => 'Fraud check failed'
+        ];
+
+        throw OmiseException::getInstance($mock);
+    }
+
+    /**
+     * @test
+     * Assert that OmiseInvalidRecipientException is throw on invalid_recipient response code
+     */
+    public function invalid_recipient_exception()
+    {
+        $this->expectException(OmiseInvalidRecipientException::class);
+        $this->expectExceptionMessage('Invalid recipient');
+        $mock = [
+            'object' => 'error',
+            'location' => 'https://docs.omise.co/api/errors#invalid-recipient',
+            'code' => 'invalid_recipient',
+            'message' => 'Invalid recipient'
+        ];
+
+        throw OmiseException::getInstance($mock);
+    }
+
+    /**
+     * @test
+     * Assert that OmiseInvalidBankAccountException is throw on invalid_bank_account response code
+     */
+    public function invalid_bank_account_exception()
+    {
+        $this->expectException(OmiseInvalidBankAccountException::class);
+        $this->expectExceptionMessage('Invalid bank account');
+        $mock = [
+            'object' => 'error',
+            'location' => 'https://docs.omise.co/api/errors#invalid-bank-account',
+            'code' => 'invalid_bank_account',
+            'message' => 'Invalid bank account'
+        ];
+
+        throw OmiseException::getInstance($mock);
+    }
 }

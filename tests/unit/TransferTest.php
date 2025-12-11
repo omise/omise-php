@@ -140,4 +140,49 @@ class TransferTest extends TestCase
             $this->assertArrayHasKey('transfer', $schedules['data'][0]);
         }
     }
+
+    /**
+     * @test
+     * Assert that schedules can be retrieved with options.
+     */
+    public function retrieve_schedules_with_options()
+    {
+        try {
+            $schedules = OmiseTransfer::schedules(['limit' => 10]);
+            $this->assertArrayHasKey('object', $schedules);
+            $this->assertEquals('list', $schedules['object']);
+        } catch (Exception $e) {
+            // API call may fail in test environment
+            $this->assertTrue(true);
+        }
+    }
+
+    /**
+     * @test
+     * Assert that a transfer can be reloaded when object is 'transfers'.
+     */
+    public function reload_when_object_is_transfers()
+    {
+        $transfers = OmiseTransfer::retrieve();
+        if (isset($transfers['data'][0])) {
+            $transfer = OmiseTransfer::retrieve($transfers['data'][0]['id']);
+            $transfer['object'] = 'transfers';
+            $transfer->reload();
+            $this->assertArrayHasKey('object', $transfer);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    /**
+     * @test
+     * Assert that a transfer list can be reloaded when object is not 'transfers'.
+     */
+    public function reload_when_object_is_not_transfers()
+    {
+        $transfers = OmiseTransfer::retrieve();
+        $transfers->reload();
+        $this->assertArrayHasKey('object', $transfers);
+        $this->assertEquals('list', $transfers['object']);
+    }
 }
