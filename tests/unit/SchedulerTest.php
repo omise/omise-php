@@ -202,7 +202,7 @@ class SchedulerTest extends TestCase
         ];
         $scheduler = new OmiseScheduler('charge', $charge);
         $scheduler->every(1)->days();
-        
+
         $this->assertTrue(isset($scheduler['charge']));
         $this->assertTrue(isset($scheduler['every']));
         $this->assertTrue(isset($scheduler['period']));
@@ -221,7 +221,7 @@ class SchedulerTest extends TestCase
         ];
         $scheduler = new OmiseScheduler('charge', $charge);
         $scheduler->every(1)->days();
-        
+
         $this->assertEquals($charge, $scheduler['charge']);
         $this->assertEquals(1, $scheduler['every']);
         $this->assertEquals('day', $scheduler['period']);
@@ -239,7 +239,7 @@ class SchedulerTest extends TestCase
         ];
         $scheduler = new OmiseScheduler('charge', $charge);
         $scheduler->every(2)->weeks(['Monday', 'Friday']);
-        
+
         $this->assertEquals(['weekdays' => ['Monday', 'Friday']], $scheduler['on']);
     }
 

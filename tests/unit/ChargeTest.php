@@ -249,7 +249,7 @@ class ChargeTest extends TestCase
         try {
             $charge = $this->createCharge(true);
             $refunds = $charge->refunds(['limit' => 10]);
-            
+
             $this->assertInstanceOf('OmiseRefundList', $refunds);
         } catch (Exception $e) {
             // API call may fail in test environment
