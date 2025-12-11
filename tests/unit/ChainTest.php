@@ -122,4 +122,3 @@ class ChainTest extends TestCase
         }
     }
 }
-

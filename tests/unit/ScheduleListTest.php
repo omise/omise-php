@@ -24,11 +24,11 @@ class ScheduleListTest extends TestCase
             if (isset($customer['data'][0])) {
                 $customer = OmiseCustomer::retrieve($customer['data'][0]['id']);
                 $schedules = $customer->schedules();
-                
+
                 if ($schedules && isset($schedules['data'][0])) {
                     $scheduleId = $schedules['data'][0]['id'];
                     $schedule = $schedules->retrieve($scheduleId);
-                    
+
                     $this->assertArrayHasKey('object', $schedule);
                     $this->assertEquals('schedule', $schedule['object']);
                     $this->assertEquals($scheduleId, $schedule['id']);
@@ -44,4 +44,3 @@ class ScheduleListTest extends TestCase
         }
     }
 }
-

@@ -250,4 +250,3 @@ class ScheduleTest extends TestCase
         }
     }
 }
-

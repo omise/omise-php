@@ -15,10 +15,10 @@ class ObjectTest extends TestCase
             if (isset($charge['data'][0])) {
                 $charge = OmiseCharge::retrieve($charge['data'][0]['id']);
                 $originalId = $charge['id'];
-                
+
                 $newValues = ['id' => 'new_id', 'amount' => 1000];
                 $charge->refresh($newValues, true);
-                
+
                 $this->assertEquals('new_id', $charge['id']);
                 $this->assertEquals(1000, $charge['amount']);
             } else {
@@ -42,10 +42,10 @@ class ObjectTest extends TestCase
                 $charge = OmiseCharge::retrieve($charge['data'][0]['id']);
                 $originalId = $charge['id'];
                 $originalAmount = $charge['amount'] ?? null;
-                
+
                 $newValues = ['description' => 'New description'];
                 $charge->refresh($newValues, false);
-                
+
                 $this->assertEquals($originalId, $charge['id']);
                 $this->assertEquals('New description', $charge['description']);
             } else {
@@ -68,10 +68,10 @@ class ObjectTest extends TestCase
             if (isset($charge['data'][0])) {
                 $charge = OmiseCharge::retrieve($charge['data'][0]['id']);
                 $originalId = $charge['id'];
-                
+
                 $charge->refresh([], false);
                 $charge->refresh(null, false);
-                
+
                 $this->assertEquals($originalId, $charge['id']);
             } else {
                 $this->assertTrue(true);
@@ -93,7 +93,7 @@ class ObjectTest extends TestCase
             if (isset($charge['data'][0])) {
                 $charge = OmiseCharge::retrieve($charge['data'][0]['id']);
                 $array = $charge->toArray();
-                
+
                 $this->assertIsArray($array);
                 $this->assertArrayHasKey('id', $array);
                 $this->assertArrayHasKey('object', $array);
@@ -116,23 +116,23 @@ class ObjectTest extends TestCase
             $charge = OmiseCharge::retrieve();
             if (isset($charge['data'][0])) {
                 $charge = OmiseCharge::retrieve($charge['data'][0]['id']);
-                
+
                 // Test rewind
                 $charge->rewind();
                 $this->assertNotNull($charge->key());
-                
+
                 // Test current
                 $current = $charge->current();
                 $this->assertNotNull($current);
-                
+
                 // Test key
                 $key = $charge->key();
                 $this->assertNotNull($key);
-                
+
                 // Test next
                 $charge->next();
                 $newKey = $charge->key();
-                
+
                 // Test valid
                 $isValid = $charge->valid();
                 $this->assertIsBool($isValid);
@@ -156,7 +156,7 @@ class ObjectTest extends TestCase
             if (isset($charge['data'][0])) {
                 $charge = OmiseCharge::retrieve($charge['data'][0]['id']);
                 $count = count($charge);
-                
+
                 $this->assertIsInt($count);
                 $this->assertGreaterThan(0, $count);
             } else {
@@ -180,7 +180,7 @@ class ObjectTest extends TestCase
                 $charge = OmiseCharge::retrieve($charge['data'][0]['id']);
                 $charge['test_key'] = 'test_value';
                 $this->assertEquals('test_value', $charge['test_key']);
-                
+
                 unset($charge['test_key']);
                 $this->assertNull($charge['test_key']);
             } else {
@@ -202,7 +202,7 @@ class ObjectTest extends TestCase
             $charge = OmiseCharge::retrieve();
             if (isset($charge['data'][0])) {
                 $charge = OmiseCharge::retrieve($charge['data'][0]['id']);
-                
+
                 $this->assertTrue(isset($charge['id']));
                 $this->assertTrue(isset($charge['object']));
                 $this->assertFalse(isset($charge['non_existent_key']));
@@ -285,4 +285,3 @@ class ObjectTest extends TestCase
         }
     }
 }
-
