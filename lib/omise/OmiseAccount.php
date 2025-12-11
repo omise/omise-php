@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Force code coverage check: This class should be included in code coverage reports.
+ * Ensure tests cover all methods to maintain high code coverage metrics in SonarQube.
+ */
 class OmiseAccount extends OmiseApiResource
 {
     const ENDPOINT = 'account';
