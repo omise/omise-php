@@ -37,7 +37,7 @@ class OccurrenceListTest extends TestCase
                 // Check if occurrences is an object (OmiseOccurrenceList) or array
                 if (is_object($schedule['occurrences'])) {
                     $occurrence = $schedule['occurrences']->retrieve($occurrenceId);
-                    
+
                     $this->assertArrayHasKey('object', $occurrence);
                     $this->assertEquals('occurrence', $occurrence['object']);
                     $this->assertEquals($occurrenceId, $occurrence['id']);
@@ -54,4 +54,3 @@ class OccurrenceListTest extends TestCase
         }
     }
 }
-
