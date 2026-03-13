@@ -4,9 +4,7 @@
   "type": "library",
   "version": "v3.0.0",
   "keywords": [
-    "alipay payment",
     "credit card payment",
-    "konbini payment",
     "omise",
     "payment",
     "payment processing"
