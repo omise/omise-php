@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### [v3.1.0 _(Apr 22, 2026)_](https://github.com/omise/omise-php/releases/tag/v3.1.0)
+
+- Remove Internet Banking [#181]((https://github.com/omise/omise-php/pull/181))
+
 ### [v3.0.0 _(Apr 08, 2025)_](https://github.com/omise/omise-php/releases/tag/v3.0.0)
 
 - Resolve issue of keys passed to method not being used [#172]((https://github.com/omise/omise-php/pull/172))
