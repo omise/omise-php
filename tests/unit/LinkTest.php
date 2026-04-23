@@ -103,4 +103,28 @@ class LinkTest extends TestCase
             $this->assertEquals('link', $item['object']);
         }
     }
+
+    /**
+     * @test
+     * Assert that a link can be reloaded when object is 'link'.
+     */
+    public function reload_when_object_is_link()
+    {
+        $link = OmiseLink::retrieve($this->linkId);
+        $link->reload();
+        $this->assertArrayHasKey('object', $link);
+        $this->assertEquals('link', $link['object']);
+    }
+
+    /**
+     * @test
+     * Assert that a link list can be reloaded when object is not 'link'.
+     */
+    public function reload_when_object_is_not_link()
+    {
+        $links = OmiseLink::retrieve();
+        $links->reload();
+        $this->assertArrayHasKey('object', $links);
+        $this->assertEquals('list', $links['object']);
+    }
 }

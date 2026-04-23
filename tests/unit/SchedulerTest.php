@@ -189,4 +189,72 @@ class SchedulerTest extends TestCase
         $this->assertEquals($endDate, $scheduler['end_date']);
         $this->assertEquals($startDate, $scheduler['start_date']);
     }
+
+    /**
+     * @test
+     * Assert that scheduler offsetExists works correctly.
+     */
+    public function offset_exists()
+    {
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900
+        ];
+        $scheduler = new OmiseScheduler('charge', $charge);
+        $scheduler->every(1)->days();
+
+        $this->assertTrue(isset($scheduler['charge']));
+        $this->assertTrue(isset($scheduler['every']));
+        $this->assertTrue(isset($scheduler['period']));
+        $this->assertFalse(isset($scheduler['non_existent']));
+    }
+
+    /**
+     * @test
+     * Assert that scheduler offsetGet works correctly.
+     */
+    public function offset_get()
+    {
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900
+        ];
+        $scheduler = new OmiseScheduler('charge', $charge);
+        $scheduler->every(1)->days();
+
+        $this->assertEquals($charge, $scheduler['charge']);
+        $this->assertEquals(1, $scheduler['every']);
+        $this->assertEquals('day', $scheduler['period']);
+    }
+
+    /**
+     * @test
+     * Assert that scheduler months with array of weekdays works.
+     */
+    public function weeks_with_array()
+    {
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900
+        ];
+        $scheduler = new OmiseScheduler('charge', $charge);
+        $scheduler->every(2)->weeks(['Monday', 'Friday']);
+
+        $this->assertEquals(['weekdays' => ['Monday', 'Friday']], $scheduler['on']);
+    }
+
+    /**
+     * @test
+     * Assert that scheduler months throws exception for invalid type.
+     */
+    public function months_with_invalid_type()
+    {
+        $this->expectException(OmiseBadRequestException::class);
+        $charge = [
+            'customer' => OMISE_CUSTOMER_ID,
+            'amount' => 99900
+        ];
+        $scheduler = new OmiseScheduler('charge', $charge);
+        $scheduler->every(1)->months(null); // null is invalid
+    }
 }

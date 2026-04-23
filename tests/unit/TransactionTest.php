@@ -57,4 +57,33 @@ class TransactionTest extends TestCase
         $this->assertArrayHasKey('origin', $transaction);
         $this->assertArrayHasKey('created_at', $transaction);
     }
+
+    /**
+     * @test
+     * Assert that a transaction can be reloaded when object is 'transaction'.
+     */
+    public function reload_when_object_is_transaction()
+    {
+        $transactions = OmiseTransaction::retrieve();
+        if (isset($transactions['data'][0])) {
+            $transaction = OmiseTransaction::retrieve($transactions['data'][0]['id']);
+            $transaction->reload();
+            $this->assertArrayHasKey('object', $transaction);
+            $this->assertEquals('transaction', $transaction['object']);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    /**
+     * @test
+     * Assert that a transaction list can be reloaded when object is not 'transaction'.
+     */
+    public function reload_when_object_is_not_transaction()
+    {
+        $transactions = OmiseTransaction::retrieve();
+        $transactions->reload();
+        $this->assertArrayHasKey('object', $transactions);
+        $this->assertEquals('list', $transactions['object']);
+    }
 }

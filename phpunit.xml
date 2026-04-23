@@ -41,12 +41,17 @@
             <file>./tests/unit/RecipientTest.php</file>
             <file>./tests/unit/RefundTest.php</file>
             <file>./tests/unit/SchedulerTest.php</file>
+            <file>./tests/unit/ScheduleTest.php</file>
             <file>./tests/unit/SearchTest.php</file>
             <file>./tests/unit/SourceTest.php</file>
             <file>./tests/unit/TokenTest.php</file>
             <file>./tests/unit/TransactionTest.php</file>
             <file>./tests/unit/CardTest.php</file>
             <file>./tests/unit/CustomerTest.php</file>
+            <file>./tests/unit/ChainTest.php</file>
+            <file>./tests/unit/ScheduleListTest.php</file>
+            <file>./tests/unit/OccurrenceListTest.php</file>
+            <file>./tests/unit/ObjectTest.php</file>
         </testsuite>
     </testsuites>
     <coverage>
