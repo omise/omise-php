@@ -116,6 +116,8 @@ class OmiseHttpExecutorTest extends UnitTestCase
             ->once()
             ->with(Mockery::any(), Mockery::on($assertCurlOptsFn));
         Functions\expect('curl_exec')->andReturnUsing($curlFn);
-        Functions\expect('curl_close')->once();
+        if (\PHP_VERSION_ID < 80000) {
+            Functions\expect('curl_close')->once();
+        }
     }
 }

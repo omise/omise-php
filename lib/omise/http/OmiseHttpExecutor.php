@@ -14,15 +14,26 @@ class OmiseHttpExecutor implements OmiseHttpExecutorInterface
         // Make a request or thrown an exception.
         if (($result = curl_exec($ch)) === false) {
             $error = curl_error($ch);
-            curl_close($ch);
+            $this->closeCurlHandle($ch);
 
             throw new Exception($error);
         }
 
-        // Close.
-        curl_close($ch);
+        $this->closeCurlHandle($ch);
 
         return $result;
+    }
+
+    /**
+     * curl_close() is deprecated since PHP 8.5 (no-op since 8.0) but still required on PHP 7.x.
+     *
+     * @param resource|\CurlHandle $ch
+     */
+    private function closeCurlHandle($ch): void
+    {
+        if (\PHP_VERSION_ID < 80000) {
+            curl_close($ch);
+        }
     }
 
     /**
